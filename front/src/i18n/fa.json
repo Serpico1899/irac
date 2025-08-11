@@ -1,12 +1,16 @@
 {
-    "header": {
-      "navigation": [
-        { "label": "صفحه اصلی", "href": "/" },
-        { "label": "دوره‌ها", "href": "/courses" },
-        { "label": "کارگاه‌ها", "href": "/workshops" },
-        { "label": "رسانه", "href": "/media" },
-        { "label": "درباره ما", "href": "/about" }
-      ],
-      "login": "ورود"
-    }
+  "Site": {
+    "title": "مرکز معماری اسلامی | ایراک",
+    "description": "خانه آنلاین مرکز معماری اسلامی"
+  },
+  "header": {
+    "navigation": [
+      { "label": "صفحه اصلی", "href": "/" },
+      { "label": "دوره‌ها", "href": "/courses" },
+      { "label": "کارگاه‌ها", "href": "/workshops" },
+      { "label": "رسانه", "href": "/media" },
+      { "label": "درباره ما", "href": "/about" }
+    ],
+    "login": "ورود"
   }
+}
