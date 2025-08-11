@@ -1,12 +1,16 @@
 {
-    "header": {
-      "navigation": [
-        { "label": "Home", "href": "/" },
-        { "label": "Courses", "href": "/courses" },
-        { "label": "Workshops", "href": "/workshops" },
-        { "label": "Media", "href": "/media" },
-        { "label": "About Us", "href": "/about" }
-      ],
-      "login": "Login"
-    }
+  "Site": {
+    "title": "IRAC | Islamic Architecture Center",
+    "description": "The online home of the Islamic Architecture Center"
+  },
+  "header": {
+    "navigation": [
+      { "label": "Home", "href": "/" },
+      { "label": "Courses", "href": "/courses" },
+      { "label": "Workshops", "href": "/workshops" },
+      { "label": "Media", "href": "/media" },
+      { "label": "About Us", "href": "/about" }
+    ],
+    "login": "Login"
   }
+}
