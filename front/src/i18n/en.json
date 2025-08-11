@@ -3,14 +3,23 @@
     "title": "IRAC | Islamic Architecture Center",
     "description": "The online home of the Islamic Architecture Center"
   },
-  "header": {
+  "Navbar": {
     "navigation": [
       { "label": "Home", "href": "/" },
-      { "label": "Courses", "href": "/courses" },
-      { "label": "Workshops", "href": "/workshops" },
-      { "label": "Media", "href": "/media" },
-      { "label": "About Us", "href": "/about" }
+      { "label": "Charts", "href": "/charts/overall" },
+      { "label": "Chatbot", "href": "/chatbot" }
     ],
-    "login": "Login"
+    "dropdownTitle": "More",
+    "dropdownLinks": [
+      { "label": "FAQ", "href": "/faq" },
+      { "label": "About Us", "href": "/about" },
+      { "label": "Contact Us", "href": "/contact" }
+    ],
+    "adminPanel": "Admin Panel",
+    "userPanel": "User Panel",
+    "login": "Login",
+    "logout": "Logout",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   }
 }
