@@ -1,0 +1,12 @@
+{
+    "header": {
+      "navigation": [
+        { "label": "Home", "href": "/" },
+        { "label": "Courses", "href": "/courses" },
+        { "label": "Workshops", "href": "/workshops" },
+        { "label": "Media", "href": "/media" },
+        { "label": "About Us", "href": "/about" }
+      ],
+      "login": "Login"
+    }
+  }
