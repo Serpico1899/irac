@@ -20,19 +20,12 @@ const locales = ["fa", "en"];
 export async function generateMetadata({
   params: { locale },
 }: Props): Promise<Metadata> {
-  // Validate locale
-  if (!locales.includes(locale)) {
-    notFound();
-  }
-
+  if (!locales.includes(locale)) notFound();
   const t = await getTranslations({ locale, namespace: "Site" });
-
   return {
     title: t("title"),
     description: t("description"),
-    icons: {
-      icon: "/favicon.ico",
-    },
+    icons: { icon: "/favicon.ico" },
   };
 }
 
@@ -40,21 +33,21 @@ export default async function LocaleLayout({
   children,
   params: { locale },
 }: Props) {
-  // Validate locale
-  if (!locales.includes(locale)) {
-    notFound();
-  }
+  if (!locales.includes(locale)) notFound();
 
-  // Providing all messages to the client side is the easiest way to get started
   const messages = await getMessages();
+  const navbarT = await getTranslations({ locale, namespace: "Navbar" });
 
-  // We still need to get the user on the server for initial state
   const me = await getMe();
   const isAuthenticated = me.success;
   const userLevel = me.success ? me.body.level : null;
-
-  // Determine direction based on locale
   const isRTL = locale === "fa";
+
+  // Prepare props for the Navbar
+  const navbarProps = {
+    navigation: navbarT.raw("navigation"),
+    dropdownLinks: navbarT.raw("dropdownLinks"),
+  };
 
   return (
     <html lang={locale} dir={isRTL ? "rtl" : "ltr"}>
@@ -66,7 +59,10 @@ export default async function LocaleLayout({
               userLevel={userLevel}
             />
             <div className="h-screen">
-              <Navbar />
+              <Navbar
+                navigation={navbarProps.navigation}
+                dropdownLinks={navbarProps.dropdownLinks}
+              />
               <div className="flex-1 p-6 bg-gray-300 mt-16">{children}</div>
               <Footer />
             </div>
