@@ -8,7 +8,7 @@ import { AuthInitializer } from "@/components/AuthInitializer";
 import { Toaster } from "react-hot-toast";
 import { Navbar } from "@/components/organisms/Navbar";
 import { getMe } from "@/app/actions/user/getMe";
-import { Footer } from "@/components/organisms/NewFooter";
+import { Footer } from "@/components/organisms/NewFooter"; // This should already be here
 
 type Props = {
   children: React.ReactNode;
@@ -37,17 +37,19 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
   const navbarT = await getTranslations({ locale, namespace: "Navbar" });
+  const footerT = await getTranslations({ locale, namespace: "Footer" }); // Fetch Footer translations
 
   const me = await getMe();
   const isAuthenticated = me.success;
   const userLevel = me.success ? me.body.level : null;
   const isRTL = locale === "fa";
 
-  // Prepare props for the Navbar
   const navbarProps = {
     navigation: navbarT.raw("navigation"),
     dropdownLinks: navbarT.raw("dropdownLinks"),
   };
+
+  const footerTranslations = footerT.raw(); // Get all footer translations
 
   return (
     <html lang={locale} dir={isRTL ? "rtl" : "ltr"}>
@@ -64,7 +66,7 @@ export default async function LocaleLayout({
                 dropdownLinks={navbarProps.dropdownLinks}
               />
               <div className="flex-1 p-6 bg-gray-300 mt-16">{children}</div>
-              <Footer />
+              <Footer translations={footerTranslations} />
             </div>
             <Toaster
               position={isRTL ? "top-right" : "top-left"}
