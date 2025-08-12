@@ -5,11 +5,9 @@
   },
   "Navbar": {
     "navigation": [
-      { "label": "صفحه اصلی", "href": "/" },
-      { "label": "دوره‌ها", "href": "/courses" },
-      { "label": "کارگاه‌ها", "href": "/workshops" },
-      { "label": "رسانه", "href": "/media" },
-      { "label": "درباره ما", "href": "/about" }
+      { "label": "خانه", "href": "/" },
+      { "label": "نمودار", "href": "/charts/overall" },
+      { "label": "چت‌بات", "href": "/chatbot" }
     ],
     "dropdownTitle": "بیشتر",
     "dropdownLinks": [
@@ -23,29 +21,5 @@
     "logout": "خروج",
     "openMenu": "باز کردن منو",
     "closeMenu": "بستن منو"
-  },
-  "Footer": {
-    "aboutTitle": "درباره ما",
-    "aboutText": "این پلتفرم با هدف تحلیل و بررسی علمی تصادفات رانندگی راه‌اندازی شده است. ما تلاش می‌کنیم با بهره‌گیری از داده‌های واقعی، بهبود ایمنی جاده‌ای و کاهش تلفات را با کمک تحلیل‌های هوشمند محقق کنیم.",
-    "featuresTitle": "امکانات",
-    "featuresLinks": [
-      { "label": "جستجوی پیشرفته تصادفات", "href": "/search" },
-      { "label": "گزارش‌های تحلیلی", "href": "/reports" },
-      { "label": "داشبورد ایمنی جاده‌ها", "href": "/dashboard" }
-    ],
-    "resourcesTitle": "منابع مفید",
-    "resourcesLinks": [
-      { "label": "سایت پلیس راهور", "href": "https://www.traffic-police.ir" },
-      {
-        "label": "ایمنی جاده‌ای سازمان جهانی بهداشت",
-        "href": "https://www.who.int/roadsafety"
-      },
-      { "label": "سؤالات متداول", "href": "/faq" }
-    ],
-    "contactTitle": "تماس با ما",
-    "contactEmail": "ایمیل: info@accident-analysis.ir",
-    "contactPhone": "تلفن: ۰۲۱-۱۲۳۴۵۶۷۸",
-    "contactHours": "ساعات پاسخگویی: شنبه تا چهارشنبه، ۹ الی ۱۶",
-    "copyright": "© {currentYear} تحلیل تصادفات رانندگی | تمامی حقوق محفوظ است."
   }
 }
