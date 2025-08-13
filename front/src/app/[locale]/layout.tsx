@@ -64,7 +64,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     dropdownLinks: navbarT.raw("dropdownLinks"),
   };
 
-  const footerTranslations = footerT.raw("");
+  const footerTranslations = messages.Footer;
 
   return (
     <html lang={typedLocale} dir={isRTL ? "rtl" : "ltr"}>
