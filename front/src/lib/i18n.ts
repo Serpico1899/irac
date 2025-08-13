@@ -1,13 +1,27 @@
 import { notFound } from "next/navigation";
 import { getRequestConfig } from "next-intl/server";
-import { locales } from "@/config/i18n.config";
 
 export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as any)) notFound();
+  // Validate that the incoming locale parameter exists and is valid
+  if (!locale || typeof locale !== "string") {
+    notFound();
+  }
 
-  return {
-    locale: locale as string,
-    messages: (await import(`../i18n/${locale}.json`)).default,
-  };
+  // Only allow our supported locales
+  const supportedLocales = ["en", "fa"];
+  if (!supportedLocales.includes(locale)) {
+    notFound();
+  }
+
+  try {
+    const messages = (await import(`../i18n/${locale}.json`)).default;
+
+    return {
+      locale,
+      messages,
+    };
+  } catch (error) {
+    console.error(`Failed to load messages for locale: ${locale}`, error);
+    notFound();
+  }
 });
