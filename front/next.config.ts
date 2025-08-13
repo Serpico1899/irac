@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 // The only change is on this line, using the '@' alias
-const withNextIntl = createNextIntlPlugin("@/lib/i18n.ts");
+const withNextIntl = createNextIntlPlugin("./src/lib/i18n.ts");
 
 const nextConfig: NextConfig = {
   experimental: {
