@@ -1,9 +1,4 @@
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/lib/navigation";
-
-export default async function NotFound() {
-  const t = await getTranslations("NotFound");
-
+export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-md mx-auto text-center px-4">
@@ -14,29 +9,26 @@ export default async function NotFound() {
 
         {/* Title */}
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-          {t("title")}
+          Page Not Found
         </h1>
 
         {/* Description */}
-        <p className="text-gray-600 mb-8 leading-relaxed">{t("description")}</p>
+        <p className="text-gray-600 mb-8 leading-relaxed">
+          Sorry, we couldn't find the page you're looking for. Please check the
+          URL and try again.
+        </p>
 
         {/* Action Buttons */}
         <div className="space-y-4">
-          <Link
-            href="/"
+          <a
+            href="/fa"
             className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
-            {t("backHome")}
-          </Link>
+            Go to Home
+          </a>
 
           <div className="text-sm text-gray-500">
-            {t("or")}{" "}
-            <button
-              onClick={() => window.history.back()}
-              className="text-blue-600 hover:text-blue-800 underline"
-            >
-              {t("goBack")}
-            </button>
+            or check the URL and try again
           </div>
         </div>
 
@@ -53,7 +45,13 @@ export default async function NotFound() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.467-.881-6.08-2.33"
+                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 5a3 3 0 116 0v4H8V5z"
               />
             </svg>
           </div>
