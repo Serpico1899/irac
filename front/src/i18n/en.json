@@ -58,5 +58,12 @@
     "fontStatus": "✅ Persian Font",
     "devNoteTitle": "Note for Developers:",
     "devNoteText": "This is a temporary page and should be replaced with the main content. The i18n structure, Tailwind CSS, and existing components are ready for use."
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, we couldn't find the page you're looking for. It may have been moved, deleted, or you entered the wrong URL.",
+    "backHome": "Back to Home",
+    "or": "or",
+    "goBack": "go back"
   }
 }
