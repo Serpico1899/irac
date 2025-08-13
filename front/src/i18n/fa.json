@@ -1,25 +1,52 @@
 {
   "Site": {
-    "title": "مرکز معماری اسلامی | ایراک",
+    "title": "ایراک | مرکز معماری اسلامی",
     "description": "خانه آنلاین مرکز معماری اسلامی"
   },
   "Navbar": {
     "navigation": [
-      { "label": "خانه", "href": "/" },
-      { "label": "نمودار", "href": "/charts/overall" },
-      { "label": "چت‌بات", "href": "/chatbot" }
+      { "label": "صفحه اصلی", "href": "/" },
+      { "label": "دوره‌ها", "href": "/courses" },
+      { "label": "کارگاه‌ها", "href": "/workshops" },
+      { "label": "رسانه", "href": "/media" }
     ],
     "dropdownTitle": "بیشتر",
     "dropdownLinks": [
-      { "label": "سوالات متداول", "href": "/faq" },
       { "label": "درباره ما", "href": "/about" },
       { "label": "تماس با ما", "href": "/contact" }
     ],
     "adminPanel": "پنل ادمین",
     "userPanel": "پنل کاربری",
-    "login": "ورود",
+    "login": "ورود / ثبت نام",
     "logout": "خروج",
     "openMenu": "باز کردن منو",
     "closeMenu": "بستن منو"
+  },
+  "Footer": {
+    "aboutTitle": "درباره مرکز",
+    "aboutText": "ایراک یک موسسه پیشرو است که به مطالعه، حفظ و پیشرفت معماری اسلامی اختصاص دارد. ما دوره‌ها، کارگاه‌ها و منابعی را برای دانشجویان و متخصصان در سراسر جهان ارائه می‌دهیم.",
+    "quickLinksTitle": "دسترسی سریع",
+    "quickLinks": [
+      { "label": "دوره‌ها", "href": "/courses" },
+      { "label": "کارگاه‌ها", "href": "/workshops" },
+      { "label": "رسانه", "href": "/media" },
+      { "label": "درباره ما", "href": "/about" }
+    ],
+    "contactTitle": "تماس با ما",
+    "contactAddress": "خیابان فلسطین، تهران، ایران",
+    "contactEmail": "ایمیل: info@irac.ir",
+    "contactPhone": "تلفن: ۱۲۳۴۵۶۷۸-۰۲۱",
+    "copyright": "© {currentYear} مرکز معماری اسلامی ایراک | تمامی حقوق محفوظ است."
+  },
+  "HomePage": {
+    "welcome": "خوش آمدید",
+    "description": "این صفحه نشان‌دهنده عملکرد صحیح سیستم چندزبانه و ساختار جدید پروژه است.",
+    "menu": "منوی اصلی",
+    "status": "وضعیت سیستم",
+    "i18nStatus": "✅ چندزبانه (i18n)",
+    "tailwindStatus": "✅ Tailwind CSS",
+    "fontStatus": "✅ فونت فارسی",
+    "devNoteTitle": "نکته برای توسعه‌دهندگان:",
+    "devNoteText": "این صفحه موقتی است و باید با محتوای اصلی جایگزین شود. ساختار i18n، Tailwind CSS و کامپوننت‌های موجود آماده استفاده هستند."
   }
 }

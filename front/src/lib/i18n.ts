@@ -1,15 +1,12 @@
-import 'server-only'
-import type { Locale } from '@/config/i18n.config'
+import { notFound } from "next/navigation";
+import { getRequestConfig } from "next-intl/server";
+import { locales } from "@/config/i18n.config";
 
-// We are defining a type for our dictionary based on the structure of en.json
-export type Dictionary = typeof import('@/i18n/en.json')
+export default getRequestConfig(async ({ locale }) => {
+  // Validate that the incoming `locale` parameter is valid
+  if (!locales.includes(locale as any)) notFound();
 
-// This object now dynamically imports the correct dictionary based on the locale
-const dictionaries: Record<Locale, () => Promise<Dictionary>> = {
-  en: () => import('@/i18n/en.json').then((module) => module.default),
-  fa: () => import('@/i18n/fa.json').then((module) => module.default),
-}
-
-export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
-  return dictionaries[locale]()
-}
+  return {
+    messages: (await import(`../i18n/${locale}.json`)).default,
+  };
+});

@@ -7,20 +7,20 @@ import { AuthProvider } from "@/context/AuthContext";
 import { AuthInitializer } from "@/components/AuthInitializer";
 import { Toaster } from "react-hot-toast";
 import { Navbar } from "@/components/organisms/Navbar";
-import { getMe } from "@/app/actions/user/getMe";
-import { Footer } from "@/components/organisms/NewFooter"; // This should already be here
+// import { getMe } from '@/app/actions/user/getMe'; // TEMPORARILY DISABLED
+import { Footer } from "@/components/organisms/NewFooter";
+import { locales } from "@/config/i18n.config";
 
 type Props = {
   children: React.ReactNode;
   params: { locale: string };
 };
 
-const locales = ["fa", "en"];
-
-export async function generateMetadata({
-  params: { locale },
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // FINAL FIX: Await the params object before using it
+  const { locale } = await params;
   if (!locales.includes(locale)) notFound();
+
   const t = await getTranslations({ locale, namespace: "Site" });
   return {
     title: t("title"),
@@ -29,19 +29,20 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleLayout({
-  children,
-  params: { locale },
-}: Props) {
+export default async function LocaleLayout({ children, params }: Props) {
+  // FINAL FIX: Await the params object before using it
+  const { locale } = await params;
   if (!locales.includes(locale)) notFound();
 
   const messages = await getMessages();
   const navbarT = await getTranslations({ locale, namespace: "Navbar" });
-  const footerT = await getTranslations({ locale, namespace: "Footer" }); // Fetch Footer translations
+  const footerT = await getTranslations({ locale, namespace: "Footer" });
 
-  const me = await getMe();
-  const isAuthenticated = me.success;
-  const userLevel = me.success ? me.body.level : null;
+  // --- TEMPORARY FIX ---
+  const isAuthenticated = false;
+  const userLevel = null;
+  // --- END TEMPORARY FIX ---
+
   const isRTL = locale === "fa";
 
   const navbarProps = {
@@ -49,7 +50,7 @@ export default async function LocaleLayout({
     dropdownLinks: navbarT.raw("dropdownLinks"),
   };
 
-  const footerTranslations = footerT.raw(); // Get all footer translations
+  const footerTranslations = footerT.raw();
 
   return (
     <html lang={locale} dir={isRTL ? "rtl" : "ltr"}>
@@ -60,12 +61,12 @@ export default async function LocaleLayout({
               isAuthenticated={isAuthenticated}
               userLevel={userLevel}
             />
-            <div className="h-screen">
+            <div className="flex flex-col min-h-screen">
               <Navbar
                 navigation={navbarProps.navigation}
                 dropdownLinks={navbarProps.dropdownLinks}
               />
-              <div className="flex-1 p-6 bg-gray-300 mt-16">{children}</div>
+              <main className="flex-grow">{children}</main>
               <Footer translations={footerTranslations} />
             </div>
             <Toaster
