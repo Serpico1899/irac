@@ -18,9 +18,7 @@ export default async function NotFound() {
         </h1>
 
         {/* Description */}
-        <p className="text-gray-600 mb-8 leading-relaxed">
-          {t("description")}
-        </p>
+        <p className="text-gray-600 mb-8 leading-relaxed">{t("description")}</p>
 
         {/* Action Buttons */}
         <div className="space-y-4">
