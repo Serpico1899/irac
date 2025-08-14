@@ -122,12 +122,80 @@ body {
 }
 
 * {
-    font-family: vazir-matn;
+    font-family: "Vazirmatn", "Tahoma", "Arial", sans-serif;
+}
+
+/* Complete font family definitions */
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("/fonts/ttf/Vazirmatn-Thin.ttf");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: vazir-matn;
+    font-family: "Vazirmatn";
+    src: url("/fonts/ttf/Vazirmatn-ExtraLight.ttf");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("/fonts/ttf/Vazirmatn-Light.ttf");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
     src: url("/fonts/ttf/Vazirmatn-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("/fonts/ttf/Vazirmatn-Medium.ttf");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("/fonts/ttf/Vazirmatn-SemiBold.ttf");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("/fonts/ttf/Vazirmatn-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("/fonts/ttf/Vazirmatn-ExtraBold.ttf");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("/fonts/ttf/Vazirmatn-Black.ttf");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
 }
 
 @keyframes fadeIn {
@@ -136,6 +204,17 @@ body {
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes fadeInSlow {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -195,6 +274,7 @@ body {
 }
 
 @layer utilities {
+    /* Enhanced fade animations */
     .animate-fade-in {
         animation: fadeIn 0.8s ease-out forwards;
     }
@@ -209,6 +289,11 @@ body {
         opacity: 0;
     }
 
+    .animate-fade-in-slow {
+        animation: fadeInSlow 1.2s ease-out forwards;
+    }
+
+    /* Slide animations */
     .animate-slide-down {
         animation: slideDown 0.8s ease-out forwards;
     }
@@ -222,41 +307,47 @@ body {
         opacity: 0;
     }
 
+    .animate-slide-up-delay-1 {
+        animation: slideUp 0.6s ease-out 0.1s forwards;
+        opacity: 0;
+    }
+
     .animate-slide-up-delay-2 {
-        animation: slideUp 0.8s ease-out 0.4s forwards;
+        animation: slideUp 0.6s ease-out 0.2s forwards;
         opacity: 0;
     }
 
     .animate-slide-up-delay-3 {
-        animation: slideUp 0.8s ease-out 0.6s forwards;
+        animation: slideUp 0.6s ease-out 0.3s forwards;
         opacity: 0;
     }
 
     .animate-slide-up-delay-4 {
-        animation: slideUp 0.8s ease-out 0.8s forwards;
+        animation: slideUp 0.6s ease-out 0.4s forwards;
         opacity: 0;
     }
 
     .animate-slide-up-delay-5 {
-        animation: slideUp 0.8s ease-out 1s forwards;
+        animation: slideUp 0.6s ease-out 0.5s forwards;
         opacity: 0;
     }
 
     .animate-slide-up-delay-6 {
-        animation: slideUp 0.8s ease-out 1.2s forwards;
+        animation: slideUp 0.6s ease-out 0.6s forwards;
         opacity: 0;
     }
 
     .animate-slide-up-delay-7 {
-        animation: slideUp 0.8s ease-out 1.4s forwards;
+        animation: slideUp 0.6s ease-out 0.7s forwards;
         opacity: 0;
     }
 
     .animate-slide-up-delay-8 {
-        animation: slideUp 0.8s ease-out 1.6s forwards;
+        animation: slideUp 0.6s ease-out 0.8s forwards;
         opacity: 0;
     }
 
+    /* Special effects */
     .animate-pop-in {
         animation: popIn 0.5s cubic-bezier(0.26, 0.53, 0.74, 1.48) forwards;
     }
@@ -264,7 +355,44 @@ body {
     .animate-bounce-in {
         animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
     }
+
+    /* Enhanced text shadows for elegance */
+    .text-shadow-elegant {
+        text-shadow:
+            0 2px 4px rgba(0, 0, 0, 0.3),
+            0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-shadow-hero {
+        text-shadow:
+            0 4px 8px rgba(0, 0, 0, 0.4),
+            0 2px 4px rgba(0, 0, 0, 0.3),
+            0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-shadow-subtle {
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Typography utilities */
+    .letter-spacing-loose {
+        letter-spacing: 0.1em;
+    }
+
+    .letter-spacing-wide {
+        letter-spacing: 0.05em;
+    }
+
+    .line-height-tight {
+        line-height: 1.1;
+    }
+
+    .line-height-relaxed {
+        line-height: 1.7;
+    }
 }
+</text>
+
 
 /* RTL Support */
 .dir-rtl {
