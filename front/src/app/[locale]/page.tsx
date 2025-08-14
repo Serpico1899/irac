@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ContentCard from "@/components/organisms/ContentCard";
 
 export default async function HomePage({
@@ -143,40 +144,149 @@ export default async function HomePage({
 
   return (
     <div className="bg-[#F5F7FA]">
-      {/* Hero Section */}
-      <section className="bg-[#29A5A1] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              {heroTitle}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed">
-              {heroSubtitle}
-            </p>
+      {/* Hero Section - Exact match to screenshot */}
+      <section className="bg-[#4ECDC4] relative overflow-hidden" dir="rtl">
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left side - Architectural Illustration */}
+            <div className="relative flex justify-center lg:justify-start order-2 lg:order-1">
+              <div className="relative w-[500px] h-[350px]">
+                {/* Main building structure - curved organic shape */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative">
+                    {/* Main building - organic curved shape */}
+                    <div className="w-80 h-64 bg-gradient-to-br from-orange-300 to-orange-400 relative">
+                      {/* Custom curved building shape using clip-path */}
+                      <div
+                        className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-400 shadow-2xl"
+                        style={{
+                          clipPath:
+                            "polygon(15% 0%, 85% 0%, 100% 20%, 95% 40%, 100% 60%, 85% 100%, 15% 100%, 0% 80%, 5% 60%, 0% 40%, 5% 20%)",
+                        }}
+                      >
+                        {/* Windows and architectural details */}
+                        <div className="absolute top-8 left-12 w-8 h-8 bg-blue-500 rounded-sm"></div>
+                        <div className="absolute top-8 right-12 w-8 h-8 bg-blue-500 rounded-sm"></div>
+                        <div className="absolute top-20 left-16 w-10 h-6 bg-red-400 rounded-sm"></div>
+                        <div className="absolute top-20 right-16 w-10 h-6 bg-red-400 rounded-sm"></div>
+                        <div className="absolute top-32 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-yellow-500 rounded-sm"></div>
+                        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-16 h-12 bg-blue-700 rounded-t-lg"></div>
 
-            {/* Illustration Placeholder */}
-            <div className="bg-white/10 rounded-2xl p-12 mb-12 max-w-3xl mx-auto backdrop-blur-sm">
-              <div className="w-full h-64 bg-white/20 rounded-lg flex items-center justify-center">
-                <div className="text-8xl text-white/60">🏛️</div>
+                        {/* Roof elements */}
+                        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-6 h-4 bg-red-600 rounded-sm"></div>
+                      </div>
+                    </div>
+
+                    {/* People figures around the building */}
+                    <div
+                      className="absolute -bottom-12 -left-16 w-12 h-20 bg-gradient-to-b from-blue-400 to-blue-500 transform -rotate-12"
+                      style={{ clipPath: "ellipse(40% 60% at 50% 70%)" }}
+                    ></div>
+                    <div
+                      className="absolute -bottom-8 -right-12 w-10 h-16 bg-gradient-to-b from-green-400 to-green-500 transform rotate-12"
+                      style={{ clipPath: "ellipse(40% 60% at 50% 70%)" }}
+                    ></div>
+                    <div
+                      className="absolute -top-8 -left-12 w-8 h-14 bg-gradient-to-b from-purple-400 to-purple-500 transform rotate-6"
+                      style={{ clipPath: "ellipse(40% 60% at 50% 70%)" }}
+                    ></div>
+                    <div
+                      className="absolute -top-4 right-4 w-6 h-12 bg-gradient-to-b from-yellow-400 to-yellow-500 transform -rotate-6"
+                      style={{ clipPath: "ellipse(40% 60% at 50% 70%)" }}
+                    ></div>
+                    <div
+                      className="absolute bottom-4 left-8 w-7 h-12 bg-gradient-to-b from-pink-400 to-pink-500 transform rotate-3"
+                      style={{ clipPath: "ellipse(40% 60% at 50% 70%)" }}
+                    ></div>
+
+                    {/* Floating papers/documents */}
+                    <div className="absolute -top-12 right-8 w-6 h-8 bg-white transform rotate-12 shadow-lg rounded-sm"></div>
+                    <div className="absolute top-6 -right-8 w-5 h-7 bg-white transform -rotate-6 shadow-lg rounded-sm"></div>
+                    <div className="absolute -bottom-6 right-12 w-4 h-6 bg-white transform rotate-45 shadow-lg rounded-sm"></div>
+
+                    {/* Decorative circles and elements */}
+                    <div className="absolute -top-16 -right-16 w-20 h-20 bg-white bg-opacity-15 rounded-full"></div>
+                    <div className="absolute -bottom-16 left-8 w-14 h-14 bg-white bg-opacity-10 rounded-full"></div>
+                    <div className="absolute top-16 -left-20 w-10 h-10 bg-white bg-opacity-20 rounded-full"></div>
+                    <div className="absolute -top-8 left-16 w-6 h-6 bg-white bg-opacity-25 rounded-full"></div>
+
+                    {/* Small architectural elements */}
+                    <div className="absolute top-12 -left-8 w-3 h-8 bg-orange-600 transform rotate-12"></div>
+                    <div className="absolute bottom-12 -right-6 w-2 h-6 bg-red-500 transform -rotate-6"></div>
+                  </div>
+                </div>
               </div>
-              <p className="text-white/80 mt-4 text-lg">
-                {locale === "fa"
-                  ? "کاوش در زیبایی معماری اسلامی"
-                  : "Exploring the Beauty of Islamic Architecture"}
-              </p>
             </div>
 
-            {/* Search Bar */}
-            <div className="max-w-2xl mx-auto">
-              <div className="relative">
+            {/* Right side - Content */}
+            <div className="text-white space-y-12 text-center lg:text-right order-1 lg:order-2">
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                کلیه دوره‌های مرکز معماری
+              </h1>
+
+              {/* Circular course buttons - exact match to screenshot */}
+              <div className="flex justify-center lg:justify-start gap-8">
+                {/* دیوان معماری button */}
+                <Link
+                  href="/courses/divan-architecture"
+                  className="group cursor-pointer"
+                >
+                  <div className="w-36 h-36 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                    <div className="text-center">
+                      <div className="w-12 h-12 bg-[#4ECDC4] rounded-full mx-auto mb-2 flex items-center justify-center shadow-md">
+                        <svg
+                          className="w-6 h-6 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 2.69L18.31 12H17v6H7v-6H5.69L12 5.69z" />
+                        </svg>
+                      </div>
+                      <p className="text-sm font-bold text-[#4ECDC4] leading-tight">
+                        دیوان
+                        <br />
+                        معماری
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+
+                {/* من اگر مورچه بودم button */}
+                <Link
+                  href="/courses/ant-perspective"
+                  className="group cursor-pointer"
+                >
+                  <div className="w-36 h-36 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                    <div className="text-center">
+                      <div className="w-12 h-12 bg-orange-400 rounded-full mx-auto mb-2 flex items-center justify-center shadow-md">
+                        <svg
+                          className="w-6 h-6 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                      </div>
+                      <p className="text-sm font-bold text-orange-400 leading-tight">
+                        من اگر
+                        <br />
+                        مورچه بودم
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Search bar */}
+              <div className="relative max-w-md mx-auto lg:mx-0">
                 <input
                   type="text"
-                  placeholder={searchPlaceholder}
-                  className="w-full px-6 py-4 bg-white rounded-full text-gray-800 placeholder-gray-500 shadow-lg focus:outline-none focus:ring-4 focus:ring-white/30 transition-all duration-300"
+                  placeholder="جستجوی دوره‌ها"
+                  className="w-full px-6 py-4 pr-14 bg-white rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 shadow-lg text-right"
                 />
-                <button className="absolute right-2 rtl:right-auto rtl:left-2 top-2 bg-[#3B5A9D] text-white p-2 rounded-full hover:bg-[#2D4A8C] transition-colors duration-300">
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
                   <svg
-                    className="w-6 h-6"
+                    className="w-6 h-6 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -184,11 +294,11 @@ export default async function HomePage({
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={2}
+                      strokeWidth={1.5}
                       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                     />
                   </svg>
-                </button>
+                </div>
               </div>
             </div>
           </div>
