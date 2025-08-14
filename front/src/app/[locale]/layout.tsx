@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ClientProviders } from "@/components/providers/ClientProviders";
 import "../globals.css";
 
 type Props = {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale: _locale } = await params;
 
   return {
     title: "IRAC | Islamic Architecture Center",
@@ -32,7 +34,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                   <h1 className="text-xl font-bold text-gray-900">IRAC</h1>
                 </div>
                 <div className="flex space-x-4">
-                  <a
+                  <Link
                     href="/en"
                     className={`px-3 py-1 rounded text-sm ${
                       locale === "en"
@@ -41,8 +43,8 @@ export default async function LocaleLayout({ children, params }: Props) {
                     }`}
                   >
                     EN
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/fa"
                     className={`px-3 py-1 rounded text-sm ${
                       locale === "fa"
@@ -51,14 +53,16 @@ export default async function LocaleLayout({ children, params }: Props) {
                     }`}
                   >
                     فا
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
           </header>
 
           {/* Main Content */}
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow">
+            <ClientProviders>{children}</ClientProviders>
+          </main>
 
           {/* Simple Footer */}
           <footer className="bg-gray-800 text-white">
