@@ -27,11 +27,10 @@ const ContentCard: React.FC<ContentCardProps> = ({
     >
       <article
         className={`relative rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full border ${
-          isDark ? "border-gray-600" : "border-gray-100"
+          isDark
+            ? "bg-[#4A4A4A] text-white border-gray-600"
+            : "bg-white text-gray-800 border-gray-100"
         }`}
-        style={{
-          backgroundColor: isDark ? "#4A4A4A" : "#FFFFFF",
-        }}
       >
         {/* Badge */}
         {badgeText && (
@@ -58,16 +57,19 @@ const ContentCard: React.FC<ContentCardProps> = ({
           </div>
         ) : (
           <div
-            className="aspect-video w-full flex items-center justify-center"
-            style={{ backgroundColor: isDark ? "#3A3A3A" : "#F5F7FA" }}
+            className={`aspect-video w-full flex items-center justify-center ${
+              isDark ? "bg-gray-700" : "bg-gray-50"
+            }`}
           >
             <div
-              className="w-20 h-20 rounded-full flex items-center justify-center"
-              style={{ backgroundColor: isDark ? "#5A5A5A" : "#E5E5E5" }}
+              className={`w-20 h-20 rounded-full flex items-center justify-center ${
+                isDark ? "bg-gray-600" : "bg-gray-200"
+              }`}
             >
               <svg
-                className="w-10 h-10"
-                style={{ color: isDark ? "#FFFFFF" : "#777777" }}
+                className={`w-10 h-10 ${
+                  isDark ? "text-gray-400" : "text-gray-500"
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -86,19 +88,15 @@ const ContentCard: React.FC<ContentCardProps> = ({
 
         {/* Content */}
         <div className="p-6">
-          <h3
-            className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-300 leading-tight"
-            style={{
-              color: isDark ? "#FFFFFF" : "#4A4A4A",
-            }}
-          >
+          <h3 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-300 leading-tight">
             {title}
           </h3>
 
           {description && (
             <p
-              className="text-base line-clamp-3 leading-relaxed"
-              style={{ color: isDark ? "#E5E5E5" : "#777777" }}
+              className={`text-base line-clamp-3 leading-relaxed ${
+                isDark ? "text-gray-200" : "text-gray-600"
+              }`}
             >
               {description}
             </p>
