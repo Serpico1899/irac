@@ -3,6 +3,66 @@
 
 @tailwind utilities;
 
+/* Persian Color Palette - Inspired by Iranian Islamic Art */
+:root {
+    /* Persian Blues - Inspired by traditional Persian tiles */
+    --persian-blue: #115e99;
+    --royal-blue: #2a4365;
+    --persian-blue-light: #3182ce;
+    --persian-blue-dark: #0d4771;
+
+    /* Terracotta - Traditional Persian pottery colors */
+    --terracotta: #b83f5e;
+    --terracotta-light: #d4556b;
+    --terracotta-dark: #9a3650;
+    --terracotta-500: #b83f5e;
+    --terracotta-600: #9a3650;
+
+    /* Persian Gold - Traditional Islamic calligraphy accent */
+    --persian-gold: #d4af37;
+    --persian-gold-light: #dac255;
+    --persian-gold-dark: #b8941f;
+
+    /* Warm Neutrals - Inspired by Persian carpets */
+    --persian-cream: #fdf8f3;
+    --persian-beige: #f7f1ea;
+    --persian-sand: #e8ddd4;
+}
+
+/* Utility classes for Persian colors */
+.text-persian-blue {
+    color: var(--persian-blue);
+}
+.bg-persian-blue {
+    background-color: var(--persian-blue);
+}
+.border-persian-blue {
+    border-color: var(--persian-blue);
+}
+.ring-persian-blue {
+    --tw-ring-color: var(--persian-blue);
+}
+
+.text-terracotta {
+    color: var(--terracotta);
+}
+.bg-terracotta {
+    background-color: var(--terracotta);
+}
+.border-terracotta {
+    border-color: var(--terracotta);
+}
+
+.text-persian-gold {
+    color: var(--persian-gold);
+}
+.bg-persian-gold {
+    background-color: var(--persian-gold);
+}
+.border-persian-gold {
+    border-color: var(--persian-gold);
+}
+
 /* Custom animations */
 @keyframes fadeInUp {
     from {
@@ -51,11 +111,23 @@ body {
 /* Enhanced text shadows for elegance */
 .text-shadow-elegant {
     text-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.12),
-        0 1px 2px rgba(0, 0, 0, 0.24);
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.text-shadow-hero {
+    text-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.text-shadow-subtle {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 /* Custom box shadows for depth */
+/* Enhanced box shadows for depth */
 .shadow-elegant {
     box-shadow:
         0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -72,9 +144,17 @@ body {
 
 .shadow-elegant-xl {
     box-shadow:
-        0 20px 25px -5px rgba(0, 0, 0, 0.1),
-        0 10px 10px -5px rgba(0, 0, 0, 0.04),
+        0 25px 50px -12px rgba(0, 0, 0, 0.15),
+        0 10px 20px -5px rgba(0, 0, 0, 0.1),
         0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Persian-inspired shadows */
+.shadow-persian {
+    box-shadow:
+        0 8px 25px -5px rgba(17, 94, 153, 0.15),
+        0 4px 10px -2px rgba(17, 94, 153, 0.1),
+        0 0 0 1px rgba(17, 94, 153, 0.05);
 }
 
 /* Traditional Islamic pattern inspiration */
@@ -121,8 +201,41 @@ body {
     transition-duration: 500ms;
 }
 
+/* Enhanced Typography System - Modern Minimalism Meets Traditional Elegance */
 * {
-    font-family: "Vazirmatn", "Tahoma", "Arial", sans-serif;
+    font-family:
+        "Vazirmatn",
+        "Inter",
+        "SF Pro Display",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    font-feature-settings:
+        "liga" 1,
+        "kern" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Persian Typography Enhancements */
+.font-persian {
+    font-family: "Vazirmatn", sans-serif;
+}
+
+.font-elegant {
+    font-family:
+        "Inter",
+        "SF Pro Display",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
 }
 
 /* Complete font family definitions */
@@ -374,13 +487,17 @@ body {
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
     }
 
-    /* Typography utilities */
+    /* Persian-Inspired Typography Utilities */
     .letter-spacing-loose {
         letter-spacing: 0.1em;
     }
 
     .letter-spacing-wide {
         letter-spacing: 0.05em;
+    }
+
+    .letter-spacing-persian {
+        letter-spacing: 0.02em;
     }
 
     .line-height-tight {
@@ -390,9 +507,105 @@ body {
     .line-height-relaxed {
         line-height: 1.7;
     }
-}
-</text>
 
+    .line-height-persian {
+        line-height: 1.8;
+    }
+
+    /* Enhanced Typography Scales */
+    .text-hero {
+        font-size: clamp(2.5rem, 8vw, 6rem);
+        line-height: 1.1;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+    }
+
+    .text-display {
+        font-size: clamp(2rem, 6vw, 4rem);
+        line-height: 1.2;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+    }
+
+    .text-heading {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        line-height: 1.3;
+        font-weight: 700;
+    }
+
+    .text-subheading {
+        font-size: clamp(1.125rem, 3vw, 1.5rem);
+        line-height: 1.4;
+        font-weight: 600;
+    }
+
+    .text-body-large {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        line-height: 1.6;
+        font-weight: 500;
+    }
+
+    .text-body {
+        font-size: 1rem;
+        line-height: 1.7;
+        font-weight: 400;
+    }
+
+    .text-caption {
+        font-size: 0.875rem;
+        line-height: 1.5;
+        font-weight: 500;
+    }
+
+    /* Persian Text Styling */
+    .persian-text {
+        font-family: "Vazirmatn", sans-serif;
+        direction: rtl;
+        text-align: right;
+    }
+
+    .english-text {
+        font-family:
+            "Inter",
+            "SF Pro Display",
+            -apple-system,
+            BlinkMacSystemFont,
+            sans-serif;
+        direction: ltr;
+        text-align: left;
+    }
+
+    /* Elegant Focus States */
+    .focus-elegant:focus-visible {
+        outline: 2px solid var(--persian-blue);
+        outline-offset: 3px;
+        border-radius: 8px;
+    }
+
+    /* Persian-Inspired Text Decoration */
+    .text-decorated::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(
+            90deg,
+            var(--persian-blue),
+            var(--persian-gold),
+            var(--terracotta)
+        );
+        margin: 1rem auto;
+        border-radius: 2px;
+    }
+
+    .text-decorated-left::after {
+        margin: 1rem 0;
+    }
+
+    .text-decorated-right::after {
+        margin: 1rem 0 1rem auto;
+    }
+}
 
 /* RTL Support */
 .dir-rtl {
