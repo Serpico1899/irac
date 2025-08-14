@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white">
@@ -14,18 +16,18 @@ export default function NotFound() {
 
         {/* Description */}
         <p className="text-gray-600 mb-8 leading-relaxed">
-          Sorry, we couldn't find the page you're looking for. Please check the
-          URL and try again.
+          Sorry, we couldn&apos;t find the page you&apos;re looking for. Please
+          check the URL and try again.
         </p>
 
         {/* Action Buttons */}
         <div className="space-y-4">
-          <a
+          <Link
             href="/fa"
             className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
             Go to Home
-          </a>
+          </Link>
 
           <div className="text-sm text-gray-500">
             or check the URL and try again
