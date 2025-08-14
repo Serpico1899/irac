@@ -51,6 +51,7 @@
   "HomePage": {
     "welcome": "Welcome",
     "description": "This page demonstrates the correct functioning of the multilingual system and the new project structure.",
+    "featuredCoursesTitle": "Featured Courses & Workshops",
     "menu": "Main Menu",
     "status": "System Status",
     "i18nStatus": "✅ Multilingual (i18n)",
