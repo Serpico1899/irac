@@ -27,7 +27,7 @@ export const Navbar = ({ navigation, dropdownLinks }: NavbarProps) => {
 
   return (
     <Fragment>
-      <header className="sticky top-0 z-50 bg-primary text-white shadow-md">
+      <header className="sticky top-4 z-50 max-w-5xl mx-auto rounded-full bg-white/80 backdrop-blur-sm shadow-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
           {/* Logo */}
           <div className="flex-shrink-0">
