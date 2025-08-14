@@ -2,171 +2,232 @@
 
 import { Fragment, useState } from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { IconLogo } from "../atoms/Icons";
-import { useAuth } from "@/context/AuthContext";
 
-// Define the shape of our navigation links
-type NavLink = {
-  label: string;
-  href: string;
-};
-
-// Define the props our Navbar will receive
-type NavbarProps = {
-  navigation: NavLink[];
-  dropdownLinks: NavLink[];
-};
-
-export const Navbar = ({ navigation, dropdownLinks }: NavbarProps) => {
+export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isAuthenticated, userLevel, logout } = useAuth();
-  const t = useTranslations("Navbar");
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const pathname = usePathname();
+
+  // Navigation items matching the screenshot
+  const navItems = [
+    { label: "صفحه اصلی", href: "/" },
+    { label: "فضای کار اشتراکی", href: "/coworking" },
+    { label: "مدرسه معماری ایرانی", href: "/school" },
+    { label: "کارگاه معماری", href: "/workshop" },
+    { label: "رسانه", href: "/media" },
+    { label: "ارتباط با ما", href: "/contact" },
+  ];
 
   return (
     <Fragment>
-      <header className="sticky top-4 z-50 max-w-5xl mx-auto rounded-full bg-white/80 backdrop-blur-sm shadow-lg">
-        <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2">
-              <IconLogo />
-              <span className="hidden font-bold sm:inline">IRAC</span>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-x-6 md:flex">
-            {navigation.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="relative py-2 text-sm font-medium transition-colors hover:text-gray-300"
-              >
-                {link.label}
-                <span
-                  className={`absolute bottom-0 start-0 w-full h-0.5 bg-accent transform transition-transform duration-300 ${
-                    pathname === link.href
-                      ? "scale-x-100"
-                      : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                ></span>
+      {/* Main Navigation Header */}
+      <header
+        className="absolute top-4 left-0 right-0 z-50 bg-[#4ECDC4] w-full rounded-2xl mx-4 shadow-lg"
+        dir="rtl"
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo - Right side for RTL */}
+            <div className="flex-shrink-0">
+              <Link href="/" className="flex items-center">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  {/* IRAC Logo - Geometric pattern */}
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect
+                      x="4"
+                      y="4"
+                      width="24"
+                      height="24"
+                      rx="2"
+                      stroke="#4ECDC4"
+                      strokeWidth="2"
+                    />
+                    <rect x="8" y="8" width="6" height="6" fill="#4ECDC4" />
+                    <rect x="18" y="8" width="6" height="6" fill="#4ECDC4" />
+                    <rect x="8" y="18" width="6" height="6" fill="#4ECDC4" />
+                    <rect x="18" y="18" width="6" height="6" fill="#4ECDC4" />
+                    <rect x="13" y="13" width="6" height="6" fill="#4ECDC4" />
+                  </svg>
+                </div>
               </Link>
-            ))}
+            </div>
 
-            {/* Dropdown Menu */}
-            <div className="relative group">
-              <button className="flex items-center gap-1 py-2 text-sm font-medium transition-colors hover:text-gray-300">
-                <span>{t("dropdownTitle")}</span>
+            {/* Desktop Navigation - Center */}
+            <nav className="hidden lg:flex items-center space-x-reverse space-x-10">
+              {navItems.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-white hover:text-gray-100 transition-colors duration-200 text-sm font-medium px-3 py-2 rounded-lg hover:bg-white hover:bg-opacity-10 ${
+                    pathname === link.href ? "bg-white bg-opacity-20" : ""
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Right side actions - Left side for RTL */}
+            <div className="flex items-center gap-4">
+              {/* Shopping Cart */}
+              <div className="relative">
+                <button
+                  onClick={() => setIsCartOpen(!isCartOpen)}
+                  className="relative p-3 text-white hover:text-gray-100 transition-colors hover:bg-white hover:bg-opacity-10 rounded-lg"
+                  aria-label="سبد خرید"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
+                    />
+                  </svg>
+                  {/* Cart badge */}
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-white text-[#4ECDC4] text-xs rounded-full flex items-center justify-center font-bold">
+                    0
+                  </span>
+                </button>
+
+                {/* Cart Dropdown */}
+                {isCartOpen && (
+                  <div className="absolute left-0 top-full mt-3 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden">
+                    <div className="p-8 text-center">
+                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg
+                          className="w-8 h-8 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-lg font-bold text-gray-800 mb-2">
+                        سبد خرید شما خالی است
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-6">
+                        هنوز محصولی به سبد خرید خود اضافه نکرده‌اید
+                      </p>
+                      <Link
+                        href="/courses"
+                        className="inline-block bg-[#4ECDC4] text-white px-6 py-3 rounded-xl hover:bg-[#45B7B8] transition-colors font-medium"
+                        onClick={() => setIsCartOpen(false)}
+                      >
+                        مشاهده دوره‌ها
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Login/Register Pill Button - Exact match from screenshot */}
+              <Link
+                href="/login"
+                className="flex items-center gap-3 bg-white text-[#4ECDC4] px-6 py-3 rounded-full hover:bg-gray-50 transition-all duration-200 font-medium shadow-sm group"
+              >
                 <svg
-                  className="h-4 w-4"
+                  className="w-5 h-5 text-[#4ECDC4] group-hover:text-[#45B7B8] transition-colors"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+                <span className="text-sm font-medium">ورود و عضویت</span>
+              </Link>
+
+              {/* Mobile menu button */}
+              <button
+                className="lg:hidden p-3 text-white hover:text-gray-100 hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="منوی موبایل"
+              >
+                <svg
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
+                  {isMobileMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
                 </svg>
               </button>
-              <div className="absolute start-0 mt-2 w-48 rounded-md bg-white text-gray-800 shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 z-10">
-                {dropdownLinks.map((link) => (
+            </div>
+          </div>
+
+          {/* Mobile Menu Panel */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden border-t border-white border-opacity-20 bg-[#4ECDC4] py-6">
+              <div className="space-y-2">
+                {navItems.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="block px-4 py-2 text-sm hover:bg-gray-100 text-start"
+                    className={`block px-4 py-3 text-white font-medium transition-colors rounded-lg mx-4 ${
+                      pathname === link.href
+                        ? "bg-white bg-opacity-20"
+                        : "hover:bg-white hover:bg-opacity-10"
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 ))}
+
+                {/* Mobile Login Button */}
+                <div className="pt-4 px-4">
+                  <Link
+                    href="/login"
+                    className="flex items-center justify-center gap-3 bg-white text-[#4ECDC4] px-6 py-4 rounded-2xl hover:bg-gray-50 transition-colors font-medium w-full"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    <span>ورود و عضویت</span>
+                  </Link>
+                </div>
               </div>
             </div>
-          </nav>
-
-          {/* Auth and Mobile Toggle */}
-          <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-2">
-              {isAuthenticated ? (
-                <>
-                  {(userLevel === "Ghost" ||
-                    userLevel === "Manager" ||
-                    userLevel === "Editor") && (
-                    <Link
-                      href="/admin"
-                      className="px-3 py-2 text-sm font-medium rounded-md hover:bg-primary-dark"
-                    >
-                      {t("adminPanel")}
-                    </Link>
-                  )}
-                  {userLevel === "Normal" && (
-                    <Link
-                      href="/user"
-                      className="px-3 py-2 text-sm font-medium rounded-md hover:bg-primary-dark"
-                    >
-                      {t("userPanel")}
-                    </Link>
-                  )}
-                  <button
-                    onClick={logout}
-                    className="px-3 py-2 text-sm font-medium rounded-md hover:bg-red-700"
-                  >
-                    {t("logout")}
-                  </button>
-                </>
-              ) : (
-                <Link
-                  href="/login"
-                  className="px-3 py-2 text-sm font-medium rounded-md bg-accent hover:bg-accent-dark" // Assuming accent-dark is defined in your theme
-                >
-                  {t("login")}
-                </Link>
-              )}
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label={t("openMenu")}
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu Panel */}
-        <div className={`md:hidden ${isMobileMenuOpen ? "block" : "hidden"}`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-primary-dark">
-            {navigation.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-primary"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {/* You can add dropdown links and auth links here as well for mobile */}
-          </div>
+          )}
         </div>
       </header>
+
+      {/* Cart backdrop */}
+      {isCartOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-25 z-40"
+          onClick={() => setIsCartOpen(false)}
+        />
+      )}
     </Fragment>
   );
 };
