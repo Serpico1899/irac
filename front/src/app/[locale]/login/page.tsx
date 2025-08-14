@@ -1,24 +1,24 @@
 "use client";
 import LoginStepOne from "@/components/organisms/login/LoginStepOne";
 import LoginStepTwo from "@/components/organisms/login/LoginStepTwo";
-import { useAutoReturnTimer } from "@/hook/useAutoReturnTimer";
+import { useAutoReturnTimer } from "@/hooks/useAutoReturnTimer";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
-const Login = ({ }) => {
+const Login = ({}) => {
   const [phone, setPhone] = useState("");
   const [step, setStep] = useState(1);
   const { login } = useAuth();
 
   const { clearAutoReturnTimer, remainingTime } = useAutoReturnTimer(
     step,
-    setStep
+    setStep,
   );
 
   const handleCodeEntered = (
     token: string,
     level: string,
-    nationalNumber: string
+    nationalNumber: string,
   ) => {
     clearAutoReturnTimer();
 
