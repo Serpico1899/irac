@@ -79,17 +79,18 @@ export default async function HomePage({
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-stone-50 to-gray-100">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-12 sm:py-16 lg:py-20">
+      <section className="bg-gradient-to-br from-blue-50 via-indigo-50/30 to-white py-16 sm:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-800 mb-8 tracking-tight">
               {locale === "fa"
                 ? "مرکز معماری اسلامی"
                 : "Islamic Architecture Center"}
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <div className="w-32 h-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 mx-auto mb-8 rounded-full shadow-lg"></div>
+            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
               {locale === "fa"
                 ? "به دنیای زیبای معماری اسلامی خوش آمدید. دوره‌ها و کارگاه‌های تخصصی ما را کشف کنید."
                 : "Welcome to the beautiful world of Islamic architecture. Discover our specialized courses and workshops."}
@@ -99,20 +100,25 @@ export default async function HomePage({
       </section>
 
       {/* Featured Courses Section */}
-      <section className="py-12 sm:py-16 lg:py-20">
+      <section className="py-16 sm:py-20 lg:py-28 bg-white/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16 lg:mb-20">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 tracking-tight">
               {locale === "fa"
                 ? "دوره‌ها و کارگاه‌های ویژه"
                 : "Featured Courses & Workshops"}
             </h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+            <div className="w-32 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 mx-auto rounded-full shadow-lg mb-6"></div>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium">
+              {locale === "fa"
+                ? "مجموعه‌ای از بهترین دوره‌ها و کارگاه‌های معماری اسلامی"
+                : "Discover our curated collection of exceptional Islamic architecture courses"}
+            </p>
           </div>
 
           {/* Courses Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
             {sampleCourses.map((course, index) => (
               <div
                 key={course.href}
@@ -134,10 +140,10 @@ export default async function HomePage({
           </div>
 
           {/* View All Courses Button */}
-          <div className="text-center mt-12 lg:mt-16">
+          <div className="text-center mt-16 lg:mt-20">
             <a
               href={`/${locale}/courses`}
-              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-medium rounded-lg shadow-lg hover:bg-blue-700 hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:shadow-blue-200/50 transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2"
             >
               <span className="ltr:mr-2 rtl:ml-2">
                 {locale === "fa" ? "مشاهده همه دوره‌ها" : "View All Courses"}
@@ -164,26 +170,27 @@ export default async function HomePage({
       </section>
 
       {/* Call to Action Section */}
-      <section className="bg-blue-600 py-12 sm:py-16 lg:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+      <section className="bg-gradient-to-br from-gray-800 via-gray-900 to-black py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-indigo-900/20 to-purple-900/20"></div>
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
             {locale === "fa" ? "آماده شروع هستید؟" : "Ready to Get Started?"}
           </h2>
-          <p className="text-xl sm:text-2xl text-blue-100 mb-8 leading-relaxed">
+          <p className="text-xl sm:text-2xl text-gray-200 mb-12 leading-relaxed font-medium max-w-3xl mx-auto">
             {locale === "fa"
               ? "با ما در سفر کشف معماری اسلامی همراه شوید و دانش خود را گسترش دهید."
               : "Join us on a journey of discovering Islamic architecture and expand your knowledge."}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
               href={`/${locale}/courses`}
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 font-medium rounded-lg shadow-lg hover:bg-gray-50 hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+              className="inline-flex items-center justify-center px-10 py-5 bg-white text-gray-900 font-semibold rounded-xl shadow-xl hover:bg-gray-50 hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-4 focus:ring-offset-gray-800"
             >
               {locale === "fa" ? "مرور دوره‌ها" : "Browse Courses"}
             </a>
             <a
               href={`/${locale}/about`}
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-blue-600 transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+              className="inline-flex items-center justify-center px-10 py-5 border-2 border-white/80 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/10 hover:border-white transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-white/50 focus:ring-offset-4 focus:ring-offset-gray-800"
             >
               {locale === "fa" ? "درباره ما" : "Learn More"}
             </a>
