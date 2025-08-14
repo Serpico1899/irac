@@ -25,18 +25,20 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} dir={isRTL ? "rtl" : "ltr"}>
-      <body className={`min-h-screen bg-gray-50 ${isRTL ? "font-arabic" : ""}`}>
+      <body
+        className={`min-h-screen bg-[#F5F7FA] ${isRTL ? "font-arabic" : ""}`}
+      >
         <div className="relative flex flex-col min-h-screen">
-          {/* Floating Navbar */}
+          {/* Sticky Navbar */}
           <Navbar />
 
           {/* Main Content */}
-          <main className="flex-grow">
+          <main className="flex-grow pt-20">
             <ClientProviders>{children}</ClientProviders>
           </main>
 
           {/* Simple Footer */}
-          <footer className="bg-gray-800 text-white">
+          <footer className="bg-[#4A4A4A] text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="text-center">
                 <p className="text-sm">
