@@ -18,39 +18,19 @@ export default async function HomePage({
       ? "آموزش، پژوهش و حفاظت از میراث معماری اسلامی"
       : "Education, Research & Preservation of Islamic Architectural Heritage";
 
-  const bestCoursesTitle = locale === "fa" ? "بهترین دوره‌ها" : "Best Courses";
+  const featuredCoursesTitle =
+    locale === "fa" ? "دوره‌های ویژه" : "Featured Courses";
 
-  const allContentTitle = locale === "fa" ? "تمام محتوا" : "All Content";
+  const latestArticlesTitle =
+    locale === "fa" ? "آخرین مقالات" : "Latest Articles";
 
   const searchPlaceholder =
     locale === "fa"
       ? "جستجو در دوره‌ها و محتوا..."
       : "Search courses and content...";
 
-  // Quick link cards data
-  const quickLinks = [
-    {
-      href: `/${locale}/courses`,
-      title: locale === "fa" ? "دوره‌ها" : "Courses",
-      description:
-        locale === "fa"
-          ? "دوره‌های آموزشی تخصصی"
-          : "Specialized educational courses",
-      icon: "📚",
-    },
-    {
-      href: `/${locale}/workshops`,
-      title: locale === "fa" ? "کارگاه‌ها" : "Workshops",
-      description:
-        locale === "fa"
-          ? "کارگاه‌های عملی و تخصصی"
-          : "Practical specialized workshops",
-      icon: "🏗️",
-    },
-  ];
-
-  // Best courses data (dark variant)
-  const bestCourses = [
+  // Sample courses data for Featured Courses section (dark variant)
+  const featuredCourses = [
     {
       href: `/${locale}/courses/islamic-geometry`,
       imageUrl:
@@ -101,10 +81,10 @@ export default async function HomePage({
     },
   ];
 
-  // All content data (light variant)
-  const allContent = [
+  // Sample articles data for Latest Articles section (light variant)
+  const latestArticles = [
     {
-      href: `/${locale}/media/restoration-project-isfahan`,
+      href: `/${locale}/articles/restoration-project-isfahan`,
       imageUrl:
         "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop",
       title:
@@ -118,7 +98,7 @@ export default async function HomePage({
       badgeText: locale === "fa" ? "مقاله" : "Article",
     },
     {
-      href: `/${locale}/media/interview-master-craftsman`,
+      href: `/${locale}/articles/interview-master-craftsman`,
       imageUrl:
         "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&h=300&fit=crop",
       title:
@@ -132,7 +112,7 @@ export default async function HomePage({
       badgeText: locale === "fa" ? "ویدیو" : "Video",
     },
     {
-      href: `/${locale}/research/persian-garden-principles`,
+      href: `/${locale}/articles/persian-garden-principles`,
       imageUrl:
         "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?w=400&h=300&fit=crop",
       title:
@@ -146,7 +126,7 @@ export default async function HomePage({
       badgeText: locale === "fa" ? "تحقیق" : "Research",
     },
     {
-      href: `/${locale}/gallery/contemporary-islamic-architecture`,
+      href: `/${locale}/articles/contemporary-islamic-architecture`,
       imageUrl:
         "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
       title:
@@ -162,11 +142,11 @@ export default async function HomePage({
   ];
 
   return (
-    <div className="min-h-screen bg-[#F5F7FA]">
+    <div className="bg-[#F5F7FA]">
       {/* Hero Section */}
-      <section className="bg-[#29A5A1] py-20">
+      <section className="bg-[#29A5A1] py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
               {heroTitle}
             </h1>
@@ -175,33 +155,15 @@ export default async function HomePage({
             </p>
 
             {/* Illustration Placeholder */}
-            <div className="bg-white/10 rounded-2xl p-12 mb-12 max-w-2xl mx-auto backdrop-blur-sm">
-              <div className="w-full h-48 bg-white/20 rounded-lg flex items-center justify-center">
-                <div className="text-6xl text-white/60">🏛️</div>
+            <div className="bg-white/10 rounded-2xl p-12 mb-12 max-w-3xl mx-auto backdrop-blur-sm">
+              <div className="w-full h-64 bg-white/20 rounded-lg flex items-center justify-center">
+                <div className="text-8xl text-white/60">🏛️</div>
               </div>
-            </div>
-
-            {/* Quick Link Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
-              {quickLinks.map((link, index) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
-                >
-                  <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                    <div className="text-4xl">{link.icon}</div>
-                    <div className="text-left rtl:text-right">
-                      <h3 className="text-xl font-bold text-[#4A4A4A] group-hover:text-[#29A5A1] transition-colors duration-300">
-                        {link.title}
-                      </h3>
-                      <p className="text-[#777777] text-sm">
-                        {link.description}
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              ))}
+              <p className="text-white/80 mt-4 text-lg">
+                {locale === "fa"
+                  ? "کاوش در زیبایی معماری اسلامی"
+                  : "Exploring the Beauty of Islamic Architecture"}
+              </p>
             </div>
 
             {/* Search Bar */}
@@ -210,7 +172,7 @@ export default async function HomePage({
                 <input
                   type="text"
                   placeholder={searchPlaceholder}
-                  className="w-full px-6 py-4 bg-white rounded-full text-[#4A4A4A] placeholder-[#777777] shadow-lg focus:outline-none focus:ring-4 focus:ring-white/30 transition-all duration-300"
+                  className="w-full px-6 py-4 bg-white rounded-full text-gray-800 placeholder-gray-500 shadow-lg focus:outline-none focus:ring-4 focus:ring-white/30 transition-all duration-300"
                 />
                 <button className="absolute right-2 rtl:right-auto rtl:left-2 top-2 bg-[#3B5A9D] text-white p-2 rounded-full hover:bg-[#2D4A8C] transition-colors duration-300">
                   <svg
@@ -233,18 +195,18 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* Best Courses Section */}
-      <section className="bg-[#29A5A1] py-20">
+      {/* Featured Courses Section */}
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {bestCoursesTitle}
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+              {featuredCoursesTitle}
             </h2>
-            <div className="w-24 h-1 bg-white/30 mx-auto rounded" />
+            <div className="w-24 h-1 bg-[#29A5A1] mx-auto rounded" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {bestCourses.map((course, index) => (
+            {featuredCourses.map((course, index) => (
               <div key={course.href} className="h-full">
                 <ContentCard
                   href={course.href}
@@ -260,25 +222,25 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* All Content Section */}
-      <section className="bg-[#F5F7FA] py-20">
+      {/* Latest Articles Section */}
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#4A4A4A] mb-4">
-              {allContentTitle}
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+              {latestArticlesTitle}
             </h2>
             <div className="w-24 h-1 bg-[#29A5A1] mx-auto rounded" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {allContent.map((content, index) => (
-              <div key={content.href} className="h-full">
+            {latestArticles.map((article, index) => (
+              <div key={article.href} className="h-full">
                 <ContentCard
-                  href={content.href}
-                  imageUrl={content.imageUrl}
-                  title={content.title}
-                  description={content.description}
-                  badgeText={content.badgeText}
+                  href={article.href}
+                  imageUrl={article.imageUrl}
+                  title={article.title}
+                  description={article.description}
+                  badgeText={article.badgeText}
                   variant="light"
                 />
               </div>
@@ -288,10 +250,10 @@ export default async function HomePage({
           {/* View All Button */}
           <div className="text-center mt-12">
             <a
-              href={`/${locale}/content`}
+              href={`/${locale}/articles`}
               className="inline-block px-8 py-4 bg-[#29A5A1] text-white font-semibold rounded-lg hover:bg-[#238B87] transition-all duration-300 hover:transform hover:scale-105 shadow-lg"
             >
-              {locale === "fa" ? "مشاهده همه محتوا" : "View All Content"}
+              {locale === "fa" ? "مشاهده همه مقالات" : "View All Articles"}
             </a>
           </div>
         </div>
