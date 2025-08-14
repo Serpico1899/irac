@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ClientProviders } from "@/components/providers/ClientProviders";
 import { Navbar } from "@/components/organisms/Navbar";
 import "../globals.css";
@@ -29,16 +28,16 @@ export default async function LocaleLayout({ children, params }: Props) {
         className={`min-h-screen bg-[#F5F7FA] ${isRTL ? "font-arabic" : ""}`}
       >
         <div className="relative flex flex-col min-h-screen">
-          {/* Sticky Navbar */}
+          {/* Navbar */}
           <Navbar />
 
           {/* Main Content */}
-          <main className="flex-grow pt-20">
+          <main className="flex-grow">
             <ClientProviders>{children}</ClientProviders>
           </main>
 
           {/* Simple Footer */}
-          <footer className="bg-[#4A4A4A] text-white">
+          <footer className="bg-[#4A4A4A] text-white mt-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="text-center">
                 <p className="text-sm">
