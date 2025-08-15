@@ -20,7 +20,10 @@
     "login": "ورود / ثبت نام",
     "logout": "خروج",
     "openMenu": "باز کردن منو",
-    "closeMenu": "بستن منو"
+    "closeMenu": "بستن منو",
+    "viewAllCourses": "مشاهده تمام دوره‌ها",
+    "viewAllArticles": "مشاهده تمام مقالات",
+    "latestProductsTitle": "آخرین محصولات"
   },
   "Footer": {
     "aboutTitle": "درباره مرکز",
@@ -58,7 +61,8 @@
     "tailwindStatus": "✅ Tailwind CSS",
     "fontStatus": "✅ فونت فارسی",
     "devNoteTitle": "نکته برای توسعه‌دهندگان:",
-    "devNoteText": "این صفحه موقتی است و باید با محتوای اصلی جایگزین شود. ساختار i18n، Tailwind CSS و کامپوننت‌های موجود آماده استفاده هستند."
+    "devNoteText": "این صفحه موقتی است و باید با محتوای اصلی جایگزین شود. ساختار i18n، Tailwind CSS و کامپوننت‌های موجود آماده استفاده هستند.",
+    "iracIntro": "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
   },
   "NotFound": {
     "title": "صفحه یافت نشد",
