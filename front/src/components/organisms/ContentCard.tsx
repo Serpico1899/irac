@@ -12,7 +12,6 @@ interface ContentCardProps {
   price?: string;
   originalPrice?: string;
 
-  badgeColor?: "teal" | "blue" | "orange" | "green" | "red";
   variant?:
     | "hero-course"
     | "article-large"
@@ -25,7 +24,6 @@ interface ContentCardProps {
   level?: string;
   reviews?: number;
   rating?: number;
-  discount?: string;
   commentCount?: number;
 }
 
@@ -37,28 +35,15 @@ const ContentCard: React.FC<ContentCardProps> = ({
   price,
   originalPrice,
 
-  badgeColor = "teal",
   variant = "light",
   author,
   date,
   level,
   reviews = 0,
   rating,
-  discount,
   commentCount = 0,
 }) => {
   const [imageError, setImageError] = useState(false);
-
-  const getBadgeColor = (color: string) => {
-    const colors = {
-      teal: "bg-[#4ECDC4] text-white",
-      blue: "bg-[#3B5A9D] text-white",
-      orange: "bg-[#F59E0B] text-white",
-      green: "bg-[#10B981] text-white",
-      red: "bg-[#EF4444] text-white",
-    };
-    return colors[color as keyof typeof colors] || colors.teal;
-  };
 
   const formatPrice = (price: string) => {
     return price.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[parseInt(d)]);
@@ -70,9 +55,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
       <Link href={href} className="group">
         <div className="text-center">
           <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-3 hover:scale-105 transition-transform cursor-pointer shadow-lg">
-            <div
-              className={`w-16 h-16 ${getBadgeColor(badgeColor).split(" ")[0]} rounded-full flex items-center justify-center`}
-            >
+            <div className="w-16 h-16 bg-[#168c95] rounded-full flex items-center justify-center">
               <span className="text-white text-2xl">🏛️</span>
             </div>
           </div>
@@ -163,7 +146,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
           </div>
 
           <div className="p-6 bg-gray-800 text-white flex-1 flex flex-col h-28">
-            <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-[#4ECDC4] transition-colors flex-1">
+            <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-[#168c95] transition-colors flex-1">
               {title}
             </h3>
 
@@ -219,12 +202,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
   return (
     <Link href={href} className="group">
       <article className="bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl h-full border border-gray-100 flex flex-col">
-        {discount && (
-          <div className="absolute top-2 right-2 z-20 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-            {discount}% تخفیف
-          </div>
-        )}
-
         {/* Fixed aspect ratio image */}
         <div className="relative aspect-video h-48 w-full overflow-hidden flex-shrink-0">
           {imageUrl && !imageError ? (
@@ -257,8 +234,8 @@ const ContentCard: React.FC<ContentCardProps> = ({
         </div>
 
         {/* Fixed height text container */}
-        <div className="p-6 flex flex-col h-28">
-          <h3 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-300 leading-tight group-hover:text-[#4ECDC4] flex-1">
+        <div className="p-6 flex flex-col">
+          <h3 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-300 leading-tight group-hover:text-[#168c95] flex-1">
             {title}
           </h3>
 
@@ -341,7 +318,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
                     {formatPrice(originalPrice)}تومان
                   </span>
                 )}
-                <span className="text-lg font-bold text-[#4ECDC4]">
+                <span className="text-lg font-bold text-[#168c95]">
                   {formatPrice(price)}تومان
                 </span>
               </div>
