@@ -32,7 +32,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <Navbar />
 
           {/* Main Content */}
-          <main className="flex-grow pt-24">
+          <main className="flex-grow pt-2">
             <ClientProviders>{children}</ClientProviders>
           </main>
 
