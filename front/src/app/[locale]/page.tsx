@@ -26,8 +26,6 @@ export default function HomePage({
           ? "اصول بنیادین هندسه اسلامی و کاربرد آن در معماری کلاسیک"
           : "Learn the foundational principles of Islamic geometry and its application in classical architecture",
       price: "2,500,000",
-      badgeText: locale === "fa" ? "محبوب" : "Popular",
-      badgeColor: "teal" as const,
       level: locale === "fa" ? "پیشرفته" : "Advanced",
       rating: 4.8,
     },
@@ -41,8 +39,6 @@ export default function HomePage({
           ? "هنر باستانی خوشنویسی کوفی و تکنیک‌های مدرن"
           : "Ancient art of Kufic calligraphy and modern techniques",
       price: "1,800,000",
-      badgeText: locale === "fa" ? "جدید" : "New",
-      badgeColor: "blue" as const,
       level: locale === "fa" ? "متوسط" : "Intermediate",
       rating: 4.6,
     },
@@ -56,8 +52,6 @@ export default function HomePage({
           ? "اصول طراحی و ساخت مساجد در معماری اسلامی"
           : "Design principles and construction of mosques in Islamic architecture",
       price: "3,200,000",
-      badgeText: locale === "fa" ? "تخصصی" : "Specialized",
-      badgeColor: "green" as const,
       level: locale === "fa" ? "پیشرفته" : "Advanced",
       rating: 4.9,
     },
@@ -71,8 +65,6 @@ export default function HomePage({
           ? "هنر طراحی باغ‌های سنتی ایرانی و اصول آن"
           : "Art of traditional Persian garden design and its principles",
       price: "2,100,000",
-      badgeText: locale === "fa" ? "محبوب" : "Popular",
-      badgeColor: "orange" as const,
       level: locale === "fa" ? "مقدماتی" : "Beginner",
       rating: 4.7,
     },
@@ -86,8 +78,6 @@ export default function HomePage({
           ? "بررسی انواع هنرهای اسلامی و تزیینات آن"
           : "Survey of Islamic arts and decorative techniques",
       price: "1,950,000",
-      badgeText: locale === "fa" ? "جامع" : "Comprehensive",
-      badgeColor: "red" as const,
       level: locale === "fa" ? "متوسط" : "Intermediate",
       rating: 4.5,
     },
@@ -109,8 +99,6 @@ export default function HomePage({
           : "Examining the role of shadow and light in creating Iranian architectural spaces",
       author: locale === "fa" ? "دکتر علی محمدی" : "Dr. Ali Mohammadi",
       date: locale === "fa" ? "۱۱ مرداد ۱۴۰۴" : "Aug 2, 2024",
-      badgeText: locale === "fa" ? "مقاله" : "Article",
-      badgeColor: "teal" as const,
     },
     {
       href: `/${locale}/articles/spatial-hierarchy`,
@@ -126,8 +114,6 @@ export default function HomePage({
           : "Analysis of spatial structure in mosques and the role of sacred geometry",
       author: locale === "fa" ? "استاد حسن رضایی" : "Master Hassan Rezaei",
       date: locale === "fa" ? "۲۲ تیر ۱۴۰۴" : "Jul 13, 2024",
-      badgeText: locale === "fa" ? "تحقیق" : "Research",
-      badgeColor: "blue" as const,
     },
     {
       href: `/${locale}/articles/sound-experience`,
@@ -143,8 +129,6 @@ export default function HomePage({
           : "Study of acoustics in traditional Iranian spaces and its impact",
       author: locale === "fa" ? "دکتر مریم احمدی" : "Dr. Maryam Ahmadi",
       date: locale === "fa" ? "۱۲ تیر ۱۴۰۴" : "Jul 3, 2024",
-      badgeText: locale === "fa" ? "پژوهش" : "Research",
-      badgeColor: "green" as const,
     },
     {
       href: `/${locale}/articles/living-spaces`,
@@ -160,8 +144,6 @@ export default function HomePage({
           : "Critique of purely visual approaches in modern architecture",
       author: locale === "fa" ? "مهندس سارا کریمی" : "Eng. Sara Karimi",
       date: locale === "fa" ? "۰۱ تیر ۱۴۰۴" : "Jun 22, 2024",
-      badgeText: locale === "fa" ? "مقاله" : "Article",
-      badgeColor: "orange" as const,
     },
     {
       href: `/${locale}/articles/khayyam-tomb`,
@@ -174,8 +156,6 @@ export default function HomePage({
           : "Architectural study of Omar Khayyam's tomb",
       author: locale === "fa" ? "دکتر امیر حسینی" : "Dr. Amir Hosseini",
       date: locale === "fa" ? "۲۴ دی ۱۴۰۳" : "Jan 14, 2024",
-      badgeText: locale === "fa" ? "تحلیل" : "Analysis",
-      badgeColor: "red" as const,
     },
   ];
 
@@ -195,9 +175,6 @@ export default function HomePage({
           : "Complete collection of the finest Islamic architecture books",
       price: "850,000",
       originalPrice: "1,200,000",
-      badgeText: locale === "fa" ? "پرفروش" : "Bestseller",
-      badgeColor: "teal" as const,
-      discount: "25",
     },
     {
       href: `/${locale}/shop/calligraphy-tools`,
@@ -212,8 +189,6 @@ export default function HomePage({
           ? "مجموعه کاملی از ابزارهای خوشنویسی دست‌ساز"
           : "Complete set of handcrafted calligraphy tools",
       price: "320,000",
-      badgeText: locale === "fa" ? "دست‌ساز" : "Handmade",
-      badgeColor: "blue" as const,
       rating: 4.9,
     },
     {
@@ -227,8 +202,6 @@ export default function HomePage({
           ? "مجموعه دیجیتالی از الگوهای هندسی سنتی"
           : "Digital collection of traditional geometric patterns",
       price: "150,000",
-      badgeText: locale === "fa" ? "دیجیتال" : "Digital",
-      badgeColor: "green" as const,
       rating: 4.7,
     },
     {
@@ -244,8 +217,6 @@ export default function HomePage({
           ? "ماکت‌های دست‌ساز از شاهکارهای معماری اسلامی"
           : "Handcrafted models of Islamic architectural masterpieces",
       price: "2,400,000",
-      badgeText: locale === "fa" ? "محدود" : "Limited",
-      badgeColor: "orange" as const,
       rating: 4.8,
     },
   ];
@@ -282,13 +253,22 @@ export default function HomePage({
     >
       {/* Hero Section */}
       <section
-        className="bg-[#4ECDC4] relative overflow-hidden min-h-[400px] max-w-7xl mx-auto rounded-[25px]"
+        className="bg-[#168c95] relative overflow-hidden min-h-[400px] max-w-7xl mx-auto rounded-[110px]"
         dir="rtl"
       >
-        <div className="max-w-7xl mx-auto px-6 h-full flex items-center">
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-center">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl">
+            {/* Right Column - Architectural Photo */}
+            <div className="order-1 md:order-1 flex justify-center">
+              <img
+                src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop"
+                alt="Islamic Architecture"
+                className="w-64 h-48 object-cover rounded-2xl shadow-lg"
+              />
+            </div>
+
             {/* Left Column - Text and Search */}
-            <div className="order-2 md:order-1">
+            <div className="order-2 md:order-2">
               {/* IRAC Intro Text */}
               <p className="text-white text-lg font-medium mb-6">
                 {locale === "fa"
@@ -305,7 +285,7 @@ export default function HomePage({
                       ? "جستجوی دوره‌ها، مقالات و محصولات"
                       : "Search courses, articles and products"
                   }
-                  className="w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none shadow-lg text-right text-lg"
+                  className="w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none border-none shadow-lg text-right text-lg"
                 />
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
                   <svg
@@ -324,31 +304,27 @@ export default function HomePage({
                 </div>
               </div>
             </div>
-
-            {/* Right Column - Architectural Photo */}
-            <div className="order-1 md:order-2 flex justify-center">
-              <img
-                src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop"
-                alt="Islamic Architecture"
-                className="w-64 h-48 object-cover rounded-2xl shadow-lg"
-              />
-            </div>
           </div>
         </div>
       </section>
 
       {/* Featured Courses Carousel Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[whitesmoke]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-800">
+              {locale === "fa" ? "دوره‌های ویژه" : "Featured Courses"}
+            </h2>
             <div className="flex items-center gap-4">
-              <h2 className="text-3xl font-bold text-gray-800">
-                {locale === "fa" ? "دوره‌های ویژه" : "Featured Courses"}
-              </h2>
-              <div className="flex gap-2">
+              <div className="flex gap-1 bg-gray-100 rounded-full p-1">
                 <button
-                  onClick={() => handleScroll(coursesCarouselRef, "left")}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  onClick={() =>
+                    handleScroll(
+                      coursesCarouselRef,
+                      locale === "fa" ? "left" : "right",
+                    )
+                  }
+                  className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Previous"
                 >
                   <svg
@@ -366,8 +342,13 @@ export default function HomePage({
                   </svg>
                 </button>
                 <button
-                  onClick={() => handleScroll(coursesCarouselRef, "right")}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  onClick={() =>
+                    handleScroll(
+                      coursesCarouselRef,
+                      locale === "fa" ? "right" : "left",
+                    )
+                  }
+                  className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Next"
                 >
                   <svg
@@ -385,13 +366,13 @@ export default function HomePage({
                   </svg>
                 </button>
               </div>
+              <Link
+                href={`/${locale}/courses`}
+                className="bg-[#168c95] text-white px-6 py-2 rounded-lg hover:bg-[#0f7882] transition-colors font-medium"
+              >
+                {locale === "fa" ? "مشاهده همه" : "View All"}
+              </Link>
             </div>
-            <Link
-              href={`/${locale}/courses`}
-              className="bg-[#4ECDC4] text-white px-6 py-2 rounded-lg hover:bg-[#45B7B8] transition-colors font-medium"
-            >
-              {locale === "fa" ? "مشاهده همه" : "View All"}
-            </Link>
           </div>
 
           {/* Horizontal Scrolling Carousel */}
@@ -410,7 +391,6 @@ export default function HomePage({
                   title={course.title}
                   description={course.description}
                   price={course.price}
-                  badgeColor={course.badgeColor}
                   variant="light"
                   level={course.level}
                   rating={course.rating}
@@ -422,17 +402,22 @@ export default function HomePage({
       </section>
 
       {/* Latest Articles Carousel Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-[#168c95]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
+            <h2 className="text-3xl font-bold text-[whitesmoke]">
+              {locale === "fa" ? "آخرین مقالات" : "Latest Articles"}
+            </h2>
             <div className="flex items-center gap-4">
-              <h2 className="text-3xl font-bold text-gray-800">
-                {locale === "fa" ? "آخرین مقالات" : "Latest Articles"}
-              </h2>
-              <div className="flex gap-2">
+              <div className="flex gap-1 bg-gray-100 rounded-full p-1">
                 <button
-                  onClick={() => handleScroll(articlesCarouselRef, "left")}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  onClick={() =>
+                    handleScroll(
+                      articlesCarouselRef,
+                      locale === "fa" ? "left" : "right",
+                    )
+                  }
+                  className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Previous"
                 >
                   <svg
@@ -450,8 +435,13 @@ export default function HomePage({
                   </svg>
                 </button>
                 <button
-                  onClick={() => handleScroll(articlesCarouselRef, "right")}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  onClick={() =>
+                    handleScroll(
+                      articlesCarouselRef,
+                      locale === "fa" ? "right" : "left",
+                    )
+                  }
+                  className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Next"
                 >
                   <svg
@@ -469,13 +459,13 @@ export default function HomePage({
                   </svg>
                 </button>
               </div>
+              <Link
+                href={`/${locale}/articles`}
+                className="bg-[whitesmoke] text-[#168c95] px-6 py-2 rounded-lg hover:bg-[#0f7882] transition-colors font-medium"
+              >
+                {locale === "fa" ? "مشاهده همه" : "View All"}
+              </Link>
             </div>
-            <Link
-              href={`/${locale}/articles`}
-              className="bg-[#4ECDC4] text-white px-6 py-2 rounded-lg hover:bg-[#45B7B8] transition-colors font-medium"
-            >
-              {locale === "fa" ? "مشاهده همه" : "View All"}
-            </Link>
           </div>
 
           {/* Horizontal Scrolling Carousel */}
@@ -493,7 +483,6 @@ export default function HomePage({
                   imageUrl={article.imageUrl}
                   title={article.title}
                   description={article.description}
-                  badgeColor={article.badgeColor}
                   variant="light"
                   author={article.author}
                   date={article.date}
@@ -508,14 +497,19 @@ export default function HomePage({
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-800">
+              {locale === "fa" ? "آخرین محصولات" : "Latest Products"}
+            </h2>
             <div className="flex items-center gap-4">
-              <h2 className="text-3xl font-bold text-gray-800">
-                {locale === "fa" ? "آخرین محصولات" : "Latest Products"}
-              </h2>
-              <div className="flex gap-2">
+              <div className="flex gap-1 bg-gray-100 rounded-full p-1">
                 <button
-                  onClick={() => handleScroll(productsCarouselRef, "left")}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  onClick={() =>
+                    handleScroll(
+                      productsCarouselRef,
+                      locale === "fa" ? "left" : "right",
+                    )
+                  }
+                  className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Previous"
                 >
                   <svg
@@ -533,8 +527,13 @@ export default function HomePage({
                   </svg>
                 </button>
                 <button
-                  onClick={() => handleScroll(productsCarouselRef, "right")}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  onClick={() =>
+                    handleScroll(
+                      productsCarouselRef,
+                      locale === "fa" ? "right" : "left",
+                    )
+                  }
+                  className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Next"
                 >
                   <svg
@@ -552,13 +551,13 @@ export default function HomePage({
                   </svg>
                 </button>
               </div>
+              <Link
+                href={`/${locale}/shop`}
+                className="bg-[#168c95] text-white px-6 py-2 rounded-lg hover:bg-[#0f7882] transition-colors font-medium"
+              >
+                {locale === "fa" ? "مشاهده همه" : "View All"}
+              </Link>
             </div>
-            <Link
-              href={`/${locale}/shop`}
-              className="bg-[#4ECDC4] text-white px-6 py-2 rounded-lg hover:bg-[#45B7B8] transition-colors font-medium"
-            >
-              {locale === "fa" ? "مشاهده همه" : "View All"}
-            </Link>
           </div>
 
           {/* Horizontal Scrolling Carousel */}
@@ -578,10 +577,8 @@ export default function HomePage({
                   description={product.description}
                   price={product.price}
                   originalPrice={product.originalPrice}
-                  badgeColor={product.badgeColor}
                   variant="light"
                   rating={product.rating}
-                  discount={product.discount}
                 />
               </div>
             ))}
