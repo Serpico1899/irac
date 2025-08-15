@@ -17,7 +17,19 @@
     --terracotta-dark: #9a3650;
     --terracotta-500: #b83f5e;
     --terracotta-600: #9a3650;
+}
 
+/* Hide scrollbar for carousel components */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Additional Persian Color Variables */
+:root {
     /* Persian Gold - Traditional Islamic calligraphy accent */
     --persian-gold: #d4af37;
     --persian-gold-light: #dac255;
