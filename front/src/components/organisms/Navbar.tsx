@@ -5,31 +5,41 @@ import Link from "next/link";
 import { usePathname } from "next/navigation"; // Corrected import
 import { getAlternateLocaleUrl, getLocaleFromPathname } from "@/lib/navigation";
 
+interface NavItem {
+  label: string;
+  href: string;
+}
+
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const pathname = usePathname();
-
   // Get current locale and alternate locale info
   const currentLocale = getLocaleFromPathname(pathname);
   const alternateLocaleUrl = getAlternateLocaleUrl(pathname);
   const alternateLocaleLabel = currentLocale === "fa" ? "EN" : "فا";
 
-  // Navigation items matching the screenshot
-  const navItems = [
-    { label: "صفحه اصلی", href: "/" },
-    { label: "فضای کار اشتراکی", href: "/coworking" },
-    { label: "مدرسه معماری ایرانی", href: "/school" },
-    { label: "کارگاه معماری", href: "/workshop" },
-    { label: "رسانه", href: "/media" },
-    { label: "ارتباط با ما", href: "/contact" },
-  ];
+  // Navigation items based on locale
+  const navItems =
+    currentLocale === "fa"
+      ? [
+          { label: "صفحه اصلی", href: "/" },
+          { label: "دوره‌ها", href: "/courses" },
+          { label: "کارگاه‌ها", href: "/workshops" },
+          { label: "رسانه", href: "/media" },
+        ]
+      : [
+          { label: "Home", href: "/" },
+          { label: "Courses", href: "/courses" },
+          { label: "Workshops", href: "/workshops" },
+          { label: "Media", href: "/media" },
+        ];
 
   return (
     <Fragment>
       {/* Main Navigation Header */}
       <header
-        className="sticky top-0 z-50 max-w-5xl mx-auto rounded-[25px] bg-white text-black shadow-xl"
+        className="sticky top-0 z-50 max-w-7xl mx-auto rounded-[25px] bg-white text-black shadow-xl"
         dir="rtl"
       >
         <div className="max-w-7xl mx-auto px-[30px]">
@@ -46,14 +56,14 @@ export const Navbar = () => {
                       width="24"
                       height="24"
                       rx="2"
-                      stroke="#4ECDC4"
+                      stroke="#168c95"
                       strokeWidth="2"
                     />
-                    <rect x="8" y="8" width="6" height="6" fill="#4ECDC4" />
-                    <rect x="18" y="8" width="6" height="6" fill="#4ECDC4" />
-                    <rect x="8" y="18" width="6" height="6" fill="#4ECDC4" />
-                    <rect x="18" y="18" width="6" height="6" fill="#4ECDC4" />
-                    <rect x="13" y="13" width="6" height="6" fill="#4ECDC4" />
+                    <rect x="8" y="8" width="6" height="6" fill="#168c95" />
+                    <rect x="18" y="8" width="6" height="6" fill="#168c95" />
+                    <rect x="8" y="18" width="6" height="6" fill="#168c95" />
+                    <rect x="18" y="18" width="6" height="6" fill="#168c95" />
+                    <rect x="13" y="13" width="6" height="6" fill="#168c95" />
                   </svg>
                 </div>
               </Link>
@@ -61,12 +71,12 @@ export const Navbar = () => {
 
             {/* Desktop Navigation - Center */}
             <nav className="hidden lg:flex items-center space-x-reverse space-x-10">
-              {navItems.map((link) => (
+              {navItems.map((link: NavItem) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-white hover:text-gray-100 transition-colors duration-200 text-sm font-medium px-3 py-2 rounded-lg hover:bg-white hover:bg-opacity-10 ${
-                    pathname === link.href ? "bg-white bg-opacity-20" : ""
+                  className={`text-black hover:text-gray-700 transition-colors duration-200 text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-100 ${
+                    pathname === link.href ? "bg-gray-200" : ""
                   }`}
                 >
                   {link.label}
@@ -76,7 +86,7 @@ export const Navbar = () => {
               {/* Language Switcher - Desktop only */}
               <Link
                 href={alternateLocaleUrl}
-                className="text-white hover:text-gray-100 transition-colors duration-200 text-sm font-medium px-3 py-2 rounded-lg hover:bg-white hover:bg-opacity-10 border border-white border-opacity-30"
+                className="text-black hover:text-gray-700 transition-colors duration-200 text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-100 border border-gray-300"
               >
                 {alternateLocaleLabel}
               </Link>
@@ -90,7 +100,6 @@ export const Navbar = () => {
                   onClick={() => setIsCartOpen(!isCartOpen)}
                   className={`
                     relative p-3 transition-colors rounded-lg
-                    md:text-white md:hover:text-gray-100 md:hover:bg-white md:hover:bg-opacity-10
                     text-gray-600 hover:text-gray-800 hover:bg-gray-100
                   `}
                   aria-label="سبد خرید"
@@ -109,7 +118,7 @@ export const Navbar = () => {
                     />
                   </svg>
                   {/* Cart badge */}
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#4ECDC4] text-white text-xs rounded-full flex items-center justify-center font-bold">
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#168c95] text-white text-xs rounded-full flex items-center justify-center font-bold">
                     0
                   </span>
                 </button>
@@ -141,7 +150,7 @@ export const Navbar = () => {
                       </p>
                       <Link
                         href="/courses"
-                        className="inline-block bg-[#4ECDC4] text-white px-6 py-3 rounded-xl hover:bg-[#45B7B8] transition-colors font-medium"
+                        className="inline-block bg-[#168c95] text-white px-6 py-3 rounded-xl hover:bg-[#0f7882] transition-colors font-medium"
                         onClick={() => setIsCartOpen(false)}
                       >
                         مشاهده دوره‌ها
@@ -156,18 +165,20 @@ export const Navbar = () => {
                 href="/login"
                 className={`
                   items-center gap-3 px-6 py-3 rounded-full transition-all duration-200 font-medium shadow-sm group
-                  md:flex md:bg-white md:text-[#4ECDC4] md:hover:bg-gray-50
+                  md:flex md:bg-gray-100 md:text-[#168c95] md:hover:bg-gray-200
                   hidden
                 `}
               >
                 <svg
-                  className="w-5 h-5 text-[#4ECDC4] group-hover:text-[#45B7B8] transition-colors"
+                  className="w-5 h-5 text-[#168c95] group-hover:text-[#0f7882] transition-colors"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                 </svg>
-                <span className="text-sm font-medium">ورود و عضویت</span>
+                <span className="text-sm font-medium">
+                  {currentLocale === "fa" ? "ورود / ثبت نام" : "Login"}
+                </span>
               </Link>
 
               {/* Mobile login button */}
@@ -188,7 +199,6 @@ export const Navbar = () => {
               <button
                 className={`
                   lg:hidden p-3 rounded-lg transition-colors
-                  md:text-white md:hover:text-gray-100 md:hover:bg-white md:hover:bg-opacity-10
                   text-gray-600 hover:text-gray-800 hover:bg-gray-100
                 `}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -225,12 +235,11 @@ export const Navbar = () => {
             <div
               className={`
               lg:hidden py-6 border-t
-              md:border-white md:border-opacity-20 md:bg-[#4ECDC4]
               border-gray-200 bg-white
             `}
             >
               <div className="space-y-2">
-                {navItems.map((link) => (
+                {navItems.map((link: NavItem) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -238,8 +247,8 @@ export const Navbar = () => {
                       block px-4 py-3 font-medium transition-colors rounded-lg mx-4
                       ${
                         pathname === link.href
-                          ? "md:bg-white md:bg-opacity-20 md:text-white bg-gray-100 text-gray-900"
-                          : "md:hover:bg-white md:hover:bg-opacity-10 md:text-white hover:bg-gray-50 text-gray-700"
+                          ? "bg-gray-200 text-gray-900"
+                          : "hover:bg-gray-50 text-gray-700"
                       }
                     `}
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -253,7 +262,6 @@ export const Navbar = () => {
                   href={alternateLocaleUrl}
                   className={`
                     block px-4 py-3 font-medium transition-colors rounded-lg mx-4
-                    md:text-white md:hover:bg-white md:hover:bg-opacity-10 md:border-white md:border-opacity-30
                     text-gray-700 hover:bg-gray-50 border border-gray-200
                   `}
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -267,8 +275,7 @@ export const Navbar = () => {
                     href="/login"
                     className={`
                       flex items-center justify-center gap-3 px-6 py-4 rounded-2xl transition-colors font-medium w-full
-                      md:bg-white md:text-[#4ECDC4] md:hover:bg-gray-50
-                      bg-[#4ECDC4] text-white hover:bg-[#45B7B8]
+                      bg-[#168c95] text-white hover:bg-[#0f7882]
                     `}
                   >
                     <svg
@@ -278,7 +285,9 @@ export const Navbar = () => {
                     >
                       <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                     </svg>
-                    <span>ورود و عضویت</span>
+                    <span>
+                      {currentLocale === "fa" ? "ورود / ثبت نام" : "Login"}
+                    </span>
                   </Link>
                 </div>
               </div>
