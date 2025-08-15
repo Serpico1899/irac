@@ -29,14 +29,10 @@ export const Navbar = () => {
     <Fragment>
       {/* Main Navigation Header */}
       <header
-        className={`
-          z-50 w-full shadow-xl
-          md:absolute md:top-4 md:left-4 md:right-4 md:bg-[#4ECDC4] md:rounded-2xl
-          fixed top-0 inset-x-0 bg-white
-        `}
+        className="sticky top-0 z-50 max-w-5xl mx-auto rounded-[25px] bg-white text-black shadow-xl"
         dir="rtl"
       >
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-[30px]">
           <div className="flex items-center justify-between h-20">
             {/* Logo - Right side for RTL */}
             <div className="flex-shrink-0">
