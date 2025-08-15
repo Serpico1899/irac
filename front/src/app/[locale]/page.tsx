@@ -1,12 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import ContentCard from "@/components/organisms/ContentCard";
+import { useRef, use } from "react";
 
-export default async function HomePage({
+export default function HomePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale } = use(params);
 
   // Sample courses data for Featured Courses carousel
   const featuredCourses = [
@@ -247,53 +250,88 @@ export default async function HomePage({
     },
   ];
 
+  // Refs for carousels
+  const coursesCarouselRef = useRef<HTMLDivElement>(null);
+  const articlesCarouselRef = useRef<HTMLDivElement>(null);
+  const productsCarouselRef = useRef<HTMLDivElement>(null);
+
+  // Scroll functions for carousels
+  const handleScroll = (
+    ref: React.RefObject<HTMLDivElement | null>,
+    direction: "left" | "right",
+  ) => {
+    if (ref.current) {
+      const scrollAmount = 400;
+      const currentScroll = ref.current.scrollLeft;
+      const targetScroll =
+        direction === "left"
+          ? currentScroll - scrollAmount
+          : currentScroll + scrollAmount;
+
+      ref.current.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div
       className="bg-[#F5F7FA] min-h-screen"
       dir={locale === "fa" ? "rtl" : "ltr"}
     >
-      {/* Hero Section - Reduced Height */}
+      {/* Hero Section */}
       <section
-        className="bg-[#4ECDC4] relative overflow-hidden h-[110px]"
+        className="bg-[#4ECDC4] relative overflow-hidden min-h-[400px] max-w-7xl mx-auto rounded-[25px]"
         dir="rtl"
       >
-        <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-          {/* IRAC Intro Text */}
-          <div className="flex-1">
-            <p className="text-white text-lg font-medium">
-              {locale === "fa"
-                ? "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
-                : "The premier center for the study and preservation of Islamic architectural heritage."}
-            </p>
-          </div>
+        <div className="max-w-7xl mx-auto px-6 h-full flex items-center">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* Left Column - Text and Search */}
+            <div className="order-2 md:order-1">
+              {/* IRAC Intro Text */}
+              <p className="text-white text-lg font-medium mb-6">
+                {locale === "fa"
+                  ? "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
+                  : "The premier center for the study and preservation of Islamic architectural heritage."}
+              </p>
 
-          {/* Larger Search Bar */}
-          <div className="flex-1 max-w-2xl">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder={
-                  locale === "fa"
-                    ? "جستجوی دوره‌ها، مقالات و محصولات"
-                    : "Search courses, articles and products"
-                }
-                className="w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 shadow-lg text-right text-lg"
-              />
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                <svg
-                  className="w-7 h-7 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+              {/* Search Bar */}
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder={
+                    locale === "fa"
+                      ? "جستجوی دوره‌ها، مقالات و محصولات"
+                      : "Search courses, articles and products"
+                  }
+                  className="w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none shadow-lg text-right text-lg"
+                />
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                  <svg
+                    className="w-7 h-7 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </div>
               </div>
+            </div>
+
+            {/* Right Column - Architectural Photo */}
+            <div className="order-1 md:order-2 flex justify-center">
+              <img
+                src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop"
+                alt="Islamic Architecture"
+                className="w-64 h-48 object-cover rounded-2xl shadow-lg"
+              />
             </div>
           </div>
         </div>
@@ -303,22 +341,75 @@ export default async function HomePage({
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800">
-              {locale === "fa" ? "دوره‌های ویژه" : "Featured Courses"}
-            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-3xl font-bold text-gray-800">
+                {locale === "fa" ? "دوره‌های ویژه" : "Featured Courses"}
+              </h2>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleScroll(coursesCarouselRef, "left")}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  aria-label="Previous"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => handleScroll(coursesCarouselRef, "right")}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  aria-label="Next"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <Link
+              href={`/${locale}/courses`}
+              className="bg-[#4ECDC4] text-white px-6 py-2 rounded-lg hover:bg-[#45B7B8] transition-colors font-medium"
+            >
+              {locale === "fa" ? "مشاهده همه" : "View All"}
+            </Link>
           </div>
 
           {/* Horizontal Scrolling Carousel */}
-          <div className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide">
+          <div
+            ref={coursesCarouselRef}
+            className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide"
+          >
             {featuredCourses.map((course, index) => (
-              <div key={index} className="snap-center flex-shrink-0 w-80">
+              <div
+                key={index}
+                className="snap-center flex-shrink-0 w-3/4 md:w-1/3"
+              >
                 <ContentCard
                   href={course.href}
                   imageUrl={course.imageUrl}
                   title={course.title}
                   description={course.description}
                   price={course.price}
-                  badgeText={course.badgeText}
                   badgeColor={course.badgeColor}
                   variant="light"
                   level={course.level}
@@ -327,16 +418,6 @@ export default async function HomePage({
               </div>
             ))}
           </div>
-
-          {/* View All Courses Button */}
-          <div className="text-center mt-8">
-            <Link
-              href={`/${locale}/courses`}
-              className="inline-block bg-[#4ECDC4] text-white px-8 py-3 rounded-xl hover:bg-[#45B7B8] transition-colors font-medium shadow-lg"
-            >
-              {locale === "fa" ? "مشاهده تمام دوره‌ها" : "View All Courses"}
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -344,21 +425,74 @@ export default async function HomePage({
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800">
-              {locale === "fa" ? "آخرین مقالات" : "Latest Articles"}
-            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-3xl font-bold text-gray-800">
+                {locale === "fa" ? "آخرین مقالات" : "Latest Articles"}
+              </h2>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleScroll(articlesCarouselRef, "left")}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  aria-label="Previous"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => handleScroll(articlesCarouselRef, "right")}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  aria-label="Next"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <Link
+              href={`/${locale}/articles`}
+              className="bg-[#4ECDC4] text-white px-6 py-2 rounded-lg hover:bg-[#45B7B8] transition-colors font-medium"
+            >
+              {locale === "fa" ? "مشاهده همه" : "View All"}
+            </Link>
           </div>
 
           {/* Horizontal Scrolling Carousel */}
-          <div className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide">
+          <div
+            ref={articlesCarouselRef}
+            className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide"
+          >
             {latestArticles.map((article, index) => (
-              <div key={index} className="snap-center flex-shrink-0 w-80">
+              <div
+                key={index}
+                className="snap-center flex-shrink-0 w-3/4 md:w-1/3"
+              >
                 <ContentCard
                   href={article.href}
                   imageUrl={article.imageUrl}
                   title={article.title}
                   description={article.description}
-                  badgeText={article.badgeText}
                   badgeColor={article.badgeColor}
                   variant="light"
                   author={article.author}
@@ -367,16 +501,6 @@ export default async function HomePage({
               </div>
             ))}
           </div>
-
-          {/* View All Articles Button */}
-          <div className="text-center mt-8">
-            <Link
-              href={`/${locale}/articles`}
-              className="inline-block bg-[#4ECDC4] text-white px-8 py-3 rounded-xl hover:bg-[#45B7B8] transition-colors font-medium shadow-lg"
-            >
-              {locale === "fa" ? "مشاهده تمام مقالات" : "View All Articles"}
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -384,15 +508,69 @@ export default async function HomePage({
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800">
-              {locale === "fa" ? "آخرین محصولات" : "Latest Products"}
-            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-3xl font-bold text-gray-800">
+                {locale === "fa" ? "آخرین محصولات" : "Latest Products"}
+              </h2>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleScroll(productsCarouselRef, "left")}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  aria-label="Previous"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => handleScroll(productsCarouselRef, "right")}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  aria-label="Next"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <Link
+              href={`/${locale}/shop`}
+              className="bg-[#4ECDC4] text-white px-6 py-2 rounded-lg hover:bg-[#45B7B8] transition-colors font-medium"
+            >
+              {locale === "fa" ? "مشاهده همه" : "View All"}
+            </Link>
           </div>
 
           {/* Horizontal Scrolling Carousel */}
-          <div className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide">
+          <div
+            ref={productsCarouselRef}
+            className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide"
+          >
             {latestProducts.map((product, index) => (
-              <div key={index} className="snap-center flex-shrink-0 w-80">
+              <div
+                key={index}
+                className="snap-center flex-shrink-0 w-3/4 md:w-1/3"
+              >
                 <ContentCard
                   href={product.href}
                   imageUrl={product.imageUrl}
@@ -400,7 +578,6 @@ export default async function HomePage({
                   description={product.description}
                   price={product.price}
                   originalPrice={product.originalPrice}
-                  badgeText={product.badgeText}
                   badgeColor={product.badgeColor}
                   variant="light"
                   rating={product.rating}
@@ -408,16 +585,6 @@ export default async function HomePage({
                 />
               </div>
             ))}
-          </div>
-
-          {/* View All Products Button */}
-          <div className="text-center mt-8">
-            <Link
-              href={`/${locale}/shop`}
-              className="inline-block bg-[#4ECDC4] text-white px-8 py-3 rounded-xl hover:bg-[#45B7B8] transition-colors font-medium shadow-lg"
-            >
-              {locale === "fa" ? "مشاهده تمام محصولات" : "View All Products"}
-            </Link>
           </div>
         </div>
       </section>
