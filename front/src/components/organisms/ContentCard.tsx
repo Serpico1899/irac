@@ -11,7 +11,7 @@ interface ContentCardProps {
   description?: string;
   price?: string;
   originalPrice?: string;
-  badgeText?: string;
+
   badgeColor?: "teal" | "blue" | "orange" | "green" | "red";
   variant?:
     | "hero-course"
@@ -36,7 +36,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   description,
   price,
   originalPrice,
-  badgeText,
+
   badgeColor = "teal",
   variant = "light",
   author,
@@ -102,18 +102,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
           <div className="absolute bottom-6 right-6 text-white z-10">
-            {badgeText && (
-              <div className="bg-[#4ECDC4] px-3 py-1 rounded-full text-sm mb-3 inline-block">
-                {badgeText} {commentCount}
-                <svg
-                  className="inline w-4 h-4 mr-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"></path>
-                </svg>
-              </div>
-            )}
             <h3 className="text-xl font-bold mb-2 line-clamp-2">{title}</h3>
             {date && <p className="text-sm text-gray-300">{date}</p>}
           </div>
@@ -138,11 +126,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div className="absolute bottom-4 right-4 text-white z-10">
-            {badgeText && (
-              <div className="bg-[#4ECDC4] px-2 py-1 rounded text-xs mb-2 inline-block">
-                {badgeText} {commentCount}
-              </div>
-            )}
             <h4 className="font-bold text-sm line-clamp-2">{title}</h4>
             {date && <p className="text-xs text-gray-300 mt-1">{date}</p>}
           </div>
@@ -175,12 +158,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
             {level && (
               <div className="absolute top-4 right-4 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-3 py-1">
                 <span className="text-white text-sm font-medium">{level}</span>
-              </div>
-            )}
-
-            {badgeText && (
-              <div className="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                {badgeText}
               </div>
             )}
           </div>
@@ -241,18 +218,10 @@ const ContentCard: React.FC<ContentCardProps> = ({
   // Default light variant with fixed sizes
   return (
     <Link href={href} className="group">
-      <article className="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full border border-gray-100 flex flex-col">
+      <article className="bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl h-full border border-gray-100 flex flex-col">
         {discount && (
           <div className="absolute top-2 right-2 z-20 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">
             {discount}% تخفیف
-          </div>
-        )}
-
-        {badgeText && (
-          <div
-            className={`absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full text-sm font-semibold shadow-md ${getBadgeColor(badgeColor)}`}
-          >
-            {badgeText}
           </div>
         )}
 
@@ -263,7 +232,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
               src={imageUrl}
               alt={title}
               fill
-              className="aspect-video h-48 object-cover transition-all duration-500 group-hover:scale-110"
+              className="aspect-video h-48 object-cover"
               onError={() => setImageError(true)}
             />
           ) : (
@@ -285,7 +254,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
               </div>
             </div>
           )}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
         </div>
 
         {/* Fixed height text container */}
@@ -380,12 +348,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
             </div>
           </div>
         )}
-
-        <div className="absolute inset-x-0 bottom-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300 origin-right bg-[#4ECDC4]" />
-
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <div className="absolute inset-0 rounded-2xl bg-[#4ECDC4] bg-opacity-3" />
-        </div>
       </article>
     </Link>
   );
