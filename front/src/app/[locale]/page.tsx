@@ -253,57 +253,55 @@ export default function HomePage({
     >
       {/* Hero Section */}
       <section
-        className="bg-[#168c95] relative overflow-hidden min-h-[400px] max-w-7xl mx-auto rounded-[110px]"
+        className="bg-[#168c95] relative overflow-hidden min-h-[300px] md:min-h-[400px] max-w-7xl mx-8 xl:mx-auto rounded-[25px] md:rounded-[110px] flex items-center justify-center px-6"
         dir="rtl"
       >
-        <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-center">
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl">
-            {/* Right Column - Architectural Photo */}
-            <div className="order-1 md:order-1 flex justify-center">
-              <img
-                src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop"
-                alt="Islamic Architecture"
-                className="w-64 h-48 object-cover rounded-2xl shadow-lg"
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl">
+          {/* Text and Search */}
+          <div className="text-center md:text-right">
+            {/* IRAC Intro Text */}
+            <p className="text-white text-xl font-bold mb-6">
+              {locale === "fa"
+                ? "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
+                : "The premier center for the study and preservation of Islamic architectural heritage."}
+            </p>
+
+            {/* Search Bar */}
+            <div className="relative">
+              <input
+                type="text"
+                placeholder={
+                  locale === "fa"
+                    ? "جستجوی دوره‌ها، مقالات و محصولات"
+                    : "Search courses, articles and products"
+                }
+                className="w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none border-none shadow-lg text-right text-lg"
               />
-            </div>
-
-            {/* Left Column - Text and Search */}
-            <div className="order-2 md:order-2">
-              {/* IRAC Intro Text */}
-              <p className="text-white text-lg font-medium mb-6">
-                {locale === "fa"
-                  ? "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
-                  : "The premier center for the study and preservation of Islamic architectural heritage."}
-              </p>
-
-              {/* Search Bar */}
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder={
-                    locale === "fa"
-                      ? "جستجوی دوره‌ها، مقالات و محصولات"
-                      : "Search courses, articles and products"
-                  }
-                  className="w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none border-none shadow-lg text-right text-lg"
-                />
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    className="w-7 h-7 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </div>
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                <svg
+                  className="w-7 h-7 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
               </div>
             </div>
+          </div>
+
+          {/* Architectural Photo - Hidden under 1024px */}
+          <div className="hidden lg:flex">
+            <img
+              src="/images/Layer-337.png"
+              alt="Islamic Architecture"
+              className="w-80 h-60 object-cover rounded-2xl shadow-lg"
+            />
           </div>
         </div>
       </section>
@@ -316,14 +314,11 @@ export default function HomePage({
               {locale === "fa" ? "دوره‌های ویژه" : "Featured Courses"}
             </h2>
             <div className="flex items-center gap-4">
-              <div className="flex gap-1 bg-gray-100 rounded-full p-1">
+              <div
+                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-gray-100 rounded-full p-1`}
+              >
                 <button
-                  onClick={() =>
-                    handleScroll(
-                      coursesCarouselRef,
-                      locale === "fa" ? "left" : "right",
-                    )
-                  }
+                  onClick={() => handleScroll(coursesCarouselRef, "left")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Previous"
                 >
@@ -342,12 +337,7 @@ export default function HomePage({
                   </svg>
                 </button>
                 <button
-                  onClick={() =>
-                    handleScroll(
-                      coursesCarouselRef,
-                      locale === "fa" ? "right" : "left",
-                    )
-                  }
+                  onClick={() => handleScroll(coursesCarouselRef, "right")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Next"
                 >
@@ -411,12 +401,7 @@ export default function HomePage({
             <div className="flex items-center gap-4">
               <div className="flex gap-1 bg-gray-100 rounded-full p-1">
                 <button
-                  onClick={() =>
-                    handleScroll(
-                      articlesCarouselRef,
-                      locale === "fa" ? "left" : "right",
-                    )
-                  }
+                  onClick={() => handleScroll(articlesCarouselRef, "left")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Previous"
                 >
@@ -435,12 +420,7 @@ export default function HomePage({
                   </svg>
                 </button>
                 <button
-                  onClick={() =>
-                    handleScroll(
-                      articlesCarouselRef,
-                      locale === "fa" ? "right" : "left",
-                    )
-                  }
+                  onClick={() => handleScroll(articlesCarouselRef, "right")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Next"
                 >
@@ -503,12 +483,7 @@ export default function HomePage({
             <div className="flex items-center gap-4">
               <div className="flex gap-1 bg-gray-100 rounded-full p-1">
                 <button
-                  onClick={() =>
-                    handleScroll(
-                      productsCarouselRef,
-                      locale === "fa" ? "left" : "right",
-                    )
-                  }
+                  onClick={() => handleScroll(productsCarouselRef, "left")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Previous"
                 >
@@ -527,12 +502,7 @@ export default function HomePage({
                   </svg>
                 </button>
                 <button
-                  onClick={() =>
-                    handleScroll(
-                      productsCarouselRef,
-                      locale === "fa" ? "right" : "left",
-                    )
-                  }
+                  onClick={() => handleScroll(productsCarouselRef, "right")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
                   aria-label="Next"
                 >
