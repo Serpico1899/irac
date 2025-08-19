@@ -399,7 +399,9 @@ export default function HomePage({
               {locale === "fa" ? "آخرین مقالات" : "Latest Articles"}
             </h2>
             <div className="flex items-center gap-4">
-              <div className="flex gap-1 bg-gray-100 rounded-full p-1">
+              <div
+                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-gray-100 rounded-full p-1`}
+              >
                 <button
                   onClick={() => handleScroll(articlesCarouselRef, "left")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
@@ -481,7 +483,9 @@ export default function HomePage({
               {locale === "fa" ? "آخرین محصولات" : "Latest Products"}
             </h2>
             <div className="flex items-center gap-4">
-              <div className="flex gap-1 bg-gray-100 rounded-full p-1">
+              <div
+                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-gray-100 rounded-full p-1`}
+                >
                 <button
                   onClick={() => handleScroll(productsCarouselRef, "left")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
