@@ -1,0 +1,3 @@
+Images should be placed at:
+1. front/public/images/Layer-337.png - for hero background
+2. front/public/images/Asset-1@20x-2-qotodtmpgaloexs25oampoe4trtwtus7grml1i9od0.png - for header logo
