@@ -28,28 +28,24 @@
     "latestProductsTitle": "Latest Products"
   },
   "Footer": {
-    "aboutTitle": "About Us",
-    "aboutText": "This platform was launched with the goal of scientifically analyzing traffic accidents. We strive to improve road safety and reduce casualties by leveraging real data and intelligent analysis.",
-    "featuresTitle": "Features",
-    "featuresLinks": [
-      { "label": "Advanced Accident Search", "href": "/search" },
-      { "label": "Analytical Reports", "href": "/reports" },
-      { "label": "Road Safety Dashboard", "href": "/dashboard" }
-    ],
-    "resourcesTitle": "Useful Resources",
-    "resourcesLinks": [
-      {
-        "label": "Traffic Police Website",
-        "href": "https://www.traffic-police.ir"
-      },
-      { "label": "WHO Road Safety", "href": "https://www.who.int/roadsafety" },
-      { "label": "FAQ", "href": "/faq" }
+    "aboutTitle": "About IRAC",
+    "aboutText": "IRAC is a pioneering institution dedicated to the study, preservation, and advancement of Islamic architecture. We provide courses, workshops, and resources for students and professionals worldwide.",
+    "quickLinksTitle": "Quick Links",
+    "quickLinks": [
+      { "label": "Courses", "href": "/courses" },
+      { "label": "Workshops", "href": "/workshops" },
+      { "label": "Media", "href": "/media" },
+      { "label": "About Us", "href": "/about" }
     ],
     "contactTitle": "Contact Us",
-    "contactEmail": "Email: info@accident-analysis.ir",
-    "contactPhone": "Phone: 021-12345678",
-    "contactHours": "Support Hours: Sat-Wed, 9 AM - 4 PM",
-    "copyright": "© {currentYear} Traffic Accident Analysis | All rights reserved."
+    "contactAddress": "Palestine St., Tehran, Iran",
+    "contactEmail": "Email: info@irac.ir",
+    "contactPhone": "Phone: +98-21-12345678",
+    "copyright": "© {currentYear} Islamic Architecture Center IRAC | All rights reserved."
+  },
+  "Currency": {
+    "symbol": "$",
+    "name": "USD"
   },
   "HomePage": {
     "welcome": "Welcome",
