@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { formatPrice, formatNumber } from "@/utils/currency";
 
 interface ContentCardProps {
   href: string;
@@ -11,6 +12,7 @@ interface ContentCardProps {
   description?: string;
   price?: string;
   originalPrice?: string;
+  locale?: string;
 
   variant?:
     | "hero-course"
@@ -34,6 +36,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   description,
   price,
   originalPrice,
+  locale = "en",
 
   variant = "light",
   author,
@@ -44,10 +47,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
   commentCount = 0,
 }) => {
   const [imageError, setImageError] = useState(false);
-
-  const formatPrice = (price: string) => {
-    return price.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[parseInt(d)]);
-  };
 
   // Hero course variant (circular buttons)
   if (variant === "hero-course") {
@@ -184,11 +183,11 @@ const ContentCard: React.FC<ContentCardProps> = ({
               <div className="flex items-center justify-between">
                 {originalPrice && (
                   <span className="text-sm text-gray-400 line-through">
-                    {formatPrice(originalPrice)} تومان
+                    {formatPrice(originalPrice, locale)}
                   </span>
                 )}
                 <div className="text-xl font-bold text-white">
-                  {formatPrice(price)} تومان
+                  {formatPrice(price, locale)}
                 </div>
               </div>
             </div>
@@ -301,7 +300,8 @@ const ContentCard: React.FC<ContentCardProps> = ({
               )}
               {reviews > 0 && (
                 <span className="text-sm text-gray-600">
-                  {formatPrice(reviews.toString())} دیدگاه
+                  {formatNumber(reviews.toString(), locale)}{" "}
+                  {locale === "fa" ? "دیدگاه" : "reviews"}
                 </span>
               )}
             </div>
@@ -315,11 +315,11 @@ const ContentCard: React.FC<ContentCardProps> = ({
               <div className="flex items-center gap-2">
                 {originalPrice && (
                   <span className="text-sm text-gray-400 line-through">
-                    {formatPrice(originalPrice)}تومان
+                    {formatPrice(originalPrice, locale)}
                   </span>
                 )}
                 <span className="text-lg font-bold text-[#168c95]">
-                  {formatPrice(price)}تومان
+                  {formatPrice(price, locale)}
                 </span>
               </div>
             </div>
