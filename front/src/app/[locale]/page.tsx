@@ -247,10 +247,7 @@ export default function HomePage({
   };
 
   return (
-    <div
-      className="bg-[#F5F7FA] min-h-screen"
-      dir={locale === "fa" ? "rtl" : "ltr"}
-    >
+    <div className="bg-[#F5F7FA]" dir={locale === "fa" ? "rtl" : "ltr"}>
       {/* Hero Section */}
       <section
         className="bg-[#168c95] relative overflow-hidden min-h-[300px] md:min-h-[400px] max-w-7xl mx-8 xl:mx-auto rounded-[25px] md:rounded-[110px] flex items-center justify-center px-6"
@@ -275,7 +272,7 @@ export default function HomePage({
                     ? "جستجوی دوره‌ها، مقالات و محصولات"
                     : "Search courses, articles and products"
                 }
-                className="w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none border-none shadow-lg text-right text-lg"
+                className="search-input w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 border-none shadow-lg text-right text-lg"
               />
               <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
                 <svg
@@ -300,7 +297,7 @@ export default function HomePage({
             <img
               src="/images/Layer-337.png"
               alt="Islamic Architecture"
-              className="w-80 h-60 object-cover rounded-2xl shadow-lg"
+              className="w-full h-60 object-cover rounded-2xl shadow-lg"
             />
           </div>
         </div>
@@ -384,6 +381,7 @@ export default function HomePage({
                   variant="light"
                   level={course.level}
                   rating={course.rating}
+                  locale={locale}
                 />
               </div>
             ))}
@@ -443,7 +441,7 @@ export default function HomePage({
               </div>
               <Link
                 href={`/${locale}/articles`}
-                className="bg-[whitesmoke] text-[#168c95] px-6 py-2 rounded-lg hover:bg-[#0f7882] transition-colors font-medium"
+                className="bg-[whitesmoke] text-[#168c95] px-6 py-2 rounded-lg hover:bg-white transition-colors font-medium"
               >
                 {locale === "fa" ? "مشاهده همه" : "View All"}
               </Link>
@@ -468,6 +466,7 @@ export default function HomePage({
                   variant="light"
                   author={article.author}
                   date={article.date}
+                  locale={locale}
                 />
               </div>
             ))}
@@ -485,7 +484,7 @@ export default function HomePage({
             <div className="flex items-center gap-4">
               <div
                 className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-gray-100 rounded-full p-1`}
-                >
+              >
                 <button
                   onClick={() => handleScroll(productsCarouselRef, "left")}
                   className="p-2 rounded-full hover:bg-white transition-colors"
@@ -553,6 +552,7 @@ export default function HomePage({
                   originalPrice={product.originalPrice}
                   variant="light"
                   rating={product.rating}
+                  locale={locale}
                 />
               </div>
             ))}
