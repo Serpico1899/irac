@@ -41,7 +41,7 @@ export const Navbar = () => {
       <div className="sticky top-0 z-50 w-full px-8 xl:px-0 flex justify-center">
         {/* Main Navigation Header */}
         <header
-          className="max-w-7xl w-full rounded-[25px] bg-white text-black shadow-xl"
+          className="max-w-7xl w-full rounded-[25px] mt-5 bg-white text-black shadow-xl"
           dir="rtl"
         >
           <div className="w-full px-6">
@@ -63,7 +63,7 @@ export const Navbar = () => {
               </div>
 
               {/* Desktop Navigation - Center */}
-              <nav className="hidden lg:flex items-center space-x-reverse space-x-10">
+              <nav className="hidden lg:flex items-center space-x-10">
                 {navItems.map((link: NavItem) => (
                   <Link
                     key={link.href}
@@ -85,19 +85,11 @@ export const Navbar = () => {
                   className="p-3 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
                   aria-label="تغییر زبان"
                 >
-                  <svg
+                  <img
+                    src="/icons/language.svg"
+                    alt="Language"
                     className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3s-4.5 4.03-4.5 9 2.015 9 4.5 9z M8.716 6.747A9.004 9.004 0 0112 3c1.39 0 2.685.31 3.716.747M8.716 6.747C9.747 6.31 11.04 6 12.5 6s2.753.31 3.784.747M8.716 6.747A9.004 9.004 0 003.284 14.253M15.284 6.747A9.004 9.004 0 0120.716 14.253M3.284 14.253A9.004 9.004 0 008.716 17.253M20.716 14.253A9.004 9.004 0 0115.284 17.253M8.716 17.253C9.747 17.69 11.04 18 12.5 18s2.753-.31 3.784-.747M15.284 17.253A9.004 9.004 0 0112 21"
-                    />
-                  </svg>
+                  />
                 </Link>
 
                 {/* Shopping Cart */}
@@ -110,19 +102,11 @@ export const Navbar = () => {
                   `}
                     aria-label="سبد خرید"
                   >
-                    <svg
+                    <img
+                      src="/icons/shopping-cart.svg"
+                      alt="Shopping Cart"
                       className="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
-                      />
-                    </svg>
+                    />
                     {/* Cart badge */}
                     <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#168c95] text-white text-xs rounded-full flex items-center justify-center font-bold">
                       0
@@ -272,19 +256,11 @@ export const Navbar = () => {
                   `}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <svg
+                    <img
+                      src="/icons/language.svg"
+                      alt="Language"
                       className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3s-4.5 4.03-4.5 9 2.015 9 4.5 9z"
-                      />
-                    </svg>
+                    />
                     {alternateLocaleLabel} - تغییر زبان
                   </Link>
 
