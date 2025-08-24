@@ -245,6 +245,50 @@ const Footer = () => {
               </div>
             </div>
           </div>
+
+          {/* Our Licenses Section */}
+          <div className="lg:col-span-1">
+            <h3 className="text-xl font-bold mb-6 text-[#cea87a]">
+              {locale === "fa" ? "مجوزهای ما" : "Our Licenses"}
+            </h3>
+            <div className="flex flex-col space-y-4 max-[636px]: flex-row ">
+              {/* IRAC Logo License */}
+              <div className="flex items-center space-x-3 space-x-reverse">
+                <div className="flex-shrink-0">
+                  <img
+                    src="https://irac.ir/wp-content/uploads/2024/02/logo.png"
+                    alt={locale === "fa" ? "مجوز ایراک" : "IRAC License"}
+                    className="w-12 h-12 object-contain"
+                  />
+                </div>
+                <span className="text-gray-300 text-base">
+                  {locale === "fa"
+                    ? "مجوز آموزشی ایراک"
+                    : "IRAC Educational License"}
+                </span>
+              </div>
+
+              {/* Samandehi License */}
+              <div className="flex items-center space-x-3 space-x-reverse">
+                <div className="flex-shrink-0">
+                  <img
+                    src="https://irac.ir/wp-content/uploads/2024/02/samandehi-logo.webp"
+                    alt={
+                      locale === "fa"
+                        ? "نماد اعتماد الکترونیکی"
+                        : "Electronic Trust Symbol"
+                    }
+                    className="w-12 h-12 object-contain"
+                  />
+                </div>
+                <span className="text-gray-300 text-base">
+                  {locale === "fa"
+                    ? "نماد اعتماد الکترونیکی"
+                    : "Electronic Trust Certificate"}
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Border */}
