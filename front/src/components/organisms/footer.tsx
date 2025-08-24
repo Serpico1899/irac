@@ -206,27 +206,34 @@ const Footer = () => {
                 <a
                   href="#"
                   className="text-gray-400 hover:text-[#cea87a] transition-colors duration-200"
-                  aria-label="Twitter"
+                  aria-label="Instagram"
                 >
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-[#cea87a] transition-colors duration-200"
-                  aria-label="LinkedIn"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
+                        fill="#0F0F0F"
+                      ></path>{" "}
+                      <path
+                        d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z"
+                        fill="#0F0F0F"
+                      ></path>{" "}
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z"
+                        fill="#0F0F0F"
+                      ></path>{" "}
+                    </g>
                   </svg>
                 </a>
                 <a
@@ -247,46 +254,32 @@ const Footer = () => {
           </div>
 
           {/* Our Licenses Section */}
-          <div className="lg:col-span-1">
+          <div className="flex flex-col items-center">
             <h3 className="text-xl font-bold mb-6 text-[#cea87a]">
               {locale === "fa" ? "مجوزهای ما" : "Our Licenses"}
             </h3>
-            <div className="flex flex-col space-y-4 max-[636px]: flex-row ">
+            <div className="flex flex-col gap-2.5 space-y-4 max-[534px]:flex-row max-[534px]:gap-5 max-[534px]:flex-wrap ">
               {/* IRAC Logo License */}
-              <div className="flex items-center space-x-3 space-x-reverse">
-                <div className="flex-shrink-0">
-                  <img
-                    src="https://irac.ir/wp-content/uploads/2024/02/logo.png"
-                    alt={locale === "fa" ? "مجوز ایراک" : "IRAC License"}
-                    className="w-12 h-12 object-contain"
-                  />
-                </div>
-                <span className="text-gray-300 text-base">
-                  {locale === "fa"
-                    ? "مجوز آموزشی ایراک"
-                    : "IRAC Educational License"}
-                </span>
-              </div>
+              <Link href="/">
+                <img
+                  src="https://irac.ir/wp-content/uploads/2024/02/logo.png"
+                  alt={locale === "fa" ? "مجوز ایراک" : "IRAC License"}
+                  className="w-12 h-12 object-contain"
+                />
+              </Link>
 
               {/* Samandehi License */}
-              <div className="flex items-center space-x-3 space-x-reverse">
-                <div className="flex-shrink-0">
-                  <img
-                    src="https://irac.ir/wp-content/uploads/2024/02/samandehi-logo.webp"
-                    alt={
-                      locale === "fa"
-                        ? "نماد اعتماد الکترونیکی"
-                        : "Electronic Trust Symbol"
-                    }
-                    className="w-12 h-12 object-contain"
-                  />
-                </div>
-                <span className="text-gray-300 text-base">
-                  {locale === "fa"
-                    ? "نماد اعتماد الکترونیکی"
-                    : "Electronic Trust Certificate"}
-                </span>
-              </div>
+              <Link href="/">
+                <img
+                  src="https://irac.ir/wp-content/uploads/2024/02/samandehi-logo.webp"
+                  alt={
+                    locale === "fa"
+                      ? "نماد اعتماد الکترونیکی"
+                      : "Electronic Trust Symbol"
+                  }
+                  className="w-12 h-12 object-contain"
+                />
+              </Link>
             </div>
           </div>
         </div>
