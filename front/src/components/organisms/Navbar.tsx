@@ -27,12 +27,14 @@ export const Navbar = () => {
           { label: "دوره‌ها", href: "/courses" },
           { label: "کارگاه‌ها", href: "/workshops" },
           { label: "رسانه", href: "/media" },
+          { label: "درباره ما", href: "/about" },
         ]
       : [
           { label: "Home", href: "/" },
           { label: "Courses", href: "/courses" },
           { label: "Workshops", href: "/workshops" },
           { label: "Media", href: "/media" },
+          { label: "About Us", href: "/about" },
         ];
 
   return (
@@ -78,11 +80,11 @@ export const Navbar = () => {
               </nav>
 
               {/* Right side actions - Left side for RTL */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 max-[345px]:gap-1">
                 {/* Language Switcher */}
                 <Link
                   href={alternateLocaleUrl}
-                  className="p-3 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-3 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors max-lg:hidden"
                   aria-label="تغییر زبان"
                 >
                   <img
