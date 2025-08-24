@@ -41,11 +41,11 @@ const Footer = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="flex flex-wrap gap-8 mb-12">
           {/* About Section */}
-          <div className="lg:col-span-1">
+          <div className="grow lg:basis-3/10 ">
             <div className="mb-8">
-              <Link href="/" className="flex items-center mb-6">
+              <Link href="/" className="inline-flex items-center ">
                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg">
                   <img
                     src="/images/Asset-1@20x-2-qotodtmpgaloexs25oampoe4trtwtus7grml1i9od0.png"
@@ -70,11 +70,11 @@ const Footer = () => {
           </div>
 
           {/* Quick Links Section */}
-          <div className="lg:col-span-1">
+          <div className="grow">
             <h3 className="text-xl font-bold mb-6 text-[#cea87a]">
               {t.quickLinksTitle}
             </h3>
-            <ul className="space-y-4 md:space-y-4 max-md:flex max-md:gap-5">
+            <ul className="space-y-4 md:space-y-4 max-[428px]:flex max-[428px]:gap-5">
               {t.quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link
@@ -82,7 +82,7 @@ const Footer = () => {
                     className="text-gray-300 hover:text-[#cea87a] transition-colors duration-200 flex items-center group"
                   >
                     <svg
-                      className="w-4 h-4 text-[#cea87a] opacity-0 group-hover:opacity-100 transition-opacity duration-200 mr-2 ml-2 hidden min-[360px]:block max-md:hidden"
+                      className="w-4 h-4 text-[#cea87a] opacity-0 group-hover:opacity-100 transition-opacity duration-200 mr-2 ml-2 hidden min-md:block max-md:hidden"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -102,13 +102,13 @@ const Footer = () => {
           </div>
 
           {/* Contact Section */}
-          <div className="lg:col-span-1">
+          <div className="grow">
             <h3 className="text-xl font-bold mb-6 text-[#cea87a]">
               {t.contactTitle}
             </h3>
             <div className="space-y-4">
               {/* Address */}
-              <div className="flex items-start space-x-3 space-x-reverse min-[610px]:flex min-[610px]:gap-[15px]">
+              <div className="flex gap-0 items-start space-x-2 ">
                 <div className="flex-shrink-0">
                   <svg
                     className="w-6 h-6 text-[#cea87a]"
@@ -134,7 +134,7 @@ const Footer = () => {
               </div>
 
               {/* Email */}
-              <div className="flex items-center space-x-3 ">
+              <div className="flex items-center space-x-2 ">
                 <div className="flex-shrink-0">
                   <svg
                     className="w-6 h-6 text-[#cea87a]"
@@ -159,7 +159,7 @@ const Footer = () => {
               </div>
 
               {/* Phone */}
-              <div className="flex items-center space-x-3 ">
+              <div className="flex items-center space-x-2 mb-4 ">
                 <div className="flex-shrink-0">
                   <svg
                     className="w-6 h-6 text-[#cea87a]"
@@ -282,7 +282,7 @@ const Footer = () => {
           <div className="flex justify-center mt-8">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="bg-[#168c95] hover:bg-[#cea87a] text-white p-3 rounded-full transition-colors duration-200 shadow-lg"
+              className="bg-[#168c95] hover:bg-[#cea87a] max-md:bg-[#cea87a] max-md:hover:bg-[#168c95] text-white p-3 rounded-full transition-colors duration-200 shadow-lg"
               aria-label={locale === "fa" ? "بازگشت به بالا" : "Back to top"}
             >
               <svg
