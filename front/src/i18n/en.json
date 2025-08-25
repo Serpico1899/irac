@@ -41,7 +41,22 @@
     "contactAddress": "Palestine St., Tehran, Iran",
     "contactEmail": "Email: info@irac.ir",
     "contactPhone": "Phone: +98-21-12345678",
-    "copyright": "© {currentYear} Islamic Architecture Center IRAC | All rights reserved."
+    "copyright": "© {currentYear} Islamic Architecture Center IRAC | All rights reserved.",
+    "featuresTitle": "Features",
+    "featuresLinks": [
+      { "label": "Online Courses", "href": "/courses" },
+      { "label": "Workshops", "href": "/workshops" },
+      { "label": "Digital Library", "href": "/library" },
+      { "label": "Community", "href": "/community" }
+    ],
+    "resourcesTitle": "Resources",
+    "resourcesLinks": [
+      { "label": "Documentation", "href": "/docs" },
+      { "label": "Research Papers", "href": "/research" },
+      { "label": "Gallery", "href": "/gallery" },
+      { "label": "Blog", "href": "/blog" }
+    ],
+    "contactHours": "Hours: Sun-Thu 9:00 AM - 5:00 PM"
   },
   "Currency": {
     "symbol": "$",
@@ -69,6 +84,74 @@
     "devNoteTitle": "Note for Developers:",
     "devNoteText": "This is a temporary page and should be replaced with the main content. The i18n structure, Tailwind CSS, and existing components are ready for use.",
     "iracIntro": "The premier center for the study and preservation of Islamic architectural heritage."
+  },
+  "Login": {
+    "stepOneTitle": "Enter your national ID",
+    "stepTwoTitle": "Enter the sent code"
+  },
+  "Admin": {
+    "createUser": "Create New User",
+    "editUser": "Edit User",
+    "editUserRelations": "Edit User Relations",
+    "backToList": "Back to List",
+    "back": "Back",
+    "edit": "Edit",
+    "editProfile": "Edit Profile",
+    "editMainInfo": "Edit Main Information",
+    "editRelations": "Edit Relations",
+    "userNotFound": "User not found",
+    "updateSuccess": "Updated successfully",
+    "userDashboard": "User Dashboard",
+    "deleteTooltip": "Delete",
+    "editTooltip": "Edit"
+  },
+  "Common": {
+    "viewAll": "View All",
+    "backToDashboard": "← Back to Dashboard",
+    "backToTop": "Back to top",
+    "editNationalId": "Edit National ID",
+    "userProfile": "User Profile",
+    "generalInfo": "General Information",
+    "searchPlaceholder": "Search...",
+    "search": "Search",
+    "clear": "Clear",
+    "viewDetails": "View Details",
+    "cartEmpty": "Your cart is empty",
+    "loading": "Loading...",
+    "noOptionsFound": "No options found",
+    "selectPlaceholder": "Select",
+    "persian": "Persian"
+  },
+  "FilterDescription": {
+    "title": "Filter Guide",
+    "activeFiltersTitle": "Active Filters",
+    "clearAllFilters": "Clear All",
+    "noActiveFilters": "No active filters. You can search for articles from the search section.",
+    "availableFiltersTitle": "Available Filter Types",
+    "textSearchTitle": "Text Search",
+    "textSearchDescription": "Search in article titles, abstracts, and content with desired keywords",
+    "authorsTitle": "Authors",
+    "authorsDescription": "Filter articles based on author or researcher name",
+    "tagsKeywordsTitle": "Tags & Keywords",
+    "tagsKeywordsDescription": "Find articles related to specific topics and categories",
+    "journalsSourcesTitle": "Journals & Sources",
+    "journalsSourcesDescription": "Search based on journal, publication, or source name",
+    "publicationYearTitle": "Publication Year",
+    "publicationYearDescription": "Limit results based on publication date range",
+    "articleTypeTitle": "Article Type",
+    "articleTypeDescription": "Filter based on article type (research, review, book, etc.)",
+    "betterSearchTipsTitle": "Better Search Tips",
+    "tip1": "For more precise search, use combination of multiple filters",
+    "tip2": "In text search, you can use exact phrases",
+    "tip3": "Click on author names or tags in articles to activate related filters",
+    "tip4": "You can remove filters individually or clear all at once"
+  },
+  "Pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "previousPage": "Previous Page",
+    "nextPage": "Next Page",
+    "page": "Page"
   },
   "NotFound": {
     "title": "Page Not Found",

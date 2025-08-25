@@ -41,7 +41,22 @@
     "contactAddress": "خیابان فلسطین، تهران، ایران",
     "contactEmail": "ایمیل: info@irac.ir",
     "contactPhone": "تلفن: ۱۲۳۴۵۶۷۸-۰۲۱",
-    "copyright": "© {currentYear} مرکز معماری اسلامی ایراک | تمامی حقوق محفوظ است."
+    "copyright": "© {currentYear} مرکز معماری اسلامی ایراک | تمامی حقوق محفوظ است.",
+    "featuresTitle": "امکانات",
+    "featuresLinks": [
+      { "label": "دوره‌های آنلاین", "href": "/courses" },
+      { "label": "کارگاه‌ها", "href": "/workshops" },
+      { "label": "کتابخانه دیجیتال", "href": "/library" },
+      { "label": "انجمن", "href": "/community" }
+    ],
+    "resourcesTitle": "منابع",
+    "resourcesLinks": [
+      { "label": "مستندات", "href": "/docs" },
+      { "label": "مقالات پژوهشی", "href": "/research" },
+      { "label": "گالری", "href": "/gallery" },
+      { "label": "وبلاگ", "href": "/blog" }
+    ],
+    "contactHours": "ساعات کاری: یکشنبه تا پنج‌شنبه ۹:۰۰ تا ۱۷:۰۰"
   },
   "Currency": {
     "symbol": "تومان",
@@ -69,6 +84,74 @@
     "devNoteTitle": "نکته برای توسعه‌دهندگان:",
     "devNoteText": "این صفحه موقتی است و باید با محتوای اصلی جایگزین شود. ساختار i18n، Tailwind CSS و کامپوننت‌های موجود آماده استفاده هستند.",
     "iracIntro": "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
+  },
+  "Login": {
+    "stepOneTitle": "کد ملی خود را وارد کنید",
+    "stepTwoTitle": "کد ارسال شده را وارد کنید"
+  },
+  "Admin": {
+    "createUser": "ایجاد کاربر جدید",
+    "editUser": "ویرایش کاربر",
+    "editUserRelations": "ویرایش رابطه‌های کاربر",
+    "backToList": "بازگشت به لیست",
+    "back": "بازگشت",
+    "edit": "ویرایش",
+    "editProfile": "ویرایش پروفایل",
+    "editMainInfo": "ویرایش اطلاعات اصلی",
+    "editRelations": "ویرایش روابط",
+    "userNotFound": "کاربر یافت نشد",
+    "updateSuccess": "با موفقیت ویرایش شد",
+    "userDashboard": "داشبورد کاربر",
+    "deleteTooltip": "حذف",
+    "editTooltip": "ویرایش"
+  },
+  "Common": {
+    "viewAll": "مشاهده همه",
+    "backToDashboard": "← بازگشت به داشبورد",
+    "backToTop": "بازگشت به بالا",
+    "editNationalId": "ویرایش کد ملی",
+    "userProfile": "پروفایل کاربری",
+    "generalInfo": "اطلاعات کلی",
+    "searchPlaceholder": "جستجو کنید...",
+    "search": "جستجو",
+    "clear": "خالی شدن",
+    "viewDetails": "مشاهده جزئیات",
+    "cartEmpty": "سبد خرید شما خالی است",
+    "loading": "در حال بارگذاری...",
+    "noOptionsFound": "گزینه‌ای یافت نشد",
+    "selectPlaceholder": "انتخاب کنید",
+    "persian": "فارسی"
+  },
+  "FilterDescription": {
+    "title": "راهنمای فیلترها",
+    "activeFiltersTitle": "فیلترهای فعال",
+    "clearAllFilters": "پاک کردن همه",
+    "noActiveFilters": "هیچ فیلتر فعالی وجود ندارد. از بخش جستجو می‌توانید به دنبال مقالات مورد نظر خود بگردید.",
+    "availableFiltersTitle": "انواع فیلتر قابل استفاده",
+    "textSearchTitle": "جستجوی متنی",
+    "textSearchDescription": "جستجو در عنوان، خلاصه و محتوای مقالات با کلیدواژه‌های دلخواه",
+    "authorsTitle": "نویسندگان",
+    "authorsDescription": "فیلتر مقالات بر اساس نام نویسنده یا پژوهشگر",
+    "tagsKeywordsTitle": "برچسب‌ها و کلیدواژه‌ها",
+    "tagsKeywordsDescription": "یافتن مقالات مرتبط با موضوعات و دسته‌بندی‌های خاص",
+    "journalsSourcesTitle": "مجلات و منابع",
+    "journalsSourcesDescription": "جستجو بر اساس نام مجله، ژورنال یا منبع انتشار مقاله",
+    "publicationYearTitle": "سال انتشار",
+    "publicationYearDescription": "محدود کردن نتایج بر اساس بازه زمانی انتشار مقالات",
+    "articleTypeTitle": "نوع مقاله",
+    "articleTypeDescription": "فیلتر بر اساس نوع مقاله (پژوهشی، مروری، کتاب و غیره)",
+    "betterSearchTipsTitle": "نکات جستجوی بهتر",
+    "tip1": "برای جستجوی دقیق‌تر، از ترکیب چند فیلتر استفاده کنید",
+    "tip2": "در جستجوی متنی می‌توانید از عبارات دقیق استفاده کنید",
+    "tip3": "با کلیک روی نام نویسنده یا برچسب در مقالات، فیلتر مربوطه فعال می‌شود",
+    "tip4": "می‌توانید فیلترها را به صورت تکی حذف کنید یا همه را یکجا پاک کنید"
+  },
+  "Pagination": {
+    "previous": "قبلی",
+    "next": "بعدی",
+    "previousPage": "صفحه قبلی",
+    "nextPage": "صفحه بعدی",
+    "page": "صفحه"
   },
   "NotFound": {
     "title": "صفحه یافت نشد",
