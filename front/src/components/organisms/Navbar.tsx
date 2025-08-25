@@ -70,8 +70,8 @@ export const Navbar = () => {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`text-black hover:text-gray-700 transition-colors duration-200 text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-100 ${
-                      pathname === link.href ? "bg-gray-200" : ""
+                    className={`text-text hover:text-text-light transition-colors duration-200 text-sm font-medium px-3 py-2 rounded-lg hover:bg-background-light ${
+                      pathname === link.href ? "bg-background-light" : ""
                     }`}
                   >
                     {link.label}
@@ -84,7 +84,7 @@ export const Navbar = () => {
                 {/* Language Switcher */}
                 <Link
                   href={alternateLocaleUrl}
-                  className="p-3 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors max-lg:hidden"
+                  className="p-3 text-text-light hover:text-text hover:bg-background-light rounded-lg transition-colors max-lg:hidden"
                   aria-label="تغییر زبان"
                 >
                   <img
@@ -100,7 +100,7 @@ export const Navbar = () => {
                     onClick={() => setIsCartOpen(!isCartOpen)}
                     className={`
                     relative p-3 transition-colors rounded-lg
-                    text-gray-600 hover:text-gray-800 hover:bg-gray-100
+                    text-text-light hover:text-text hover:bg-background-light
                   `}
                     aria-label="سبد خرید"
                   >
@@ -110,18 +110,18 @@ export const Navbar = () => {
                       className="w-6 h-6"
                     />
                     {/* Cart badge */}
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#168c95] text-white text-xs rounded-full flex items-center justify-center font-bold">
+                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-xs rounded-full flex items-center justify-center font-bold">
                       0
                     </span>
                   </button>
 
                   {/* Cart Dropdown */}
                   {isCartOpen && (
-                    <div className="absolute left-0 top-full mt-3 w-96 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden">
+                    <div className="absolute left-0 top-full mt-3 w-96 bg-white rounded-2xl shadow-xl border border-background-light z-50 overflow-hidden">
                       <div className="p-8 text-center">
-                        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div className="w-16 h-16 bg-background-light rounded-full flex items-center justify-center mx-auto mb-4">
                           <svg
-                            className="w-8 h-8 text-gray-400"
+                            className="w-8 h-8 text-text-light"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -134,15 +134,15 @@ export const Navbar = () => {
                             />
                           </svg>
                         </div>
-                        <h3 className="text-lg font-bold text-gray-800 mb-2">
+                        <h3 className="text-lg font-bold text-text mb-2">
                           سبد خرید شما خالی است
                         </h3>
-                        <p className="text-gray-600 text-sm mb-6">
+                        <p className="text-text-light text-sm mb-6">
                           هنوز محصولی به سبد خرید خود اضافه نکرده‌اید
                         </p>
                         <Link
                           href="/courses"
-                          className="inline-block bg-[#168c95] text-white px-6 py-3 rounded-xl hover:bg-[#0f7882] transition-colors font-medium"
+                          className="inline-block bg-primary text-white px-6 py-3 rounded-xl hover:bg-primary-dark transition-colors font-medium"
                           onClick={() => setIsCartOpen(false)}
                         >
                           مشاهده دوره‌ها
@@ -157,12 +157,12 @@ export const Navbar = () => {
                   href="/login"
                   className={`
                   items-center gap-3 px-6 py-3 rounded-full transition-all duration-200 font-medium shadow-sm group
-                  md:flex md:bg-gray-100 md:text-[#168c95] md:hover:bg-gray-200
+                  md:flex md:bg-background-light md:text-primary md:hover:bg-accent
                   hidden
                 `}
                 >
                   <svg
-                    className="w-5 h-5 text-[#168c95] group-hover:text-[#0f7882] transition-colors"
+                    className="w-5 h-5 text-primary group-hover:text-primary-dark transition-colors"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -176,7 +176,7 @@ export const Navbar = () => {
                 {/* Mobile login button */}
                 <Link
                   href="/login"
-                  className="md:hidden text-gray-600 hover:text-gray-800 p-2"
+                  className="md:hidden text-text-light hover:text-text p-2"
                 >
                   <svg
                     className="w-6 h-6"
@@ -191,7 +191,7 @@ export const Navbar = () => {
                 <button
                   className={`
                   lg:hidden p-3 rounded-lg transition-colors
-                  text-gray-600 hover:text-gray-800 hover:bg-gray-100
+                  text-text-light hover:text-text hover:bg-background-light
                 `}
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   aria-label="منوی موبایل"
@@ -227,7 +227,7 @@ export const Navbar = () => {
               <div
                 className={`
               lg:hidden py-6 border-t
-              border-gray-200 bg-white
+              border-background-light bg-white
             `}
               >
                 <div className="space-y-2">
@@ -236,11 +236,11 @@ export const Navbar = () => {
                       key={link.href}
                       href={link.href}
                       className={`
-                      block px-4 py-3 font-medium transition-colors rounded-lg mx-4 border border-gray-200
+                      block px-4 py-3 font-medium transition-colors rounded-lg mx-4 border border-background-light
                       ${
                         pathname === link.href
-                          ? "bg-gray-200 text-gray-900"
-                          : "hover:bg-gray-50 text-gray-700"
+                          ? "bg-background-light text-text"
+                          : "hover:bg-background-light text-text-light"
                       }
                     `}
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -253,8 +253,8 @@ export const Navbar = () => {
                   <Link
                     href={alternateLocaleUrl}
                     className={`
-                    flex items-center gap-3 px-4 py-3 font-medium transition-colors rounded-lg mx-4 border border-gray-200
-                    text-gray-700 hover:bg-gray-50
+                    flex items-center gap-3 px-4 py-3 font-medium transition-colors rounded-lg mx-4 border border-background-light
+                    text-text-light hover:bg-background-light
                   `}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -271,8 +271,8 @@ export const Navbar = () => {
                     <Link
                       href="/login"
                       className={`
-                      flex items-center justify-center gap-3 px-6 py-4 rounded-2xl transition-colors font-medium w-full border border-gray-200
-                      bg-[#168c95] text-white hover:bg-[#0f7882]
+                      flex items-center justify-center gap-3 px-6 py-4 rounded-2xl transition-colors font-medium w-full border border-background-light
+                      bg-primary text-white hover:bg-primary-dark
                     `}
                     >
                       <svg
