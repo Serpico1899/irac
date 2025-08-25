@@ -3,6 +3,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { CSSObjectWithLabel } from "react-select";
+import { useTranslations } from "next-intl";
 
 // Single select component that stores both _id and name
 const MySelectWithName = dynamic(
@@ -31,6 +32,7 @@ const MySelectWithName = dynamic(
         errMsg?: string;
         placeholder?: string;
       }) {
+        const t = useTranslations("Common");
         return (
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-slate-700 text-right">
@@ -50,9 +52,9 @@ const MySelectWithName = dynamic(
                   setValue(name, null);
                 }
               }}
-              placeholder={placeholder || `${label} را انتخاب کنید`}
-              noOptionsMessage={() => "گزینه‌ای یافت نشد"}
-              loadingMessage={() => "در حال بارگذاری..."}
+              placeholder={placeholder || `${label} ${t("selectPlaceholder")}`}
+              noOptionsMessage={() => t("noOptionsFound")}
+              loadingMessage={() => t("loading")}
               isClearable
               isRtl
               styles={{
