@@ -10,15 +10,15 @@ export const Footer = ({ translations }: FooterProps) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white pt-12 pb-8">
+    <footer className="bg-primary text-white pt-12 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-right">
           {/* About Us Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4 border-b border-gray-700 pb-2">
+            <h3 className="text-xl font-bold mb-4 border-b border-accent pb-2">
               {translations.aboutTitle}
             </h3>
-            <p className="text-gray-300 mb-4 text-sm leading-relaxed">
+            <p className="text-white mb-4 text-sm leading-relaxed">
               {translations.aboutText}
             </p>
             <div className="flex justify-end space-x-4 space-x-reverse mt-4">
@@ -28,7 +28,7 @@ export const Footer = ({ translations }: FooterProps) => {
 
           {/* Features Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4 border-b border-gray-700 pb-2">
+            <h3 className="text-xl font-bold mb-4 border-b border-accent pb-2">
               {translations.featuresTitle}
             </h3>
             <ul className="space-y-3 text-sm">
@@ -36,7 +36,7 @@ export const Footer = ({ translations }: FooterProps) => {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition flex items-center justify-end"
+                    className="text-white hover:text-accent transition flex items-center justify-end"
                   >
                     <span>{link.label}</span>
                     {/* Icons can be mapped here if needed */}
@@ -48,7 +48,7 @@ export const Footer = ({ translations }: FooterProps) => {
 
           {/* Resources Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4 border-b border-gray-700 pb-2">
+            <h3 className="text-xl font-bold mb-4 border-b border-accent pb-2">
               {translations.resourcesTitle}
             </h3>
             <ul className="space-y-3 text-sm">
@@ -58,7 +58,7 @@ export const Footer = ({ translations }: FooterProps) => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white transition"
+                    className="text-white hover:text-accent transition"
                   >
                     {link.label}
                   </a>
@@ -69,10 +69,10 @@ export const Footer = ({ translations }: FooterProps) => {
 
           {/* Contact Us Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4 border-b border-gray-700 pb-2">
+            <h3 className="text-xl font-bold mb-4 border-b border-accent pb-2">
               {translations.contactTitle}
             </h3>
-            <ul className="text-sm text-gray-300 space-y-2">
+            <ul className="text-sm text-white space-y-2">
               <li>{translations.contactEmail}</li>
               <li>{translations.contactPhone}</li>
               <li>{translations.contactHours}</li>
@@ -81,7 +81,7 @@ export const Footer = ({ translations }: FooterProps) => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 text-center text-gray-500 text-sm">
+        <div className="mt-8 text-center text-white opacity-75 text-sm">
           {translations.copyright.replace("{currentYear}", currentYear)}
         </div>
       </div>
