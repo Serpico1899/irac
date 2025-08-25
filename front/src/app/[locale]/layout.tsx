@@ -26,7 +26,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} dir={isRTL ? "rtl" : "ltr"}>
       <body
-        className={`min-h-screen bg-[#F5F7FA] ${isRTL ? "font-arabic" : ""}`}
+        className={`min-h-screen bg-background-light ${isRTL ? "font-arabic" : ""}`}
       >
         <div className="relative flex flex-col min-h-screen">
           {/* Navbar */}
