@@ -1,6 +1,12 @@
 import React from "react";
-import { EditIcon, HideIcon, TrashIcon, UpdateIcon } from "@/components/atoms/Icons";
+import {
+  EditIcon,
+  HideIcon,
+  TrashIcon,
+  UpdateIcon,
+} from "@/components/atoms/Icons";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface UserCardProps {
   id: string;
@@ -18,6 +24,8 @@ const UserCard: React.FC<UserCardProps> = ({
   onDelete,
 }) => {
   const router = useRouter();
+  const t = useTranslations("Admin");
+  const tCommon = useTranslations("Common");
   return (
     <div className="border w-full max-w-lg bg-white rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center gap-4">
       <div className="w-24 h-24 flex-shrink-0">
@@ -36,29 +44,29 @@ const UserCard: React.FC<UserCardProps> = ({
           <button
             onClick={onDelete}
             className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all duration-200 shadow"
-            title="حذف"
+            title={t("deleteTooltip")}
           >
             <TrashIcon />
           </button>
         )}
         <button
           onClick={() => router.push(`/admin/users/edit/pure/${id}`)}
-          className="p-2 bg-yellow-400 text-white rounded-full hover:bg-yellow-500 transition-all duration-200 shadow"
-          title="ویرایش"
+          className="p-2 bg-accent text-white rounded-full hover:bg-accent/80 transition-all duration-200 shadow"
+          title={t("editTooltip")}
         >
           <UpdateIcon />
         </button>
         <button
           onClick={() => router.push(`/admin/users/edit/relation/${id}`)}
-          className="p-2 bg-yellow-400 text-white rounded-full hover:bg-yellow-500 transition-all duration-200 shadow"
-          title="ویرایش"
+          className="p-2 bg-accent text-white rounded-full hover:bg-accent/80 transition-all duration-200 shadow"
+          title={t("editTooltip")}
         >
           <EditIcon />
         </button>
         <button
           onClick={() => router.push(`/admin/users/user/${id}`)}
-          className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all duration-200 shadow"
-          title="مشاهده جزئیات"
+          className="p-2 bg-primary text-white rounded-full hover:bg-primary-dark transition-all duration-200 shadow"
+          title={tCommon("viewDetails")}
         >
           <HideIcon />
         </button>
