@@ -36,7 +36,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="bg-[#168c95] text-white"
+      className="bg-primary-dark text-white"
       dir={locale === "fa" ? "rtl" : "ltr"}
     >
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -61,7 +61,7 @@ const Footer = () => {
               </Link>
             </div>
 
-            <h3 className="text-xl font-bold mb-4 text-[#cea87a]">
+            <h3 className="text-xl font-bold mb-4 text-accent">
               {t.aboutTitle}
             </h3>
             <p className="text-gray-300 leading-relaxed text-base">
@@ -71,7 +71,7 @@ const Footer = () => {
 
           {/* Quick Links Section */}
           <div className="grow">
-            <h3 className="text-xl font-bold mb-6 text-[#cea87a]">
+            <h3 className="text-xl font-bold mb-6 text-accent">
               {t.quickLinksTitle}
             </h3>
             <ul className="space-y-4 md:space-y-4 max-[428px]:flex max-[428px]:gap-5">
@@ -79,10 +79,10 @@ const Footer = () => {
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-[#cea87a] transition-colors duration-200 flex items-center group"
+                    className="text-gray-300 hover:text-accent transition-colors duration-200 flex items-center group"
                   >
                     <svg
-                      className="w-4 h-4 text-[#cea87a] opacity-0 group-hover:opacity-100 transition-opacity duration-200 mr-2 ml-2 hidden min-md:block max-md:hidden"
+                      className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-200 mr-2 ml-2 hidden min-md:block max-md:hidden"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -103,7 +103,7 @@ const Footer = () => {
 
           {/* Contact Section */}
           <div className="grow">
-            <h3 className="text-xl font-bold mb-6 text-[#cea87a]">
+            <h3 className="text-xl font-bold mb-6 text-accent">
               {t.contactTitle}
             </h3>
             <div className="space-y-4">
@@ -111,7 +111,7 @@ const Footer = () => {
               <div className="flex gap-0 items-start space-x-2 ">
                 <div className="flex-shrink-0">
                   <svg
-                    className="w-6 h-6 text-[#cea87a]"
+                    className="w-6 h-6 text-accent"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -137,7 +137,7 @@ const Footer = () => {
               <div className="flex items-center space-x-2 ">
                 <div className="flex-shrink-0">
                   <svg
-                    className="w-6 h-6 text-[#cea87a]"
+                    className="w-6 h-6 text-accent"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -152,7 +152,7 @@ const Footer = () => {
                 </div>
                 <a
                   href={`mailto:${t.contactEmail.replace("Email: ", "").replace("ایمیل: ", "")}`}
-                  className="text-gray-300 hover:text-[#cea87a] transition-colors duration-200 text-base"
+                  className="text-gray-300 hover:text-accent transition-colors duration-200 text-base"
                 >
                   {t.contactEmail}
                 </a>
@@ -162,7 +162,7 @@ const Footer = () => {
               <div className="flex items-center space-x-2 mb-4 ">
                 <div className="flex-shrink-0">
                   <svg
-                    className="w-6 h-6 text-[#cea87a]"
+                    className="w-6 h-6 text-accent"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -177,7 +177,7 @@ const Footer = () => {
                 </div>
                 <a
                   href={`tel:${t.contactPhone.replace("Phone: ", "").replace("تلفن: ", "").replace(/\s/g, "")}`}
-                  className="text-gray-300 hover:text-[#cea87a] transition-colors duration-200 text-base"
+                  className="text-gray-300 hover:text-accent transition-colors duration-200 text-base"
                 >
                   {t.contactPhone}
                 </a>
@@ -192,7 +192,7 @@ const Footer = () => {
               <div className="flex space-x-4">
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-[#cea87a] transition-colors duration-200"
+                  className="text-gray-400 hover:text-accent transition-colors duration-200"
                   aria-label="Telegram"
                 >
                   <svg
@@ -205,7 +205,7 @@ const Footer = () => {
                 </a>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-[#cea87a] transition-colors duration-200"
+                  className="text-gray-400 hover:text-accent transition-colors duration-200"
                   aria-label="Instagram"
                 >
                   <svg
@@ -228,7 +228,7 @@ const Footer = () => {
                 </a>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-[#cea87a] transition-colors duration-200"
+                  className="text-gray-400 hover:text-accent transition-colors duration-200"
                   aria-label="Instagram"
                 >
                   <svg
@@ -255,7 +255,7 @@ const Footer = () => {
 
           {/* Our Licenses Section */}
           <div className="flex flex-col items-center">
-            <h3 className="text-xl font-bold mb-6 text-[#cea87a]">
+            <h3 className="text-xl font-bold mb-6 text-accent">
               {locale === "fa" ? "مجوزهای ما" : "Our Licenses"}
             </h3>
             <div className="flex flex-col gap-2.5 space-y-4 max-[534px]:flex-row max-[534px]:gap-5 max-[534px]:flex-wrap ">
@@ -265,6 +265,7 @@ const Footer = () => {
                   src="https://irac.ir/wp-content/uploads/2024/02/logo.png"
                   alt={locale === "fa" ? "مجوز ایراک" : "IRAC License"}
                   className="w-12 h-12 object-contain"
+                  loading="lazy"
                 />
               </Link>
 
@@ -278,6 +279,7 @@ const Footer = () => {
                       : "Electronic Trust Symbol"
                   }
                   className="w-12 h-12 object-contain"
+                  loading="lazy"
                 />
               </Link>
             </div>
@@ -296,19 +298,19 @@ const Footer = () => {
             <div className="flex space-x-6 text-sm">
               <Link
                 href="/privacy"
-                className="text-gray-400 hover:text-[#cea87a] transition-colors duration-200"
+                className="text-gray-400 hover:text-accent transition-colors duration-200"
               >
                 {locale === "fa" ? "حریم خصوصی" : "Privacy Policy"}
               </Link>
               <Link
                 href="/terms"
-                className="text-gray-400 hover:text-[#cea87a] transition-colors duration-200"
+                className="text-gray-400 hover:text-accent transition-colors duration-200"
               >
                 {locale === "fa" ? "شرایط استفاده" : "Terms of Service"}
               </Link>
               <Link
                 href="/contact"
-                className="text-gray-400 hover:text-[#cea87a] transition-colors duration-200"
+                className="text-gray-400 hover:text-accent transition-colors duration-200"
               >
                 {locale === "fa" ? "تماس با ما" : "Contact"}
               </Link>
@@ -319,7 +321,7 @@ const Footer = () => {
           <div className="flex justify-center mt-8">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="bg-[#168c95] hover:bg-[#cea87a] max-md:bg-[#cea87a] max-md:hover:bg-[#168c95] text-white p-3 rounded-full transition-colors duration-200 shadow-lg"
+              className="bg-primary hover:bg-accent-bronze max-md:bg-accent-bronze max-md:hover:bg-primary text-white p-3 rounded-full transition-colors duration-200 shadow-lg"
               aria-label={locale === "fa" ? "بازگشت به بالا" : "Back to top"}
             >
               <svg
