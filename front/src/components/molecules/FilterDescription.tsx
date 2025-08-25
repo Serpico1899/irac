@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type FilterValue = string | string[] | number;
 
@@ -20,6 +21,7 @@ export const FilterDescription = ({
   activeFilters,
 }: FilterDescriptionProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const t = useTranslations("FilterDescription");
 
   // Filter category icons with colored backgrounds
   const filterIcons = {
@@ -235,7 +237,7 @@ export const FilterDescription = ({
                 d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
               />
             </svg>
-            <h2 className="font-bold">راهنمای فیلترها</h2>
+            <h2 className="font-bold">{t("title")}</h2>
           </div>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
@@ -273,12 +275,14 @@ export const FilterDescription = ({
           {activeFilters.length > 0 ? (
             <div className="mb-6">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-bold text-gray-800">فیلترهای فعال</h3>
+                <h3 className="font-bold text-gray-800">
+                  {t("activeFiltersTitle")}
+                </h3>
                 <Link
                   href="/"
                   className="flex items-center gap-1 px-3 py-1.5 bg-red-50 text-red-600 text-sm rounded-lg hover:bg-red-100 transition-all duration-300"
                 >
-                  <span>پاک کردن همه</span>
+                  <span>{t("clearAllFilters")}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
@@ -302,7 +306,7 @@ export const FilterDescription = ({
                   <div
                     key={index}
                     className={`relative flex flex-col rounded-lg border p-4 transition-all duration-300 hover:shadow-md ${getFilterBgClass(
-                      filter.key
+                      filter.key,
                     )}`}
                   >
                     <div className="flex items-center justify-between mb-2">
@@ -315,8 +319,8 @@ export const FilterDescription = ({
                           Object.fromEntries(
                             activeFilters
                               .filter((f) => f.key !== filter.key)
-                              .map((f) => [f.key, String(f.value)])
-                          )
+                              .map((f) => [f.key, String(f.value)]),
+                          ),
                         ).toString()}`}
                         className="text-gray-500 hover:text-red-500 transition-colors"
                       >
@@ -360,25 +364,24 @@ export const FilterDescription = ({
                     />
                   </svg>
                 </div>
-                <p className="text-yellow-700">
-                  هیچ فیلتر فعالی وجود ندارد. از بخش جستجو می‌توانید به دنبال
-                  مقالات مورد نظر خود بگردید.
-                </p>
+                <p className="text-yellow-700">{t("noActiveFilters")}</p>
               </div>
             </div>
           )}
 
           {/* Filter types guide */}
           <h3 className="font-bold text-gray-800 mb-4">
-            انواع فیلتر قابل استفاده
+            {t("availableFiltersTitle")}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-lg border border-blue-100 hover:bg-blue-50 transition-all duration-300">
               {filterIcons.search}
               <div>
-                <h4 className="font-medium text-gray-800">جستجوی متنی</h4>
+                <h4 className="font-medium text-gray-800">
+                  {t("textSearchTitle")}
+                </h4>
                 <p className="text-sm text-gray-600 mt-1">
-                  جستجو در عنوان، خلاصه و محتوای مقالات با کلیدواژه‌های دلخواه
+                  {t("textSearchDescription")}
                 </p>
               </div>
             </div>
@@ -386,9 +389,11 @@ export const FilterDescription = ({
             <div className="flex items-start gap-3 p-4 bg-green-50/50 rounded-lg border border-green-100 hover:bg-green-50 transition-all duration-300">
               {filterIcons.author}
               <div>
-                <h4 className="font-medium text-gray-800">نویسندگان</h4>
+                <h4 className="font-medium text-gray-800">
+                  {t("authorsTitle")}
+                </h4>
                 <p className="text-sm text-gray-600 mt-1">
-                  فیلتر مقالات بر اساس نام نویسنده یا پژوهشگر
+                  {t("authorsDescription")}
                 </p>
               </div>
             </div>
@@ -397,10 +402,10 @@ export const FilterDescription = ({
               {filterIcons.tag}
               <div>
                 <h4 className="font-medium text-gray-800">
-                  برچسب‌ها و کلیدواژه‌ها
+                  {t("tagsKeywordsTitle")}
                 </h4>
                 <p className="text-sm text-gray-600 mt-1">
-                  یافتن مقالات مرتبط با موضوعات و دسته‌بندی‌های خاص
+                  {t("tagsKeywordsDescription")}
                 </p>
               </div>
             </div>
@@ -408,9 +413,11 @@ export const FilterDescription = ({
             <div className="flex items-start gap-3 p-4 bg-amber-50/50 rounded-lg border border-amber-100 hover:bg-amber-50 transition-all duration-300">
               {filterIcons.publication}
               <div>
-                <h4 className="font-medium text-gray-800">مجلات و منابع</h4>
+                <h4 className="font-medium text-gray-800">
+                  {t("journalsSourcesTitle")}
+                </h4>
                 <p className="text-sm text-gray-600 mt-1">
-                  جستجو بر اساس نام مجله، ژورنال یا منبع انتشار مقاله
+                  {t("journalsSourcesDescription")}
                 </p>
               </div>
             </div>
@@ -418,9 +425,11 @@ export const FilterDescription = ({
             <div className="flex items-start gap-3 p-4 bg-cyan-50/50 rounded-lg border border-cyan-100 hover:bg-cyan-50 transition-all duration-300">
               {filterIcons.year}
               <div>
-                <h4 className="font-medium text-gray-800">سال انتشار</h4>
+                <h4 className="font-medium text-gray-800">
+                  {t("publicationYearTitle")}
+                </h4>
                 <p className="text-sm text-gray-600 mt-1">
-                  محدود کردن نتایج بر اساس بازه زمانی انتشار مقالات
+                  {t("publicationYearDescription")}
                 </p>
               </div>
             </div>
@@ -428,9 +437,11 @@ export const FilterDescription = ({
             <div className="flex items-start gap-3 p-4 bg-indigo-50/50 rounded-lg border border-indigo-100 hover:bg-indigo-50 transition-all duration-300">
               {filterIcons.type}
               <div>
-                <h4 className="font-medium text-gray-800">نوع مقاله</h4>
+                <h4 className="font-medium text-gray-800">
+                  {t("articleTypeTitle")}
+                </h4>
                 <p className="text-sm text-gray-600 mt-1">
-                  فیلتر بر اساس نوع مقاله (پژوهشی، مروری، کتاب و غیره)
+                  {t("articleTypeDescription")}
                 </p>
               </div>
             </div>
@@ -453,19 +464,13 @@ export const FilterDescription = ({
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              نکات جستجوی بهتر
+              {t("betterSearchTipsTitle")}
             </h4>
             <ul className="text-sm text-gray-600 space-y-2 mr-5 list-disc">
-              <li>برای جستجوی دقیق‌تر، از ترکیب چند فیلتر استفاده کنید</li>
-              <li>در جستجوی متنی می‌توانید از عبارات دقیق استفاده کنید</li>
-              <li>
-                با کلیک روی نام نویسنده یا برچسب در مقالات، فیلتر مربوطه فعال
-                می‌شود
-              </li>
-              <li>
-                می‌توانید فیلترها را به صورت تکی حذف کنید یا همه را یکجا پاک
-                کنید
-              </li>
+              <li>{t("tip1")}</li>
+              <li>{t("tip2")}</li>
+              <li>{t("tip3")}</li>
+              <li>{t("tip4")}</li>
             </ul>
           </div>
         </div>
