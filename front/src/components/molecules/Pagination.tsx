@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { FC } from "react";
+import { useTranslations } from "next-intl";
 
 interface PaginationProps {
   initialPage: number; // صفحه فعلی
@@ -9,7 +10,12 @@ interface PaginationProps {
   limit?: number; // تعداد آیتم در هر صفحه
 }
 
-const Pagination: FC<PaginationProps> = ({ initialPage, countPage, limit = 20 }) => {
+const Pagination: FC<PaginationProps> = ({
+  initialPage,
+  countPage,
+  limit = 20,
+}) => {
+  const t = useTranslations("Pagination");
   const router = useRouter();
   const searchParams = useSearchParams();
   const totalPages = Math.ceil(countPage / limit);
@@ -64,11 +70,12 @@ const Pagination: FC<PaginationProps> = ({ initialPage, countPage, limit = 20 })
         <button
           onClick={() => handlePageChange(initialPage - 1)}
           disabled={initialPage === 1}
-          aria-label="صفحه قبلی"
-          className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors duration-200 ${initialPage === 1
-            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
+          aria-label={t("previousPage")}
+          className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors duration-200 ${
+            initialPage === 1
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,13 +91,16 @@ const Pagination: FC<PaginationProps> = ({ initialPage, countPage, limit = 20 })
               d="M9 5l7 7-7 7"
             />
           </svg>
-          <span>قبلی</span>
+          <span>{t("previous")}</span>
         </button>
 
         {/* Page numbers */}
         <div className="flex items-center gap-1 mx-2">
           {getPageNumbers().map((pageNumber, index) => {
-            if (pageNumber === "ellipsis-start" || pageNumber === "ellipsis-end") {
+            if (
+              pageNumber === "ellipsis-start" ||
+              pageNumber === "ellipsis-end"
+            ) {
               return (
                 <span
                   key={`${pageNumber}-${index}`}
@@ -106,12 +116,13 @@ const Pagination: FC<PaginationProps> = ({ initialPage, countPage, limit = 20 })
               <button
                 key={pageNumber}
                 onClick={() => handlePageChange(pageNumber as number)}
-                aria-label={`صفحه ${pageNumber}`}
+                aria-label={`${t("page")} ${pageNumber}`}
                 aria-current={pageNumber === initialPage ? "page" : undefined}
-                className={`w-9 h-9 flex items-center justify-center rounded-lg transition-colors duration-200 ${pageNumber === initialPage
-                  ? "bg-blue-600 text-white font-bold"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
+                className={`w-9 h-9 flex items-center justify-center rounded-lg transition-colors duration-200 ${
+                  pageNumber === initialPage
+                    ? "bg-blue-600 text-white font-bold"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
               >
                 {pageNumber}
               </button>
@@ -123,13 +134,14 @@ const Pagination: FC<PaginationProps> = ({ initialPage, countPage, limit = 20 })
         <button
           onClick={() => handlePageChange(initialPage + 1)}
           disabled={initialPage === totalPages}
-          aria-label="صفحه بعدی"
-          className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors duration-200 ${initialPage === totalPages
-            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
+          aria-label={t("nextPage")}
+          className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors duration-200 ${
+            initialPage === totalPages
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          }`}
         >
-          <span>بعدی</span>
+          <span>{t("next")}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
