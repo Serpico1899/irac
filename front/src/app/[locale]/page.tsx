@@ -247,21 +247,21 @@ export default function HomePage({
   };
 
   return (
-    <div className="bg-[#F5F7FA]" dir={locale === "fa" ? "rtl" : "ltr"}>
+    <div className="bg-background-light" dir={locale === "fa" ? "rtl" : "ltr"}>
       {/* Hero Section */}
       <section
-        className="bg-[#168c95] relative overflow-hidden min-h-[300px] md:min-h-[400px] max-w-7xl mx-8 xl:mx-auto rounded-[25px] md:rounded-[110px] flex items-center justify-center px-6"
+        className="bg-primary relative overflow-hidden min-h-[300px] md:min-h-[400px] max-w-7xl mx-8 xl:mx-auto rounded-[25px] md:rounded-[110px] flex items-center justify-center px-6"
         dir="rtl"
       >
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl">
           {/* Text and Search */}
           <div className="text-center md:text-right">
-            {/* IRAC Intro Text */}
-            <p className="text-white text-xl font-bold mb-6">
+            {/* Main Heading */}
+            <h1 className="text-white text-2xl md:text-3xl font-bold mb-6">
               {locale === "fa"
                 ? "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
                 : "The premier center for the study and preservation of Islamic architectural heritage."}
-            </p>
+            </h1>
 
             {/* Search Bar */}
             <div className="relative">
@@ -298,13 +298,14 @@ export default function HomePage({
               src="/images/Layer-337.png"
               alt="Islamic Architecture"
               className="w-full h-60 object-cover rounded-2xl shadow-lg"
+              loading="lazy"
             />
           </div>
         </div>
       </section>
 
       {/* Featured Courses Carousel Section */}
-      <section className="py-16 bg-[whitesmoke]">
+      <section className="py-16 bg-background-light">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800">
@@ -355,7 +356,7 @@ export default function HomePage({
               </div>
               <Link
                 href={`/${locale}/courses`}
-                className="bg-[#168c95] text-white px-6 py-2 rounded-lg hover:bg-[#0f7882] transition-colors font-medium"
+                className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
               >
                 {locale === "fa" ? "مشاهده همه" : "View All"}
               </Link>
@@ -390,10 +391,10 @@ export default function HomePage({
       </section>
 
       {/* Latest Articles Carousel Section */}
-      <section className="py-16 bg-[#168c95]">
+      <section className="py-16 bg-primary">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-[whitesmoke]">
+            <h2 className="text-3xl font-bold text-white">
               {locale === "fa" ? "آخرین مقالات" : "Latest Articles"}
             </h2>
             <div className="flex items-center gap-4">
@@ -441,7 +442,7 @@ export default function HomePage({
               </div>
               <Link
                 href={`/${locale}/articles`}
-                className="bg-[whitesmoke] text-[#168c95] px-6 py-2 rounded-lg hover:bg-white transition-colors font-medium"
+                className="px-6 py-2 bg-background-light text-primary rounded-lg hover:bg-background transition-colors font-medium"
               >
                 {locale === "fa" ? "مشاهده همه" : "View All"}
               </Link>
@@ -526,7 +527,7 @@ export default function HomePage({
               </div>
               <Link
                 href={`/${locale}/shop`}
-                className="bg-[#168c95] text-white px-6 py-2 rounded-lg hover:bg-[#0f7882] transition-colors font-medium"
+                className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
               >
                 {locale === "fa" ? "مشاهده همه" : "View All"}
               </Link>
