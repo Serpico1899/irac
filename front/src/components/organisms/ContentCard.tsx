@@ -54,7 +54,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
       <Link href={href} className="group">
         <div className="text-center">
           <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-3 hover:scale-105 transition-transform cursor-pointer shadow-lg">
-            <div className="w-16 h-16 bg-[#168c95] rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
               <span className="text-white text-2xl">🏛️</span>
             </div>
           </div>
@@ -79,6 +79,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
               alt={title}
               fill
               className="object-cover"
+              loading="lazy"
               onError={() => setImageError(true)}
             />
           )}
@@ -103,6 +104,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
               alt={title}
               fill
               className="object-cover"
+              loading="lazy"
               onError={() => setImageError(true)}
             />
           )}
@@ -128,6 +130,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
                 alt={title}
                 fill
                 className="aspect-video h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
                 onError={() => setImageError(true)}
               />
             ) : (
@@ -145,7 +148,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
           </div>
 
           <div className="p-6 bg-gray-800 text-white flex-1 flex flex-col h-28">
-            <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-[#168c95] transition-colors flex-1">
+            <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-primary transition-colors flex-1">
               {title}
             </h3>
 
@@ -209,6 +212,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
               alt={title}
               fill
               className="aspect-video h-48 object-cover"
+              loading="lazy"
               onError={() => setImageError(true)}
             />
           ) : (
@@ -234,7 +238,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
 
         {/* Fixed height text container */}
         <div className="p-6 flex flex-col">
-          <h3 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-300 leading-tight group-hover:text-[#168c95] flex-1">
+          <h3 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-300 leading-tight group-hover:text-primary flex-1">
             {title}
           </h3>
 
@@ -318,7 +322,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
                     {formatPrice(originalPrice, locale)}
                   </span>
                 )}
-                <span className="text-lg font-bold text-[#168c95]">
+                <span className="text-lg font-bold text-primary">
                   {formatPrice(price, locale)}
                 </span>
               </div>
