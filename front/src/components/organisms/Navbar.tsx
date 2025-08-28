@@ -2,6 +2,7 @@
 
 import { Fragment, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation"; // Corrected import
 import { getAlternateLocaleUrl, getLocaleFromPathname } from "@/lib/navigation";
 
@@ -53,11 +54,11 @@ export const Navbar = () => {
                 <Link href="/" className="flex items-center">
                   <div className="w-12 h-12 bg-white md:bg-white rounded-lg flex items-center justify-center shadow-sm">
                     {/* IRAC Logo */}
-                    <img
+                    <Image
                       src="/images/Asset-1@20x-2-qotodtmpgaloexs25oampoe4trtwtus7grml1i9od0.png"
                       alt="IRAC Logo"
-                      width="32"
-                      height="32"
+                      width={32}
+                      height={32}
                       className="object-contain"
                     />
                   </div>
@@ -87,9 +88,11 @@ export const Navbar = () => {
                   className="p-3 text-text-light hover:text-text hover:bg-background-light rounded-lg transition-colors max-lg:hidden"
                   aria-label="تغییر زبان"
                 >
-                  <img
+                  <Image
                     src="/icons/language.svg"
                     alt="Language"
+                    width={24}
+                    height={24}
                     className="w-6 h-6"
                   />
                 </Link>
@@ -104,9 +107,11 @@ export const Navbar = () => {
                   `}
                     aria-label="سبد خرید"
                   >
-                    <img
+                    <Image
                       src="/icons/shopping-cart.svg"
                       alt="Shopping Cart"
+                      width={24}
+                      height={24}
                       className="w-6 h-6"
                     />
                     {/* Cart badge */}
@@ -258,10 +263,12 @@ export const Navbar = () => {
                   `}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <img
+                    <Image
                       src="/icons/language.svg"
                       alt="Language"
-                      className="w-5 h-5"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6"
                     />
                     {alternateLocaleLabel} - تغییر زبان
                   </Link>
