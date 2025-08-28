@@ -10,7 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        vazir: ["vazir-matn", "sans-serif"],
+        sans: ["Vazirmatn", "Inter", "sans-serif"],
+        vazir: ["Vazirmatn", "sans-serif"],
       },
       colors: {
         primary: {
