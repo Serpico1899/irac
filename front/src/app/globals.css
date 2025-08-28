@@ -1,6 +1,24 @@
+@config "../../tailwind.config.ts";
 @import "tailwindcss";
-
 @tailwind utilities;
+
+/* Global UX Enhancements */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Search Input Focus - The key issue you mentioned */
+.search-input:focus-visible {
+    outline: 2px solid #cea87a;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
 
 /* Hide scrollbar for carousel components */
 .scrollbar-hide {
@@ -11,7 +29,30 @@
     display: none;
 }
 
-/* Vazirmatn font definitions */
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+/* Vazirmatn Font Definitions */
 @font-face {
     font-family: "Vazirmatn";
     src: url("/fonts/ttf/Vazirmatn-Thin.ttf");
@@ -82,4 +123,33 @@
     font-weight: 900;
     font-style: normal;
     font-display: swap;
+}
+
+/* Persian Text Direction Support */
+.dir-rtl {
+    direction: rtl;
+}
+
+/* Loader Animation (for existing spinners) */
+.loader {
+    width: 28px;
+    height: 28px;
+    border: 4px solid #ccc;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Dark mode support for loader */
+@media (prefers-color-scheme: dark) {
+    .loader {
+        border-color: #555;
+        border-top-color: #60a5fa;
+    }
 }
