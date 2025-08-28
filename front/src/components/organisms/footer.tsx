@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { getLocaleFromPathname } from "@/lib/navigation";
 
@@ -23,8 +24,8 @@ interface FooterTranslations {
 }
 
 // Import translations
-const enTranslations: FooterTranslations = require("@/i18n/en.json");
-const faTranslations: FooterTranslations = require("@/i18n/fa.json");
+import enTranslations from "@/i18n/en.json";
+import faTranslations from "@/i18n/fa.json";
 
 const Footer = () => {
   const pathname = usePathname();
@@ -47,11 +48,11 @@ const Footer = () => {
             <div className="mb-8">
               <Link href="/" className="inline-flex items-center ">
                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                  <img
+                  <Image
                     src="/images/Asset-1@20x-2-qotodtmpgaloexs25oampoe4trtwtus7grml1i9od0.png"
                     alt="IRAC Logo"
-                    width="40"
-                    height="40"
+                    width={40}
+                    height={40}
                     className="object-contain"
                   />
                 </div>
@@ -261,25 +262,27 @@ const Footer = () => {
             <div className="flex flex-col gap-2.5 space-y-4 max-[534px]:flex-row max-[534px]:gap-5 max-[534px]:flex-wrap ">
               {/* IRAC Logo License */}
               <Link href="/">
-                <img
-                  src="https://irac.ir/wp-content/uploads/2024/02/logo.png"
+                <Image
+                  src="/images/logo.png"
                   alt={locale === "fa" ? "مجوز ایراک" : "IRAC License"}
+                  width={48}
+                  height={48}
                   className="w-12 h-12 object-contain"
-                  loading="lazy"
                 />
               </Link>
 
               {/* Samandehi License */}
               <Link href="/">
-                <img
-                  src="https://irac.ir/wp-content/uploads/2024/02/samandehi-logo.webp"
+                <Image
+                  src="/images/samandehi-logo.webp"
                   alt={
                     locale === "fa"
                       ? "نماد اعتماد الکترونیکی"
                       : "Electronic Trust Symbol"
                   }
+                  width={48}
+                  height={48}
                   className="w-12 h-12 object-contain"
-                  loading="lazy"
                 />
               </Link>
             </div>
@@ -321,7 +324,7 @@ const Footer = () => {
           <div className="flex justify-center mt-8">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="bg-primary hover:bg-accent-bronze max-md:bg-accent-bronze max-md:hover:bg-primary text-white p-3 rounded-full transition-colors duration-200 shadow-lg"
+              className="bg-primary hover:bg-accent max-md:bg-accent max-md:hover:bg-primary text-white p-3 rounded-full transition-colors duration-200 shadow-lg"
               aria-label={locale === "fa" ? "بازگشت به بالا" : "Back to top"}
             >
               <svg
