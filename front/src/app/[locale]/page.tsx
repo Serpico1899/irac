@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import ContentCard from "@/components/organisms/ContentCard";
 import { useRef, use } from "react";
 
@@ -294,11 +295,12 @@ export default function HomePage({
 
           {/* Architectural Photo - Hidden under 1024px */}
           <div className="hidden lg:flex">
-            <img
+            <Image
               src="/images/Layer-337.png"
               alt="Islamic Architecture"
+              width={800}
+              height={240}
               className="w-full h-60 object-cover rounded-2xl shadow-lg"
-              loading="lazy"
             />
           </div>
         </div>
