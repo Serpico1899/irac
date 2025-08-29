@@ -34,7 +34,7 @@ const Login = ({}) => {
   return (
     <div className="w-full min-h-[calc(100vh-9rem)] p-6 bg-gray-300">
       <div className="h-[calc(100vh-9rem)] bg-gray-100 flex items-center justify-center">
-        <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
+        <div className="bg-background p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
           <h1 className="text-xl sm:text-2xl font-bold mb-4 text-center text-gray-700">
             {step === 1 ? t("stepOneTitle") : t("stepTwoTitle")}
           </h1>
