@@ -53,12 +53,12 @@ const ContentCard: React.FC<ContentCardProps> = ({
     return (
       <Link href={href} className="group">
         <div className="text-center">
-          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-3 hover:scale-105 transition-transform cursor-pointer shadow-lg">
+          <div className="w-24 h-24 bg-background rounded-full flex items-center justify-center mb-3 hover:scale-105 transition-transform cursor-pointer shadow-lg">
             <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-white text-2xl">🏛️</span>
+              <span className="text-background text-2xl">🏛️</span>
             </div>
           </div>
-          <p className="text-sm font-medium text-white">
+          <p className="text-sm font-medium text-background">
             {title.split(" ").slice(0, 2).join(" ")}
             <br />
             {title.split(" ").slice(2).join(" ")}
@@ -84,7 +84,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-          <div className="absolute bottom-6 right-6 text-white z-10">
+          <div className="absolute bottom-6 right-6 text-background z-10">
             <h3 className="text-xl font-bold mb-2 line-clamp-2">{title}</h3>
             {date && <p className="text-sm text-gray-300">{date}</p>}
           </div>
@@ -109,7 +109,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <div className="absolute bottom-4 right-4 text-white z-10">
+          <div className="absolute bottom-4 right-4 text-background z-10">
             <h4 className="font-bold text-sm line-clamp-2">{title}</h4>
             {date && <p className="text-xs text-gray-300 mt-1">{date}</p>}
           </div>
@@ -122,7 +122,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   if (variant === "course-dark") {
     return (
       <Link href={href} className="group">
-        <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full flex flex-col">
+        <div className="bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow h-full flex flex-col">
           <div className="aspect-video h-48 bg-gradient-to-br from-gray-400 to-gray-600 relative overflow-hidden flex-shrink-0">
             {imageUrl && !imageError ? (
               <Image
@@ -135,19 +135,21 @@ const ContentCard: React.FC<ContentCardProps> = ({
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
-                <span className="text-4xl text-white">🏛️</span>
+                <span className="text-4xl text-background">🏛️</span>
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
             {level && (
-              <div className="absolute top-4 right-4 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-3 py-1">
-                <span className="text-white text-sm font-medium">{level}</span>
+              <div className="absolute top-4 right-4 bg-background bg-opacity-20 backdrop-blur-sm rounded-lg px-3 py-1">
+                <span className="text-background text-sm font-medium">
+                  {level}
+                </span>
               </div>
             )}
           </div>
 
-          <div className="p-6 bg-gray-800 text-white flex-1 flex flex-col h-28">
+          <div className="p-6 bg-gray-800 text-background flex-1 flex flex-col h-28">
             <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-primary transition-colors flex-1">
               {title}
             </h3>
@@ -189,7 +191,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
                     {formatPrice(originalPrice, locale)}
                   </span>
                 )}
-                <div className="text-xl font-bold text-white">
+                <div className="text-xl font-bold text-background">
                   {formatPrice(price, locale)}
                 </div>
               </div>
@@ -203,7 +205,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   // Default light variant with fixed sizes
   return (
     <Link href={href} className="group">
-      <article className="bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl h-full border border-gray-100 flex flex-col">
+      <article className="bg-background rounded-2xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl h-full border border-background-secondary flex flex-col">
         {/* Fixed aspect ratio image */}
         <div className="relative aspect-video h-48 w-full overflow-hidden flex-shrink-0">
           {imageUrl && !imageError ? (
@@ -216,10 +218,10 @@ const ContentCard: React.FC<ContentCardProps> = ({
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-50">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center bg-gray-200">
+            <div className="w-full h-full flex items-center justify-center bg-background-secondary">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center bg-text-lightest">
                 <svg
-                  className="w-10 h-10 text-gray-500"
+                  className="w-10 h-10 text-text-secondary "
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -238,12 +240,12 @@ const ContentCard: React.FC<ContentCardProps> = ({
 
         {/* Fixed height text container */}
         <div className="p-6 flex flex-col">
-          <h3 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-300 leading-tight group-hover:text-primary flex-1">
+          <h3 className="text-xl font-bold text-text mb-3 line-clamp-2 transition-colors duration-300 leading-tight group-hover:text-primary flex-1">
             {title}
           </h3>
 
           {(author || date) && (
-            <div className="flex items-center gap-4 mb-3 text-sm text-gray-500 mt-auto">
+            <div className="flex items-center gap-4 mb-3 text-sm text-text-light mt-auto">
               {author && (
                 <div className="flex items-center gap-2">
                   <svg
@@ -275,7 +277,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
         {/* Description with line clamp */}
         {description && (
           <div className="px-6 pb-4">
-            <p className="text-base line-clamp-2 leading-relaxed text-gray-600">
+            <p className="text-base line-clamp-2 leading-relaxed text-text-secondary">
               {description}
             </p>
           </div>
@@ -291,7 +293,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
                     {[1, 2, 3, 4, 5].map((star) => (
                       <svg
                         key={star}
-                        className={`w-4 h-4 ${star <= rating ? "text-yellow-400" : "text-gray-300"}`}
+                        className={`w-4 h-4 ${star <= rating ? "text-accent-primary" : "text-text-lightest"}`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -299,11 +301,13 @@ const ContentCard: React.FC<ContentCardProps> = ({
                       </svg>
                     ))}
                   </div>
-                  <span className="text-sm text-gray-600">({rating})</span>
+                  <span className="text-sm text-text-secondary">
+                    ({rating})
+                  </span>
                 </div>
               )}
               {reviews > 0 && (
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-text-secondary">
                   {formatNumber(reviews.toString(), locale)}{" "}
                   {locale === "fa" ? "دیدگاه" : "reviews"}
                 </span>
@@ -318,7 +322,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {originalPrice && (
-                  <span className="text-sm text-gray-400 line-through">
+                  <span className="text-sm text-text-lighter line-through">
                     {formatPrice(originalPrice, locale)}
                   </span>
                 )}
