@@ -404,11 +404,11 @@ export default function HomePage({
             </h2>
             <div className="flex items-center gap-4">
               <div
-                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-background-secondary rounded-full p-1`}
+                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-background rounded-full p-1`}
               >
                 <button
                   onClick={() => handleScroll(articlesCarouselRef, "left")}
-                  className="p-2 rounded-full hover:bg-background transition-colors"
+                  className="p-2 rounded-full hover:bg-background-darkest transition-colors"
                   aria-label="Previous"
                 >
                   <svg
@@ -427,7 +427,7 @@ export default function HomePage({
                 </button>
                 <button
                   onClick={() => handleScroll(articlesCarouselRef, "right")}
-                  className="p-2 rounded-full hover:bg-background transition-colors"
+                  className="p-2 rounded-full hover:bg-background-darkest transition-colors"
                   aria-label="Next"
                 >
                   <svg
@@ -447,7 +447,7 @@ export default function HomePage({
               </div>
               <Link
                 href={`/${locale}/articles`}
-                className="px-6 py-2 bg-background-primary text-primary rounded-lg hover:bg-background transition-colors font-medium"
+                className="px-6 py-2 bg-background text-primary rounded-lg hover:bg-background-secondary transition-colors font-medium"
               >
                 {locale === "fa" ? "مشاهده همه" : "View All"}
               </Link>
