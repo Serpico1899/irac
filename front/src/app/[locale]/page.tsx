@@ -248,7 +248,10 @@ export default function HomePage({
   };
 
   return (
-    <div className="bg-background-light" dir={locale === "fa" ? "rtl" : "ltr"}>
+    <div
+      className="bg-background-primary"
+      dir={locale === "fa" ? "rtl" : "ltr"}
+    >
       {/* Hero Section */}
       <section
         className="bg-primary relative overflow-hidden min-h-[300px] md:min-h-[400px] max-w-7xl mx-8 xl:mx-auto rounded-[25px] md:rounded-[110px] flex items-center justify-center px-6"
@@ -258,7 +261,7 @@ export default function HomePage({
           {/* Text and Search */}
           <div className="text-center md:text-right">
             {/* Main Heading */}
-            <h1 className="text-white text-2xl md:text-3xl font-bold mb-6">
+            <h1 className="text-background text-2xl md:text-3xl font-bold mb-6">
               {locale === "fa"
                 ? "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
                 : "The premier center for the study and preservation of Islamic architectural heritage."}
@@ -273,11 +276,11 @@ export default function HomePage({
                     ? "جستجوی دوره‌ها، مقالات و محصولات"
                     : "Search courses, articles and products"
                 }
-                className="search-input w-full px-8 py-4 pr-16 bg-white rounded-2xl text-gray-800 placeholder-gray-500 border-none shadow-lg text-right text-lg"
+                className="search-input w-full px-8 py-4 pr-16 bg-background rounded-2xl text-text placeholder-text-light border-none shadow-lg text-right text-lg"
               />
               <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
                 <svg
-                  className="w-7 h-7 text-gray-400"
+                  className="w-7 h-7 text-text-lighter"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -307,19 +310,19 @@ export default function HomePage({
       </section>
 
       {/* Featured Courses Carousel Section */}
-      <section className="py-16 bg-background-light">
+      <section className="py-16 bg-background-primary">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800">
+            <h2 className="text-3xl font-bold text-text-primary">
               {locale === "fa" ? "دوره‌های ویژه" : "Featured Courses"}
             </h2>
             <div className="flex items-center gap-4">
               <div
-                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-gray-100 rounded-full p-1`}
+                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-background-darkest rounded-full p-1`}
               >
                 <button
                   onClick={() => handleScroll(coursesCarouselRef, "left")}
-                  className="p-2 rounded-full hover:bg-white transition-colors"
+                  className="p-2 rounded-full hover:bg-background transition-colors"
                   aria-label="Previous"
                 >
                   <svg
@@ -338,7 +341,7 @@ export default function HomePage({
                 </button>
                 <button
                   onClick={() => handleScroll(coursesCarouselRef, "right")}
-                  className="p-2 rounded-full hover:bg-white transition-colors"
+                  className="p-2 rounded-full hover:bg-background transition-colors"
                   aria-label="Next"
                 >
                   <svg
@@ -358,7 +361,7 @@ export default function HomePage({
               </div>
               <Link
                 href={`/${locale}/courses`}
-                className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
+                className="bg-primary text-background px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
               >
                 {locale === "fa" ? "مشاهده همه" : "View All"}
               </Link>
@@ -396,16 +399,16 @@ export default function HomePage({
       <section className="py-16 bg-primary">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-white">
+            <h2 className="text-3xl font-bold text-background">
               {locale === "fa" ? "آخرین مقالات" : "Latest Articles"}
             </h2>
             <div className="flex items-center gap-4">
               <div
-                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-gray-100 rounded-full p-1`}
+                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-background-secondary rounded-full p-1`}
               >
                 <button
                   onClick={() => handleScroll(articlesCarouselRef, "left")}
-                  className="p-2 rounded-full hover:bg-white transition-colors"
+                  className="p-2 rounded-full hover:bg-background transition-colors"
                   aria-label="Previous"
                 >
                   <svg
@@ -424,7 +427,7 @@ export default function HomePage({
                 </button>
                 <button
                   onClick={() => handleScroll(articlesCarouselRef, "right")}
-                  className="p-2 rounded-full hover:bg-white transition-colors"
+                  className="p-2 rounded-full hover:bg-background transition-colors"
                   aria-label="Next"
                 >
                   <svg
@@ -444,7 +447,7 @@ export default function HomePage({
               </div>
               <Link
                 href={`/${locale}/articles`}
-                className="px-6 py-2 bg-background-light text-primary rounded-lg hover:bg-background transition-colors font-medium"
+                className="px-6 py-2 bg-background-primary text-primary rounded-lg hover:bg-background transition-colors font-medium"
               >
                 {locale === "fa" ? "مشاهده همه" : "View All"}
               </Link>
@@ -478,19 +481,19 @@ export default function HomePage({
       </section>
 
       {/* Latest Products Carousel Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800">
+            <h2 className="text-3xl font-bold text-text-primary">
               {locale === "fa" ? "آخرین محصولات" : "Latest Products"}
             </h2>
             <div className="flex items-center gap-4">
               <div
-                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-gray-100 rounded-full p-1`}
+                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-background-secondary rounded-full p-1`}
               >
                 <button
                   onClick={() => handleScroll(productsCarouselRef, "left")}
-                  className="p-2 rounded-full hover:bg-white transition-colors"
+                  className="p-2 rounded-full hover:bg-background transition-colors"
                   aria-label="Previous"
                 >
                   <svg
@@ -509,7 +512,7 @@ export default function HomePage({
                 </button>
                 <button
                   onClick={() => handleScroll(productsCarouselRef, "right")}
-                  className="p-2 rounded-full hover:bg-white transition-colors"
+                  className="p-2 rounded-full hover:bg-background transition-colors"
                   aria-label="Next"
                 >
                   <svg
@@ -529,7 +532,7 @@ export default function HomePage({
               </div>
               <Link
                 href={`/${locale}/shop`}
-                className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
+                className="bg-primary text-background px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
               >
                 {locale === "fa" ? "مشاهده همه" : "View All"}
               </Link>
