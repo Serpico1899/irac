@@ -21,7 +21,7 @@ const LoginStepOne = ({ setStep, setPhone, phone }: TProps) => {
   return (
     <form
       onSubmit={handlePhoneSubmit}
-      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
+      className="max-w-md mx-auto bg-background p-6 rounded-lg shadow-md space-y-4"
     >
       <div className="mb-4">
         <label
@@ -41,7 +41,7 @@ const LoginStepOne = ({ setStep, setPhone, phone }: TProps) => {
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        className="w-full bg-blue-500 text-background py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
         ادامه
       </button>

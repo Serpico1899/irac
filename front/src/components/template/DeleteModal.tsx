@@ -30,7 +30,7 @@ export const DeleteModal: FC<IProps> = ({
       }`}
     >
       <div
-        className={`bg-white rounded-lg shadow-lg max-w-sm w-full p-6 text-center transform transition-transform duration-300 ${
+        className={`bg-background rounded-lg shadow-lg max-w-sm w-full p-6 text-center transform transition-transform duration-300 ${
           isVisible ? "scale-100" : "scale-90"
         }`}
       >
@@ -45,8 +45,8 @@ export const DeleteModal: FC<IProps> = ({
               onClick={() => onHardCascadeChange(true)}
               className={`px-2 py-1 text-xs border border-gray-900 rounded-lg text-black transition-all duration-300 ${
                 !isHardCascade
-                  ? "bg-white"
-                  : "bg-red-500 border-none text-white hover:bg-red-600"
+                  ? "bg-background"
+                  : "bg-red-500 border-none text-background hover:bg-red-600"
               }`}
             >
               بله
@@ -55,8 +55,8 @@ export const DeleteModal: FC<IProps> = ({
               onClick={() => onHardCascadeChange(false)}
               className={`px-2 py-1 text-xs border border-gray-900 rounded-lg text-black transition-all duration-300 ${
                 isHardCascade
-                  ? "bg-white"
-                  : "bg-red-500 border-none text-white hover:bg-red-600"
+                  ? "bg-background"
+                  : "bg-red-500 border-none text-background hover:bg-red-600"
               }`}
             >
               خیر
@@ -74,13 +74,13 @@ export const DeleteModal: FC<IProps> = ({
         <div className="flex justify-end gap-4">
           <button
             onClick={onCancel}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-all duration-300"
+            className="bg-red-500 text-background px-4 py-2 rounded-lg hover:bg-red-600 transition-all duration-300"
           >
             لغو
           </button>
           <button
             onClick={onConfirm}
-            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-all duration-300"
+            className="bg-green-500 text-background px-4 py-2 rounded-lg hover:bg-green-600 transition-all duration-300"
           >
             تایید
           </button>

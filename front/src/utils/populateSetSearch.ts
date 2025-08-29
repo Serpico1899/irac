@@ -1,10 +1,8 @@
 import { ReqType } from "@/types/declarations/selectInp";
 
-export type GetAccidentsSetParams =
-  ReqType["main"]["accident"]["gets"]["set"];
+export type GetAccidentsSetParams = ReqType["main"]["accident"]["gets"]["set"];
 
 export const populateSetSearch = (searchParams: GetAccidentsSetParams) => {
-
   const {
     limit = "20",
     page = "1",
@@ -92,15 +90,20 @@ export const populateSetSearch = (searchParams: GetAccidentsSetParams) => {
   } = searchParams;
 
   // Helper to process potential string array inputs from searchParams
-  const parseStringArray = (input: string | string[] | undefined): string[] | undefined => {
+  const parseStringArray = (
+    input: string | string[] | undefined,
+  ): string[] | undefined => {
     if (input === undefined || input === null) return undefined;
     let arr: string[];
-    if (typeof input === 'string') {
-      // Split comma-separated string, trim whitespace, and filter out empty strings
-      arr = input.split(',').map(s => s.trim()).filter(s => s.length > 0);
+    if (typeof input === "string") {
+      // Split comma-separated string, trim backgroundspace, and filter out empty strings
+      arr = input
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0);
     } else if (Array.isArray(input)) {
       // Ensure all elements are strings, trim, and filter out empty strings
-      arr = input.map(s => String(s).trim()).filter(s => s.length > 0);
+      arr = input.map((s) => String(s).trim()).filter((s) => s.length > 0);
     } else {
       return undefined; // Should not happen if searchParams are string | string[]
     }
@@ -109,7 +112,7 @@ export const populateSetSearch = (searchParams: GetAccidentsSetParams) => {
 
   const set: ReqType["main"]["accident"]["gets"]["set"] = {
     limit: +limit || 20, // Convert limit string to number, default to 20
-    page: +page || 1,    // Convert page string to number, default to 1
+    page: +page || 1, // Convert page string to number, default to 1
 
     // Conditionally add numeric fields (convert from string)
     ...(seri && { seri: +seri }),
@@ -121,9 +124,15 @@ export const populateSetSearch = (searchParams: GetAccidentsSetParams) => {
     ...(injuredCountMin && { injuredCountMin: +injuredCountMin }),
     ...(injuredCountMax && { injuredCountMax: +injuredCountMax }),
     ...(newsNumber && { newsNumber: +newsNumber }),
-    ...(vehicleInsuranceWarrantyLimit && { vehicleInsuranceWarrantyLimit: +vehicleInsuranceWarrantyLimit }),
-    ...(vehicleInsuranceWarrantyLimitMin && { vehicleInsuranceWarrantyLimitMin: +vehicleInsuranceWarrantyLimitMin }),
-    ...(vehicleInsuranceWarrantyLimitMax && { vehicleInsuranceWarrantyLimitMax: +vehicleInsuranceWarrantyLimitMax }),
+    ...(vehicleInsuranceWarrantyLimit && {
+      vehicleInsuranceWarrantyLimit: +vehicleInsuranceWarrantyLimit,
+    }),
+    ...(vehicleInsuranceWarrantyLimitMin && {
+      vehicleInsuranceWarrantyLimitMin: +vehicleInsuranceWarrantyLimitMin,
+    }),
+    ...(vehicleInsuranceWarrantyLimitMax && {
+      vehicleInsuranceWarrantyLimitMax: +vehicleInsuranceWarrantyLimitMax,
+    }),
 
     // Conditionally add string fields (no conversion needed if already string)
     ...(dateOfAccidentFrom && { dateOfAccidentFrom }),
@@ -189,15 +198,35 @@ export const populateSetSearch = (searchParams: GetAccidentsSetParams) => {
     ...(pedestrianTotalReason && { pedestrianTotalReason }),
 
     // Conditionally add string array fields (parse if necessary)
-    ...(parseStringArray(areaUsages) && { areaUsages: parseStringArray(areaUsages) as string[] }),
-    ...(parseStringArray(airStatuses) && { airStatuses: parseStringArray(airStatuses) as string[] }),
-    ...(parseStringArray(roadDefects) && { roadDefects: parseStringArray(roadDefects) as string[] }),
-    ...(parseStringArray(humanReasons) && { humanReasons: parseStringArray(humanReasons) as string[] }),
-    ...(parseStringArray(vehicleReasons) && { vehicleReasons: parseStringArray(vehicleReasons) as string[] }),
-    ...(parseStringArray(equipmentDamages) && { equipmentDamages: parseStringArray(equipmentDamages) as string[] }),
-    ...(parseStringArray(roadSurfaceConditions) && { roadSurfaceConditions: parseStringArray(roadSurfaceConditions) as string[] }),
-    ...(parseStringArray(vehicleMaxDamageSections) && { vehicleMaxDamageSections: parseStringArray(vehicleMaxDamageSections) as string[] }),
+    ...(parseStringArray(areaUsages) && {
+      areaUsages: parseStringArray(areaUsages) as string[],
+    }),
+    ...(parseStringArray(airStatuses) && {
+      airStatuses: parseStringArray(airStatuses) as string[],
+    }),
+    ...(parseStringArray(roadDefects) && {
+      roadDefects: parseStringArray(roadDefects) as string[],
+    }),
+    ...(parseStringArray(humanReasons) && {
+      humanReasons: parseStringArray(humanReasons) as string[],
+    }),
+    ...(parseStringArray(vehicleReasons) && {
+      vehicleReasons: parseStringArray(vehicleReasons) as string[],
+    }),
+    ...(parseStringArray(equipmentDamages) && {
+      equipmentDamages: parseStringArray(equipmentDamages) as string[],
+    }),
+    ...(parseStringArray(roadSurfaceConditions) && {
+      roadSurfaceConditions: parseStringArray(
+        roadSurfaceConditions,
+      ) as string[],
+    }),
+    ...(parseStringArray(vehicleMaxDamageSections) && {
+      vehicleMaxDamageSections: parseStringArray(
+        vehicleMaxDamageSections,
+      ) as string[],
+    }),
   };
 
   return set;
-}
+};

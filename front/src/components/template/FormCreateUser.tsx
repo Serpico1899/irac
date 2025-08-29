@@ -218,7 +218,7 @@ export const FormCreateUser = ({ token }: { token?: string }) => {
           <button
             type="submit"
             disabled={isSubmitting || !isValid}
-            className="p-4 px-8 bg-blue-600 text-white text-center font-semibold rounded-lg hover:bg-blue-700 disabled:bg-blue-300"
+            className="p-4 px-8 bg-blue-600 text-background text-center font-semibold rounded-lg hover:bg-blue-700 disabled:bg-blue-300"
           >
             {isSubmitting ? "در حال ارسال..." : "ارسال"}
           </button>

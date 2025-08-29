@@ -22,7 +22,7 @@ const MyDateInput = <T extends FieldValues = FieldValues>({
   placeholder,
   control,
   disabled = false,
-  customShowDateFormat = "YYYY/MM/DD"
+  customShowDateFormat = "YYYY/MM/DD",
 }: DateInputProps<T>) => {
   return (
     <div className={`flex flex-col gap-2 ${className || ""}`}>
@@ -42,7 +42,7 @@ const MyDateInput = <T extends FieldValues = FieldValues>({
             onChange={(e) => {
               if (e && e.value) {
                 // Convert to ISO string for consistent storage
-                onChange(new Date(e.value).toISOString().split('T')[0]);
+                onChange(new Date(e.value).toISOString().split("T")[0]);
               } else {
                 onChange(null);
               }
@@ -50,24 +50,26 @@ const MyDateInput = <T extends FieldValues = FieldValues>({
             customShowDateFormat={customShowDateFormat}
             className="z-999"
             inputClass={`
-              w-full px-4 py-3 text-slate-800 bg-white border rounded-xl
+              w-full px-4 py-3 text-slate-800 bg-background border rounded-xl
               placeholder:text-slate-400 text-right
               transition-all duration-200 ease-in-out
               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 focus:border-blue-500
               hover:border-slate-400 z-999
-              ${disabled
-                ? "bg-slate-100 cursor-not-allowed opacity-60"
-                : "hover:bg-slate-50/50"
+              ${
+                disabled
+                  ? "bg-slate-100 cursor-not-allowed opacity-60"
+                  : "hover:bg-slate-50/50"
               }
-              ${errMsg
-                ? "border-red-300 bg-red-50/30 focus:ring-red-500 focus:border-red-500"
-                : "border-slate-300"
+              ${
+                errMsg
+                  ? "border-red-300 bg-red-50/30 focus:ring-red-500 focus:border-red-500"
+                  : "border-slate-300"
               }
             `}
             inputAttributes={{
               placeholder: placeholder || label,
               disabled: disabled,
-              readOnly: disabled
+              readOnly: disabled,
             }}
             round="x2"
             accentColor="#3b82f6"

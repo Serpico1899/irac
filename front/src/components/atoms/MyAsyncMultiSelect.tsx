@@ -63,7 +63,7 @@ const MyAsyncMultiSelect = <
     control: (provided, state) => ({
       ...provided,
       minHeight: "48px",
-      backgroundColor: errMsg ? "#fef2f2" : "white",
+      backgroundColor: errMsg ? "#fef2f2" : "background",
       borderColor: errMsg
         ? state.isFocused
           ? "#ef4444"
@@ -141,7 +141,7 @@ const MyAsyncMultiSelect = <
       borderRadius: "0 8px 8px 0",
       "&:hover": {
         backgroundColor: "#ef4444",
-        color: "white",
+        color: "background",
       },
       cursor: "pointer",
       transition: "all 0.2s ease-in-out",
@@ -177,7 +177,7 @@ const MyAsyncMultiSelect = <
 
     menu: (provided) => ({
       ...provided,
-      backgroundColor: "white",
+      backgroundColor: "background",
       border: "1px solid #e2e8f0",
       borderRadius: "12px",
       boxShadow:
@@ -200,7 +200,7 @@ const MyAsyncMultiSelect = <
         : state.isFocused
           ? "#f1f5f9"
           : "transparent",
-      color: state.isSelected ? "white" : "#1e293b",
+      color: state.isSelected ? "background" : "#1e293b",
       borderRadius: "8px",
       margin: "2px 0",
       padding: "12px 16px",

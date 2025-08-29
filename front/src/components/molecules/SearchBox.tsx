@@ -27,7 +27,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ defaultValue = "", title }) => {
       {title === "search" && (
         <button
           onClick={() => router.push("/admin/articles/createArticle")}
-          className="px-6 h-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-sm font-semibold rounded-md shadow hover:from-blue-600 hover:to-blue-800 transition-all duration-300"
+          className="px-6 h-10 bg-gradient-to-r from-blue-500 to-blue-700 text-background text-sm font-semibold rounded-md shadow hover:from-blue-600 hover:to-blue-800 transition-all duration-300"
         >
           ایجاد مقاله جدید
         </button>
@@ -42,13 +42,13 @@ const SearchBox: React.FC<SearchBoxProps> = ({ defaultValue = "", title }) => {
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+          className="px-4 py-2 bg-green-500 text-background rounded-lg hover:bg-green-600"
         >
           جستجو
         </button>
         <button
           onClick={clickHandler}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          className="px-4 py-2 bg-blue-500 text-background rounded-lg hover:bg-blue-600"
         >
           خالی شدن
         </button>

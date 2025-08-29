@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-background">
       <div className="max-w-md mx-auto text-center px-4">
         {/* 404 Number */}
         <div className="text-6xl md:text-8xl font-bold text-gray-300 mb-4">
@@ -24,7 +24,7 @@ export default function NotFound() {
         <div className="space-y-4">
           <Link
             href="/fa"
-            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-background bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
             Go to Home
           </Link>

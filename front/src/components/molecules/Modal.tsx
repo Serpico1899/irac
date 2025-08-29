@@ -60,7 +60,7 @@ const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div
         ref={modalRef}
-        className="bg-white rounded-lg p-6 shadow-xl max-w-md w-full mx-4 transform transition-all"
+        className="bg-background rounded-lg p-6 shadow-xl max-w-md w-full mx-4 transform transition-all"
       >
         <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
         <p className="text-gray-600 mb-6">{description}</p>
@@ -74,7 +74,7 @@ const Modal: React.FC<ModalProps> = ({
           </button>
           <button
             onClick={onConfirm}
-            className={`px-4 py-2 text-white rounded-md transition-colors ${confirmButtonClassName}`}
+            className={`px-4 py-2 text-background rounded-md transition-colors ${confirmButtonClassName}`}
           >
             {confirmText}
           </button>

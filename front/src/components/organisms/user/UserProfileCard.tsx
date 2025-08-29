@@ -27,7 +27,7 @@ const UserProfileCard = ({
 
   return (
     <div
-      className={`bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-md ${className}`}
+      className={`bg-background rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-md ${className}`}
     >
       {/* Header Section */}
       <ProfileHeader

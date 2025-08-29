@@ -43,7 +43,7 @@ const UserPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-background shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
@@ -65,10 +65,10 @@ const UserPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Profile Card */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6">
+            <div className="bg-background rounded-lg shadow-sm p-6">
               <div className="text-center">
                 <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-white">
+                  <span className="text-2xl font-bold text-background">
                     {user.name
                       .split(" ")
                       .map((n) => n[0])
@@ -108,7 +108,7 @@ const UserPage = () => {
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-200">
-                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                <button className="w-full bg-blue-600 text-background py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
                   ویرایش پروفایل
                 </button>
               </div>
@@ -118,7 +118,7 @@ const UserPage = () => {
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Tabs */}
-            <div className="bg-white rounded-lg shadow-sm mb-6">
+            <div className="bg-background rounded-lg shadow-sm mb-6">
               <div className="border-b border-gray-200">
                 <nav className="flex space-x-8" dir="rtl">
                   <button
@@ -291,7 +291,7 @@ const UserPage = () => {
                           key={activity.id}
                           className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
                         >
-                          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-xl">
+                          <div className="w-10 h-10 bg-background rounded-full flex items-center justify-center text-xl">
                             📝
                           </div>
                           <div className="flex-1">

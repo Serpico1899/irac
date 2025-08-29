@@ -185,7 +185,7 @@ export const UploadImage = ({
       {file && (
         <button
           onClick={handleUpload}
-          className={`mt-4 w-full h-10 bg-blue-500 text-white rounded-lg transition-all duration-200 hover:shadow-md disabled:bg-gray-400`}
+          className={`mt-4 w-full h-10 bg-blue-500 text-background rounded-lg transition-all duration-200 hover:shadow-md disabled:bg-gray-400`}
           disabled={isUploaded === "uploading" || isUploaded === true}
         >
           {isUploaded === "uploading"

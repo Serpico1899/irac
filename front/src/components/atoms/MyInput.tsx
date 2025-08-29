@@ -38,7 +38,7 @@ const MyInput = <T extends FieldValues = FieldValues>({
           {...register(name)}
           placeholder={placeholder || label}
           className={`
-            w-full px-4 py-3 text-slate-800 bg-white border rounded-xl resize-none
+            w-full px-4 py-3 text-slate-800 bg-background border rounded-xl resize-none
             placeholder:text-slate-400 text-right
             transition-all duration-200 ease-in-out
             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 focus:border-blue-500
@@ -59,7 +59,7 @@ const MyInput = <T extends FieldValues = FieldValues>({
           placeholder={placeholder || label}
           step={step}
           className={`
-            w-full px-4 py-3 text-slate-800 bg-white border rounded-xl
+            w-full px-4 py-3 text-slate-800 bg-background border rounded-xl
             placeholder:text-slate-400 text-right
             transition-all duration-200 ease-in-out
             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 focus:border-blue-500

@@ -26,7 +26,7 @@ const ClientUserDashboard: React.FC<ClientDashboardProps> = ({ users }) => {
   const router = useRouter();
 
   const [activeModal, setActiveModal] = useState<"edit" | "delete" | null>(
-    null
+    null,
   );
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
@@ -63,7 +63,8 @@ const ClientUserDashboard: React.FC<ClientDashboardProps> = ({ users }) => {
     <div>
       <Link
         href="/admin/users/createUser"
-        className="absolute top-1 left-5 mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+        className="absolute top-1 left-5 mt-4 px-4 py-2 bg-blue-500 text-background rounded-lg hover:bg-blue-600"
+      >
         ایجاد کاربر جدید
       </Link>
 

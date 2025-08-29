@@ -12,7 +12,7 @@ export const StatCard: React.FC<CardProps> = ({
   bgColor = "bg-blue-500",
 }) => {
   return (
-    <div className="flex justify-between w-full items-center border bg-white shadow-lg rounded-lg p-4">
+    <div className="flex justify-between w-full items-center border bg-background shadow-lg rounded-lg p-4">
       <div className="ml-4 text-right">
         <h3 className="text-xl font-bold text-gray-800">{title}</h3>
         <p className="text-sm text-gray-500">{description}</p>
@@ -20,7 +20,7 @@ export const StatCard: React.FC<CardProps> = ({
       <div
         className={`w-16 h-16 flex items-center justify-center rounded-lg ${bgColor}`}
       >
-        <span className="text-white text-xl font-bold">{value}</span>
+        <span className="text-background text-xl font-bold">{value}</span>
       </div>
     </div>
   );

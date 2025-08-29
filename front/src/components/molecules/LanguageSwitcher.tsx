@@ -68,7 +68,7 @@ export function LanguageSwitcher({
         className={`
           ${baseClasses}
           px-3 py-2
-          bg-white hover:bg-gray-50
+          bg-background hover:bg-gray-50
           border border-gray-300 hover:border-gray-400
           rounded-md
           text-gray-700 hover:text-gray-900
@@ -97,8 +97,8 @@ export function LanguageSwitcher({
             rounded-r-lg border-l border-gray-300
             ${
               locale === "fa"
-                ? "bg-blue-600 text-white"
-                : "bg-white text-gray-700 hover:bg-gray-50"
+                ? "bg-blue-600 text-background"
+                : "bg-background text-gray-700 hover:bg-gray-50"
             }
           `}
         >
@@ -112,8 +112,8 @@ export function LanguageSwitcher({
             rounded-l-lg
             ${
               locale === "en"
-                ? "bg-blue-600 text-white"
-                : "bg-white text-gray-700 hover:bg-gray-50"
+                ? "bg-blue-600 text-background"
+                : "bg-background text-gray-700 hover:bg-gray-50"
             }
           `}
         >
@@ -131,7 +131,7 @@ export function LanguageSwitcher({
         className={`
           ${baseClasses}
           px-3 py-2
-          bg-white hover:bg-gray-50
+          bg-background hover:bg-gray-50
           border border-gray-300 hover:border-gray-400
           rounded-md
           text-gray-700 hover:text-gray-900
@@ -183,7 +183,7 @@ export function LanguageSwitcher({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute top-full mt-1 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
+        <div className="absolute top-full mt-1 w-48 bg-background border border-gray-300 rounded-md shadow-lg z-50">
           <div className="py-1">
             <button
               onClick={() => handleLocaleSwitch("fa")}

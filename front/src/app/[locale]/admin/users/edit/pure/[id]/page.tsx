@@ -25,7 +25,7 @@ const FormComponent = async ({
             </h1>
             <Link
               href="/admin/users"
-              className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+              className="px-4 py-2 bg-gray-600 text-background rounded-lg hover:bg-gray-700 transition-colors"
             >
               بازگشت به لیست
             </Link>
@@ -37,7 +37,7 @@ const FormComponent = async ({
           مشکلی در یافتن کاربر وجود دارد - {foundedUser.body.message}
           <Link
             href="/admin/users"
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-blue-600 text-background rounded-md hover:bg-blue-700 transition"
           >
             بازگشت
           </Link>

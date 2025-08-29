@@ -27,9 +27,9 @@ const UserCard: React.FC<UserCardProps> = ({
   const t = useTranslations("Admin");
   const tCommon = useTranslations("Common");
   return (
-    <div className="border w-full max-w-lg bg-white rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center gap-4">
+    <div className="border w-full max-w-lg bg-background rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center gap-4">
       <div className="w-24 h-24 flex-shrink-0">
-        <div className="w-full h-full bg-gradient-to-r from-blue-400 to-green-400 flex items-center justify-center rounded-full text-white text-2xl font-semibold">
+        <div className="w-full h-full bg-gradient-to-r from-blue-400 to-green-400 flex items-center justify-center rounded-full text-background text-2xl font-semibold">
           {first_name[0]} {last_name[0]}
         </div>
       </div>
@@ -43,7 +43,7 @@ const UserCard: React.FC<UserCardProps> = ({
         {onDelete && (
           <button
             onClick={onDelete}
-            className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all duration-200 shadow"
+            className="p-2 bg-red-500 text-background rounded-full hover:bg-red-600 transition-all duration-200 shadow"
             title={t("deleteTooltip")}
           >
             <TrashIcon />
@@ -51,21 +51,21 @@ const UserCard: React.FC<UserCardProps> = ({
         )}
         <button
           onClick={() => router.push(`/admin/users/edit/pure/${id}`)}
-          className="p-2 bg-accent text-white rounded-full hover:bg-accent/80 transition-all duration-200 shadow"
+          className="p-2 bg-accent text-background rounded-full hover:bg-accent/80 transition-all duration-200 shadow"
           title={t("editTooltip")}
         >
           <UpdateIcon />
         </button>
         <button
           onClick={() => router.push(`/admin/users/edit/relation/${id}`)}
-          className="p-2 bg-accent text-white rounded-full hover:bg-accent/80 transition-all duration-200 shadow"
+          className="p-2 bg-accent text-background rounded-full hover:bg-accent/80 transition-all duration-200 shadow"
           title={t("editTooltip")}
         >
           <EditIcon />
         </button>
         <button
           onClick={() => router.push(`/admin/users/user/${id}`)}
-          className="p-2 bg-primary text-white rounded-full hover:bg-primary-dark transition-all duration-200 shadow"
+          className="p-2 bg-primary text-background rounded-full hover:bg-primary-dark transition-all duration-200 shadow"
           title={tCommon("viewDetails")}
         >
           <HideIcon />

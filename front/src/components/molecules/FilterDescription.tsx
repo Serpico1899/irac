@@ -218,7 +218,7 @@ export const FilterDescription = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm mb-8 overflow-hidden transition-all duration-300">
+    <div className="bg-background rounded-xl shadow-sm mb-8 overflow-hidden transition-all duration-300">
       {/* Header with expand/collapse button */}
       <div className="border-b border-gray-100 bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-4">
         <div className="flex justify-between items-center">

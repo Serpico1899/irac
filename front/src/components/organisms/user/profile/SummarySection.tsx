@@ -15,7 +15,7 @@ const SummarySection = ({ user }: SummarySectionProps) => {
           </div>
           <label className="text-sm font-medium text-gray-600">خلاصه</label>
         </div>
-        <p className="text-gray-800 font-medium pr-11 whitespace-pre-wrap">
+        <p className="text-gray-800 font-medium pr-11 backgroundspace-pre-wrap">
           {user.summary || "خلاصه‌ای ثبت نشده است"}
         </p>
       </div>

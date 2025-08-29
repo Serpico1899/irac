@@ -65,7 +65,7 @@ const Pagination: FC<PaginationProps> = ({
 
   return (
     <nav aria-label="صفحه‌بندی" className="w-full flex justify-center my-8">
-      <div className="flex items-center justify-center gap-2 px-4 py-2 bg-white rounded-xl shadow-md">
+      <div className="flex items-center justify-center gap-2 px-4 py-2 bg-background rounded-xl shadow-md">
         {/* Previous button */}
         <button
           onClick={() => handlePageChange(initialPage - 1)}
@@ -120,7 +120,7 @@ const Pagination: FC<PaginationProps> = ({
                 aria-current={pageNumber === initialPage ? "page" : undefined}
                 className={`w-9 h-9 flex items-center justify-center rounded-lg transition-colors duration-200 ${
                   pageNumber === initialPage
-                    ? "bg-blue-600 text-white font-bold"
+                    ? "bg-blue-600 text-background font-bold"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >

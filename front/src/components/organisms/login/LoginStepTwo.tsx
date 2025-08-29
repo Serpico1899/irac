@@ -27,20 +27,26 @@ const LoginStepTwo = ({ setStep, phone, onCodeEntered }: TProps) => {
         });
 
         if (userLoggedIn.success) {
-          const { user, token } = userLoggedIn.body
-          Cookies.set("user", JSON.stringify({
-            ...user,
-            level: user.level || "Normal",
-          }))
-          Cookies.set("national_number", user.national_number)
-          Cookies.set("token", token)
+          const { user, token } = userLoggedIn.body;
+          Cookies.set(
+            "user",
+            JSON.stringify({
+              ...user,
+              level: user.level || "Normal",
+            }),
+          );
+          Cookies.set("national_number", user.national_number);
+          Cookies.set("token", token);
 
-          onCodeEntered(userLoggedIn.body.token, userLoggedIn.body.user.level, userLoggedIn.body.user.national_number);
+          onCodeEntered(
+            userLoggedIn.body.token,
+            userLoggedIn.body.user.level,
+            userLoggedIn.body.user.national_number,
+          );
           router.replace("/");
         } else {
-          throw new Error(userLoggedIn.body)
+          throw new Error(userLoggedIn.body);
         }
-
       } catch (error) {
         console.error("Login error:", error);
         setLoading(false);
@@ -79,8 +85,9 @@ const LoginStepTwo = ({ setStep, phone, onCodeEntered }: TProps) => {
       </div>
       <button
         type="submit"
-        className={`w-full ${loading ? "bg-green-300" : "bg-green-500 hover:bg-green-600"
-          } text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2`}
+        className={`w-full ${
+          loading ? "bg-green-300" : "bg-green-500 hover:bg-green-600"
+        } text-background py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2`}
         disabled={loading}
       >
         {loading ? "در حال پردازش..." : "تایید و وارد شوید"}

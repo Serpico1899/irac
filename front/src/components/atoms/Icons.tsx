@@ -7,7 +7,7 @@ export const IconLogo = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="230" height="40" fill="white"></rect>
+      <rect width="230" height="40" fill="background"></rect>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

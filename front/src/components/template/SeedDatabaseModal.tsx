@@ -70,7 +70,7 @@ const SeedDatabaseModal: React.FC<SeedDatabaseModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[2000]">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+      <div className="bg-background rounded-lg shadow-xl w-full max-w-md mx-4">
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
             بذرگذاری پایگاه داده
@@ -130,7 +130,7 @@ const SeedDatabaseModal: React.FC<SeedDatabaseModalProps> = ({
           </button>
           <button
             onClick={handleSeedDatabase}
-            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-4 py-2 bg-green-600 text-background rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
             disabled={!uploadedFileId || isProcessing}
           >
             {isProcessing ? (
