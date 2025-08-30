@@ -66,12 +66,6 @@ interface HomePageData {
   };
 }
 
-interface HomePageProps {
-  params: {
-    locale: string;
-  };
-}
-
 // Data Fetching Function
 async function getHomePageData(): Promise<HomePageData> {
   try {
@@ -148,7 +142,12 @@ async function getHomePageData(): Promise<HomePageData> {
 }
 
 // Main Homepage Component
-export default async function HomePage({ params: { locale } }: HomePageProps) {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations({ locale });
   const { featuredCourses, latestArticles, latestProducts, meta } =
     await getHomePageData();
