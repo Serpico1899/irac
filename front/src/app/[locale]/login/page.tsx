@@ -1,10 +1,12 @@
 "use client";
 import LoginStepOne from "@/components/organisms/login/LoginStepOne";
 import LoginStepTwo from "@/components/organisms/login/LoginStepTwo";
-import { useAutoReturnTimer } from "@/hooks/useAutoReturnTimer";
+
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useTranslations } from "next-intl";
+
+export const dynamic = "force-dynamic";
 
 const Login = ({}) => {
   const [phone, setPhone] = useState("");
@@ -12,18 +14,11 @@ const Login = ({}) => {
   const { login } = useAuth();
   const t = useTranslations("Login");
 
-  const { clearAutoReturnTimer, remainingTime } = useAutoReturnTimer(
-    step,
-    setStep,
-  );
-
   const handleCodeEntered = (
     token: string,
     level: string,
     nationalNumber: string,
   ) => {
-    clearAutoReturnTimer();
-
     // Convert level to our UserLevel type
     const userLevel = level as "Ghost" | "Manager" | "Editor" | "Normal" | null;
 
@@ -47,14 +42,6 @@ const Login = ({}) => {
               onCodeEntered={handleCodeEntered}
             />
           )}
-          {step === 2 ? (
-            <div className="text-center mt-4 text-gray-500">
-              <p>
-                زمان باقی‌مانده:
-                <span className="text-red-300">{remainingTime}</span> ثانیه
-              </p>
-            </div>
-          ) : null}
         </div>
       </div>
     </div>
