@@ -1,4 +1,4 @@
-import type { ActFn } from "../../../../deps.ts";
+import type { ActFn } from "@deps";
 import { course } from "../../../mod.ts";
 
 export const getHomePageDataFn: ActFn = async (body) => {
