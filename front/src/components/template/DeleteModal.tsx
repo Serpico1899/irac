@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useScrollLock } from "@/hooks/useScrollLock";
+import { useEffect } from "react";
 
 interface IProps {
   onConfirm: () => void;
@@ -19,7 +19,17 @@ export const DeleteModal: FC<IProps> = ({
   onHardCascadeChange,
 }) => {
   // Prevent background scrolling when modal is open
-  useScrollLock(isVisible);
+  useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isVisible]);
 
   return (
     <div
