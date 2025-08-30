@@ -19,8 +19,8 @@ interface Course {
   imageUrl?: string;
 }
 
-// Define the type for the API response from our unified endpoint
-interface HomePageDataResponse {
+// Define the type for the API response
+interface ApiResponse {
   success: boolean;
   data?: {
     featuredCourses: Course[];
@@ -30,7 +30,7 @@ interface HomePageDataResponse {
   message?: string;
 }
 
-// SEO Metadata Generation
+// SEO Metadata Generation - Handle params as Promise
 export async function generateMetadata({
   params,
 }: {
@@ -49,17 +49,18 @@ export async function generateMetadata({
   };
 }
 
-// Data Fetching Function
+// Data Fetching Function - CORRECTED TO USE THE UNIFIED ENDPOINT
 async function getCourses(): Promise<Course[]> {
   try {
     const response = await fetch("http://backend:1404/lesan", {
-      // Use Docker network hostname
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         service: "main",
-        model: "page",
-        act: "getHomePageData",
+        model: "page", // Corrected model
+        act: "getHomePageData", // Corrected act
         details: {},
       }),
       next: { revalidate: 3600 }, // Revalidate every hour
@@ -69,7 +70,7 @@ async function getCourses(): Promise<Course[]> {
       throw new Error(`API error! status: ${response.status}`);
     }
 
-    const result: HomePageDataResponse = await response.json();
+    const result: ApiResponse = await response.json();
 
     if (!result.success || !result.data || !result.data.featuredCourses) {
       console.error(
@@ -86,17 +87,19 @@ async function getCourses(): Promise<Course[]> {
   }
 }
 
-// Main Courses Page Component
+// Main Courses Page Component - Handle params as Promise
 export default async function CoursesPage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "HomePage" });
   const courses = await getCourses();
 
   return (
     <main className="min-h-screen bg-background">
+      {/* Hero Section */}
       <section className="bg-primary py-20 px-6 text-center text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           {t("featuredCoursesTitle")}
@@ -106,6 +109,7 @@ export default async function CoursesPage({
         </p>
       </section>
 
+      {/* Courses Grid Section */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           {courses.length > 0 ? (
@@ -130,14 +134,15 @@ export default async function CoursesPage({
               ))}
             </div>
           ) : (
+            /* Empty State */
             <div className="text-center py-24 text-text-light">
               <h3 className="text-2xl font-bold text-text mb-4">
                 {locale === "fa" ? "دوره‌ای یافت نشد" : "No Courses Found"}
               </h3>
               <p>
                 {locale === "fa"
-                  ? "در حال حاضر هیچ دوره‌ای در دسترس نیست."
-                  : "There are currently no courses available."}
+                  ? "در حال حاضر هیچ دوره‌ای در دسترس نیست. لطفاً بعداً دوباره بررسی کنید."
+                  : "There are currently no courses available. Please check back later."}
               </p>
             </div>
           )}
