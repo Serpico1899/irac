@@ -30,15 +30,13 @@ interface HomePageDataResponse {
   message?: string;
 }
 
-// Correctly type the props for Next.js Server Components
-type PageProps = {
-  params: { locale: string };
-};
-
 // SEO Metadata Generation
 export async function generateMetadata({
-  params: { locale },
-}: PageProps): Promise<Metadata> {
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "HomePage" });
   const siteT = await getTranslations({ locale, namespace: "Site" });
   const navT = await getTranslations({ locale, namespace: "Navbar" });
@@ -89,7 +87,11 @@ async function getCourses(): Promise<Course[]> {
 }
 
 // Main Courses Page Component
-export default async function CoursesPage({ params: { locale } }: PageProps) {
+export default async function CoursesPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
   const t = await getTranslations({ locale, namespace: "HomePage" });
   const courses = await getCourses();
 
