@@ -3,6 +3,8 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
   const token = (await cookies()).get("token");
   const t = await getTranslations("Admin");
