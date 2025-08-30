@@ -36,6 +36,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
+    // Only run in browser environment
+    if (typeof window === "undefined") {
+      return;
+    }
+
     // Check authentication status on initial load
     const token = Cookies.get("token");
     const userCookie = Cookies.get("user");
@@ -52,7 +57,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         } catch (parseError) {
           // If it's not valid JSON, the server might have set it in a different format
           // Just use the default level
-          console.warn("Could not parse user cookie as JSON, using default level " + parseError);
+          console.warn(
+            "Could not parse user cookie as JSON, using default level " +
+              parseError,
+          );
         }
 
         setIsAuthenticated(true);
@@ -74,10 +82,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const login = (token: string, level: UserLevel, nationalNumber: string) => {
-    // Set cookies
-    Cookies.set("token", token, { path: "/" });
-    Cookies.set("national_number", nationalNumber, { path: "/" });
-    Cookies.set("user", JSON.stringify({ level }), { path: "/" });
+    // Only set cookies in browser environment
+    if (typeof window !== "undefined") {
+      // Set cookies
+      Cookies.set("token", token, { path: "/" });
+      Cookies.set("national_number", nationalNumber, { path: "/" });
+      Cookies.set("user", JSON.stringify({ level }), { path: "/" });
+    }
 
     // Update state
     setIsAuthenticated(true);
@@ -85,15 +96,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
-    // Remove cookies
-    Cookies.remove("token", { path: "/" });
-    Cookies.remove("national_number", { path: "/" });
-    Cookies.remove("user", { path: "/" });
+    // Only remove cookies and redirect in browser environment
+    if (typeof window !== "undefined") {
+      // Remove cookies
+      Cookies.remove("token", { path: "/" });
+      Cookies.remove("national_number", { path: "/" });
+      Cookies.remove("user", { path: "/" });
 
-    setInitialAuthState(false, null)
+      // Redirect to home page
+      router.replace("/");
+    }
 
-    // Redirect to home page
-    router.replace("/");
+    setInitialAuthState(false, null);
   };
 
   return (
