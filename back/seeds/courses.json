@@ -1,0 +1,58 @@
+[
+  {
+    "title": {
+      "en": "Fundamentals of Islamic Architecture",
+      "fa": "مبانی معماری اسلامی"
+    },
+    "description": {
+      "en": "An introductory course covering the basic principles, history, and key elements of Islamic architectural design. Students will explore geometric patterns, spatial concepts, and the spiritual dimensions of Islamic buildings.",
+      "fa": "دوره‌ای مقدماتی که اصول پایه، تاریخ و عناصر کلیدی طراحی معماری اسلامی را پوشش می‌دهد. دانشجویان الگوهای هندسی، مفاهیم فضایی و ابعاد معنوی ساختمان‌های اسلامی را کاوش خواهند کرد."
+    },
+    "instructorName": "Dr. Mohammad Reza Ahmadi",
+    "price": 2500000,
+    "duration": "8 Weeks",
+    "imageUrl": "https://example.com/images/islamic-architecture-fundamentals.jpg"
+  },
+  {
+    "title": {
+      "en": "Persian Garden Design Principles",
+      "fa": "اصول طراحی باغ ایرانی"
+    },
+    "description": {
+      "en": "Explore the rich tradition of Persian garden design, from the ancient Achaemenid period to contemporary interpretations. Learn about the four-fold garden concept, water management, and the integration of architecture with landscape.",
+      "fa": "سنت غنی طراحی باغ ایرانی را از دوره هخامنشی باستان تا تفسیرهای معاصر کاوش کنید. درباره مفهوم چهارباغ، مدیریت آب و تلفیق معماری با منظر طبیعی بیاموزید."
+    },
+    "instructorName": "Prof. Zahra Hosseini",
+    "price": 3200000,
+    "duration": "6 Weeks",
+    "imageUrl": "https://example.com/images/persian-garden-design.jpg"
+  },
+  {
+    "title": {
+      "en": "Geometric Patterns in Islamic Art",
+      "fa": "الگوهای هندسی در هنر اسلامی"
+    },
+    "description": {
+      "en": "Master the mathematical and artistic principles behind Islamic geometric patterns. This hands-on course covers both traditional methods and modern computational approaches to creating complex geometric designs.",
+      "fa": "اصول ریاضی و هنری پشت الگوهای هندسی اسلامی را فرا بگیرید. این دوره عملی هم روش‌های سنتی و هم رویکردهای محاسباتی مدرن برای خلق طرح‌های هندسی پیچیده را پوشش می‌دهد."
+    },
+    "instructorName": "Dr. Ali Karimi",
+    "price": 1800000,
+    "duration": "4 Weeks",
+    "imageUrl": "https://example.com/images/geometric-patterns.jpg"
+  },
+  {
+    "title": {
+      "en": "Contemporary Islamic Architecture",
+      "fa": "معماری اسلامی معاصر"
+    },
+    "description": {
+      "en": "Examine how contemporary architects are reinterpreting Islamic architectural principles for modern buildings. Study case studies from around the world and learn to balance tradition with innovation.",
+      "fa": "بررسی کنید که چگونه معماران معاصر اصول معماری اسلامی را برای ساختمان‌های مدرن تفسیر می‌کنند. مطالعات موردی از سراسر جهان را بررسی کرده و تعادل بین سنت و نوآوری را بیاموزید."
+    },
+    "instructorName": "Dr. Fatima Al-Zahra",
+    "price": 4500000,
+    "duration": "10 Weeks",
+    "imageUrl": "https://example.com/images/contemporary-islamic-architecture.jpg"
+  }
+]
