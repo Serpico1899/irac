@@ -2,11 +2,17 @@
 
 export const dynamic = "force-dynamic";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 const UserPage = () => {
+  const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
+
+  // Ensure this only renders on the client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const user = {
     name: "احمد محمدی",
@@ -41,6 +47,18 @@ const UserPage = () => {
       time: "۱ روز پیش",
     },
   ];
+
+  // Return loading state during server-side rendering and hydration
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
