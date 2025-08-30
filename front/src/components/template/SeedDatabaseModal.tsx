@@ -5,7 +5,7 @@ import { UploadImage } from "../molecules/UploadFile";
 import { seed } from "@/app/actions/user/seed";
 import { ToastNotify } from "@/utils/helper";
 import { useRouter } from "next/navigation";
-import { useScrollLock } from "@/hooks/useScrollLock";
+import { useEffect } from "react";
 
 interface SeedDatabaseModalProps {
   isOpen: boolean;
@@ -23,7 +23,17 @@ const SeedDatabaseModal: React.FC<SeedDatabaseModalProps> = ({
   const router = useRouter();
 
   // Prevent background scrolling when modal is open
-  useScrollLock(isOpen);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   const handleSeedDatabase = async () => {
     if (!uploadedFileId) {
