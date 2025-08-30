@@ -1,12 +1,11 @@
 {
   "tasks": {
-    "bc-dev": "ENV=development deno run -A --watch --watch-exclude=declarations --no-clear-screen ./mod.ts"
+    "bc-dev": "ENV=development deno run -A --watch --watch-exclude=declarations --no-clear-screen ./mod.ts",
+    "seed": "deno run -A ./seeds/seed.ts"
   },
   "fmt": {
     "files": {
-      "exclude": [
-        "declaration"
-      ]
+      "exclude": ["declaration"]
     },
     "options": {
       "useTabs": true,
@@ -19,7 +18,7 @@
   "imports": {
     "@deps": "./deps.ts",
     "@lib": "./utils/mod.ts",
-    "@model": "./models/mod.ts",
+    "@model": "./models/mod.ts"
   },
   "nodeModulesDir": "auto"
 }
