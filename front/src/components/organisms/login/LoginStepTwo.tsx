@@ -1,6 +1,5 @@
 "use client";
 
-import { loginAction } from "@/app/actions/login";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
@@ -21,6 +20,7 @@ const LoginStepTwo = ({ setStep, phone, onCodeEntered }: TProps) => {
     if (otp.length === 5) {
       try {
         setLoading(true);
+        const { loginAction } = await import("@/app/actions/login");
         const userLoggedIn = await loginAction({
           national_number: phone,
           code: otp,
