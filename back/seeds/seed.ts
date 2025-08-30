@@ -63,9 +63,8 @@ async function main() {
     console.log(`📡 Connecting to MongoDB at: ${MONGO_URI}`);
 
     // Connect to MongoDB
-    client = new MongoClient();
-    await client.connect(MONGO_URI);
-    const db = client.database(DB_NAME);
+    client = await new MongoClient(MONGO_URI).connect();
+    const db = client.db(DB_NAME);
 
     console.log(`✅ Connected to database: ${DB_NAME}`);
 
