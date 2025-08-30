@@ -1,286 +1,302 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import ContentCard from "@/components/organisms/ContentCard";
-import { useRef, use } from "react";
+import { getTranslations } from "next-intl/server";
 
-export default function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = use(params);
-
-  // Sample courses data for Featured Courses carousel
-  const featuredCourses = [
-    {
-      href: `/${locale}/courses/islamic-geometry`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1519452575417-564c1401ecc0?w=400&h=300&fit=crop",
-      title:
-        locale === "fa"
-          ? "مقدمه‌ای بر هندسه اسلامی"
-          : "Introduction to Islamic Geometry",
-      description:
-        locale === "fa"
-          ? "اصول بنیادین هندسه اسلامی و کاربرد آن در معماری کلاسیک"
-          : "Learn the foundational principles of Islamic geometry and its application in classical architecture",
-      price: "2,500,000",
-      level: locale === "fa" ? "پیشرفته" : "Advanced",
-      rating: 4.8,
-    },
-    {
-      href: `/${locale}/courses/kufic-calligraphy`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-      title: locale === "fa" ? "خوشنویسی کوفی" : "Kufic Calligraphy",
-      description:
-        locale === "fa"
-          ? "هنر باستانی خوشنویسی کوفی و تکنیک‌های مدرن"
-          : "Ancient art of Kufic calligraphy and modern techniques",
-      price: "1,800,000",
-      level: locale === "fa" ? "متوسط" : "Intermediate",
-      rating: 4.6,
-    },
-    {
-      href: `/${locale}/courses/mosque-architecture`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop",
-      title: locale === "fa" ? "معماری مسجد" : "Mosque Architecture",
-      description:
-        locale === "fa"
-          ? "اصول طراحی و ساخت مساجد در معماری اسلامی"
-          : "Design principles and construction of mosques in Islamic architecture",
-      price: "3,200,000",
-      level: locale === "fa" ? "پیشرفته" : "Advanced",
-      rating: 4.9,
-    },
-    {
-      href: `/${locale}/courses/persian-garden`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=300&fit=crop",
-      title: locale === "fa" ? "باغ ایرانی" : "Persian Garden Design",
-      description:
-        locale === "fa"
-          ? "هنر طراحی باغ‌های سنتی ایرانی و اصول آن"
-          : "Art of traditional Persian garden design and its principles",
-      price: "2,100,000",
-      level: locale === "fa" ? "مقدماتی" : "Beginner",
-      rating: 4.7,
-    },
-    {
-      href: `/${locale}/courses/islamic-art`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop",
-      title: locale === "fa" ? "هنر اسلامی" : "Islamic Art & Decoration",
-      description:
-        locale === "fa"
-          ? "بررسی انواع هنرهای اسلامی و تزیینات آن"
-          : "Survey of Islamic arts and decorative techniques",
-      price: "1,950,000",
-      level: locale === "fa" ? "متوسط" : "Intermediate",
-      rating: 4.5,
-    },
-  ];
-
-  // Sample articles data for Latest Articles carousel
-  const latestArticles = [
-    {
-      href: `/${locale}/articles/shadow-experience`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop",
-      title:
-        locale === "fa"
-          ? "تجربه‌ی سایه در معماری ایرانی"
-          : "Shadow Experience in Iranian Architecture",
-      description:
-        locale === "fa"
-          ? "بررسی نقش سایه و روشن در خلق فضاهای معماری ایرانی"
-          : "Examining the role of shadow and light in creating Iranian architectural spaces",
-      author: locale === "fa" ? "دکتر علی محمدی" : "Dr. Ali Mohammadi",
-      date: locale === "fa" ? "۱۱ مرداد ۱۴۰۴" : "Aug 2, 2024",
-    },
-    {
-      href: `/${locale}/articles/spatial-hierarchy`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1539650116574-75c0c6d73c5e?w=400&h=300&fit=crop",
-      title:
-        locale === "fa"
-          ? "سلسله‌مراتب فضایی در مسجد"
-          : "Spatial Hierarchy in Mosque Architecture",
-      description:
-        locale === "fa"
-          ? "تحلیل ساختار فضایی مساجد و نقش هندسه مقدس"
-          : "Analysis of spatial structure in mosques and the role of sacred geometry",
-      author: locale === "fa" ? "استاد حسن رضایی" : "Master Hassan Rezaei",
-      date: locale === "fa" ? "۲۲ تیر ۱۴۰۴" : "Jul 13, 2024",
-    },
-    {
-      href: `/${locale}/articles/sound-experience`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&h=300&fit=crop",
-      title:
-        locale === "fa"
-          ? "تجربه‌ی آوایی در معماری ایرانی"
-          : "Acoustic Experience in Iranian Architecture",
-      description:
-        locale === "fa"
-          ? "مطالعه اکوستیک فضاهای سنتی ایرانی و تأثیر آن"
-          : "Study of acoustics in traditional Iranian spaces and its impact",
-      author: locale === "fa" ? "دکتر مریم احمدی" : "Dr. Maryam Ahmadi",
-      date: locale === "fa" ? "۱۲ تیر ۱۴۰۴" : "Jul 3, 2024",
-    },
-    {
-      href: `/${locale}/articles/living-spaces`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?w=400&h=300&fit=crop",
-      title:
-        locale === "fa"
-          ? "فضا برای زیستن، نه فقط دیدن"
-          : "Space for Living, Not Just Viewing",
-      description:
-        locale === "fa"
-          ? "نقد رویکردهای صرفاً بصری در معماری مدرن"
-          : "Critique of purely visual approaches in modern architecture",
-      author: locale === "fa" ? "مهندس سارا کریمی" : "Eng. Sara Karimi",
-      date: locale === "fa" ? "۰۱ تیر ۱۴۰۴" : "Jun 22, 2024",
-    },
-    {
-      href: `/${locale}/articles/khayyam-tomb`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
-      title: locale === "fa" ? "آرامگاه خیام" : "Khayyam's Tomb Architecture",
-      description:
-        locale === "fa"
-          ? "مطالعه معماری آرامگاه حکیم عمر خیام"
-          : "Architectural study of Omar Khayyam's tomb",
-      author: locale === "fa" ? "دکتر امیر حسینی" : "Dr. Amir Hosseini",
-      date: locale === "fa" ? "۲۴ دی ۱۴۰۳" : "Jan 14, 2024",
-    },
-  ];
-
-  // Sample products data for Latest Products carousel
-  const latestProducts = [
-    {
-      href: `/${locale}/shop/architectural-books`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop",
-      title:
-        locale === "fa"
-          ? "مجموعه کتاب‌های معماری اسلامی"
-          : "Islamic Architecture Book Collection",
-      description:
-        locale === "fa"
-          ? "مجموعه کاملی از بهترین کتاب‌های معماری اسلامی"
-          : "Complete collection of the finest Islamic architecture books",
-      price: "850,000",
-      originalPrice: "1,200,000",
-    },
-    {
-      href: `/${locale}/shop/calligraphy-tools`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop",
-      title:
-        locale === "fa"
-          ? "ابزار خوشنویسی حرفه‌ای"
-          : "Professional Calligraphy Tools",
-      description:
-        locale === "fa"
-          ? "مجموعه کاملی از ابزارهای خوشنویسی دست‌ساز"
-          : "Complete set of handcrafted calligraphy tools",
-      price: "320,000",
-      rating: 4.9,
-    },
-    {
-      href: `/${locale}/shop/geometric-patterns`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1509909756405-be0199881695?w=400&h=300&fit=crop",
-      title:
-        locale === "fa" ? "الگوهای هندسی اسلامی" : "Islamic Geometric Patterns",
-      description:
-        locale === "fa"
-          ? "مجموعه دیجیتالی از الگوهای هندسی سنتی"
-          : "Digital collection of traditional geometric patterns",
-      price: "150,000",
-      rating: 4.7,
-    },
-    {
-      href: `/${locale}/shop/miniature-models`,
-      imageUrl:
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop",
-      title:
-        locale === "fa"
-          ? "ماکت‌های معماری کلاسیک"
-          : "Classical Architecture Models",
-      description:
-        locale === "fa"
-          ? "ماکت‌های دست‌ساز از شاهکارهای معماری اسلامی"
-          : "Handcrafted models of Islamic architectural masterpieces",
-      price: "2,400,000",
-      rating: 4.8,
-    },
-  ];
-
-  // Refs for carousels
-  const coursesCarouselRef = useRef<HTMLDivElement>(null);
-  const articlesCarouselRef = useRef<HTMLDivElement>(null);
-  const productsCarouselRef = useRef<HTMLDivElement>(null);
-
-  // Scroll functions for carousels
-  const handleScroll = (
-    ref: React.RefObject<HTMLDivElement | null>,
-    direction: "left" | "right",
-  ) => {
-    if (ref.current) {
-      const scrollAmount = 400;
-      const currentScroll = ref.current.scrollLeft;
-      const targetScroll =
-        direction === "left"
-          ? currentScroll - scrollAmount
-          : currentScroll + scrollAmount;
-
-      ref.current.scrollTo({
-        left: targetScroll,
-        behavior: "smooth",
-      });
-    }
+interface Course {
+  _id: string;
+  title: {
+    en: string;
+    fa: string;
   };
+  description: {
+    en: string;
+    fa: string;
+  };
+  instructorName: string;
+  price: number;
+  duration: string;
+  imageUrl?: string;
+  isFeatured?: boolean;
+  createdAt: string;
+}
+
+interface Article {
+  _id: string;
+  title: {
+    en: string;
+    fa: string;
+  };
+  description: {
+    en: string;
+    fa: string;
+  };
+  author: string;
+  imageUrl?: string;
+  slug: string;
+  createdAt: string;
+}
+
+interface Product {
+  _id: string;
+  title: {
+    en: string;
+    fa: string;
+  };
+  description: {
+    en: string;
+    fa: string;
+  };
+  price: number;
+  imageUrl?: string;
+  category: string;
+  createdAt: string;
+}
+
+interface HomePageData {
+  featuredCourses: Course[];
+  latestArticles: Article[];
+  latestProducts: Product[];
+  meta: {
+    timestamp: string;
+    totalCourses: number;
+    totalArticles: number;
+    totalProducts: number;
+    error?: string;
+  };
+}
+
+interface HomePageProps {
+  params: {
+    locale: string;
+  };
+}
+
+// Data Fetching Function
+async function getHomePageData(): Promise<HomePageData> {
+  try {
+    const response = await fetch("http://localhost:1404/lesan", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        service: "main",
+        model: "main",
+        act: "getHomePageData",
+        details: {
+          get: {
+            courses: {
+              title: 1,
+              description: 1,
+              instructorName: 1,
+              price: 1,
+              duration: 1,
+              imageUrl: 1,
+              isFeatured: 1,
+              createdAt: 1,
+            },
+            articles: {
+              title: 1,
+              description: 1,
+              author: 1,
+              imageUrl: 1,
+              slug: 1,
+              createdAt: 1,
+            },
+            products: {
+              title: 1,
+              description: 1,
+              price: 1,
+              imageUrl: 1,
+              category: 1,
+              createdAt: 1,
+            },
+          },
+        },
+      }),
+      // Revalidate every 30 minutes for fresh content
+      next: { revalidate: 1800 },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (!result) {
+      throw new Error("No data received from API");
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching homepage data:", error);
+    return {
+      featuredCourses: [],
+      latestArticles: [],
+      latestProducts: [],
+      meta: {
+        timestamp: new Date().toISOString(),
+        totalCourses: 0,
+        totalArticles: 0,
+        totalProducts: 0,
+        error: "Failed to fetch homepage data",
+      },
+    };
+  }
+}
+
+// Main Homepage Component
+export default async function HomePage({ params: { locale } }: HomePageProps) {
+  const t = await getTranslations({ locale });
+  const { featuredCourses, latestArticles, latestProducts, meta } =
+    await getHomePageData();
 
   return (
-    <div
-      className="bg-background-primary"
-      dir={locale === "fa" ? "rtl" : "ltr"}
-    >
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section
-        className="bg-primary relative overflow-hidden min-h-[300px] md:min-h-[400px] max-w-7xl mx-8 xl:mx-auto rounded-[25px] md:rounded-[110px] flex items-center justify-center px-6"
-        dir="rtl"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl">
-          {/* Text and Search */}
-          <div className="text-center md:text-right">
-            {/* Main Heading */}
-            <h1 className="text-background text-2xl md:text-3xl font-bold mb-6">
-              {locale === "fa"
-                ? "مرکز پیشرو برای مطالعه و حفاظت از میراث معماری اسلامی."
-                : "The premier center for the study and preservation of Islamic architectural heritage."}
-            </h1>
+      <section className="relative bg-gradient-to-br from-primary to-primary-dark overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative max-w-7xl mx-auto px-6 py-24 lg:py-32">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Hero Content */}
+            <div
+              className="text-center lg:text-right"
+              dir={locale === "fa" ? "rtl" : "ltr"}
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-background mb-6 leading-tight">
+                {t("HomePage.heroTitle")}
+              </h1>
+              <p className="text-xl md:text-2xl text-background-secondary mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                {t("HomePage.heroSubtitle")}
+              </p>
 
-            {/* Search Bar */}
+              {/* Hero CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link
+                  href={`/${locale}/courses`}
+                  className="bg-accent-primary hover:bg-accent text-text-dark font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+                >
+                  {t("HomePage.viewCoursesBtn")}
+                </Link>
+                <Link
+                  href={`/${locale}/workshops`}
+                  className="bg-transparent hover:bg-background/10 border-2 border-background text-background font-semibold py-4 px-8 rounded-xl transition-all duration-200"
+                >
+                  {t("HomePage.workshopsBtn")}
+                </Link>
+              </div>
+
+              {/* Hero Search */}
+              <div className="mt-12 max-w-md mx-auto lg:mx-0">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder={
+                      locale === "fa"
+                        ? "جستجو در دوره‌ها..."
+                        : "Search courses..."
+                    }
+                    className="search-input w-full py-4 px-6 pr-14 rounded-2xl bg-background/95 backdrop-blur-sm text-text placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-accent-primary shadow-lg"
+                    dir={locale === "fa" ? "rtl" : "ltr"}
+                  />
+                  <button className="absolute top-1/2 right-4 transform -translate-y-1/2 text-text-secondary hover:text-primary transition-colors">
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Hero Image */}
             <div className="relative">
-              <input
-                type="text"
-                placeholder={
-                  locale === "fa"
-                    ? "جستجوی دوره‌ها، مقالات و محصولات"
-                    : "Search courses, articles and products"
-                }
-                className="search-input w-full px-8 py-4 pr-16 bg-background rounded-2xl text-text placeholder-text-light border-none shadow-lg text-right text-lg"
-              />
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+              <div className="aspect-square bg-background/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
+                <Image
+                  src="/images/Asset-1@20x-2-qotodtmpgaloexs25oampoe4trtwtus7grml1i9od0.png"
+                  alt="IRAC - Islamic Architecture Center"
+                  width={400}
+                  height={400}
+                  className="w-full h-60 object-contain"
+                  priority
+                />
+                <div className="mt-6 text-center">
+                  <p className="text-background/90 text-lg font-medium">
+                    {t("HomePage.iracIntro")}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Courses Section */}
+      <section className="py-20 px-6 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
+              {t("HomePage.featuredCoursesTitle")}
+            </h2>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+              {t("HomePage.featuredCoursesDescription")}
+            </p>
+            <div className="w-24 h-1 bg-accent-primary mx-auto mt-6 rounded-full"></div>
+          </div>
+
+          {featuredCourses.length > 0 ? (
+            <>
+              {/* Quick Course Categories */}
+              <div className="flex flex-wrap justify-center gap-4 mb-16">
+                {featuredCourses.slice(0, 5).map((course, index) => (
+                  <ContentCard
+                    key={course._id || index}
+                    href={`/${locale}/courses/${course._id || "demo"}`}
+                    title={locale === "fa" ? course.title.fa : course.title.en}
+                    variant="hero-course"
+                  />
+                ))}
+              </div>
+
+              {/* Featured Courses Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {featuredCourses.slice(0, 3).map((course) => (
+                  <ContentCard
+                    key={course._id}
+                    href={`/${locale}/courses/${course._id}`}
+                    title={locale === "fa" ? course.title.fa : course.title.en}
+                    description={
+                      locale === "fa"
+                        ? course.description.fa
+                        : course.description.en
+                    }
+                    price={course.price.toString()}
+                    imageUrl={course.imageUrl}
+                    author={course.instructorName}
+                    date={course.duration}
+                    locale={locale}
+                    variant="course-dark"
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            /* Empty State for Courses */
+            <div className="text-center py-16">
+              <div className="w-20 h-20 bg-background-primary rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg
-                  className="w-7 h-7 text-text-lighter"
+                  className="w-10 h-10 text-text-secondary"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -289,279 +305,113 @@ export default function HomePage({
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={1.5}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                   />
                 </svg>
               </div>
+              <h3 className="text-2xl font-bold text-text mb-2">
+                {locale === "fa" ? "دوره‌ای یافت نشد" : "No Featured Courses"}
+              </h3>
+              <p className="text-text-secondary">
+                {locale === "fa"
+                  ? "به زودی دوره‌های جدید اضافه خواهد شد"
+                  : "New courses will be added soon"}
+              </p>
             </div>
-          </div>
-
-          {/* Architectural Photo - Hidden under 1024px */}
-          <div className="hidden lg:flex">
-            <Image
-              src="/images/Layer-337.png"
-              alt="Islamic Architecture"
-              width={800}
-              height={240}
-              className="w-full h-60 object-cover rounded-2xl shadow-lg"
-            />
-          </div>
+          )}
         </div>
       </section>
 
-      {/* Featured Courses Carousel Section */}
-      <section className="py-16 bg-background-primary">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-text-primary">
-              {locale === "fa" ? "دوره‌های ویژه" : "Featured Courses"}
+      {/* Latest Articles Section */}
+      <section className="py-20 px-6 bg-background-primary">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-text">
+              {t("HomePage.latestArticlesTitle")}
             </h2>
-            <div className="flex items-center gap-4">
-              <div
-                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-background-darkest rounded-full p-1`}
-              >
-                <button
-                  onClick={() => handleScroll(coursesCarouselRef, "left")}
-                  className="p-2 rounded-full hover:bg-background transition-colors"
-                  aria-label="Previous"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => handleScroll(coursesCarouselRef, "right")}
-                  className="p-2 rounded-full hover:bg-background transition-colors"
-                  aria-label="Next"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <Link
-                href={`/${locale}/courses`}
-                className="bg-primary text-background px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
-              >
-                {locale === "fa" ? "مشاهده همه" : "View All"}
-              </Link>
-            </div>
+            <Link
+              href={`/${locale}/media`}
+              className="text-primary hover:text-primary-dark font-semibold transition-colors"
+            >
+              {locale === "fa" ? "مشاهده همه" : "View All"}
+            </Link>
           </div>
 
-          {/* Horizontal Scrolling Carousel */}
-          <div
-            ref={coursesCarouselRef}
-            className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide"
-          >
-            {featuredCourses.map((course, index) => (
-              <div
-                key={index}
-                className="snap-center flex-shrink-0 w-3/4 md:w-1/3"
-              >
+          {latestArticles.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {latestArticles.map((article) => (
                 <ContentCard
-                  href={course.href}
-                  imageUrl={course.imageUrl}
-                  title={course.title}
-                  description={course.description}
-                  price={course.price}
-                  variant="light"
-                  level={course.level}
-                  rating={course.rating}
-                  locale={locale}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Latest Articles Carousel Section */}
-      <section className="py-16 bg-primary">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-background">
-              {locale === "fa" ? "آخرین مقالات" : "Latest Articles"}
-            </h2>
-            <div className="flex items-center gap-4">
-              <div
-                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-background rounded-full p-1`}
-              >
-                <button
-                  onClick={() => handleScroll(articlesCarouselRef, "left")}
-                  className="p-2 rounded-full hover:bg-background-darkest transition-colors"
-                  aria-label="Previous"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => handleScroll(articlesCarouselRef, "right")}
-                  className="p-2 rounded-full hover:bg-background-darkest transition-colors"
-                  aria-label="Next"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <Link
-                href={`/${locale}/articles`}
-                className="px-6 py-2 bg-background text-primary rounded-lg hover:bg-background-secondary transition-colors font-medium"
-              >
-                {locale === "fa" ? "مشاهده همه" : "View All"}
-              </Link>
-            </div>
-          </div>
-
-          {/* Horizontal Scrolling Carousel */}
-          <div
-            ref={articlesCarouselRef}
-            className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide"
-          >
-            {latestArticles.map((article, index) => (
-              <div
-                key={index}
-                className="snap-center flex-shrink-0 w-3/4 md:w-1/3"
-              >
-                <ContentCard
-                  href={article.href}
+                  key={article._id}
+                  href={`/${locale}/articles/${article.slug}`}
+                  title={locale === "fa" ? article.title.fa : article.title.en}
+                  description={
+                    locale === "fa"
+                      ? article.description.fa
+                      : article.description.en
+                  }
                   imageUrl={article.imageUrl}
-                  title={article.title}
-                  description={article.description}
-                  variant="light"
                   author={article.author}
-                  date={article.date}
+                  date={new Date(article.createdAt).toLocaleDateString(locale)}
                   locale={locale}
+                  variant="article-medium"
                 />
+              ))}
+            </div>
+          ) : (
+            /* Empty State for Articles */
+            <div className="text-center py-16">
+              <div className="w-20 h-20 bg-background rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg
+                  className="w-10 h-10 text-text-secondary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                  />
+                </svg>
               </div>
-            ))}
-          </div>
+              <h3 className="text-2xl font-bold text-text mb-2">
+                {locale === "fa"
+                  ? "مقاله‌ای یافت نشد"
+                  : "No Articles Available"}
+              </h3>
+              <p className="text-text-secondary">
+                {locale === "fa"
+                  ? "به زودی مقالات جدید منتشر خواهد شد"
+                  : "New articles will be published soon"}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Latest Products Carousel Section */}
-      <section className="py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-text-primary">
-              {locale === "fa" ? "آخرین محصولات" : "Latest Products"}
-            </h2>
-            <div className="flex items-center gap-4">
-              <div
-                className={` flex ${locale === "fa" ? "flex-row-reverse" : "flex-row"} gap-1 bg-background-secondary rounded-full p-1`}
-              >
-                <button
-                  onClick={() => handleScroll(productsCarouselRef, "left")}
-                  className="p-2 rounded-full hover:bg-background transition-colors"
-                  aria-label="Previous"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => handleScroll(productsCarouselRef, "right")}
-                  className="p-2 rounded-full hover:bg-background transition-colors"
-                  aria-label="Next"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <Link
-                href={`/${locale}/shop`}
-                className="bg-primary text-background px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
-              >
-                {locale === "fa" ? "مشاهده همه" : "View All"}
-              </Link>
-            </div>
-          </div>
-
-          {/* Horizontal Scrolling Carousel */}
-          <div
-            ref={productsCarouselRef}
-            className="flex overflow-x-auto space-x-4 p-4 snap-x snap-mandatory scrollbar-hide"
-          >
-            {latestProducts.map((product, index) => (
-              <div
-                key={index}
-                className="snap-center flex-shrink-0 w-3/4 md:w-1/3"
-              >
-                <ContentCard
-                  href={product.href}
-                  imageUrl={product.imageUrl}
-                  title={product.title}
-                  description={product.description}
-                  price={product.price}
-                  originalPrice={product.originalPrice}
-                  variant="light"
-                  rating={product.rating}
-                  locale={locale}
-                />
-              </div>
-            ))}
+      {/* Call to Action Section */}
+      <section className="py-20 px-6 bg-gradient-to-r from-primary to-primary-dark">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-background mb-6">
+            {t("HomePage.ctaTitle")}
+          </h2>
+          <p className="text-xl text-background-secondary mb-8 leading-relaxed max-w-2xl mx-auto">
+            {t("HomePage.ctaDescription")}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href={`/${locale}/courses`}
+              className="bg-accent-primary hover:bg-accent text-text-dark font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              {t("HomePage.browseCoursesBtn")}
+            </Link>
+            <Link
+              href={`/${locale}/about`}
+              className="bg-transparent hover:bg-background/10 border-2 border-background text-background font-semibold py-4 px-8 rounded-xl transition-all duration-200"
+            >
+              {t("HomePage.learnMoreBtn")}
+            </Link>
           </div>
         </div>
       </section>
