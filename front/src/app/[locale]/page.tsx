@@ -3,6 +3,8 @@ import Image from "next/image";
 import ContentCard from "@/components/organisms/ContentCard";
 import { getTranslations } from "next-intl/server";
 
+export const dynamic = "force-dynamic";
+
 interface Course {
   _id: string;
   title: {
