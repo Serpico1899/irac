@@ -1,8 +1,10 @@
 import { lesan, MongoClient, redis } from "@deps";
 import {
+  articles,
   categories,
   courses,
   files,
+  products,
   tags,
   users,
 } from "@model";
@@ -26,6 +28,8 @@ export const file = files();
 export const tag = tags();
 export const category = categories();
 export const course = courses();
+export const article = articles();
+export const product = products();
 
 export const { setAct, setService, getAtcsWithServices } = coreApp.acts;
 
