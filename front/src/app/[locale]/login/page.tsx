@@ -1,12 +1,13 @@
 "use client";
+
+export const dynamic = "force-dynamic";
+
 import LoginStepOne from "@/components/organisms/login/LoginStepOne";
 import LoginStepTwo from "@/components/organisms/login/LoginStepTwo";
 
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useTranslations } from "next-intl";
-
-export const dynamic = "force-dynamic";
 
 const Login = ({}) => {
   const [phone, setPhone] = useState("");
