@@ -148,7 +148,7 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale, namespace: "HomePage" });
   const { featuredCourses, latestArticles, latestProducts, meta } =
     await getHomePageData();
 
@@ -165,10 +165,10 @@ export default async function HomePage({
               dir={locale === "fa" ? "rtl" : "ltr"}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-background mb-6 leading-tight">
-                {t("HomePage.heroTitle")}
+                {t("heroTitle")}
               </h1>
               <p className="text-xl md:text-2xl text-background-secondary mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                {t("HomePage.heroSubtitle")}
+                {t("heroSubtitle")}
               </p>
 
               {/* Hero CTAs */}
@@ -177,13 +177,13 @@ export default async function HomePage({
                   href={`/${locale}/courses`}
                   className="bg-accent-primary hover:bg-accent text-text-dark font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
                 >
-                  {t("HomePage.viewCoursesBtn")}
+                  {t("viewCoursesBtn")}
                 </Link>
                 <Link
                   href={`/${locale}/workshops`}
                   className="bg-transparent hover:bg-background/10 border-2 border-background text-background font-semibold py-4 px-8 rounded-xl transition-all duration-200"
                 >
-                  {t("HomePage.workshopsBtn")}
+                  {t("workshopsBtn")}
                 </Link>
               </div>
 
@@ -232,7 +232,7 @@ export default async function HomePage({
                 />
                 <div className="mt-6 text-center">
                   <p className="text-background/90 text-lg font-medium">
-                    {t("HomePage.iracIntro")}
+                    {t("iracIntro")}
                   </p>
                 </div>
               </div>
@@ -246,10 +246,10 @@ export default async function HomePage({
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-              {t("HomePage.featuredCoursesTitle")}
+              {t("featuredCoursesTitle")}
             </h2>
             <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-              {t("HomePage.featuredCoursesDescription")}
+              {t("featuredCoursesDescription")}
             </p>
             <div className="w-24 h-1 bg-accent-primary mx-auto mt-6 rounded-full"></div>
           </div>
@@ -326,7 +326,7 @@ export default async function HomePage({
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-text">
-              {t("HomePage.latestArticlesTitle")}
+              {t("latestArticlesTitle")}
             </h2>
             <Link
               href={`/${locale}/media`}
@@ -393,23 +393,23 @@ export default async function HomePage({
       <section className="py-20 px-6 bg-gradient-to-r from-primary to-primary-dark">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-background mb-6">
-            {t("HomePage.ctaTitle")}
+            {t("ctaTitle")}
           </h2>
           <p className="text-xl text-background-secondary mb-8 leading-relaxed max-w-2xl mx-auto">
-            {t("HomePage.ctaDescription")}
+            {t("ctaDescription")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href={`/${locale}/courses`}
               className="bg-accent-primary hover:bg-accent text-text-dark font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              {t("HomePage.browseCoursesBtn")}
+              {t("browseCoursesBtn")}
             </Link>
             <Link
               href={`/${locale}/about`}
               className="bg-transparent hover:bg-background/10 border-2 border-background text-background font-semibold py-4 px-8 rounded-xl transition-all duration-200"
             >
-              {t("HomePage.learnMoreBtn")}
+              {t("learnMoreBtn")}
             </Link>
           </div>
         </div>
