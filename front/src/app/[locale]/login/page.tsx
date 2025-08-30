@@ -2,72 +2,30 @@
 
 export const dynamic = "force-dynamic";
 
-import { useState, useEffect } from "react";
-import LoginStepOne from "@/components/organisms/login/LoginStepOne";
-import LoginStepTwo from "@/components/organisms/login/LoginStepTwo";
-import { useAuth } from "@/context/AuthContext";
-import { useTranslations } from "next-intl";
-
-const Login = () => {
-  const [mounted, setMounted] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [step, setStep] = useState(1);
-  const { login } = useAuth();
-  const t = useTranslations("Login");
-
-  // Ensure this only renders on the client
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const handleCodeEntered = (
-    token: string,
-    level: string,
-    nationalNumber: string,
-  ) => {
-    // Convert level to our UserLevel type
-    const userLevel = level as "Ghost" | "Manager" | "Editor" | "Normal" | null;
-
-    // Call login from auth context
-    login(token, userLevel, nationalNumber);
-  };
-
-  // Return loading state during server-side rendering and hydration
-  if (!mounted) {
-    return (
-      <div className="w-full min-h-[calc(100vh-9rem)] p-6 bg-gray-300">
-        <div className="h-[calc(100vh-9rem)] bg-gray-100 flex items-center justify-center">
-          <div className="bg-background p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-700 mx-auto"></div>
-              <p className="mt-4 text-gray-700">Loading...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+export default function LoginPage() {
   return (
-    <div className="w-full min-h-[calc(100vh-9rem)] p-6 bg-gray-300">
-      <div className="h-[calc(100vh-9rem)] bg-gray-100 flex items-center justify-center">
-        <div className="bg-background p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
-          <h1 className="text-xl sm:text-2xl font-bold mb-4 text-center text-gray-700">
-            {step === 1 ? t("stepOneTitle") : t("stepTwoTitle")}
-          </h1>
-          {step === 1 ? (
-            <LoginStepOne setStep={setStep} setPhone={setPhone} phone={phone} />
-          ) : (
-            <LoginStepTwo
-              setStep={setStep}
-              phone={phone}
-              onCodeEntered={handleCodeEntered}
-            />
-          )}
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-6">
+        <h1 className="text-2xl font-bold text-center text-gray-900 mb-8">
+          Login
+        </h1>
+
+        <div className="text-center">
+          <p className="text-gray-600 mb-4">
+            Login functionality is being prepared.
+          </p>
+          <p className="text-sm text-gray-500">Please check back soon.</p>
+        </div>
+
+        <div className="mt-8">
+          <a
+            href="/"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Back to Home
+          </a>
         </div>
       </div>
     </div>
   );
-};
-
-export default Login;
+}
