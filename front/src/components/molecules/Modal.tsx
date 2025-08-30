@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { useScrollLock } from "@/hooks/useScrollLock";
 
 export interface ModalProps {
   isOpen: boolean;
@@ -52,7 +51,17 @@ const Modal: React.FC<ModalProps> = ({
   }, [isOpen, onClose]);
 
   // Prevent background scrolling when modal is open
-  useScrollLock(isOpen);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
