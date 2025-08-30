@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import ContentCard from "@/components/organisms/ContentCard";
-import { Link } from "@/navigation"; // Use the type-safe Link
 
 // Define a clear type for the Course data
 interface Course {
@@ -20,8 +19,8 @@ interface Course {
   imageUrl?: string;
 }
 
-// Define the type for the API response
-interface ApiResponse {
+// Define the type for the API response from our unified endpoint
+interface HomePageDataResponse {
   success: boolean;
   data?: {
     featuredCourses: Course[];
@@ -31,12 +30,12 @@ interface ApiResponse {
   message?: string;
 }
 
-// Correctly type the props for BOTH the page and metadata function
+// Correctly type the props for Next.js Server Components
 type PageProps = {
   params: { locale: string };
 };
 
-// SEO Metadata Generation - FIXED
+// SEO Metadata Generation
 export async function generateMetadata({
   params: { locale },
 }: PageProps): Promise<Metadata> {
@@ -52,18 +51,17 @@ export async function generateMetadata({
   };
 }
 
-// Data Fetching Function - CORRECTED TO USE THE UNIFIED ENDPOINT
+// Data Fetching Function
 async function getCourses(): Promise<Course[]> {
   try {
-    const response = await fetch("http://localhost:1404/lesan", {
+    const response = await fetch("http://backend:1404/lesan", {
+      // Use Docker network hostname
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         service: "main",
-        model: "page", // Corrected model
-        act: "getHomePageData", // Corrected act
+        model: "page",
+        act: "getHomePageData",
         details: {},
       }),
       next: { revalidate: 3600 }, // Revalidate every hour
@@ -73,9 +71,8 @@ async function getCourses(): Promise<Course[]> {
       throw new Error(`API error! status: ${response.status}`);
     }
 
-    const result: ApiResponse = await response.json();
+    const result: HomePageDataResponse = await response.json();
 
-    // Check the nested data structure
     if (!result.success || !result.data || !result.data.featuredCourses) {
       console.error(
         "Failed to fetch courses from homepage data:",
@@ -91,14 +88,13 @@ async function getCourses(): Promise<Course[]> {
   }
 }
 
-// Main Courses Page Component - FIXED
+// Main Courses Page Component
 export default async function CoursesPage({ params: { locale } }: PageProps) {
   const t = await getTranslations({ locale, namespace: "HomePage" });
   const courses = await getCourses();
 
   return (
     <main className="min-h-screen bg-background">
-      {/* Hero Section */}
       <section className="bg-primary py-20 px-6 text-center text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           {t("featuredCoursesTitle")}
@@ -108,7 +104,6 @@ export default async function CoursesPage({ params: { locale } }: PageProps) {
         </p>
       </section>
 
-      {/* Courses Grid Section */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           {courses.length > 0 ? (
@@ -116,7 +111,7 @@ export default async function CoursesPage({ params: { locale } }: PageProps) {
               {courses.map((course) => (
                 <ContentCard
                   key={course._id}
-                  href={`/${locale}/courses/${course._id}`}
+                  href={`/courses/${course._id}`}
                   title={locale === "fa" ? course.title.fa : course.title.en}
                   description={
                     locale === "fa"
@@ -133,15 +128,14 @@ export default async function CoursesPage({ params: { locale } }: PageProps) {
               ))}
             </div>
           ) : (
-            /* Empty State */
             <div className="text-center py-24 text-text-light">
               <h3 className="text-2xl font-bold text-text mb-4">
                 {locale === "fa" ? "دوره‌ای یافت نشد" : "No Courses Found"}
               </h3>
               <p>
                 {locale === "fa"
-                  ? "در حال حاضر هیچ دوره‌ای در دسترس نیست. لطفاً بعداً دوباره بررسی کنید."
-                  : "There are currently no courses available. Please check back later."}
+                  ? "در حال حاضر هیچ دوره‌ای در دسترس نیست."
+                  : "There are currently no courses available."}
               </p>
             </div>
           )}
