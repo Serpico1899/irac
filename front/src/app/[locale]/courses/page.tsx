@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import ContentCard from "@/components/organisms/ContentCard";
 
+export const dynamic = "force-dynamic";
+
 // Define a clear type for the Course data
 interface Course {
   _id: string;
