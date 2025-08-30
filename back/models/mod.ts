@@ -5,3 +5,4 @@ export * from "./file.ts";
 export * from "./user.ts";
 export * from "./tag.ts";
 export * from "./category.ts";
+export * from "./course.ts";
