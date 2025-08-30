@@ -12,22 +12,22 @@ import { removeUserSetup } from "./removeUser/mod.ts";
 import { countUsersSetup } from "./countUsers/mod.ts";
 import { toggleFavArticleSetup } from "./toggleFavArticle/mod.ts";
 import { updateUserRelationsSetup } from "./updateUserRelations/mod.ts";
-import { dashboardStatisticSetup } from "./dashboardStatistic/mod.ts";
+
 
 export const userSetup = () => {
-	addUserSetup();
-	getMeSetup();
-	getUserSetup();
-	loginUserSetup();
-	loginReqUserSetup();
-	tempUserSetup();
-	updateUserSetup();
-	registerUserSetup();
-	changeMobileSetup();
-	getUsersSetup();
-	removeUserSetup();
-	countUsersSetup();
-	toggleFavArticleSetup();
-	updateUserRelationsSetup();
-	dashboardStatisticSetup();
+  addUserSetup();
+  getMeSetup();
+  getUserSetup();
+  loginUserSetup();
+  loginReqUserSetup();
+  tempUserSetup();
+  updateUserSetup();
+  registerUserSetup();
+  changeMobileSetup();
+  getUsersSetup();
+  removeUserSetup();
+  countUsersSetup();
+  toggleFavArticleSetup();
+  updateUserRelationsSetup();
+
 };
