@@ -1,4 +1,4 @@
-import { object, optional } from "../../../../deps.ts";
+import { object, optional } from "@deps";
 
 export const getHomePageDataValidator = () => {
   return object({
