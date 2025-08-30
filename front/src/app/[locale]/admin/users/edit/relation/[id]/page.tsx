@@ -2,6 +2,8 @@ import { getUser } from "@/app/actions/user/getUser";
 import { EditUserRelations } from "@/components/organisms/user/EditUserRelations";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 const FormComponent = async ({
   params,
 }: {
