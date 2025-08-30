@@ -1,5 +1,6 @@
 import { coreApp } from "../mod.ts";
 import {
+  boolean,
   number,
   object,
   optional,
@@ -25,6 +26,7 @@ export const course_pure = {
   price: number(),
   duration: string(),
   imageUrl: optional(string()),
+  isFeatured: optional(boolean()),
   ...createUpdateAt,
 };
 
