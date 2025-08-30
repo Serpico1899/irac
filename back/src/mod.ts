@@ -3,6 +3,7 @@ import { userSetup } from "./user/mod.ts";
 import { tagSetup } from "./tag/mod.ts";
 import { categorySetup } from "./category/mod.ts";
 import { courseSetup } from "./course/mod.ts";
+import { pageSetup } from "./page/mod.ts";
 
 export const functionsSetup = () => {
   fileSetup();
@@ -10,4 +11,5 @@ export const functionsSetup = () => {
   tagSetup();
   categorySetup();
   courseSetup();
+  pageSetup();
 };
