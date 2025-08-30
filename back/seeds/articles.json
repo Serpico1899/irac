@@ -1,0 +1,34 @@
+[
+  {
+    "title": {
+      "en": "The Sacred Geometry in Mosque Architecture",
+      "fa": "هندسه مقدس در معماری مسجد"
+    },
+    "authorName": "Dr. Hassan Fathi",
+    "imageUrl": "https://example.com/images/sacred-geometry-mosque.jpg"
+  },
+  {
+    "title": {
+      "en": "Water Features in Islamic Garden Design",
+      "fa": "عناصر آبی در طراحی باغ اسلامی"
+    },
+    "authorName": "Prof. Maryam Tabatabaei",
+    "imageUrl": "https://example.com/images/water-features-islamic-gardens.jpg"
+  },
+  {
+    "title": {
+      "en": "Preservation of Historical Islamic Buildings",
+      "fa": "حفظ و نگهداری ساختمان‌های تاریخی اسلامی"
+    },
+    "authorName": "Dr. Ahmad Mansouri",
+    "imageUrl": "https://example.com/images/historical-preservation.jpg"
+  },
+  {
+    "title": {
+      "en": "Calligraphy and Architecture: A Harmonious Blend",
+      "fa": "خوشنویسی و معماری: تلفیقی هماهنگ"
+    },
+    "authorName": "Master Reza Taghavi",
+    "imageUrl": "https://example.com/images/calligraphy-architecture.jpg"
+  }
+]
