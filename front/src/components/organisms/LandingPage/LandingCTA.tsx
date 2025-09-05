@@ -444,7 +444,7 @@ export default function LandingCTA({
                           : button.text.toLowerCase().includes("ثبت") ||
                               button.text.toLowerCase().includes("enroll")
                             ? "enroll"
-                            : "primary_cta";
+                            : "learn_more";
 
                       // Extract content type from context (would need to be passed as prop)
                       trackLandingPageConversion(
