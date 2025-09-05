@@ -325,6 +325,13 @@ export const smsApi = {
         user.last_login = new Date().toISOString();
       }
 
+      if (!user) {
+        return {
+          success: false,
+          error: "خطا در ایجاد کاربر",
+        };
+      }
+
       const token = `guest_token_${user.id}_${Date.now()}`;
       const isNewUser = !mockSMSUsers.some(
         (u) => u.id === user.id && u.last_login !== user.last_login,
