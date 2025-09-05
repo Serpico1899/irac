@@ -12,12 +12,29 @@ import { useRouter } from "next/navigation";
 
 type UserLevel = "Ghost" | "Manager" | "Editor" | "Normal" | null;
 
+interface AuthUser {
+  id: string;
+  email: string;
+  name: string;
+  nationalNumber?: string;
+}
+
 interface AuthContextType {
   isAuthenticated: boolean;
   userLevel: UserLevel;
-  login: (token: string, level: UserLevel, nationalNumber: string) => void;
+  user: AuthUser | null;
+  login: (
+    token: string,
+    level: UserLevel,
+    nationalNumber: string,
+    userData?: AuthUser,
+  ) => void;
   logout: () => void;
-  setInitialAuthState: (isAuth: boolean, level: UserLevel) => void;
+  setInitialAuthState: (
+    isAuth: boolean,
+    level: UserLevel,
+    userData?: AuthUser,
+  ) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -33,6 +50,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userLevel, setUserLevel] = useState<UserLevel>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -52,7 +70,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         } catch (parseError) {
           // If it's not valid JSON, the server might have set it in a different format
           // Just use the default level
-          console.warn("Could not parse user cookie as JSON, using default level " + parseError);
+          console.warn(
+            "Could not parse user cookie as JSON, using default level " +
+              parseError,
+          );
         }
 
         setIsAuthenticated(true);
@@ -68,9 +89,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [isAuthenticated]);
 
-  const setInitialAuthState = (isAuth: boolean, level: UserLevel) => {
+  const setInitialAuthState = (
+    isAuth: boolean,
+    level: UserLevel,
+    userData?: AuthUser,
+  ) => {
     setIsAuthenticated(isAuth);
     setUserLevel(level);
+    setUser(userData || null);
   };
 
   const login = (token: string, level: UserLevel, nationalNumber: string) => {
@@ -90,7 +116,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     Cookies.remove("national_number", { path: "/" });
     Cookies.remove("user", { path: "/" });
 
-    setInitialAuthState(false, null)
+    setIsAuthenticated(false);
+    setUserLevel(null);
+    setUser(null);
 
     // Redirect to home page
     router.replace("/");
@@ -98,7 +126,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, userLevel, login, logout, setInitialAuthState }}
+      value={{
+        isAuthenticated,
+        userLevel,
+        user,
+        login,
+        logout,
+        setInitialAuthState,
+      }}
     >
       {children}
     </AuthContext.Provider>
