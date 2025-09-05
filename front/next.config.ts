@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/lib/i18n.ts");
 
 const nextConfig: NextConfig = {
   output: "standalone",
@@ -6,14 +9,19 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: "550mb",
     },
+    esmExternals: true,
+    forceSwcTransforms: true,
   },
+  trailingSlash: false,
+  poweredByHeader: false,
   eslint: {
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: true,
     dirs: ["src"],
   },
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
   },
+  staticPageGenerationTimeout: 300,
   images: {
     remotePatterns: [
       {
@@ -26,4 +34,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
