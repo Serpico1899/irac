@@ -69,7 +69,7 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
 
   const phoneInputRef = useRef<HTMLInputElement>(null);
   const codeInputRefs = useRef<HTMLInputElement[]>([]);
-  const resendTimerRef = useRef<NodeJS.Timeout>();
+  const resendTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -82,14 +82,14 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
 
   // Start countdown timer
   const startCountdown = (seconds: number) => {
-    setState(prev => ({ ...prev, timeLeft: seconds, canResend: false }));
+    setState((prev) => ({ ...prev, timeLeft: seconds, canResend: false }));
 
     if (resendTimerRef.current) {
       clearInterval(resendTimerRef.current);
     }
 
     resendTimerRef.current = setInterval(() => {
-      setState(prev => {
+      setState((prev) => {
         const newTimeLeft = prev.timeLeft - 1;
         if (newTimeLeft <= 0) {
           if (resendTimerRef.current) {
@@ -121,20 +121,20 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
   const handlePhoneNumberChange = (value: string) => {
     // Allow only digits, +, and spaces
     const cleaned = value.replace(/[^\d+\s]/g, "");
-    setState(prev => ({ ...prev, phoneNumber: cleaned, error: "" }));
+    setState((prev) => ({ ...prev, phoneNumber: cleaned, error: "" }));
   };
 
   // Send SMS verification code
   const sendVerificationCode = async () => {
     if (!validatePhoneNumber(state.phoneNumber)) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "لطفاً شماره تلفن صحیح وارد کنید",
       }));
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "" }));
 
     try {
       const request: SMSVerificationRequest = {
@@ -145,7 +145,7 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
       const response = await smsApi.sendVerificationCode(request);
 
       if (response.success && response.data) {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           step: "verification",
           verificationId: response.data!.verification_id,
@@ -154,14 +154,14 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
         }));
         startCountdown(response.data.can_resend_after);
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: response.error || "خطا در ارسال کد تأیید",
           isLoading: false,
         }));
       }
     } catch (error) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در ارسال کد تأیید",
         isLoading: false,
@@ -177,7 +177,7 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
     newCode[index] = value;
     const updatedCode = newCode.join("");
 
-    setState(prev => ({ ...prev, verificationCode: updatedCode, error: "" }));
+    setState((prev) => ({ ...prev, verificationCode: updatedCode, error: "" }));
 
     // Auto-focus next input
     if (value && index < 5) {
@@ -193,9 +193,13 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
   // Handle backspace in code input
   const handleCodeKeyDown = (
     index: number,
-    event: React.KeyboardEvent<HTMLInputElement>
+    event: React.KeyboardEvent<HTMLInputElement>,
   ) => {
-    if (event.key === "Backspace" && !state.verificationCode[index] && index > 0) {
+    if (
+      event.key === "Backspace" &&
+      !state.verificationCode[index] &&
+      index > 0
+    ) {
       codeInputRefs.current[index - 1]?.focus();
     }
   };
@@ -205,11 +209,11 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
     const codeToVerify = code || state.verificationCode;
 
     if (codeToVerify.length !== 6) {
-      setState(prev => ({ ...prev, error: "لطفاً کد ۶ رقمی را وارد کنید" }));
+      setState((prev) => ({ ...prev, error: "لطفاً کد ۶ رقمی را وارد کنید" }));
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "" }));
 
     try {
       const request: SMSCodeVerifyRequest = {
@@ -229,7 +233,7 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
             nationalNumber: response.data.phone_number,
           });
 
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             step: "success",
             success: response.data!.message,
@@ -243,21 +247,21 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
           }
         } else {
           // New user - show guest info form
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             step: "guest_info",
             isLoading: false,
           }));
         }
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: response.error || "کد تأیید اشتباه است",
           isLoading: false,
         }));
       }
     } catch (error) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در تأیید کد",
         isLoading: false,
@@ -268,11 +272,11 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
   // Complete guest login
   const completeGuestLogin = async () => {
     if (!state.guestName.trim()) {
-      setState(prev => ({ ...prev, error: "لطفاً نام خود را وارد کنید" }));
+      setState((prev) => ({ ...prev, error: "لطفاً نام خود را وارد کنید" }));
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "" }));
 
     try {
       const request: SMSGuestLoginRequest = {
@@ -292,7 +296,7 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
           nationalNumber: response.data.user.phone,
         });
 
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           step: "success",
           success: response.data!.message,
@@ -305,14 +309,14 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
           setTimeout(() => router.push(redirectPath), 1500);
         }
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: response.error || "خطا در ورود مهمان",
           isLoading: false,
         }));
       }
     } catch (error) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در ورود مهمان",
         isLoading: false,
@@ -322,13 +326,13 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
 
   // Resend verification code
   const resendCode = async () => {
-    setState(prev => ({ ...prev, isLoading: true, error: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "" }));
 
     try {
       const response = await smsApi.resendCode(state.verificationId);
 
       if (response.success && response.data) {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           success: response.data!.message,
           verificationCode: "",
@@ -337,19 +341,19 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
         startCountdown(response.data.can_resend_after);
 
         // Clear code inputs
-        codeInputRefs.current.forEach(input => {
+        codeInputRefs.current.forEach((input) => {
           if (input) input.value = "";
         });
         codeInputRefs.current[0]?.focus();
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: response.error || "خطا در ارسال مجدد کد",
           isLoading: false,
         }));
       }
     } catch (error) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در ارسال مجدد کد",
         isLoading: false,
@@ -359,7 +363,7 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
 
   // Go back to phone input
   const goBackToPhone = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       step: "phone",
       verificationCode: "",
@@ -529,7 +533,11 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
               type="text"
               value={state.guestName}
               onChange={(e) =>
-                setState(prev => ({ ...prev, guestName: e.target.value, error: "" }))
+                setState((prev) => ({
+                  ...prev,
+                  guestName: e.target.value,
+                  error: "",
+                }))
               }
               placeholder="نام خود را وارد کنید"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -544,7 +552,7 @@ const SMSLogin: React.FC<SMSLoginProps> = ({
               type="email"
               value={state.guestEmail}
               onChange={(e) =>
-                setState(prev => ({ ...prev, guestEmail: e.target.value }))
+                setState((prev) => ({ ...prev, guestEmail: e.target.value }))
               }
               placeholder="example@email.com"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
