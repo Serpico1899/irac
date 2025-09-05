@@ -29,7 +29,11 @@ import type {
 interface SMS2FASettingsState {
   isEnabled: boolean;
   phoneNumber: string;
-  step: "settings" | "phone_verification" | "enable_success" | "disable_confirm";
+  step:
+    | "settings"
+    | "phone_verification"
+    | "enable_success"
+    | "disable_confirm";
   verificationId: string;
   verificationCode: string;
   backupCodes: string[];
@@ -60,7 +64,7 @@ const SMS2FASettings: React.FC = () => {
     showBackupCodes: false,
   });
 
-  const resendTimerRef = React.useRef<NodeJS.Timeout>();
+  const resendTimerRef = React.useRef<NodeJS.Timeout | null>(null);
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -73,14 +77,14 @@ const SMS2FASettings: React.FC = () => {
 
   // Start countdown timer for resend
   const startCountdown = (seconds: number) => {
-    setState(prev => ({ ...prev, timeLeft: seconds, canResend: false }));
+    setState((prev) => ({ ...prev, timeLeft: seconds, canResend: false }));
 
     if (resendTimerRef.current) {
       clearInterval(resendTimerRef.current);
     }
 
     resendTimerRef.current = setInterval(() => {
-      setState(prev => {
+      setState((prev) => {
         const newTimeLeft = prev.timeLeft - 1;
         if (newTimeLeft <= 0) {
           if (resendTimerRef.current) {
@@ -102,11 +106,11 @@ const SMS2FASettings: React.FC = () => {
   // Send verification code
   const sendVerificationCode = async () => {
     if (!state.phoneNumber) {
-      setState(prev => ({ ...prev, error: "شماره تلفن را وارد کنید" }));
+      setState((prev) => ({ ...prev, error: "شماره تلفن را وارد کنید" }));
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: "", success: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "", success: "" }));
 
     try {
       const request: SMSVerificationRequest = {
@@ -117,7 +121,7 @@ const SMS2FASettings: React.FC = () => {
       const response = await smsApi.sendVerificationCode(request);
 
       if (response.success && response.data) {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           verificationId: response.data!.verification_id,
           step: "phone_verification",
@@ -126,30 +130,30 @@ const SMS2FASettings: React.FC = () => {
 
         startCountdown(60); // 1 minute countdown
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: response.error || "خطا در ارسال کد تأیید",
         }));
       }
     } catch (err) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در اتصال به سرور",
       }));
       console.error("Error sending verification code:", err);
     } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
   // Verify code and enable/disable 2FA
   const verifyAndToggle2FA = async () => {
     if (!state.verificationCode || state.verificationCode.length !== 6) {
-      setState(prev => ({ ...prev, error: "کد 6 رقمی را وارد کنید" }));
+      setState((prev) => ({ ...prev, error: "کد 6 رقمی را وارد کنید" }));
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "" }));
 
     try {
       // First verify the SMS code
@@ -161,7 +165,7 @@ const SMS2FASettings: React.FC = () => {
       const verifyResponse = await smsApi.verifyCode(verifyRequest);
 
       if (!verifyResponse.success) {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: verifyResponse.error || "کد تأیید نادرست است",
         }));
@@ -180,7 +184,7 @@ const SMS2FASettings: React.FC = () => {
       if (twoFAResponse.success && twoFAResponse.data) {
         const newEnabledState = twoFAResponse.data.two_factor_enabled;
 
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           isEnabled: newEnabledState,
           backupCodes: twoFAResponse.data!.backup_codes || [],
@@ -190,19 +194,19 @@ const SMS2FASettings: React.FC = () => {
           verificationId: "",
         }));
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: twoFAResponse.error || "خطا در تنظیم احراز هویت دو مرحله‌ای",
         }));
       }
     } catch (err) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در اتصال به سرور",
       }));
       console.error("Error toggling 2FA:", err);
     } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
@@ -211,9 +215,9 @@ const SMS2FASettings: React.FC = () => {
     try {
       const codesText = state.backupCodes.join("\n");
       await navigator.clipboard.writeText(codesText);
-      setState(prev => ({ ...prev, success: "کدهای پشتیبان کپی شدند" }));
+      setState((prev) => ({ ...prev, success: "کدهای پشتیبان کپی شدند" }));
     } catch (err) {
-      setState(prev => ({ ...prev, error: "خطا در کپی کردن" }));
+      setState((prev) => ({ ...prev, error: "خطا در کپی کردن" }));
     }
   };
 
@@ -221,18 +225,18 @@ const SMS2FASettings: React.FC = () => {
   const handlePhoneChange = (value: string) => {
     // Allow only digits and common formats
     const cleaned = value.replace(/[^\d+]/g, "");
-    setState(prev => ({ ...prev, phoneNumber: cleaned, error: "" }));
+    setState((prev) => ({ ...prev, phoneNumber: cleaned, error: "" }));
   };
 
   const handleCodeChange = (value: string) => {
     // Allow only 6 digits
     const cleaned = value.replace(/\D/g, "").slice(0, 6);
-    setState(prev => ({ ...prev, verificationCode: cleaned, error: "" }));
+    setState((prev) => ({ ...prev, verificationCode: cleaned, error: "" }));
   };
 
   // Reset to settings view
   const resetToSettings = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       step: "settings",
       verificationId: "",
@@ -358,7 +362,8 @@ const SMS2FASettings: React.FC = () => {
               ) : (
                 <ShieldCheckIcon className="h-5 w-5" />
               )}
-              {state.isEnabled ? "غیرفعال کردن" : "فعال کردن"} احراز هویت دو مرحله‌ای
+              {state.isEnabled ? "غیرفعال کردن" : "فعال کردن"} احراز هویت دو
+              مرحله‌ای
             </button>
           </div>
         )}
@@ -422,7 +427,9 @@ const SMS2FASettings: React.FC = () => {
             <div className="flex flex-col gap-3">
               <button
                 onClick={verifyAndToggle2FA}
-                disabled={state.isLoading || state.verificationCode.length !== 6}
+                disabled={
+                  state.isLoading || state.verificationCode.length !== 6
+                }
                 className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
               >
                 {state.isLoading ? (
@@ -469,10 +476,12 @@ const SMS2FASettings: React.FC = () => {
                     </span>
                   </div>
                   <button
-                    onClick={() => setState(prev => ({
-                      ...prev,
-                      showBackupCodes: !prev.showBackupCodes
-                    }))}
+                    onClick={() =>
+                      setState((prev) => ({
+                        ...prev,
+                        showBackupCodes: !prev.showBackupCodes,
+                      }))
+                    }
                     className="text-orange-700 hover:text-orange-800"
                   >
                     {state.showBackupCodes ? (
@@ -484,8 +493,8 @@ const SMS2FASettings: React.FC = () => {
                 </div>
 
                 <p className="text-sm text-orange-800 mb-3">
-                  این کدها را در جای امنی نگهداری کنید. در صورت عدم دسترسی به تلفن،
-                  می‌توانید از آن‌ها استفاده کنید.
+                  این کدها را در جای امنی نگهداری کنید. در صورت عدم دسترسی به
+                  تلفن، می‌توانید از آن‌ها استفاده کنید.
                 </p>
 
                 {state.showBackupCodes && (
@@ -550,8 +559,8 @@ const SMS2FASettings: React.FC = () => {
                 چرا احراز هویت دو مرحله‌ای؟
               </h4>
               <p className="text-sm text-blue-800">
-                حتی اگر رمز عبور شما در اختیار دیگران قرار گیرد،
-                بدون دسترسی به تلفن شما نمی‌توانند وارد حساب شوند.
+                حتی اگر رمز عبور شما در اختیار دیگران قرار گیرد، بدون دسترسی به
+                تلفن شما نمی‌توانند وارد حساب شوند.
               </p>
             </div>
           </div>
@@ -565,8 +574,8 @@ const SMS2FASettings: React.FC = () => {
                 چگونه کار می‌کند؟
               </h4>
               <p className="text-sm text-green-800">
-                پس از ورود با رمز عبور، کدی به تلفن همراه شما ارسال می‌شود
-                که باید آن را وارد کنید.
+                پس از ورود با رمز عبور، کدی به تلفن همراه شما ارسال می‌شود که
+                باید آن را وارد کنید.
               </p>
             </div>
           </div>
