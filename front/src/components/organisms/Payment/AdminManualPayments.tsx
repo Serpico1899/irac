@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/context/AuthContext";
 import { manualPaymentApi } from "@/services/payment/manualPaymentApi";
+import type { ManualPayment } from "@/types";
 import {
   CreditCardIcon,
   ClockIcon,
@@ -116,7 +117,7 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
         query.user_id = filters.userId;
       }
 
-      const response = await manualPaymentApi.getPaymentHistory(query);
+      const response = await manualPaymentApi.getManualPayments(query);
 
       if (response.success && response.data) {
         setPayments(response.data.payments);
@@ -132,7 +133,7 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
         if (filters.search) {
           const searchTerm = filters.search.toLowerCase();
           const filtered = response.data.payments.filter(
-            (payment) =>
+            (payment: ManualPayment) =>
               payment.title.toLowerCase().includes(searchTerm) ||
               payment.description.toLowerCase().includes(searchTerm) ||
               payment._id.toLowerCase().includes(searchTerm) ||
@@ -155,7 +156,7 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
     if (isAuthenticated && user) {
       loadPayments();
     }
-  }, [isAuthenticated, user, filters]);
+  }, [isAuthenticated, user, filters, loadPayments]);
 
   // Format date and time
   const formatDateTime = (dateTime: string) => {
@@ -211,7 +212,7 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
     setError("");
 
     try {
-      const response = await manualPaymentApi.updatePayment(paymentId, {
+      const response = await manualPaymentApi.updateManualPayment(paymentId, {
         status: "approved",
         admin_notes: notes,
       });
@@ -239,7 +240,7 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
     setError("");
 
     try {
-      const response = await manualPaymentApi.updatePayment(paymentId, {
+      const response = await manualPaymentApi.updateManualPayment(paymentId, {
         status: "rejected",
         rejection_reason: reason,
         admin_notes: notes,
@@ -389,7 +390,10 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
                     type="text"
                     value={filters.search}
                     onChange={(e) =>
-                      setFilters((prev) => ({ ...prev, search: e.target.value }))
+                      setFilters((prev) => ({
+                        ...prev,
+                        search: e.target.value,
+                      }))
                     }
                     placeholder="عنوان، شناسه یا کاربر"
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -445,7 +449,10 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
                   type="date"
                   value={filters.dateFrom}
                   onChange={(e) =>
-                    setFilters((prev) => ({ ...prev, dateFrom: e.target.value }))
+                    setFilters((prev) => ({
+                      ...prev,
+                      dateFrom: e.target.value,
+                    }))
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -581,7 +588,9 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
                     <div
                       className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${statusConfig.color}`}
                     >
-                      <StatusIcon className={`h-3 w-3 ${statusConfig.iconColor}`} />
+                      <StatusIcon
+                        className={`h-3 w-3 ${statusConfig.iconColor}`}
+                      />
                       {statusConfig.label}
                     </div>
 
@@ -591,8 +600,7 @@ const AdminManualPayments: React.FC<AdminManualPaymentsProps> = ({
                       </p>
                       {payment.payment_deadline && (
                         <p className="text-xs text-red-600">
-                          مهلت:{" "}
-                          {formatDateTime(payment.payment_deadline).date}
+                          مهلت: {formatDateTime(payment.payment_deadline).date}
                         </p>
                       )}
                     </div>
