@@ -124,9 +124,11 @@ class Analytics {
       content_id: slug,
       action: action,
       event_label: `${type}_${slug}_${action}`,
-      content_group1: "landing-page",
-      content_group2: type,
-      content_group3: slug,
+      custom_parameters: {
+        content_group1: "landing-page",
+        content_group2: type,
+        content_group3: slug,
+      },
     });
 
     // Track specific conversion goals
