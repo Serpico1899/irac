@@ -4,6 +4,35 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { formatPrice, formatNumber } from "@/utils/currency";
+import AddToCartButton from "@/components/molecules/AddToCartButton";
+
+interface CourseData {
+  _id: string;
+  name: string;
+  name_en?: string;
+  slug: string;
+  price: number;
+  original_price?: number;
+  discounted_price?: number;
+  is_free?: boolean;
+  featured_image?: {
+    url: string;
+    alt?: string;
+  };
+  instructor?: {
+    details?: {
+      name?: string;
+      name_en?: string;
+      first_name?: string;
+      last_name?: string;
+    };
+    name?: string;
+    name_en?: string;
+  };
+  duration_hours?: number;
+  level?: "Beginner" | "Intermediate" | "Advanced";
+  type: "Course" | "Workshop" | "Bootcamp" | "Seminar";
+}
 
 interface ContentCardProps {
   href: string;
@@ -27,6 +56,8 @@ interface ContentCardProps {
   reviews?: number;
   rating?: number;
   commentCount?: number;
+  courseData?: CourseData;
+  showAddToCart?: boolean;
 }
 
 const ContentCard: React.FC<ContentCardProps> = ({
@@ -45,6 +76,8 @@ const ContentCard: React.FC<ContentCardProps> = ({
   reviews = 0,
   rating,
   commentCount = 0,
+  courseData,
+  showAddToCart = false,
 }) => {
   const [imageError, setImageError] = useState(false);
 
@@ -183,18 +216,29 @@ const ContentCard: React.FC<ContentCardProps> = ({
             </div>
           </div>
 
-          {price && (
+          {(price || courseData) && (
             <div className="px-6 py-4 bg-gray-800 border-t border-gray-700">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-3">
                 {originalPrice && (
                   <span className="text-sm text-gray-400 line-through">
                     {formatPrice(originalPrice, locale)}
                   </span>
                 )}
                 <div className="text-xl font-bold text-background">
-                  {formatPrice(price, locale)}
+                  {price
+                    ? formatPrice(price, locale)
+                    : courseData &&
+                      formatPrice(courseData.price.toString(), locale)}
                 </div>
               </div>
+              {courseData && showAddToCart && (
+                <AddToCartButton
+                  course={courseData}
+                  variant="outline"
+                  size="sm"
+                  className="w-full text-white border-white hover:bg-white hover:text-gray-800"
+                />
+              )}
             </div>
           )}
         </div>
@@ -317,9 +361,9 @@ const ContentCard: React.FC<ContentCardProps> = ({
         )}
 
         {/* Price section */}
-        {price && (
+        {(price || courseData) && (
           <div className="px-6 pb-6 mt-auto">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 {originalPrice && (
                   <span className="text-sm text-text-lighter line-through">
@@ -327,10 +371,21 @@ const ContentCard: React.FC<ContentCardProps> = ({
                   </span>
                 )}
                 <span className="text-lg font-bold text-primary">
-                  {formatPrice(price, locale)}
+                  {price
+                    ? formatPrice(price, locale)
+                    : courseData &&
+                      formatPrice(courseData.price.toString(), locale)}
                 </span>
               </div>
             </div>
+            {courseData && showAddToCart && (
+              <AddToCartButton
+                course={courseData}
+                variant="default"
+                size="sm"
+                className="w-full"
+              />
+            )}
           </div>
         )}
       </article>
