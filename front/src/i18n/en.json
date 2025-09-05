@@ -103,7 +103,32 @@
     "updateSuccess": "Updated successfully",
     "userDashboard": "User Dashboard",
     "deleteTooltip": "Delete",
-    "editTooltip": "Edit"
+    "editTooltip": "Edit",
+    "paymentsManagement": "Payments Management",
+    "manualPayments": "Manual Payments",
+    "createPaymentRequest": "Create Payment Request",
+    "paymentsList": "Payments List",
+    "paymentDetails": "Payment Details",
+    "approvePayment": "Approve Payment",
+    "rejectPayment": "Reject Payment",
+    "paymentApproved": "Payment Approved",
+    "paymentRejected": "Payment Rejected",
+    "paymentPending": "Pending Review",
+    "paymentCancelled": "Cancelled",
+    "totalPayments": "Total Payments",
+    "pendingPayments": "Pending Payments",
+    "approvedPayments": "Approved Payments",
+    "totalAmount": "Total Amount",
+    "userSelection": "User Selection",
+    "paymentTitle": "Payment Title",
+    "paymentDescription": "Payment Description",
+    "paymentAmount": "Payment Amount",
+    "paymentDeadline": "Payment Deadline",
+    "paymentInstructions": "Payment Instructions",
+    "proofOfPayment": "Proof of Payment",
+    "adminNotes": "Admin Notes",
+    "rejectionReason": "Rejection Reason",
+    "viewProof": "View Proof"
   },
   "Common": {
     "viewAll": "View All",
@@ -159,5 +184,306 @@
     "backHome": "Back to Home",
     "or": "or",
     "goBack": "go back"
+  },
+  "landingHero": {
+    "types": {
+      "workshop": "Workshop",
+      "course": "Course"
+    },
+    "cta": {
+      "reserveNow": "Reserve Now",
+      "enrollNow": "Enroll Now",
+      "learnMore": "Learn More"
+    },
+    "stats": {
+      "reviews": "Reviews",
+      "students": "Students"
+    },
+    "trust": {
+      "certificateIncluded": "Certificate Included",
+      "moneyBackGuarantee": "Money Back Guarantee",
+      "lifetimeSupport": "Lifetime Support"
+    },
+    "instructor": {
+      "yourInstructor": "Your Instructor"
+    }
+  },
+  "instructorProfile": {
+    "yearsExperience": "Years Experience",
+    "reviews": "Reviews",
+    "students": "Students",
+    "courses": "Courses",
+    "about": "About",
+    "specializations": "Specializations",
+    "credentials": "Credentials",
+    "languages": "Languages",
+    "connect": "Connect",
+    "website": "Website",
+    "email": "Email",
+    "achievements": "Achievements",
+    "showMore": "Show More",
+    "showLess": "Show Less"
+  },
+  "testimonials": {
+    "defaultTitle": "Student Reviews",
+    "goToSlide": "Go to slide",
+    "previousTestimonial": "Previous testimonial",
+    "nextTestimonial": "Next testimonial",
+    "pause": "Pause",
+    "play": "Play",
+    "viewAllReviews": "View All Reviews"
+  },
+  "curriculum": {
+    "defaultTitle": "Curriculum",
+    "learningObjectives": "Learning Objectives",
+    "lessons": "Lessons",
+    "resources": "Resources",
+    "freePreview": "Free Preview",
+    "totalLessons": "Total Lessons",
+    "totalDuration": "Total Duration",
+    "totalModules": "Total Modules",
+    "module": "Module"
+  },
+  "faq": {
+    "defaultTitle": "Frequently Asked Questions",
+    "searchPlaceholder": "Search questions...",
+    "allCategories": "All Categories",
+    "noResults": "No results found",
+    "noResultsWithFilters": "No results found with the selected filters",
+    "noFaqsAvailable": "No questions available at the moment",
+    "clearFilters": "Clear Filters",
+    "expandAll": "Expand All",
+    "collapseAll": "Collapse All",
+    "stillHaveQuestions": "Still have questions?",
+    "contactSupportText": "Our support team is ready to help you",
+    "contactUs": "Contact Us",
+    "callUs": "Call Us"
+  },
+  "cta": {
+    "defaultTitle": "Get Started Now"
+  },
+  "workshopLanding": {
+    "meta": {
+      "title": "Workshop | IRAC"
+    },
+    "reserveSpot": "Reserve My Spot",
+    "learnMore": "Learn More",
+    "overview": {
+      "title": "About the Workshop"
+    },
+    "whatYoullLearn": "What You'll Learn",
+    "materialsIncluded": "Materials & Tools Included",
+    "workshopDetails": "Workshop Details",
+    "duration": "Duration",
+    "level": "Level",
+    "language": "Language",
+    "location": "Location",
+    "capacity": "Capacity",
+    "enrolled": "Enrolled",
+    "people": "people",
+    "students": "students",
+    "prerequisites": "Prerequisites",
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "guarantee": {
+      "title": "Quality Guarantee"
+    },
+    "curriculum": {
+      "title": "Workshop Program",
+      "subtitle": "Complete structure and details of workshop sessions"
+    },
+    "testimonials": {
+      "title": "Participant Reviews",
+      "subtitle": "Real experiences from our students"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Answers to your common questions"
+    },
+    "finalCta": {
+      "title": "Reserve Your Spot Today",
+      "subtitle": "A golden opportunity to enhance your skills",
+      "description": "By participating in this workshop, take an important step in your learning and professional development journey."
+    },
+    "reserveSpotNow": "Reserve Now",
+    "urgency": {
+      "limitedSpots": "Limited spots remaining!"
+    },
+    "securePayment": "Secure Payment",
+    "socialProof": {
+      "joinedStudents": "people have already enrolled"
+    },
+    "reserve": "Reserve"
+  },
+  "courseLanding": {
+    "meta": {
+      "title": "Course | IRAC"
+    },
+    "enrollNow": "Enroll in Course",
+    "learnMore": "Learn More",
+    "overview": {
+      "title": "About the Course"
+    },
+    "whatYoullLearn": "What You'll Learn",
+    "careerPaths": "Career Paths",
+    "toolsRequired": "Tools Required",
+    "courseDetails": "Course Details",
+    "duration": "Duration",
+    "lessons": "Lessons",
+    "level": "Level",
+    "language": "Language",
+    "format": "Format",
+    "schedule": "Schedule",
+    "access": "Access",
+    "weeks": "weeks",
+    "hours": "hours",
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "formats": {
+      "online": "Online",
+      "offline": "In-Person",
+      "hybrid": "Hybrid"
+    },
+    "schedules": {
+      "self_paced": "Self-Paced",
+      "instructor_led": "Instructor-Led",
+      "cohort_based": "Cohort-Based"
+    },
+    "courseIncludes": "Course Includes",
+    "features": {
+      "certificate": "Certificate of Completion",
+      "resources": "Downloadable Resources",
+      "mobileAccess": "Mobile Access",
+      "community": "Community Access"
+    },
+    "prerequisites": "Prerequisites",
+    "guarantee": {
+      "title": "Quality Guarantee"
+    },
+    "curriculum": {
+      "title": "Course Curriculum",
+      "subtitle": "Complete structure and details of course modules"
+    },
+    "testimonials": {
+      "title": "Student Reviews",
+      "subtitle": "Real experiences from our graduates"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Answers to your common questions"
+    },
+    "finalCta": {
+      "title": "Enroll in the Course Now",
+      "subtitle": "Invest in your professional future",
+      "description": "By joining this course, acquire the skills necessary for success in your career."
+    },
+    "downloadSyllabus": "Download Syllabus",
+    "urgency": {
+      "enrollmentDeadline": "Enrollment deadline is approaching!"
+    },
+    "countdown": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
+    "securePayment": "Secure Payment",
+    "socialProof": {
+      "enrolledStudents": "students have enrolled so far"
+    },
+    "enroll": "Enroll"
+  },
+  "international": {
+    "meta": {
+      "title": "International Programs | IRAC",
+      "description": "Join IRAC's international educational programs. Islamic architecture courses and workshops for students worldwide.",
+      "keywords": "international education, Islamic architecture, global courses, international workshops, IRAC"
+    },
+    "hero": {
+      "title": "Global Islamic Architecture Education",
+      "subtitle": "Join the world's largest Islamic architecture educational network and connect with students and instructors from around the globe.",
+      "cta": {
+        "contact": "Contact for Consultation",
+        "programs": "View Programs"
+      }
+    },
+    "stats": {
+      "countries": "Countries",
+      "students": "International Students",
+      "partnerships": "Global Partnerships",
+      "languages": "Teaching Languages"
+    },
+    "globalReach": {
+      "title": "Global Access to Education",
+      "subtitle": "We provide educational services worldwide, respecting cultural and time differences",
+      "features": {
+        "timezone": {
+          "title": "Multi-Timezone Support",
+          "description": "Classes and support available across all global time zones"
+        },
+        "currency": {
+          "title": "Multi-Currency Payments",
+          "description": "Payment options in various world currencies"
+        },
+        "language": {
+          "title": "Multilingual Education",
+          "description": "Courses in Persian, English, Arabic and other languages"
+        },
+        "certification": {
+          "title": "International Certification",
+          "description": "Valid and recognized credentials worldwide"
+        },
+        "partnerships": {
+          "title": "University Partnerships",
+          "description": "Collaboration with top universities globally"
+        },
+        "crossCultural": {
+          "title": "Cross-Cultural Learning",
+          "description": "Exchange of knowledge and experience between different cultures"
+        }
+      }
+    },
+    "programs": {
+      "title": "International Programs",
+      "subtitle": "Courses and workshops specially designed for international students",
+      "duration": "Duration",
+      "languages": "Teaching Languages",
+      "certification": "Certification",
+      "price": "Fee",
+      "apply": "Apply to Join",
+      "masterclass": {
+        "title": "Islamic Architecture Masterclass",
+        "description": "Intensive workshop for deep understanding of Islamic architecture principles and philosophy"
+      },
+      "exchange": {
+        "title": "Student Exchange Program",
+        "description": "Study and research opportunity at IRAC center for international students"
+      },
+      "research": {
+        "title": "Research Fellowship",
+        "description": "Research program for in-depth studies in Islamic architecture"
+      }
+    },
+    "partners": {
+      "title": "International Partners",
+      "subtitle": "We collaborate with leading institutions and universities worldwide"
+    },
+    "success": {
+      "title": "Global Success Stories",
+      "subtitle": "Our graduates worldwide are creating positive change",
+      "graduate": "Graduate"
+    },
+    "cta": {
+      "title": "Ready to Join Our Global Community?",
+      "subtitle": "Start your journey of learning and discovering Islamic architecture with us",
+      "contact": "Contact for Consultation",
+      "programs": "View Programs"
+    }
   }
 }
