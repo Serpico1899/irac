@@ -69,7 +69,7 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
     success: "",
   });
 
-  const resendTimerRef = React.useRef<NodeJS.Timeout>();
+  const resendTimerRef = React.useRef<NodeJS.Timeout | null>(null);
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -82,14 +82,14 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
 
   // Start countdown timer for resend
   const startCountdown = (seconds: number) => {
-    setState(prev => ({ ...prev, timeLeft: seconds, canResend: false }));
+    setState((prev) => ({ ...prev, timeLeft: seconds, canResend: false }));
 
     if (resendTimerRef.current) {
       clearInterval(resendTimerRef.current);
     }
 
     resendTimerRef.current = setInterval(() => {
-      setState(prev => {
+      setState((prev) => {
         const newTimeLeft = prev.timeLeft - 1;
         if (newTimeLeft <= 0) {
           if (resendTimerRef.current) {
@@ -137,14 +137,14 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
   // Send SMS verification code
   const sendVerificationCode = async () => {
     if (!validatePhoneNumber(state.phoneNumber)) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "شماره تلفن معتبر وارد کنید (مثال: 09123456789)",
       }));
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: "", success: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "", success: "" }));
 
     try {
       const request: SMSVerificationRequest = {
@@ -155,7 +155,7 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
       const response = await smsApi.sendVerificationCode(request);
 
       if (response.success && response.data) {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           verificationId: response.data!.verification_id,
           step: "verification",
@@ -164,30 +164,30 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
 
         startCountdown(response.data.can_resend_after);
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: response.error || "خطا در ارسال کد تأیید",
         }));
       }
     } catch (err) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در اتصال به سرور",
       }));
       console.error("Error sending verification code:", err);
     } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
   // Verify SMS code
   const verifyCode = async () => {
     if (!state.verificationCode || state.verificationCode.length !== 6) {
-      setState(prev => ({ ...prev, error: "کد 6 رقمی را وارد کنید" }));
+      setState((prev) => ({ ...prev, error: "کد 6 رقمی را وارد کنید" }));
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "" }));
 
     try {
       const request: SMSCodeVerifyRequest = {
@@ -199,57 +199,58 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
 
       if (response.success && response.data) {
         if (!response.data.user_exists) {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             error: "کاربری با این شماره تلفن یافت نشد",
           }));
           return;
         }
 
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           step: "password",
           success: "کد تأیید شد. رمز عبور جدید را وارد کنید",
         }));
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: response.error || "کد تأیید نادرست است",
         }));
       }
     } catch (err) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در اتصال به سرور",
       }));
       console.error("Error verifying code:", err);
     } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
   // Reset password
   const resetPassword = async () => {
     if (!state.newPassword || !state.confirmPassword) {
-      setState(prev => ({ ...prev, error: "همه فیلدها را پر کنید" }));
+      setState((prev) => ({ ...prev, error: "همه فیلدها را پر کنید" }));
       return;
     }
 
     if (state.newPassword !== state.confirmPassword) {
-      setState(prev => ({ ...prev, error: "رمزهای عبور مطابقت ندارند" }));
+      setState((prev) => ({ ...prev, error: "رمزهای عبور مطابقت ندارند" }));
       return;
     }
 
     const passwordValidation = validatePassword(state.newPassword);
     if (!passwordValidation.isValid) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
-        error: "رمز عبور باید حداقل 8 کاراکتر و شامل حروف بزرگ، کوچک و عدد باشد",
+        error:
+          "رمز عبور باید حداقل 8 کاراکتر و شامل حروف بزرگ، کوچک و عدد باشد",
       }));
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: "" }));
+    setState((prev) => ({ ...prev, isLoading: true, error: "" }));
 
     try {
       const request: SMSPasswordResetRequest = {
@@ -261,25 +262,25 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
       const response = await smsApi.resetPassword(request);
 
       if (response.success && response.data) {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           step: "success",
-          success: response.data.message,
+          success: response.data?.message || "رمز عبور با موفقیت تغییر یافت",
         }));
       } else {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           error: response.error || "خطا در تغییر رمز عبور",
         }));
       }
     } catch (err) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         error: "خطا در اتصال به سرور",
       }));
       console.error("Error resetting password:", err);
     } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
@@ -287,23 +288,26 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
   const handlePhoneChange = (value: string) => {
     // Allow digits and common phone number formats
     const cleaned = value.replace(/[^\d+]/g, "");
-    setState(prev => ({ ...prev, phoneNumber: cleaned, error: "" }));
+    setState((prev) => ({ ...prev, phoneNumber: cleaned, error: "" }));
   };
 
   const handleCodeChange = (value: string) => {
     // Allow only 6 digits
     const cleaned = value.replace(/\D/g, "").slice(0, 6);
-    setState(prev => ({ ...prev, verificationCode: cleaned, error: "" }));
+    setState((prev) => ({ ...prev, verificationCode: cleaned, error: "" }));
   };
 
-  const handlePasswordChange = (field: "newPassword" | "confirmPassword", value: string) => {
-    setState(prev => ({ ...prev, [field]: value, error: "" }));
+  const handlePasswordChange = (
+    field: "newPassword" | "confirmPassword",
+    value: string,
+  ) => {
+    setState((prev) => ({ ...prev, [field]: value, error: "" }));
   };
 
   // Go to previous step
   const goToPreviousStep = () => {
     if (state.step === "verification") {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         step: "phone",
         verificationId: "",
@@ -312,7 +316,7 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
         success: "",
       }));
     } else if (state.step === "password") {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         step: "verification",
         newPassword: "",
@@ -436,7 +440,9 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
             <div className="flex flex-col gap-3">
               <button
                 onClick={verifyCode}
-                disabled={state.isLoading || state.verificationCode.length !== 6}
+                disabled={
+                  state.isLoading || state.verificationCode.length !== 6
+                }
                 className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
               >
                 {state.isLoading ? (
@@ -470,13 +476,20 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
                 <input
                   type={state.showPassword ? "text" : "password"}
                   value={state.newPassword}
-                  onChange={(e) => handlePasswordChange("newPassword", e.target.value)}
+                  onChange={(e) =>
+                    handlePasswordChange("newPassword", e.target.value)
+                  }
                   placeholder="رمز عبور جدید"
                   className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 <button
                   type="button"
-                  onClick={() => setState(prev => ({ ...prev, showPassword: !prev.showPassword }))}
+                  onClick={() =>
+                    setState((prev) => ({
+                      ...prev,
+                      showPassword: !prev.showPassword,
+                    }))
+                  }
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
                   {state.showPassword ? (
@@ -496,7 +509,13 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
                     ) : (
                       <div className="h-3 w-3 rounded-full border border-gray-300"></div>
                     )}
-                    <span className={passwordValidation.checks.minLength ? "text-green-600" : "text-gray-500"}>
+                    <span
+                      className={
+                        passwordValidation.checks.minLength
+                          ? "text-green-600"
+                          : "text-gray-500"
+                      }
+                    >
                       حداقل 8 کاراکتر
                     </span>
                   </div>
@@ -506,7 +525,13 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
                     ) : (
                       <div className="h-3 w-3 rounded-full border border-gray-300"></div>
                     )}
-                    <span className={passwordValidation.checks.hasUpperCase ? "text-green-600" : "text-gray-500"}>
+                    <span
+                      className={
+                        passwordValidation.checks.hasUpperCase
+                          ? "text-green-600"
+                          : "text-gray-500"
+                      }
+                    >
                       حروف بزرگ انگلیسی
                     </span>
                   </div>
@@ -516,7 +541,13 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
                     ) : (
                       <div className="h-3 w-3 rounded-full border border-gray-300"></div>
                     )}
-                    <span className={passwordValidation.checks.hasLowerCase ? "text-green-600" : "text-gray-500"}>
+                    <span
+                      className={
+                        passwordValidation.checks.hasLowerCase
+                          ? "text-green-600"
+                          : "text-gray-500"
+                      }
+                    >
                       حروف کوچک انگلیسی
                     </span>
                   </div>
@@ -526,7 +557,13 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
                     ) : (
                       <div className="h-3 w-3 rounded-full border border-gray-300"></div>
                     )}
-                    <span className={passwordValidation.checks.hasNumbers ? "text-green-600" : "text-gray-500"}>
+                    <span
+                      className={
+                        passwordValidation.checks.hasNumbers
+                          ? "text-green-600"
+                          : "text-gray-500"
+                      }
+                    >
                       اعداد
                     </span>
                   </div>
@@ -543,13 +580,20 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
                 <input
                   type={state.showConfirmPassword ? "text" : "password"}
                   value={state.confirmPassword}
-                  onChange={(e) => handlePasswordChange("confirmPassword", e.target.value)}
+                  onChange={(e) =>
+                    handlePasswordChange("confirmPassword", e.target.value)
+                  }
                   placeholder="تأیید رمز عبور"
                   className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 <button
                   type="button"
-                  onClick={() => setState(prev => ({ ...prev, showConfirmPassword: !prev.showConfirmPassword }))}
+                  onClick={() =>
+                    setState((prev) => ({
+                      ...prev,
+                      showConfirmPassword: !prev.showConfirmPassword,
+                    }))
+                  }
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
                   {state.showConfirmPassword ? (
@@ -560,17 +604,22 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
                 </button>
               </div>
 
-              {state.confirmPassword && state.newPassword !== state.confirmPassword && (
-                <p className="text-sm text-red-600 mt-1">
-                  رمزهای عبور مطابقت ندارند
-                </p>
-              )}
+              {state.confirmPassword &&
+                state.newPassword !== state.confirmPassword && (
+                  <p className="text-sm text-red-600 mt-1">
+                    رمزهای عبور مطابقت ندارند
+                  </p>
+                )}
             </div>
 
             <div className="flex flex-col gap-3">
               <button
                 onClick={resetPassword}
-                disabled={state.isLoading || !passwordValidation.isValid || state.newPassword !== state.confirmPassword}
+                disabled={
+                  state.isLoading ||
+                  !passwordValidation.isValid ||
+                  state.newPassword !== state.confirmPassword
+                }
                 className="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
               >
                 {state.isLoading ? (
@@ -603,7 +652,8 @@ const SMSPasswordReset: React.FC<SMSPasswordResetProps> = ({
                 رمز عبور تغییر یافت!
               </h3>
               <p className="text-gray-600 text-sm">
-                رمز عبور شما با موفقیت تغییر یافت. اکنون می‌توانید با رمز عبور جدید وارد شوید.
+                رمز عبور شما با موفقیت تغییر یافت. اکنون می‌توانید با رمز عبور
+                جدید وارد شوید.
               </p>
             </div>
 
