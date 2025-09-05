@@ -161,7 +161,10 @@ const CreateManualPayment: React.FC<CreateManualPaymentProps> = ({
       newErrors.description = "توضیحات الزامی است";
     }
 
-    if (!formData.amount || parseFloat(formData.amount.replace(/,/g, "")) <= 0) {
+    if (
+      !formData.amount ||
+      parseFloat(formData.amount.replace(/,/g, "")) <= 0
+    ) {
       newErrors.amount = "مبلغ معتبر وارد کنید";
     }
 
@@ -234,7 +237,7 @@ const CreateManualPayment: React.FC<CreateManualPaymentProps> = ({
         related_order_id: formData.related_order_id || undefined,
       };
 
-      const response = await manualPaymentApi.createPayment(request);
+      const response = await manualPaymentApi.createManualPayment(request);
 
       if (response.success && response.data) {
         setSuccess("درخواست پرداخت با موفقیت ایجاد شد");
@@ -346,10 +349,16 @@ const CreateManualPayment: React.FC<CreateManualPaymentProps> = ({
                     </div>
                   )}
                   <div>
-                    <p className="font-medium text-gray-900">{selectedUser.name}</p>
-                    <p className="text-sm text-gray-600">{selectedUser.email}</p>
+                    <p className="font-medium text-gray-900">
+                      {selectedUser.name}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {selectedUser.email}
+                    </p>
                     {selectedUser.phone && (
-                      <p className="text-xs text-gray-500">{selectedUser.phone}</p>
+                      <p className="text-xs text-gray-500">
+                        {selectedUser.phone}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -432,11 +441,13 @@ const CreateManualPayment: React.FC<CreateManualPaymentProps> = ({
                       </div>
                     )}
 
-                    {userSearch && searchResults.length === 0 && !isSearching && (
-                      <div className="text-center py-3 text-gray-500">
-                        کاربری یافت نشد
-                      </div>
-                    )}
+                    {userSearch &&
+                      searchResults.length === 0 &&
+                      !isSearching && (
+                        <div className="text-center py-3 text-gray-500">
+                          کاربری یافت نشد
+                        </div>
+                      )}
 
                     <button
                       type="button"
