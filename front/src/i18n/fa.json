@@ -103,7 +103,32 @@
     "updateSuccess": "با موفقیت ویرایش شد",
     "userDashboard": "داشبورد کاربر",
     "deleteTooltip": "حذف",
-    "editTooltip": "ویرایش"
+    "editTooltip": "ویرایش",
+    "paymentsManagement": "مدیریت پرداخت‌ها",
+    "manualPayments": "پرداخت‌های دستی",
+    "createPaymentRequest": "ایجاد درخواست پرداخت",
+    "paymentsList": "لیست پرداخت‌ها",
+    "paymentDetails": "جزئیات پرداخت",
+    "approvePayment": "تأیید پرداخت",
+    "rejectPayment": "رد پرداخت",
+    "paymentApproved": "پرداخت تأیید شد",
+    "paymentRejected": "پرداخت رد شد",
+    "paymentPending": "در انتظار بررسی",
+    "paymentCancelled": "لغو شده",
+    "totalPayments": "کل پرداخت‌ها",
+    "pendingPayments": "پرداخت‌های در انتظار",
+    "approvedPayments": "پرداخت‌های تأیید شده",
+    "totalAmount": "کل مبلغ",
+    "userSelection": "انتخاب کاربر",
+    "paymentTitle": "عنوان پرداخت",
+    "paymentDescription": "توضیحات پرداخت",
+    "paymentAmount": "مبلغ پرداخت",
+    "paymentDeadline": "مهلت پرداخت",
+    "paymentInstructions": "راهنمای پرداخت",
+    "proofOfPayment": "فیش پرداخت",
+    "adminNotes": "یادداشت مدیر",
+    "rejectionReason": "دلیل رد",
+    "viewProof": "مشاهده فیش"
   },
   "Common": {
     "viewAll": "مشاهده همه",
@@ -159,5 +184,306 @@
     "backHome": "بازگشت به خانه",
     "or": "یا",
     "goBack": "بازگشت"
+  },
+  "landingHero": {
+    "types": {
+      "workshop": "کارگاه",
+      "course": "دوره"
+    },
+    "cta": {
+      "reserveNow": "رزرو فوری",
+      "enrollNow": "ثبت‌نام کنید",
+      "learnMore": "اطلاعات بیشتر"
+    },
+    "stats": {
+      "reviews": "نظر",
+      "students": "دانشجو"
+    },
+    "trust": {
+      "certificateIncluded": "گواهی معتبر",
+      "moneyBackGuarantee": "ضمانت بازگشت وجه",
+      "lifetimeSupport": "پشتیبانی مادام‌العمر"
+    },
+    "instructor": {
+      "yourInstructor": "مدرس شما"
+    }
+  },
+  "instructorProfile": {
+    "yearsExperience": "سال تجربه",
+    "reviews": "نظر",
+    "students": "دانشجو",
+    "courses": "دوره",
+    "about": "درباره",
+    "specializations": "تخصص‌ها",
+    "credentials": "مدارک",
+    "languages": "زبان‌ها",
+    "connect": "ارتباط",
+    "website": "وب‌سایت",
+    "email": "ایمیل",
+    "achievements": "دستاورد‌ها",
+    "showMore": "مشاهده بیشتر",
+    "showLess": "مشاهده کمتر"
+  },
+  "testimonials": {
+    "defaultTitle": "نظرات دانشجویان",
+    "goToSlide": "رفتن به اسلاید",
+    "previousTestimonial": "نظر قبلی",
+    "nextTestimonial": "نظر بعدی",
+    "pause": "توقف",
+    "play": "پخش",
+    "viewAllReviews": "مشاهده همه نظرات"
+  },
+  "curriculum": {
+    "defaultTitle": "برنامه درسی",
+    "learningObjectives": "اهداف یادگیری",
+    "lessons": "درس",
+    "resources": "منابع",
+    "freePreview": "پیش‌نمایش رایگان",
+    "totalLessons": "مجموع درس‌ها",
+    "totalDuration": "مدت زمان کل",
+    "totalModules": "مجموع ماژول‌ها",
+    "module": "ماژول"
+  },
+  "faq": {
+    "defaultTitle": "سؤالات متداول",
+    "searchPlaceholder": "جستجو در سؤالات...",
+    "allCategories": "همه دسته‌ها",
+    "noResults": "نتیجه‌ای یافت نشد",
+    "noResultsWithFilters": "با فیلترهای انتخاب شده نتیجه‌ای یافت نشد",
+    "noFaqsAvailable": "در حال حاضر سؤالی موجود نیست",
+    "clearFilters": "پاک کردن فیلترها",
+    "expandAll": "باز کردن همه",
+    "collapseAll": "بستن همه",
+    "stillHaveQuestions": "هنوز سؤال دارید؟",
+    "contactSupportText": "تیم پشتیبانی ما آماده کمک به شما است",
+    "contactUs": "تماس با ما",
+    "callUs": "تماس تلفنی"
+  },
+  "cta": {
+    "defaultTitle": "همین حالا شروع کنید"
+  },
+  "workshopLanding": {
+    "meta": {
+      "title": "کارگاه | ایراک"
+    },
+    "reserveSpot": "رزرو جای من",
+    "learnMore": "اطلاعات بیشتر",
+    "overview": {
+      "title": "درباره کارگاه"
+    },
+    "whatYoullLearn": "آنچه یاد خواهید گرفت",
+    "materialsIncluded": "مواد و ابزار همراه",
+    "workshopDetails": "جزئیات کارگاه",
+    "duration": "مدت زمان",
+    "level": "سطح",
+    "language": "زبان",
+    "location": "مکان",
+    "capacity": "ظرفیت",
+    "enrolled": "ثبت‌نام شده",
+    "people": "نفر",
+    "students": "دانشجو",
+    "prerequisites": "پیش‌نیازها",
+    "levels": {
+      "beginner": "مقدماتی",
+      "intermediate": "متوسط",
+      "advanced": "پیشرفته"
+    },
+    "guarantee": {
+      "title": "ضمانت کیفیت"
+    },
+    "curriculum": {
+      "title": "برنامه کارگاه",
+      "subtitle": "ساختار کامل و جزئیات جلسات کارگاه"
+    },
+    "testimonials": {
+      "title": "نظرات شرکت‌کنندگان",
+      "subtitle": "تجربه واقعی دانشجویان ما"
+    },
+    "faq": {
+      "title": "سؤالات متداول",
+      "subtitle": "پاسخ پرسش‌های رایج شما"
+    },
+    "finalCta": {
+      "title": "جای خود را امروز رزرو کنید",
+      "subtitle": "فرصت طلایی برای ارتقای مهارت‌هایتان",
+      "description": "با شرکت در این کارگاه، گام مهمی در مسیر یادگیری و توسعه حرفه‌ای خود بردارید."
+    },
+    "reserveSpotNow": "همین حالا رزرو کن",
+    "urgency": {
+      "limitedSpots": "تعداد جاهای محدود باقی مانده!"
+    },
+    "securePayment": "پرداخت امن",
+    "socialProof": {
+      "joinedStudents": "نفر تا کنون ثبت‌نام کرده‌اند"
+    },
+    "reserve": "رزرو"
+  },
+  "courseLanding": {
+    "meta": {
+      "title": "دوره | ایراک"
+    },
+    "enrollNow": "ثبت‌نام در دوره",
+    "learnMore": "اطلاعات بیشتر",
+    "overview": {
+      "title": "درباره دوره"
+    },
+    "whatYoullLearn": "آنچه یاد خواهید گرفت",
+    "careerPaths": "مسیرهای شغلی",
+    "toolsRequired": "ابزارهای مورد نیاز",
+    "courseDetails": "جزئیات دوره",
+    "duration": "مدت زمان",
+    "lessons": "درس",
+    "level": "سطح",
+    "language": "زبان",
+    "format": "نحوه ارائه",
+    "schedule": "برنامه‌زمانی",
+    "access": "دسترسی",
+    "weeks": "هفته",
+    "hours": "ساعت",
+    "levels": {
+      "beginner": "مقدماتی",
+      "intermediate": "متوسط",
+      "advanced": "پیشرفته"
+    },
+    "formats": {
+      "online": "آنلاین",
+      "offline": "حضوری",
+      "hybrid": "ترکیبی"
+    },
+    "schedules": {
+      "self_paced": "خودآموز",
+      "instructor_led": "با مدرس",
+      "cohort_based": "گروهی"
+    },
+    "courseIncludes": "شامل دوره",
+    "features": {
+      "certificate": "گواهینامه تکمیل",
+      "resources": "منابع قابل دانلود",
+      "mobileAccess": "دسترسی موبایل",
+      "community": "دسترسی به انجمن"
+    },
+    "prerequisites": "پیش‌نیازها",
+    "guarantee": {
+      "title": "ضمانت کیفیت"
+    },
+    "curriculum": {
+      "title": "برنامه درسی",
+      "subtitle": "ساختار کامل و جزئیات ماژول‌های دوره"
+    },
+    "testimonials": {
+      "title": "نظرات دانشجویان",
+      "subtitle": "تجربه واقعی فارغ‌التحصیلان ما"
+    },
+    "faq": {
+      "title": "سؤالات متداول",
+      "subtitle": "پاسخ پرسش‌های رایج شما"
+    },
+    "finalCta": {
+      "title": "همین حالا در دوره ثبت‌نام کنید",
+      "subtitle": "سرمایه‌گذاری در آینده حرفه‌ای خود",
+      "description": "با شرکت در این دوره، مهارت‌های لازم برای موفقیت در حرفه خود را کسب کنید."
+    },
+    "downloadSyllabus": "دانلود سرفصل",
+    "urgency": {
+      "enrollmentDeadline": "مهلت ثبت‌نام رو به پایان است!"
+    },
+    "countdown": {
+      "days": "روز",
+      "hours": "ساعت",
+      "minutes": "دقیقه",
+      "seconds": "ثانیه"
+    },
+    "securePayment": "پرداخت امن",
+    "socialProof": {
+      "enrolledStudents": "دانشجو تاکنون ثبت‌نام کرده‌اند"
+    },
+    "enroll": "ثبت‌نام"
+  },
+  "international": {
+    "meta": {
+      "title": "برنامه‌های بین‌المللی | ایراک",
+      "description": "به برنامه‌های آموزشی بین‌المللی ایراک بپیوندید. دوره‌ها و کارگاه‌های معماری اسلامی برای دانشجویان سراسر جهان.",
+      "keywords": "آموزش بین‌المللی، معماری اسلامی، دوره‌های جهانی، کارگاه‌های بین‌المللی، ایراک"
+    },
+    "hero": {
+      "title": "آموزش جهانی معماری اسلامی",
+      "subtitle": "به بزرگترین شبکه آموزشی معماری اسلامی در جهان بپیوندید و با دانشجویان و اساتید سراسر دنیا در ارتباط باشید.",
+      "cta": {
+        "contact": "تماس برای مشاوره",
+        "programs": "مشاهده برنامه‌ها"
+      }
+    },
+    "stats": {
+      "countries": "کشور",
+      "students": "دانشجو بین‌المللی",
+      "partnerships": "شراکت جهانی",
+      "languages": "زبان آموزش"
+    },
+    "globalReach": {
+      "title": "دسترسی جهانی به آموزش",
+      "subtitle": "ما خدمات آموزشی خود را با رعایت تفاوت‌های فرهنگی و زمانی به سراسر جهان ارائه می‌دهیم",
+      "features": {
+        "timezone": {
+          "title": "پشتیبانی چندزمانه",
+          "description": "کلاس‌ها و پشتیبانی در تمام نواحی زمانی جهان"
+        },
+        "currency": {
+          "title": "پرداخت چندارزی",
+          "description": "امکان پرداخت با ارزهای مختلف جهان"
+        },
+        "language": {
+          "title": "آموزش چندزبانه",
+          "description": "دوره‌ها به فارسی، انگلیسی، عربی و سایر زبان‌ها"
+        },
+        "certification": {
+          "title": "گواهی‌نامه بین‌المللی",
+          "description": "مدارک معتبر و قابل قبول در سراسر جهان"
+        },
+        "partnerships": {
+          "title": "شراکت‌های دانشگاهی",
+          "description": "همکاری با برترین دانشگاه‌های جهان"
+        },
+        "crossCultural": {
+          "title": "یادگیری میان‌فرهنگی",
+          "description": "تبادل دانش و تجربه بین فرهنگ‌های مختلف"
+        }
+      }
+    },
+    "programs": {
+      "title": "برنامه‌های بین‌المللی",
+      "subtitle": "دوره‌ها و کارگاه‌های ویژه طراحی شده برای دانشجویان بین‌المللی",
+      "duration": "مدت زمان",
+      "languages": "زبان‌های آموزش",
+      "certification": "گواهی‌نامه",
+      "price": "هزینه",
+      "apply": "درخواست شرکت",
+      "masterclass": {
+        "title": "کارگاه استادی معماری اسلامی",
+        "description": "کارگاه فشرده برای آشنایی عمیق با اصول و فلسفه معماری اسلامی"
+      },
+      "exchange": {
+        "title": "برنامه تبادل دانشجویی",
+        "description": "فرصت مطالعه و پژوهش در مرکز ایراک برای دانشجویان بین‌المللی"
+      },
+      "research": {
+        "title": "بورسیه پژوهشی",
+        "description": "برنامه پژوهشی برای مطالعات عمیق در زمینه معماری اسلامی"
+      }
+    },
+    "partners": {
+      "title": "شرکای بین‌المللی",
+      "subtitle": "ما با برترین موسسات و دانشگاه‌های جهان همکاری می‌کنیم"
+    },
+    "success": {
+      "title": "داستان‌های موفقیت جهانی",
+      "subtitle": "فارغ‌التحصیلان ما در سراسر جهان در حال ایجاد تغییرات مثبت هستند",
+      "graduate": "فارغ‌التحصیل"
+    },
+    "cta": {
+      "title": "آماده پیوستن به جامعه جهانی ما هستید؟",
+      "subtitle": "با ما سفر یادگیری و کشف معماری اسلامی را آغاز کنید",
+      "contact": "تماس برای مشاوره",
+      "programs": "مشاهده برنامه‌ها"
+    }
   }
 }
