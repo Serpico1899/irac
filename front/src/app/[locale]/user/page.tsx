@@ -1,10 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 const UserPage = () => {
+  const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
+
+  // Prevent SSR issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   const user = {
     name: "احمد محمدی",
