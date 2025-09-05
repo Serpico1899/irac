@@ -5,6 +5,8 @@ import SearchBox from "@/components/molecules/SearchBox";
 import ClientUserDashboard from "@/components/template/clientUserDashboard";
 import { ReqType } from "@/types/declarations/selectInp";
 
+export const dynamic = "force-dynamic";
+
 const UserDashboard = async ({
   searchParams,
 }: {
