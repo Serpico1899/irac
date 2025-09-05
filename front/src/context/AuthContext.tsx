@@ -17,12 +17,16 @@ interface AuthUser {
   email: string;
   name: string;
   nationalNumber?: string;
+  phone?: string;
+  role?: string;
+  isAdmin?: boolean;
 }
 
 interface AuthContextType {
   isAuthenticated: boolean;
   userLevel: UserLevel;
   user: AuthUser | null;
+  isLoading: boolean;
   login: (
     token: string,
     level: UserLevel,
@@ -51,6 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userLevel, setUserLevel] = useState<UserLevel>(null);
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -87,6 +92,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(false);
       setUserLevel(null);
     }
+    setIsLoading(false);
   }, [isAuthenticated]);
 
   const setInitialAuthState = (
@@ -130,6 +136,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         isAuthenticated,
         userLevel,
         user,
+        isLoading,
         login,
         logout,
         setInitialAuthState,
