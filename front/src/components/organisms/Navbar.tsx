@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation"; // Corrected import
 import { getAlternateLocaleUrl, getLocaleFromPathname } from "@/lib/navigation";
+import CartButton from "@/components/molecules/CartButton";
 
 interface NavItem {
   label: string;
@@ -13,7 +14,6 @@ interface NavItem {
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const pathname = usePathname();
   // Get current locale and alternate locale info
   const currentLocale = getLocaleFromPathname(pathname);
@@ -29,6 +29,7 @@ export const Navbar = () => {
           { label: "کارگاه‌ها", href: "/workshops" },
           { label: "رسانه", href: "/media" },
           { label: "درباره ما", href: "/about" },
+          { label: "تماس با ما", href: "/contact" },
         ]
       : [
           { label: "Home", href: "/" },
@@ -36,6 +37,7 @@ export const Navbar = () => {
           { label: "Workshops", href: "/workshops" },
           { label: "Media", href: "/media" },
           { label: "About Us", href: "/about" },
+          { label: "Contact", href: "/contact" },
         ];
 
   return (
@@ -98,64 +100,11 @@ export const Navbar = () => {
                 </Link>
 
                 {/* Shopping Cart */}
-                <div className="relative">
-                  <button
-                    onClick={() => setIsCartOpen(!isCartOpen)}
-                    className={`
-                    relative p-3 transition-colors rounded-lg
-                    text-text-primary hover:text-text hover:bg-background-primary
-                  `}
-                    aria-label="سبد خرید"
-                  >
-                    <Image
-                      src="/icons/shopping-cart.svg"
-                      alt="Shopping Cart"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6"
-                    />
-                    {/* Cart badge */}
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-background text-xs rounded-full flex items-center justify-center font-bold">
-                      0
-                    </span>
-                  </button>
-
-                  {/* Cart Dropdown */}
-                  {isCartOpen && (
-                    <div className="absolute left-0 top-full mt-3 w-96 bg-background rounded-2xl shadow-xl border border-background-primary z-50 overflow-hidden">
-                      <div className="p-8 text-center">
-                        <div className="w-16 h-16 bg-background-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                          <svg
-                            className="w-8 h-8 text-text-primary"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={1.5}
-                              d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
-                            />
-                          </svg>
-                        </div>
-                        <h3 className="text-lg font-bold text-text mb-2">
-                          سبد خرید شما خالی است
-                        </h3>
-                        <p className="text-text-primary text-sm mb-6">
-                          هنوز محصولی به سبد خرید خود اضافه نکرده‌اید
-                        </p>
-                        <Link
-                          href="/courses"
-                          className="inline-block bg-primary text-background px-6 py-3 rounded-xl hover:bg-primary-dark transition-colors font-medium"
-                          onClick={() => setIsCartOpen(false)}
-                        >
-                          مشاهده دوره‌ها
-                        </Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <CartButton
+                  variant="ghost"
+                  size="md"
+                  className="text-text-primary hover:text-text hover:bg-background-primary"
+                />
 
                 {/* Login/Register Pill Button - Desktop only */}
                 <Link
