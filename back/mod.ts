@@ -5,6 +5,7 @@ import {
   courses,
   files,
   order_models,
+  product_models,
   tags,
   users,
   wallets,
@@ -34,20 +35,23 @@ export const course = courses();
 export const wallet = wallets();
 export const wallet_transaction = wallet_transactions();
 export const order = order_models();
+export const product = product_models();
 
 export const { setAct, setService, getAtcsWithServices } = coreApp.acts;
 
 export const { selectStruct, getSchemas } = coreApp.schemas;
 
-functionsSetup();
-
-coreApp.runServer({
-  port: 1405,
+// Initialize server and wait for it to be ready before setting up routes
+await coreApp.runServer({
+  port: parseInt(Deno.env.get("APP_PORT") || "1405"),
   typeGeneration: true,
   playground: true,
-  staticPath: ["/uploads"],
+  staticPath: ["./public"],
   cors: [
     "http://localhost:3000",
     "http://localhost:4000",
   ],
 });
+
+// Now that the server is initialized, set up the functions that use HTTP router
+functionsSetup();
