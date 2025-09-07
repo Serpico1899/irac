@@ -4,9 +4,7 @@
   },
   "fmt": {
     "files": {
-      "exclude": [
-        "declaration"
-      ]
+      "exclude": ["declaration"]
     },
     "options": {
       "useTabs": true,
