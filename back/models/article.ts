@@ -227,35 +227,4 @@ export const article_relations = {
 };
 
 export const articles = () =>
-  coreApp.odm.newModel("article", article_pure, article_relations, {
-    createIndex: [
-      {
-        indexSpec: { slug: 1 },
-        options: { unique: true, sparse: true },
-      },
-      {
-        indexSpec: { status: 1, published_at: -1 },
-        options: {},
-      },
-      {
-        indexSpec: { featured: -1, published_at: -1 },
-        options: {},
-      },
-      {
-        indexSpec: { type: 1, status: 1, published_at: -1 },
-        options: {},
-      },
-      {
-        indexSpec: { view_count: -1 },
-        options: {},
-      },
-      {
-        indexSpec: { "author._id": 1, published_at: -1 },
-        options: {},
-      },
-      {
-        indexSpec: { "category._id": 1, status: 1, published_at: -1 },
-        options: {},
-      },
-    ],
-  });
+  coreApp.odm.newModel("article", article_pure, article_relations);
