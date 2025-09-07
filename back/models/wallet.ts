@@ -45,9 +45,4 @@ export const wallet_relations = {
 };
 
 export const wallets = () =>
-  coreApp.odm.newModel("wallet", wallet_pure, wallet_relations, {
-    createIndex: {
-      indexSpec: { "user._id": 1 },
-      options: { unique: true },
-    },
-  });
+  coreApp.odm.newModel("wallet", wallet_pure, wallet_relations);
