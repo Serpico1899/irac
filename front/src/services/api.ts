@@ -22,14 +22,14 @@ const getLesanUrl = (): string => {
 
   if (isServerSide) {
     // Server-side: use internal Docker network or env variable
-    url = envLesanUrl ? `${envLesanUrl}/lesan` : "http://localhost:1404/lesan";
+    url = envLesanUrl ? `${envLesanUrl}/lesan` : "http://localhost:1405/lesan";
   } else {
     // Client-side: use public env var if available
     if (publicLesanUrl) {
       url = `${publicLesanUrl}/lesan`;
     } else {
       // Default to localhost for development
-      url = "http://localhost:1404/lesan";
+      url = "http://localhost:1405/lesan";
     }
   }
 
@@ -51,14 +51,14 @@ export const getLesanBaseUrl = (): string => {
   try {
     if (isServerSide) {
       // Server-side: use internal Docker network or env variable
-      baseUrl = envLesanUrl || "http://localhost:1404";
+      baseUrl = envLesanUrl || "http://localhost:1405";
     } else {
       // Client-side: use public env var if available
       if (publicLesanUrl) {
         baseUrl = publicLesanUrl;
       } else {
         // Default to localhost for development
-        baseUrl = "http://localhost:1404";
+        baseUrl = "http://localhost:1405";
       }
     }
 
@@ -74,7 +74,7 @@ export const getLesanBaseUrl = (): string => {
   } catch (error) {
     console.error("Error in getLesanBaseUrl:", error);
     // Fallback to localhost
-    return "http://localhost:1404";
+    return "http://localhost:1405";
   }
 };
 
@@ -100,7 +100,7 @@ export const AppApi = (lesanUrl?: string) => {
     console.error("Error creating AppApi:", error);
     // Fallback to default URL
     return lesanApi({
-      URL: "http://localhost:1404/lesan",
+      URL: "http://localhost:1405/lesan",
       baseHeaders: {
         connection: "keep-alive",
       },
