@@ -7,11 +7,11 @@ services:
     image: lesan-backend:latest
     restart: unless-stopped
     ports:
-      - "1404:1404"
+      - "1405:1405"
     env_file:
       - .env.backend
     environment:
-      - APP_PORT=1404
+      - APP_PORT=1405
       - ENV=production
       - MONGO_URI=mongodb://mongo:27017/
       - REDIS_URI=redis://redis:6379
@@ -33,12 +33,14 @@ services:
     environment:
       - APP_PORT=3000
       - NODE_ENV=production
-      - LESAN_URL=http://backend:1404
+      - LESAN_URL=http://backend:1405
 
   # MongoDB service
   mongo:
     image: mongo:latest
     restart: unless-stopped
+    ports:
+      - "27017:27017"
     volumes:
       - mongo_data:/data/db
 
@@ -46,6 +48,8 @@ services:
   redis:
     image: redis:alpine
     restart: unless-stopped
+    ports:
+      - "6379:6379"
     volumes:
       - redis_data:/data
 
