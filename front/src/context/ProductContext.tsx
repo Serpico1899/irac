@@ -16,7 +16,7 @@ import {
   ProductType,
   ProductCategory,
 } from "@/types";
-import { productApi } from "@/services/product/productApi";
+import { productLesanApi } from "@/services/product/productLesanApi";
 
 // Product state interface
 interface ProductState {
@@ -37,7 +37,11 @@ interface ProductState {
   // Categories and filters
   categories: Array<{ category: ProductCategory; count: number; name: string }>;
   availableFilters: {
-    categories: Array<{ category: ProductCategory; count: number; name: string }>;
+    categories: Array<{
+      category: ProductCategory;
+      count: number;
+      name: string;
+    }>;
     types: Array<{ type: ProductType; count: number; name: string }>;
     price_range: { min: number; max: number };
     tags: Array<{ tag: string; count: number }>;
@@ -81,7 +85,14 @@ type ProductAction =
   | { type: "SET_FEATURED_PRODUCTS"; payload: Product[] }
   | { type: "SET_BESTSELLER_PRODUCTS"; payload: Product[] }
   | { type: "SET_NEW_PRODUCTS"; payload: Product[] }
-  | { type: "SET_CATEGORIES"; payload: Array<{ category: ProductCategory; count: number; name: string }> }
+  | {
+      type: "SET_CATEGORIES";
+      payload: Array<{
+        category: ProductCategory;
+        count: number;
+        name: string;
+      }>;
+    }
   | { type: "SET_AVAILABLE_FILTERS"; payload: any }
   | { type: "SET_CURRENT_QUERY"; payload: ProductQuery }
   | { type: "SET_SEARCH_TERM"; payload: string }
@@ -117,7 +128,10 @@ const initialState: ProductState = {
 };
 
 // Reducer
-function productReducer(state: ProductState, action: ProductAction): ProductState {
+function productReducer(
+  state: ProductState,
+  action: ProductAction,
+): ProductState {
   switch (action.type) {
     case "SET_LOADING":
       return { ...state, isLoading: action.payload };
@@ -192,10 +206,20 @@ interface ProductContextType {
   fetchFeaturedProducts: (limit?: number) => Promise<void>;
   fetchBestsellerProducts: (limit?: number) => Promise<void>;
   fetchNewProducts: (limit?: number) => Promise<void>;
-  fetchProductsByCategory: (category: ProductCategory, query?: ProductQuery) => Promise<void>;
-  fetchProductsByType: (type: ProductType, query?: ProductQuery) => Promise<void>;
+  fetchProductsByCategory: (
+    category: ProductCategory,
+    query?: ProductQuery,
+  ) => Promise<void>;
+  fetchProductsByType: (
+    type: ProductType,
+    query?: ProductQuery,
+  ) => Promise<void>;
   fetchRelatedProducts: (productId: string, limit?: number) => Promise<void>;
-  fetchProductReviews: (productId: string, page?: number, limit?: number) => Promise<void>;
+  fetchProductReviews: (
+    productId: string,
+    page?: number,
+    limit?: number,
+  ) => Promise<void>;
   fetchProductCategories: () => Promise<void>;
   fetchProductFilters: () => Promise<void>;
 
@@ -212,11 +236,14 @@ interface ProductContextType {
 
   // Product actions
   trackProductView: (productId: string) => Promise<void>;
-  addProductReview: (productId: string, review: {
-    rating: number;
-    title?: string;
-    comment: string;
-  }) => Promise<boolean>;
+  addProductReview: (
+    productId: string,
+    review: {
+      rating: number;
+      title?: string;
+      comment: string;
+    },
+  ) => Promise<boolean>;
 
   // Utility methods
   refreshData: () => Promise<void>;
@@ -257,7 +284,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
       dispatch({ type: "SET_LOADING", payload: true });
       dispatch({ type: "SET_CURRENT_QUERY", payload: query });
 
-      const response = await productApi.getProducts(query);
+      const response = await productLesanApi.getProducts(query);
 
       if (response.success && response.data) {
         dispatch({ type: "SET_PRODUCT_LIST", payload: response.data });
@@ -276,7 +303,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const fetchProduct = async (identifier: string) => {
     try {
       dispatch({ type: "SET_PRODUCT_LOADING", payload: true });
-      const response = await productApi.getProduct(identifier);
+      const response = await productLesanApi.getProduct(identifier);
 
       if (response.success && response.data) {
         dispatch({ type: "SET_SELECTED_PRODUCT", payload: response.data });
@@ -301,7 +328,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const fetchFeaturedProducts = async (limit: number = 8) => {
     try {
       dispatch({ type: "SET_FEATURED_LOADING", payload: true });
-      const response = await productApi.getFeaturedProducts(limit);
+      const response = await productLesanApi.getFeaturedProducts(limit);
 
       if (response.success && response.data) {
         dispatch({ type: "SET_FEATURED_PRODUCTS", payload: response.data });
@@ -317,7 +344,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const fetchBestsellerProducts = async (limit: number = 8) => {
     try {
-      const response = await productApi.getBestsellerProducts(limit);
+      const response = await productLesanApi.getBestsellerProducts(limit);
 
       if (response.success && response.data) {
         dispatch({ type: "SET_BESTSELLER_PRODUCTS", payload: response.data });
@@ -329,7 +356,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const fetchNewProducts = async (limit: number = 8) => {
     try {
-      const response = await productApi.getNewProducts(limit);
+      const response = await productLesanApi.getNewProducts(limit);
 
       if (response.success && response.data) {
         dispatch({ type: "SET_NEW_PRODUCTS", payload: response.data });
@@ -341,21 +368,24 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const fetchProductsByCategory = async (
     category: ProductCategory,
-    query: ProductQuery = {}
+    query: ProductQuery = {},
   ) => {
     return fetchProducts({ ...query, category: [category] });
   };
 
   const fetchProductsByType = async (
     type: ProductType,
-    query: ProductQuery = {}
+    query: ProductQuery = {},
   ) => {
     return fetchProducts({ ...query, type: [type] });
   };
 
   const fetchRelatedProducts = async (productId: string, limit: number = 4) => {
     try {
-      const response = await productApi.getRelatedProducts(productId, limit);
+      const response = await productLesanApi.getRelatedProducts(
+        productId,
+        limit,
+      );
 
       if (response.success && response.data) {
         dispatch({ type: "SET_RELATED_PRODUCTS", payload: response.data });
@@ -368,14 +398,21 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const fetchProductReviews = async (
     productId: string,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
   ) => {
     try {
       dispatch({ type: "SET_REVIEWS_LOADING", payload: true });
-      const response = await productApi.getProductReviews(productId, page, limit);
+      const response = await productApi.getProductReviews(
+        productId,
+        page,
+        limit,
+      );
 
       if (response.success && response.data) {
-        dispatch({ type: "SET_PRODUCT_REVIEWS", payload: response.data.reviews });
+        dispatch({
+          type: "SET_PRODUCT_REVIEWS",
+          payload: response.data.reviews,
+        });
       }
     } catch (error) {
       console.error("Failed to fetch product reviews:", error);
@@ -386,10 +423,11 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const fetchProductCategories = async () => {
     try {
-      const response = await productApi.getProductCategories();
-
+      const response = await productLesanApi.getProductFilters();
       if (response.success && response.data) {
-        dispatch({ type: "SET_CATEGORIES", payload: response.data });
+        dispatch({ type: "SET_CATEGORIES", payload: response.data.categories });
+      } else {
+        throw new Error(response.error || "Failed to fetch categories");
       }
     } catch (error) {
       console.error("Failed to fetch product categories:", error);
@@ -398,7 +436,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const fetchProductFilters = async () => {
     try {
-      const response = await productApi.getProductFilters();
+      const response = await productLesanApi.getProductFilters();
 
       if (response.success && response.data) {
         dispatch({ type: "SET_AVAILABLE_FILTERS", payload: response.data });
@@ -408,7 +446,10 @@ export function ProductProvider({ children }: ProductProviderProps) {
     }
   };
 
-  const searchProducts = async (searchTerm: string, query: ProductQuery = {}) => {
+  const searchProducts = async (
+    searchTerm: string,
+    query: ProductQuery = {},
+  ) => {
     dispatch({ type: "SET_SEARCH_TERM", payload: searchTerm });
     return fetchProducts({ ...query, search: searchTerm, page: 1 });
   };
@@ -446,7 +487,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const trackProductView = async (productId: string) => {
     try {
-      await productApi.trackProductView(productId);
+      productLesanApi.trackProductView(productId);
     } catch (error) {
       console.error("Failed to track product view:", error);
     }
@@ -458,7 +499,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
       rating: number;
       title?: string;
       comment: string;
-    }
+    },
   ): Promise<boolean> => {
     try {
       const response = await productApi.addProductReview(productId, review);
@@ -520,9 +561,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
   };
 
   return (
-    <ProductContext.Provider value={value}>
-      {children}
-    </ProductContext.Provider>
+    <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
   );
 }
 
@@ -574,13 +613,19 @@ export function useProductDetail(productId?: string) {
     isReviewsLoading: state.isReviewsLoading,
     error: state.productError,
     refresh: () => productId && fetchProduct(productId),
-    loadReviews: (page?: number) => productId && fetchProductReviews(productId, page),
+    loadReviews: (page?: number) =>
+      productId && fetchProductReviews(productId, page),
   };
 }
 
 // Hook for featured collections
 export function useFeaturedCollections() {
-  const { state, fetchFeaturedProducts, fetchBestsellerProducts, fetchNewProducts } = useProduct();
+  const {
+    state,
+    fetchFeaturedProducts,
+    fetchBestsellerProducts,
+    fetchNewProducts,
+  } = useProduct();
 
   useEffect(() => {
     if (state.featuredProducts.length === 0) {
@@ -599,10 +644,11 @@ export function useFeaturedCollections() {
     bestsellerProducts: state.bestsellerProducts,
     newProducts: state.newProducts,
     isLoading: state.isFeaturedLoading,
-    refresh: () => Promise.all([
-      fetchFeaturedProducts(),
-      fetchBestsellerProducts(),
-      fetchNewProducts(),
-    ]),
+    refresh: () =>
+      Promise.all([
+        fetchFeaturedProducts(),
+        fetchBestsellerProducts(),
+        fetchNewProducts(),
+      ]),
   };
 }
