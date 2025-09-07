@@ -188,23 +188,4 @@ export const course_relations = {
 };
 
 export const courses = () =>
-  coreApp.odm.newModel("course", course_pure, course_relations, {
-    createIndex: [
-      {
-        indexSpec: { slug: 1 },
-        options: { unique: true, sparse: true },
-      },
-      {
-        indexSpec: { status: 1, featured: -1, sort_order: 1 },
-        options: {},
-      },
-      {
-        indexSpec: { price: 1, level: 1 },
-        options: {},
-      },
-      {
-        indexSpec: { start_date: 1, registration_deadline: 1 },
-        options: {},
-      },
-    ],
-  });
+  coreApp.odm.newModel("course", course_pure, course_relations);
