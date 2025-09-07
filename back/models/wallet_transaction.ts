@@ -108,9 +108,4 @@ export const wallet_transaction_relations = {
 };
 
 export const wallet_transactions = () =>
-  coreApp.odm.newModel("wallet_transaction", wallet_transaction_pure, wallet_transaction_relations, {
-    createIndex: {
-      indexSpec: { "transaction_id": 1 },
-      options: { unique: true },
-    },
-  });
+  coreApp.odm.newModel("wallet_transaction", wallet_transaction_pure, wallet_transaction_relations);
