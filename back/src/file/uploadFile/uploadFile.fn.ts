@@ -12,18 +12,23 @@ export const uploadFileFn: ActFn = async (body) => {
   const fileName = `${new ObjectId()}-${fileToUpload.name}`;
   const uploadDir =
     type === "image"
-      ? "./uploads/images"
+      ? "./public/uploads/images"
       : type === "video"
-      ? "./uploads/videos"
-      : "./uploads/docs";
+        ? "./public/uploads/videos"
+        : "./public/uploads/docs";
   await ensureDir(uploadDir);
   await Deno.writeFile(`${uploadDir}/${fileName}`, fileToUpload.stream());
+
+  const relativePath = `${uploadDir.replace("./public", "")}/${fileName}`;
+  const publicUrl = `${relativePath}`;
 
   return await file.insertOne({
     doc: {
       name: fileName,
       type: fileToUpload.type,
       size: fileToUpload.size,
+      path: relativePath,
+      url: publicUrl,
       ...rest,
     },
     relations: {
