@@ -117,6 +117,7 @@ interface WalletContextType {
   state: WalletState;
 
   // Convenience properties
+  balance: number;
   walletBalance: WalletBalance | null;
   walletStats: WalletStats | null;
 
@@ -134,6 +135,7 @@ interface WalletContextType {
   // Utility methods
   checkSufficientBalance: (amount: number) => Promise<boolean>;
   refreshWalletData: () => Promise<void>;
+  refreshWallet: () => Promise<void>;
   clearError: () => void;
 
   // Charge wallet methods
@@ -154,22 +156,22 @@ interface WalletProviderProps {
 
 export function WalletProvider({ children }: WalletProviderProps) {
   const [state, dispatch] = useReducer(walletReducer, initialState);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
+  const userId = user?._id;
 
   // Auto-fetch wallet data when user is authenticated
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && userId) {
       fetchBalance();
-      fetchStats();
       fetchTransactionHistory({ page: 1, limit: 10 });
     } else {
       dispatch({ type: "CLEAR_WALLET" });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, userId]);
 
   // Auto-refresh wallet data every 5 minutes
   useEffect(() => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated || !userId) return;
 
     const interval = setInterval(
       () => {
@@ -179,7 +181,7 @@ export function WalletProvider({ children }: WalletProviderProps) {
     ); // 5 minutes
 
     return () => clearInterval(interval);
-  }, [isAuthenticated]);
+  }, [isAuthenticated, userId]);
 
   const handleApiError = (error: any) => {
     const errorMessage = error.message || "خطای غیرمنتظره رخ داده است";
@@ -188,11 +190,11 @@ export function WalletProvider({ children }: WalletProviderProps) {
   };
 
   const fetchWallet = async () => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated || !userId) return;
 
     try {
       dispatch({ type: "SET_LOADING", payload: true });
-      const response = await walletApi.getWallet();
+      const response = await walletApi.getWallet(userId);
 
       if (response.success && response.data) {
         dispatch({ type: "SET_WALLET", payload: response.data });
@@ -208,10 +210,10 @@ export function WalletProvider({ children }: WalletProviderProps) {
   };
 
   const fetchBalance = async () => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated || !userId) return;
 
     try {
-      const response = await walletApi.getBalance();
+      const response = await walletApi.getBalance(userId);
 
       if (response.success && response.data) {
         dispatch({ type: "SET_BALANCE", payload: response.data });
@@ -225,15 +227,30 @@ export function WalletProvider({ children }: WalletProviderProps) {
   };
 
   const fetchStats = async () => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated || !userId) return;
 
     try {
-      const response = await walletApi.getWalletStats();
+      // For now, we'll create basic stats from balance data
+      const balanceResponse = await walletApi.getBalance(userId);
+      const transactionResponse = await walletApi.getTransactionHistory(
+        userId,
+        { page: 1, limit: 5 },
+      );
 
-      if (response.success && response.data) {
-        dispatch({ type: "SET_STATS", payload: response.data });
+      if (balanceResponse.success && balanceResponse.data) {
+        const mockStats: WalletStats = {
+          balance: balanceResponse.data.balance,
+          currency: balanceResponse.data.currency,
+          status: balanceResponse.data.status,
+          totalDeposits: { total: 0, count: 0 },
+          totalWithdrawals: { total: 0, count: 0 },
+          recentTransactions: transactionResponse.success
+            ? transactionResponse.data.transactions
+            : [],
+        };
+        dispatch({ type: "SET_STATS", payload: mockStats });
       } else {
-        throw new Error(response.error || "Failed to fetch stats");
+        throw new Error(balanceResponse.error || "Failed to fetch stats");
       }
     } catch (error) {
       handleApiError(error);
@@ -241,11 +258,11 @@ export function WalletProvider({ children }: WalletProviderProps) {
   };
 
   const fetchTransactionHistory = async (query: TransactionQuery = {}) => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated || !userId) return;
 
     try {
       dispatch({ type: "SET_TRANSACTION_LOADING", payload: true });
-      const response = await walletApi.getTransactionHistory(query);
+      const response = await walletApi.getTransactionHistory(userId, query);
 
       if (response.success && response.data) {
         dispatch({ type: "SET_TRANSACTION_HISTORY", payload: response.data });
@@ -264,11 +281,11 @@ export function WalletProvider({ children }: WalletProviderProps) {
   };
 
   const deposit = async (request: DepositRequest): Promise<boolean> => {
-    if (!isAuthenticated) return false;
+    if (!isAuthenticated || !userId) return false;
 
     try {
       dispatch({ type: "SET_TRANSACTION_LOADING", payload: true });
-      const response = await walletApi.deposit(request);
+      const response = await walletApi.deposit(userId, request);
 
       if (response.success) {
         // Refresh balance after successful deposit
@@ -287,11 +304,18 @@ export function WalletProvider({ children }: WalletProviderProps) {
   };
 
   const withdraw = async (request: WithdrawRequest): Promise<boolean> => {
-    if (!isAuthenticated) return false;
+    if (!isAuthenticated || !userId) return false;
 
     try {
       dispatch({ type: "SET_TRANSACTION_LOADING", payload: true });
-      const response = await walletApi.withdraw(request);
+      // For now, we'll implement withdrawal as a negative purchase transaction
+      // This can be enhanced later with a proper withdrawal API
+      const purchaseRequest = {
+        amount: request.amount,
+        order_id: `withdrawal_${Date.now()}`,
+        description: request.description || "Manual withdrawal",
+      };
+      const response = await walletApi.makePurchase(userId, purchaseRequest);
 
       if (response.success) {
         // Refresh balance after successful withdrawal
@@ -310,11 +334,11 @@ export function WalletProvider({ children }: WalletProviderProps) {
   };
 
   const makePurchase = async (request: PurchaseRequest): Promise<boolean> => {
-    if (!isAuthenticated) return false;
+    if (!isAuthenticated || !userId) return false;
 
     try {
       dispatch({ type: "SET_TRANSACTION_LOADING", payload: true });
-      const response = await walletApi.makePurchase(request);
+      const response = await walletApi.makePurchase(userId, request);
 
       if (response.success) {
         // Refresh balance after successful purchase
@@ -333,16 +357,10 @@ export function WalletProvider({ children }: WalletProviderProps) {
   };
 
   const checkSufficientBalance = async (amount: number): Promise<boolean> => {
-    if (!isAuthenticated) return false;
+    if (!isAuthenticated || !userId) return false;
 
     try {
-      const response = await walletApi.checkBalance(amount);
-
-      if (response.success && response.data) {
-        return response.data.has_sufficient_balance;
-      } else {
-        return false;
-      }
+      return await walletApi.hasSufficientBalance(userId, amount);
     } catch (error) {
       console.error("Error checking balance:", error);
       return false;
@@ -357,6 +375,10 @@ export function WalletProvider({ children }: WalletProviderProps) {
     ]);
   };
 
+  const refreshWallet = async () => {
+    await fetchBalance();
+  };
+
   const clearError = () => {
     dispatch({ type: "SET_ERROR", payload: null });
   };
@@ -365,17 +387,14 @@ export function WalletProvider({ children }: WalletProviderProps) {
     amount: number,
     description?: string,
   ): Promise<string | null> => {
-    if (!isAuthenticated) return null;
+    if (!isAuthenticated || !userId) return null;
 
     try {
       dispatch({ type: "SET_LOADING", payload: true });
-      const response = await walletApi.initiateCharge(amount, description);
-
-      if (response.success && response.data) {
-        return response.data.payment_url;
-      } else {
-        throw new Error(response.error || "Failed to initiate charge");
-      }
+      // For now, return null as payment gateway integration is not yet implemented
+      // This will be implemented in later phases
+      console.log("Payment gateway integration not yet implemented");
+      return null;
     } catch (error) {
       handleApiError(error);
       return null;
@@ -388,19 +407,14 @@ export function WalletProvider({ children }: WalletProviderProps) {
     authority: string,
     status: string,
   ): Promise<boolean> => {
-    if (!isAuthenticated) return false;
+    if (!isAuthenticated || !userId) return false;
 
     try {
       dispatch({ type: "SET_LOADING", payload: true });
-      const response = await walletApi.verifyCharge(authority, status);
-
-      if (response.success) {
-        // Refresh wallet data after successful charge
-        await refreshWalletData();
-        return true;
-      } else {
-        throw new Error(response.error || "Payment verification failed");
-      }
+      // For now, return false as payment gateway integration is not yet implemented
+      // This will be implemented in later phases
+      console.log("Payment verification not yet implemented");
+      return false;
     } catch (error) {
       handleApiError(error);
       return false;
@@ -411,6 +425,8 @@ export function WalletProvider({ children }: WalletProviderProps) {
 
   const value: WalletContextType = {
     state,
+    // Convenience properties
+    balance: state.balance?.balance || 0,
     walletBalance: state.balance,
     walletStats: state.stats,
     fetchWallet,
@@ -422,6 +438,7 @@ export function WalletProvider({ children }: WalletProviderProps) {
     makePurchase,
     checkSufficientBalance,
     refreshWalletData,
+    refreshWallet,
     clearError,
     initiateCharge,
     verifyCharge,
