@@ -11,3 +11,4 @@ export * from "./article.ts";
 export * from "./wallet.ts";
 export * from "./wallet_transaction.ts";
 export * from "./order.ts";
+export * from "./product.ts";
