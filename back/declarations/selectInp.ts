@@ -6,7 +6,13 @@
       avatar?: number | fileInp
 national_card?: number | fileInp
       uploadedAssets?: number | fileInp
-registered_locations?: number | locationInp
+articles?: number | articleInp
+edited_articles?: number | articleInp
+liked_articles?: number | articleInp
+bookmarked_articles?: number | articleInp
+taught_courses?: number | courseInp
+enrolled_courses?: number | courseInp
+created_courses?: number | courseInp
     }
 
 
@@ -30,6 +36,8 @@ _id?: string;
 name: string;
 type: string;
 size: number;
+path: string;
+url: string;
 createdAt: Date;
 updatedAt: Date;
 };
@@ -38,6 +46,8 @@ _id?: string;
 name: string;
 type: string;
 size: number;
+path: string;
+url: string;
 createdAt: Date;
 updatedAt: Date;
 };
@@ -46,21 +56,317 @@ _id?: string;
 name: string;
 type: string;
 size: number;
+path: string;
+url: string;
 createdAt: Date;
 updatedAt: Date;
 }[];
-registered_locations: {
+articles: {
+_id?: string;
+title: string;
+content: string;
+excerpt?: string;
+title_en?: string;
+content_en?: string;
+excerpt_en?: string;
+status: ("Draft" | "Published" | "Archived" | "Scheduled" );
+type: ("Article" | "News" | "Research" | "Tutorial" | "Interview" );
+published_at?: Date;
+scheduled_at?: Date;
+featured: boolean;
+pinned: boolean;
+sort_order: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+meta_title_en?: string;
+meta_description_en?: string;
+view_count: number;
+like_count: number;
+comment_count: number;
+share_count: number;
+estimated_reading_time?: number;
+allow_comments: boolean;
+featured_on_homepage: boolean;
+social_image_alt?: string;
+social_image_alt_en?: string;
+abstract?: string;
+abstract_en?: string;
+keywords?: string;
+keywords_en?: string;
+doi?: string;
+citation?: string;
+has_gallery: boolean;
+video_url?: string;
+audio_url?: string;
+archive_date?: Date;
+last_modified_by_name?: string;
+is_premium: boolean;
+requires_login: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+edited_articles: {
+_id?: string;
+title: string;
+content: string;
+excerpt?: string;
+title_en?: string;
+content_en?: string;
+excerpt_en?: string;
+status: ("Draft" | "Published" | "Archived" | "Scheduled" );
+type: ("Article" | "News" | "Research" | "Tutorial" | "Interview" );
+published_at?: Date;
+scheduled_at?: Date;
+featured: boolean;
+pinned: boolean;
+sort_order: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+meta_title_en?: string;
+meta_description_en?: string;
+view_count: number;
+like_count: number;
+comment_count: number;
+share_count: number;
+estimated_reading_time?: number;
+allow_comments: boolean;
+featured_on_homepage: boolean;
+social_image_alt?: string;
+social_image_alt_en?: string;
+abstract?: string;
+abstract_en?: string;
+keywords?: string;
+keywords_en?: string;
+doi?: string;
+citation?: string;
+has_gallery: boolean;
+video_url?: string;
+audio_url?: string;
+archive_date?: Date;
+last_modified_by_name?: string;
+is_premium: boolean;
+requires_login: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+liked_articles: {
+_id?: string;
+title: string;
+content: string;
+excerpt?: string;
+title_en?: string;
+content_en?: string;
+excerpt_en?: string;
+status: ("Draft" | "Published" | "Archived" | "Scheduled" );
+type: ("Article" | "News" | "Research" | "Tutorial" | "Interview" );
+published_at?: Date;
+scheduled_at?: Date;
+featured: boolean;
+pinned: boolean;
+sort_order: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+meta_title_en?: string;
+meta_description_en?: string;
+view_count: number;
+like_count: number;
+comment_count: number;
+share_count: number;
+estimated_reading_time?: number;
+allow_comments: boolean;
+featured_on_homepage: boolean;
+social_image_alt?: string;
+social_image_alt_en?: string;
+abstract?: string;
+abstract_en?: string;
+keywords?: string;
+keywords_en?: string;
+doi?: string;
+citation?: string;
+has_gallery: boolean;
+video_url?: string;
+audio_url?: string;
+archive_date?: Date;
+last_modified_by_name?: string;
+is_premium: boolean;
+requires_login: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+bookmarked_articles: {
+_id?: string;
+title: string;
+content: string;
+excerpt?: string;
+title_en?: string;
+content_en?: string;
+excerpt_en?: string;
+status: ("Draft" | "Published" | "Archived" | "Scheduled" );
+type: ("Article" | "News" | "Research" | "Tutorial" | "Interview" );
+published_at?: Date;
+scheduled_at?: Date;
+featured: boolean;
+pinned: boolean;
+sort_order: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+meta_title_en?: string;
+meta_description_en?: string;
+view_count: number;
+like_count: number;
+comment_count: number;
+share_count: number;
+estimated_reading_time?: number;
+allow_comments: boolean;
+featured_on_homepage: boolean;
+social_image_alt?: string;
+social_image_alt_en?: string;
+abstract?: string;
+abstract_en?: string;
+keywords?: string;
+keywords_en?: string;
+doi?: string;
+citation?: string;
+has_gallery: boolean;
+video_url?: string;
+audio_url?: string;
+archive_date?: Date;
+last_modified_by_name?: string;
+is_premium: boolean;
+requires_login: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+taught_courses: {
 _id?: string;
 name: string;
 description: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+}[];
+enrolled_courses: {
+_id?: string;
+name: string;
+description: string;
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+}[];
+created_courses: {
+_id?: string;
+name: string;
+description: string;
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
 createdAt: Date;
 updatedAt: Date;
 }[];
@@ -79,6 +385,8 @@ _id?: string;
 name: string;
 type: string;
 size: number;
+path: string;
+url: string;
 createdAt: Date;
 updatedAt: Date;
 uploader: {
@@ -101,284 +409,10 @@ updatedAt: Date;
 ;
 
 
-    export type provinceInp = {
-      registrer?: number | userInp
-      cities?: number | cityInp
-center?: number | cityInp
-locations?: number | locationInp
-    }
-
-
-    export type provinceSchema = {
-_id?: string;
-name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-registrer?: {
-_id?: string;
-first_name: string;
-last_name: string;
-father_name: string;
-mobile: string;
-gender: ("Male" | "Female" );
-birth_date?: Date;
-summary?: string;
-national_number: string;
-address: string;
-level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
-is_verified: boolean;
-createdAt: Date;
-updatedAt: Date;
-};
-cities: {
-_id?: string;
-name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-}[];
-center: {
-_id?: string;
-name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-}[];
-locations: {
-_id?: string;
-name: string;
-description: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-}[];
-};
-;
-
-
-    export type cityInp = {
-      registrer?: number | userInp
-province?: number | provinceInp
-      city_zones?: number | city_zoneInp
-locations?: number | locationInp
-    }
-
-
-    export type citySchema = {
-_id?: string;
-name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-registrer?: {
-_id?: string;
-first_name: string;
-last_name: string;
-father_name: string;
-mobile: string;
-gender: ("Male" | "Female" );
-birth_date?: Date;
-summary?: string;
-national_number: string;
-address: string;
-level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
-is_verified: boolean;
-createdAt: Date;
-updatedAt: Date;
-};
-province?: {
-_id?: string;
-name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-};
-city_zones: {
-_id?: string;
-name: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-}[];
-locations: {
-_id?: string;
-name: string;
-description: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-}[];
-};
-;
-
-
-    export type city_zoneInp = {
-      registrer?: number | userInp
-city?: number | cityInp
-      locations?: number | locationInp
-    }
-
-
-    export type city_zoneSchema = {
-_id?: string;
-name: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-registrer?: {
-_id?: string;
-first_name: string;
-last_name: string;
-father_name: string;
-mobile: string;
-gender: ("Male" | "Female" );
-birth_date?: Date;
-summary?: string;
-national_number: string;
-address: string;
-level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
-is_verified: boolean;
-createdAt: Date;
-updatedAt: Date;
-};
-city?: {
-_id?: string;
-name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-};
-locations: {
-_id?: string;
-name: string;
-description: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-}[];
-};
-;
-
-
-    export type categoryInp = {
-      registrer?: number | userInp
-      
-    }
-
-
-    export type categorySchema = {
-_id?: string;
-name: string;
-description: string;
-createdAt: Date;
-updatedAt: Date;
-registrer?: {
-_id?: string;
-first_name: string;
-last_name: string;
-father_name: string;
-mobile: string;
-gender: ("Male" | "Female" );
-birth_date?: Date;
-summary?: string;
-national_number: string;
-address: string;
-level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
-is_verified: boolean;
-createdAt: Date;
-updatedAt: Date;
-};
-};
-;
-
-
     export type tagInp = {
       registrer?: number | userInp
-      
+      articles?: number | articleInp
+courses?: number | courseInp
     }
 
 
@@ -404,33 +438,109 @@ is_verified: boolean;
 createdAt: Date;
 updatedAt: Date;
 };
+articles: {
+_id?: string;
+title: string;
+content: string;
+excerpt?: string;
+title_en?: string;
+content_en?: string;
+excerpt_en?: string;
+status: ("Draft" | "Published" | "Archived" | "Scheduled" );
+type: ("Article" | "News" | "Research" | "Tutorial" | "Interview" );
+published_at?: Date;
+scheduled_at?: Date;
+featured: boolean;
+pinned: boolean;
+sort_order: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+meta_title_en?: string;
+meta_description_en?: string;
+view_count: number;
+like_count: number;
+comment_count: number;
+share_count: number;
+estimated_reading_time?: number;
+allow_comments: boolean;
+featured_on_homepage: boolean;
+social_image_alt?: string;
+social_image_alt_en?: string;
+abstract?: string;
+abstract_en?: string;
+keywords?: string;
+keywords_en?: string;
+doi?: string;
+citation?: string;
+has_gallery: boolean;
+video_url?: string;
+audio_url?: string;
+archive_date?: Date;
+last_modified_by_name?: string;
+is_premium: boolean;
+requires_login: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+courses: {
+_id?: string;
+name: string;
+description: string;
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+}[];
 };
 ;
 
 
-    export type locationInp = {
+    export type categoryInp = {
       registrer?: number | userInp
-province?: number | provinceInp
-city?: number | cityInp
-city_zone?: number | city_zoneInp
-category?: number | categoryInp
-tags?: number | tagInp
-      
+      articles?: number | articleInp
+courses?: number | courseInp
     }
 
 
-    export type locationSchema = {
+    export type categorySchema = {
 _id?: string;
 name: string;
 description: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
 createdAt: Date;
 updatedAt: Date;
 registrer?: {
@@ -449,47 +559,414 @@ is_verified: boolean;
 createdAt: Date;
 updatedAt: Date;
 };
-province?: {
+articles: {
+_id?: string;
+title: string;
+content: string;
+excerpt?: string;
+title_en?: string;
+content_en?: string;
+excerpt_en?: string;
+status: ("Draft" | "Published" | "Archived" | "Scheduled" );
+type: ("Article" | "News" | "Research" | "Tutorial" | "Interview" );
+published_at?: Date;
+scheduled_at?: Date;
+featured: boolean;
+pinned: boolean;
+sort_order: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+meta_title_en?: string;
+meta_description_en?: string;
+view_count: number;
+like_count: number;
+comment_count: number;
+share_count: number;
+estimated_reading_time?: number;
+allow_comments: boolean;
+featured_on_homepage: boolean;
+social_image_alt?: string;
+social_image_alt_en?: string;
+abstract?: string;
+abstract_en?: string;
+keywords?: string;
+keywords_en?: string;
+doi?: string;
+citation?: string;
+has_gallery: boolean;
+video_url?: string;
+audio_url?: string;
+archive_date?: Date;
+last_modified_by_name?: string;
+is_premium: boolean;
+requires_login: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+courses: {
 _id?: string;
 name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
+description: string;
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+}[];
 };
-center_location: {
-type: "Point";
-coordinates: any[];
-};
+;
+
+
+    export type courseInp = {
+      featured_image?: number | fileInp
+gallery?: number | fileInp
+category?: number | categoryInp
+tags?: number | tagInp
+instructor?: number | userInp
+enrolled_users?: number | userInp
+creator?: number | userInp
+related_courses?: number | courseInp
+prerequisite_courses?: number | courseInp
+      
+    }
+
+
+    export type courseSchema = {
+_id?: string;
+name: string;
+description: string;
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+featured_image?: {
+_id?: string;
+name: string;
+type: string;
+size: number;
+path: string;
+url: string;
 createdAt: Date;
 updatedAt: Date;
 };
-city?: {
+gallery?: {
 _id?: string;
 name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
+type: string;
+size: number;
+path: string;
+url: string;
+createdAt: Date;
+updatedAt: Date;
+}[];
+category?: {
+_id?: string;
+name: string;
+description: string;
 createdAt: Date;
 updatedAt: Date;
 };
-city_zone?: {
+tags?: {
 _id?: string;
 name: string;
-center: {
-type: "Point";
-coordinates: any[];
+description: string;
+createdAt: Date;
+updatedAt: Date;
+}[];
+instructor?: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
 };
-area: {
-type: "MultiPolygon";
-coordinates: any[];
+enrolled_users?: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+creator?: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
 };
+related_courses?: {
+_id?: string;
+name: string;
+description: string;
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+}[];
+prerequisite_courses?: {
+_id?: string;
+name: string;
+description: string;
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+}[];
+};
+;
+
+
+    export type articleInp = {
+      featured_image?: number | fileInp
+gallery?: number | fileInp
+social_image?: number | fileInp
+category?: number | categoryInp
+tags?: number | tagInp
+author?: number | userInp
+editors?: number | userInp
+liked_by?: number | userInp
+bookmarked_by?: number | userInp
+related_articles?: number | articleInp
+related_courses?: number | courseInp
+referenced_files?: number | fileInp
+      
+    }
+
+
+    export type articleSchema = {
+_id?: string;
+title: string;
+content: string;
+excerpt?: string;
+title_en?: string;
+content_en?: string;
+excerpt_en?: string;
+status: ("Draft" | "Published" | "Archived" | "Scheduled" );
+type: ("Article" | "News" | "Research" | "Tutorial" | "Interview" );
+published_at?: Date;
+scheduled_at?: Date;
+featured: boolean;
+pinned: boolean;
+sort_order: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+meta_title_en?: string;
+meta_description_en?: string;
+view_count: number;
+like_count: number;
+comment_count: number;
+share_count: number;
+estimated_reading_time?: number;
+allow_comments: boolean;
+featured_on_homepage: boolean;
+social_image_alt?: string;
+social_image_alt_en?: string;
+abstract?: string;
+abstract_en?: string;
+keywords?: string;
+keywords_en?: string;
+doi?: string;
+citation?: string;
+has_gallery: boolean;
+video_url?: string;
+audio_url?: string;
+archive_date?: Date;
+last_modified_by_name?: string;
+is_premium: boolean;
+requires_login: boolean;
+createdAt: Date;
+updatedAt: Date;
+featured_image?: {
+_id?: string;
+name: string;
+type: string;
+size: number;
+path: string;
+url: string;
+createdAt: Date;
+updatedAt: Date;
+};
+gallery?: {
+_id?: string;
+name: string;
+type: string;
+size: number;
+path: string;
+url: string;
+createdAt: Date;
+updatedAt: Date;
+}[];
+social_image?: {
+_id?: string;
+name: string;
+type: string;
+size: number;
+path: string;
+url: string;
 createdAt: Date;
 updatedAt: Date;
 };
@@ -507,1878 +984,8 @@ description: string;
 createdAt: Date;
 updatedAt: Date;
 }[];
-};
-;
-
-
-    export type ReqType = {
-
-  
-        main: {
-
-      
-        city: {
-
-      
-            add: {
-set: {
-name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-provinceId: string;
-isCenter: boolean;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            update: {
-set: {
-_id: string;
-name?: string;
-english_name?: string;
-area?: {
-type: "Polygon";
-coordinates: any[];
-};
-center_location?: {
-type: "Point";
-coordinates: any[];
-};
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            get: {
-set: {
-_id: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-cities?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-center?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            gets: {
-set: {
-page: number;
-limit: number;
-name?: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-cities?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-center?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            remove: {
-set: {
-_id: string;
-hardCascade?: boolean;
-};
-get: {
-success?: (0 | 1 );
-};
-};
-
-          
-            count: {
-set: {
-name?: string;
-};
-get: {
-qty?: (0 | 1 );
-};
-};
-
-          
-          }
-
-        
-        city_zone: {
-
-      
-            add: {
-set: {
-name: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-cityId: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            update: {
-set: {
-_id: string;
-name?: string;
-area?: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            get: {
-set: {
-_id: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            gets: {
-set: {
-page: number;
-limit: number;
-name?: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            remove: {
-set: {
-_id: string;
-hardCascade?: boolean;
-};
-get: {
-success?: (0 | 1 );
-};
-};
-
-          
-            count: {
-set: {
-name?: string;
-};
-get: {
-qty?: (0 | 1 );
-};
-};
-
-          
-          }
-
-        
-        file: {
-
-      
-            getFiles: {
-set: {
-page: number;
-limit: number;
-name?: string;
-type?: ("image" | "video" | "doc" );
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            uploadFile: {
-set: {
-type: ("video" | "image" | "doc" );
-createdAt: Date;
-updatedAt: Date;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-          }
-
-        
-        province: {
-
-      
-            add: {
-set: {
-name: string;
-english_name: string;
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-center_location: {
-type: "Point";
-coordinates: any[];
-};
-createdAt: Date;
-updatedAt: Date;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-cities?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-center?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            update: {
-set: {
-_id: string;
-name?: string;
-english_name?: string;
-area?: {
-type: "Polygon";
-coordinates: any[];
-};
-center_location?: {
-type: "Point";
-coordinates: any[];
-};
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-cities?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-center?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            get: {
-set: {
-_id: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-cities?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-center?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            gets: {
-set: {
-page: number;
-limit: number;
-name?: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-cities?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-center?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            remove: {
-set: {
-_id: string;
-hardCascade?: boolean;
-};
-get: {
-success?: (0 | 1 );
-};
-};
-
-          
-            count: {
-set: {
-name?: string;
-};
-get: {
-qty?: (0 | 1 );
-};
-};
-
-          
-          }
-
-        
-        user: {
-
-      
-            addUser: {
-set: {
+author: {
+_id?: string;
 first_name: string;
 last_name: string;
 father_name: string;
@@ -2390,2125 +997,538 @@ national_number: string;
 address: string;
 level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
 is_verified: boolean;
-nationalCard?: string;
-avatar?: string;
+createdAt: Date;
+updatedAt: Date;
 };
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            getMe: {
-set: {
-};
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            getUser: {
-set: {
-_id: string;
-};
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            login: {
-set: {
-national_number: string;
-code: string;
-};
-get?: {
-token?: (0 | 1 );
-user: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            loginReq: {
-set: {
-national_number: string;
-};
-get: {
-mobile: (1 );
-national_number: (1 );
-};
-};
-
-          
-            tempUser: {
-set: {
+editors?: {
+_id?: string;
 first_name: string;
 last_name: string;
 father_name: string;
 mobile: string;
-national_number: string;
-};
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            updateUser: {
-set: {
-_id: string;
-first_name?: string;
-last_name?: string;
-father_name?: string;
-gender?: ("Male" | "Female" );
+gender: ("Male" | "Female" );
 birth_date?: Date;
 summary?: string;
-address?: string;
-};
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            registerUser: {
-set: {
-mobile: string;
 national_number: string;
-};
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            changeMobile: {
-set: {
-national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+liked_by?: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
 mobile: string;
-};
-get: {
-mobile: (1 );
-national_number: (1 );
-};
-};
-
-          
-            getUsers: {
-set: {
-levels?: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
-page: number;
-limit: number;
-};
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-uploader?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            removeUser: {
-set: {
-_id: string;
-hardCascade?: boolean;
-};
-get: {
-success?: (0 | 1 );
-};
-};
-
-          
-            countUsers: {
-set: {
-levels?: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
-};
-get: {
-qty: (0 | 1 );
-};
-};
-
-          
-            toggleFavArticle: {
-set: {
-articleId: string;
-};
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            updateUserRelations: {
-set: {
-_id: string;
-avatar?: string;
-nationalCard?: string;
-};
-get: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            dashboardStatistic: {
-set: {
-};
-get: {
-users?: (0 | 1 );
-provinces?: (0 | 1 );
-cities?: (0 | 1 );
-city_zones?: (0 | 1 );
-locaions?: (0 | 1 );
-categories?: (0 | 1 );
-tags?: (0 | 1 );
-};
-};
-
-          
-          }
-
-        
-        location: {
-
-      
-            add: {
-set: {
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+bookmarked_by?: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+related_articles?: {
+_id?: string;
+title: string;
+content: string;
+excerpt?: string;
+title_en?: string;
+content_en?: string;
+excerpt_en?: string;
+status: ("Draft" | "Published" | "Archived" | "Scheduled" );
+type: ("Article" | "News" | "Research" | "Tutorial" | "Interview" );
+published_at?: Date;
+scheduled_at?: Date;
+featured: boolean;
+pinned: boolean;
+sort_order: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+meta_title_en?: string;
+meta_description_en?: string;
+view_count: number;
+like_count: number;
+comment_count: number;
+share_count: number;
+estimated_reading_time?: number;
+allow_comments: boolean;
+featured_on_homepage: boolean;
+social_image_alt?: string;
+social_image_alt_en?: string;
+abstract?: string;
+abstract_en?: string;
+keywords?: string;
+keywords_en?: string;
+doi?: string;
+citation?: string;
+has_gallery: boolean;
+video_url?: string;
+audio_url?: string;
+archive_date?: Date;
+last_modified_by_name?: string;
+is_premium: boolean;
+requires_login: boolean;
+createdAt: Date;
+updatedAt: Date;
+}[];
+related_courses?: {
 _id?: string;
 name: string;
 description: string;
-center: {
-type: "Point";
-coordinates: any[];
-};
-area: {
-type: "MultiPolygon";
-coordinates: any[];
-};
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
 createdAt: Date;
 updatedAt: Date;
-province: string;
-city: string;
-city_zone: string;
-category: string;
-tags?: string[];
+}[];
+referenced_files?: {
+_id?: string;
+name: string;
+type: string;
+size: number;
+path: string;
+url: string;
+createdAt: Date;
+updatedAt: Date;
+}[];
 };
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
+;
 
-          
-            update: {
-set: {
-_id: string;
-name?: string;
-description?: string;
-center?: {
-type: "Point";
-coordinates: any[];
-};
-area?: {
-type: "MultiPolygon";
-coordinates: any[];
-};
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
 
-          
-            get: {
-set: {
-_id: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-cities?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-center?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            gets: {
-set: {
-page: number;
-limit: number;
-name?: string;
-province?: string;
-city?: string;
-cityZone?: string;
-polygon?: {
-type: "Polygon";
-coordinates: any[];
-};
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-cities?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-center?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-province?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city_zones?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-city_zone?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-city?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-english_name?: (0 | 1 );
-area?: (0 | 1 );
-center_location?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-category?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-tags?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            remove: {
-set: {
-_id: string;
-hardCascade?: boolean;
-};
-get: {
-success?: (0 | 1 );
-};
-};
-
-          
-            count: {
-set: {
-name?: string;
-province?: string;
-city?: string;
-cityZone?: string;
-polygon?: {
-type: "Polygon";
-coordinates: any[];
-};
-};
-get: {
-total?: (0 | 1 );
-filtered?: (0 | 1 );
-};
-};
-
-          
-          }
-
-        
-        tag: {
-
+    export type walletInp = {
+      user?: number | userInp
       
-            add: {
-set: {
+    }
+
+
+    export type walletSchema = {
+_id?: string;
+balance: number;
+currency: ("IRR" | "USD" | "EUR" );
+status: ("active" | "suspended" | "blocked" );
+is_active: boolean;
+last_transaction_at?: string;
+createdAt: Date;
+updatedAt: Date;
+user: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+};
+};
+;
+
+
+    export type wallet_transactionInp = {
+      wallet?: number | walletInp
+user?: number | userInp
+order?: number | orderInp
+      
+    }
+
+
+    export type wallet_transactionSchema = {
+_id?: string;
+transaction_id: string;
+amount: number;
+currency: string;
+type: ("deposit" | "withdrawal" | "purchase" | "refund" | "transfer_in" | "transfer_out" | "bonus" | "penalty" | "commission" );
+status: ("pending" | "processing" | "completed" | "failed" | "cancelled" | "refunded" );
+payment_method?: ("zarinpal" | "bank_transfer" | "manual" | "wallet_balance" | "credit_card" | "other" );
+description?: string;
+reference_id?: string;
+gateway_response?: string;
+balance_before: number;
+balance_after: number;
+ip_address?: string;
+user_agent?: string;
+admin_notes?: string;
+processed_by?: string;
+processed_at?: string;
+expires_at?: string;
+createdAt: Date;
+updatedAt: Date;
+wallet: {
+_id?: string;
+balance: number;
+currency: ("IRR" | "USD" | "EUR" );
+status: ("active" | "suspended" | "blocked" );
+is_active: boolean;
+last_transaction_at?: string;
+createdAt: Date;
+updatedAt: Date;
+};
+user: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+};
+order?: {
+_id?: string;
+order_number: string;
+order_id: string;
+status: ("pending" | "confirmed" | "processing" | "shipped" | "delivered" | "cancelled" | "refunded" | "failed" );
+payment_status: ("pending" | "paid" | "partially_paid" | "failed" | "refunded" | "cancelled" );
+order_type: ("course" | "workshop" | "product" | "mixed" );
+items: {
+item_id: string;
+item_type: ("course" | "workshop" | "product" );
+name: string;
+name_en?: string;
+price: number;
+discounted_price?: number;
+quantity: number;
+total: number;
+metadata?: string;
+}[];
+subtotal: number;
+tax_amount: number;
+discount_amount: number;
+total_amount: number;
+currency: string;
+customer_email?: string;
+customer_phone?: string;
+customer_name: string;
+billing_address?: string;
+billing_city?: string;
+billing_postal_code?: string;
+billing_country: string;
+shipping_address?: string;
+shipping_city?: string;
+shipping_postal_code?: string;
+shipping_country?: string;
+shipping_cost: number;
+payment_method?: string;
+payment_reference?: string;
+gateway_transaction_id?: string;
+gateway_response?: string;
+shipped_at?: Date;
+delivered_at?: Date;
+admin_notes?: string;
+internal_notes?: string;
+tracking_number?: string;
+tracking_url?: string;
+refund_amount: number;
+refund_reason?: string;
+refunded_at?: Date;
+createdAt: Date;
+updatedAt: Date;
+};
+};
+;
+
+
+    export type orderInp = {
+      user?: number | userInp
+wallet_transactions?: number | wallet_transactionInp
+      
+    }
+
+
+    export type orderSchema = {
+_id?: string;
+order_number: string;
+order_id: string;
+status: ("pending" | "confirmed" | "processing" | "shipped" | "delivered" | "cancelled" | "refunded" | "failed" );
+payment_status: ("pending" | "paid" | "partially_paid" | "failed" | "refunded" | "cancelled" );
+order_type: ("course" | "workshop" | "product" | "mixed" );
+items: {
+item_id: string;
+item_type: ("course" | "workshop" | "product" );
+name: string;
+name_en?: string;
+price: number;
+discounted_price?: number;
+quantity: number;
+total: number;
+metadata?: string;
+}[];
+subtotal: number;
+tax_amount: number;
+discount_amount: number;
+total_amount: number;
+currency: string;
+customer_email?: string;
+customer_phone?: string;
+customer_name: string;
+billing_address?: string;
+billing_city?: string;
+billing_postal_code?: string;
+billing_country: string;
+shipping_address?: string;
+shipping_city?: string;
+shipping_postal_code?: string;
+shipping_country?: string;
+shipping_cost: number;
+payment_method?: string;
+payment_reference?: string;
+gateway_transaction_id?: string;
+gateway_response?: string;
+shipped_at?: Date;
+delivered_at?: Date;
+admin_notes?: string;
+internal_notes?: string;
+tracking_number?: string;
+tracking_url?: string;
+refund_amount: number;
+refund_reason?: string;
+refunded_at?: Date;
+createdAt: Date;
+updatedAt: Date;
+user: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+};
+wallet_transactions?: {
+_id?: string;
+transaction_id: string;
+amount: number;
+currency: string;
+type: ("deposit" | "withdrawal" | "purchase" | "refund" | "transfer_in" | "transfer_out" | "bonus" | "penalty" | "commission" );
+status: ("pending" | "processing" | "completed" | "failed" | "cancelled" | "refunded" );
+payment_method?: ("zarinpal" | "bank_transfer" | "manual" | "wallet_balance" | "credit_card" | "other" );
+description?: string;
+reference_id?: string;
+gateway_response?: string;
+balance_before: number;
+balance_after: number;
+ip_address?: string;
+user_agent?: string;
+admin_notes?: string;
+processed_by?: string;
+processed_at?: string;
+expires_at?: string;
+createdAt: Date;
+updatedAt: Date;
+}[];
+};
+;
+
+
+    export type productInp = {
+      category_rel?: number | categoryInp
+tags_rel?: number | tagInp
+created_by_user?: number | userInp
+updated_by_user?: number | userInp
+      
+    }
+
+
+    export type productSchema = {
+_id?: string;
+title: string;
+title_en?: string;
+slug: string;
+description: string;
+description_en?: string;
+type: ("book" | "artwork" | "article" | "cultural" | "other" );
+category: ("books" | "digital_books" | "physical_books" | "artworks" | "paintings" | "sculptures" | "digital_art" | "articles" | "cultural_items" | "handicrafts" | "educational" | "research" | "other" );
+status: ("active" | "draft" | "archived" | "out_of_stock" );
+price: number;
+discounted_price?: number;
+stock_quantity?: number;
+is_digital: boolean;
+featured_image?: {
+url: string;
+alt?: string;
+width?: number;
+height?: number;
+};
+gallery?: {
+url: string;
+alt?: string;
+width?: number;
+height?: number;
+}[];
+tags: string[];
+specifications?: string;
+author?: string;
+author_en?: string;
+isbn?: string;
+publisher?: string;
+publisher_en?: string;
+publication_date?: Date;
+language: ("fa" | "en" | "ar" | "mixed" );
+page_count?: number;
+file_url?: string;
+file_size?: number;
+file_format?: ("pdf" | "epub" | "mobi" | "jpg" | "png" | "svg" | "mp4" | "mp3" | "zip" | "rar" );
+dimensions?: {
+width: number;
+height: number;
+depth?: number;
+unit: ("cm" | "mm" | "inch" );
+};
+weight?: {
+value: number;
+unit: ("g" | "kg" | "lb" );
+};
+materials?: string[];
+artist?: string;
+artist_en?: string;
+artwork_year?: number;
+artwork_style?: string;
+is_featured: boolean;
+is_bestseller: boolean;
+is_new: boolean;
+view_count: number;
+purchase_count: number;
+rating: {
+average: number;
+count: number;
+};
+meta_title?: string;
+meta_description?: string;
+seo_keywords?: string[];
+created_by?: string;
+updated_by?: string;
+createdAt: Date;
+updatedAt: Date;
+category_rel?: {
+_id?: string;
 name: string;
 description: string;
 createdAt: Date;
 updatedAt: Date;
 };
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            update: {
-set: {
-_id: string;
-name?: string;
-description?: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-
-          
-            get: {
-set: {
-_id: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            gets: {
-set: {
-page: number;
-limit: number;
-name?: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
-
-          
-            remove: {
-set: {
-_id: string;
-hardCascade?: boolean;
-};
-get: {
-success?: (0 | 1 );
-};
-};
-
-          
-            count: {
-set: {
-name?: string;
-};
-get: {
-qty?: (0 | 1 );
-};
-};
-
-          
-          }
-
-        
-        category: {
-
-      
-            add: {
-set: {
+tags_rel?: {
+_id?: string;
 name: string;
 description: string;
 createdAt: Date;
 updatedAt: Date;
+}[];
+created_by_user?: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
 };
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
+updated_by_user?: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
 };
 };
-};
+;
 
-          
-            update: {
-set: {
-_id: string;
-name?: string;
-description?: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
 
-          
-            get: {
-set: {
-_id: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
+    export type ReqType = {
 
-          
-            gets: {
-set: {
-page: number;
-limit: number;
-name?: string;
-};
-get: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-registrer?: {
-_id?: (0 | 1 );
-first_name?: (0 | 1 );
-last_name?: (0 | 1 );
-father_name?: (0 | 1 );
-mobile?: (0 | 1 );
-gender?: (0 | 1 );
-birth_date?: (0 | 1 );
-summary?: (0 | 1 );
-national_number?: (0 | 1 );
-address?: (0 | 1 );
-level?: (0 | 1 );
-is_verified?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-avatar?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-national_card?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-uploadedAssets?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-type?: (0 | 1 );
-size?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-registered_locations?: {
-_id?: (0 | 1 );
-name?: (0 | 1 );
-description?: (0 | 1 );
-center?: (0 | 1 );
-area?: (0 | 1 );
-createdAt?: (0 | 1 );
-updatedAt?: (0 | 1 );
-};
-};
-};
-};
+  
+        main: {
 
-          
-            remove: {
-set: {
-_id: string;
-hardCascade?: boolean;
-};
-get: {
-success?: (0 | 1 );
-};
-};
-
-          
-            count: {
-set: {
-name?: string;
-};
-get: {
-qty?: (0 | 1 );
-};
-};
-
-          
-          }
-
-        
+      
         }
 
       
