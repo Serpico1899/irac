@@ -4,7 +4,9 @@ import { tagSetup } from "./tag/mod.ts";
 import { categorySetup } from "./category/mod.ts";
 import { courseSetup } from "./course/mod.ts";
 import { articleSetup } from "./article/mod.ts";
-import "./wallet/mod.ts";
+import { walletSetup } from "./wallet/mod.ts";
+import { paymentSetup } from "./payment/mod.ts";
+import { productSetup } from "./product/mod.ts";
 
 export const functionsSetup = () => {
   fileSetup();
@@ -13,4 +15,7 @@ export const functionsSetup = () => {
   categorySetup();
   courseSetup();
   articleSetup();
+  walletSetup();
+  paymentSetup();
+  productSetup();
 };
