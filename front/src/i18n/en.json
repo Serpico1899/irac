@@ -485,5 +485,47 @@
       "contact": "Contact for Consultation",
       "programs": "View Programs"
     }
+  },
+  "media": {
+    "title": "Media & Image Gallery",
+    "subtitle": "A collection of images, videos, and documents related to Islamic architecture and center activities",
+    "categories": {
+      "all": "All Media",
+      "images": "Images",
+      "videos": "Videos",
+      "documents": "Documents"
+    },
+    "viewModes": {
+      "grid": "Grid View",
+      "list": "List View"
+    },
+    "loading": "Loading...",
+    "error": "Error loading media",
+    "noMedia": {
+      "title": "No media found",
+      "description": "No media items are currently available in this category"
+    },
+    "itemsFound": "{count} items found",
+    "adminInfo": {
+      "title": "Admin Information",
+      "description": "To upload new media, please use the admin panel"
+    }
+  },
+  "payment": {
+    "processing": "Processing payment...",
+    "success": "Payment successful",
+    "failed": "Payment failed",
+    "cancelled": "Payment cancelled",
+    "verifying": "Verifying payment...",
+    "amount": "Amount",
+    "referenceId": "Reference ID",
+    "cardNumber": "Card Number",
+    "newBalance": "New Balance",
+    "goToWallet": "Go to Wallet",
+    "goToDashboard": "Go to Dashboard",
+    "tryAgain": "Try Again",
+    "goHome": "Go Home",
+    "errorCode": "Error Code",
+    "support": "If you encounter any issues, please contact support"
   }
 }
