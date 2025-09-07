@@ -1,41 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
-import { useProduct, useFeaturedCollections } from "@/context/ProductContext";
-import ProductGrid from "@/components/organisms/Product/ProductGrid";
-import ProductCard from "@/components/organisms/Product/ProductCard";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  BookOpen,
-  Palette,
-  FileText,
-  Package,
-  Star,
-  TrendingUp,
-  Sparkles,
-  Search,
-  Filter,
-  Grid,
-  List,
-  ArrowRight,
-  Eye,
-  ShoppingCart,
-  Heart,
-} from "lucide-react";
-import { ProductType, ProductCategory } from "@/types";
-import { productApi, ProductApiService } from "@/services/product/productApi";
+import Head from "next/head";
+import ProductStore from "@/components/organisms/Product/ProductStore";
 
 export default function ProductsPage() {
   const t = useTranslations();
@@ -43,406 +12,239 @@ export default function ProductsPage() {
   const locale = params.locale as string;
   const isRTL = locale === "fa";
 
-  const { state, fetchProductCategories } = useProduct();
-  const {
-    featuredProducts,
-    bestsellerProducts,
-    newProducts,
-    isLoading: featuredLoading,
-  } = useFeaturedCollections();
+  const pageTitle = isRTL ? "فروشگاه محصولات" : "Product Store";
+  const pageDescription = isRTL
+    ? "مجموعه‌ای غنی از کتاب‌ها، آثار هنری، مقالات دیجیتال و محصولات فرهنگی را کشف کنید. خرید آنلاین با بهترین قیمت و کیفیت."
+    : "Discover our rich collection of books, artworks, digital articles and cultural products. Shop online with the best prices and quality.";
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedType, setSelectedType] = useState<string>("all");
-  const [showAllFeatured, setShowAllFeatured] = useState(false);
-
-  useEffect(() => {
-    if (state.categories.length === 0) {
-      fetchProductCategories();
-    }
-  }, []);
-
-  const productTypes: Array<{
-    value: ProductType | "all";
-    label: string;
-    icon: React.ReactNode;
-  }> = [
-    {
-      value: "all",
-      label: "همه محصولات",
-      icon: <Package className="h-4 w-4" />,
+  // Structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/${locale}/products`,
+    inLanguage: locale === "fa" ? "fa-IR" : "en-US",
+    isPartOf: {
+      "@type": "WebSite",
+      name: isRTL
+        ? "مرکز معماری ایرانی اسلامی"
+        : "Iranian Islamic Architecture Center",
+      url: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
     },
-    { value: "book", label: "کتاب‌ها", icon: <BookOpen className="h-4 w-4" /> },
-    {
-      value: "artwork",
-      label: "آثار هنری",
-      icon: <Palette className="h-4 w-4" />,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: isRTL ? "خانه" : "Home",
+          item: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/${locale}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: pageTitle,
+          item: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/${locale}/products`,
+        },
+      ],
     },
-    {
-      value: "article",
-      label: "مقالات",
-      icon: <FileText className="h-4 w-4" />,
-    },
-    { value: "cultural", label: "فرهنگی", icon: <Star className="h-4 w-4" /> },
-  ];
-
-  const handleCategoryFilter = (category: string) => {
-    setSelectedCategory(category);
-    // This will be handled by ProductGrid component
-  };
-
-  const handleTypeFilter = (type: string) => {
-    setSelectedType(type);
-    // This will be handled by ProductGrid component
-  };
-
-  const getInitialQuery = () => {
-    const query: any = { page: 1, limit: 12 };
-
-    if (selectedCategory !== "all") {
-      query.category = [selectedCategory];
-    }
-
-    if (selectedType !== "all") {
-      query.type = [selectedType];
-    }
-
-    return query;
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="text-center space-y-4">
-            <h1 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900">
-              فروشگاه محصولات
-            </h1>
-            <p className="text-sm xs:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              مجموعه‌ای غنی از کتاب‌ها، آثار هنری، مقالات و محصولات فرهنگی را
-              کشف کنید
-            </p>
-          </div>
-        </div>
-      </div>
+    <>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
-        {/* Product Type Filters */}
-        <Card>
-          <CardHeader className="pb-4">
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Filter className="h-5 w-5 text-primary" />
-              دسته‌بندی محصولات
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-5 gap-3">
-              {productTypes.map((type) => (
-                <button
-                  key={type.value}
-                  onClick={() => handleTypeFilter(type.value)}
-                  className={`p-4 rounded-lg border-2 transition-all text-center hover:shadow-md ${
-                    selectedType === type.value
-                      ? "border-primary bg-primary/5 text-primary"
-                      : "border-gray-200 hover:border-gray-300 text-gray-700"
-                  }`}
+      <div className="min-h-screen bg-gray-50" dir={isRTL ? "rtl" : "ltr"}>
+        {/* Header Section with improved mobile-first design */}
+        <header className="bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 xs:py-12 lg:py-16">
+            <div className="text-center space-y-4">
+              <h1
+                className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
+                itemProp="headline"
+              >
+                {pageTitle}
+              </h1>
+              <p
+                className="text-sm xs:text-base lg:text-lg text-blue-100 max-w-3xl mx-auto leading-relaxed"
+                itemProp="description"
+              >
+                {pageDescription}
+              </p>
+
+              {/* Quick Stats with improved mobile accessibility */}
+              <div
+                className="grid grid-cols-2 xs:grid-cols-4 gap-4 xs:gap-6 mt-8 max-w-2xl mx-auto"
+                role="region"
+                aria-label={
+                  isRTL ? "آمار سریع محصولات" : "Quick product statistics"
+                }
+              >
+                <div
+                  className="text-center"
+                  itemScope
+                  itemType="https://schema.org/Quantity"
                 >
-                  <div className="flex flex-col items-center gap-2">
-                    {type.icon}
-                    <span className="text-xs xs:text-sm font-medium">
-                      {type.label}
-                    </span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Featured Collections */}
-        {!featuredLoading &&
-          (featuredProducts.length > 0 ||
-            bestsellerProducts.length > 0 ||
-            newProducts.length > 0) && (
-            <div className="space-y-6">
-              {/* Featured Products */}
-              {featuredProducts.length > 0 && (
-                <Card>
-                  <CardHeader className="pb-4">
-                    <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-3">
-                      <CardTitle className="flex items-center gap-2 text-lg xs:text-xl">
-                        <Sparkles className="h-5 w-5 text-primary" />
-                        محصولات ویژه
-                      </CardTitle>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowAllFeatured(!showAllFeatured)}
-                        className="self-end xs:self-auto"
-                      >
-                        {showAllFeatured ? "نمایش کمتر" : "مشاهده همه"}
-                        <ArrowRight className="h-4 w-4 ml-1" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xs:gap-6">
-                      {(showAllFeatured
-                        ? featuredProducts
-                        : featuredProducts.slice(0, 4)
-                      ).map((product) => (
-                        <ProductCard
-                          key={product._id}
-                          product={product}
-                          viewMode="grid"
-                          locale={locale}
-                        />
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Bestsellers */}
-                {bestsellerProducts.length > 0 && (
-                  <Card>
-                    <CardHeader className="pb-4">
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <TrendingUp className="h-5 w-5 text-orange-500" />
-                        پرفروش‌ترین‌ها
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        {bestsellerProducts
-                          .slice(0, 3)
-                          .map((product, index) => (
-                            <div
-                              key={product._id}
-                              className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-                            >
-                              <div className="flex-shrink-0">
-                                <Badge
-                                  variant="warning"
-                                  className="w-8 h-8 rounded-full flex items-center justify-center p-0"
-                                >
-                                  {(index + 1).toLocaleString("fa-IR")}
-                                </Badge>
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-medium text-gray-900 truncate">
-                                  {isRTL
-                                    ? product.title
-                                    : product.title_en || product.title}
-                                </h4>
-                                <div className="flex items-center gap-2 mt-1">
-                                  <div className="flex items-center gap-1">
-                                    {ProductApiService.getProductStars(
-                                      product.rating.average,
-                                    )
-                                      .slice(0, 5)
-                                      .map((star: any, idx: number) => (
-                                        <Star
-                                          key={idx}
-                                          className={`h-3 w-3 ${
-                                            star === "full"
-                                              ? "fill-yellow-400 text-yellow-400"
-                                              : "fill-gray-200 text-gray-200"
-                                          }`}
-                                        />
-                                      ))}
-                                  </div>
-                                  <span className="text-xs text-gray-600">
-                                    ({product.rating.count})
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm font-medium text-primary">
-                                  {ProductApiService.formatPrice(
-                                    product.discounted_price || product.price,
-                                  )}
-                                </span>
-                              </div>
-                            </div>
-                          ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-
-                {/* New Products */}
-                {newProducts.length > 0 && (
-                  <Card>
-                    <CardHeader className="pb-4">
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <Sparkles className="h-5 w-5 text-green-500" />
-                        جدیدترین‌ها
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        {newProducts.slice(0, 3).map((product) => (
-                          <div
-                            key={product._id}
-                            className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-                          >
-                            <div className="flex-shrink-0">
-                              <Badge
-                                variant="success"
-                                className="text-xs py-1 px-2"
-                              >
-                                جدید
-                              </Badge>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <h4 className="font-medium text-gray-900 truncate">
-                                {isRTL
-                                  ? product.title
-                                  : product.title_en || product.title}
-                              </h4>
-                              <p className="text-xs text-gray-600 truncate">
-                                {ProductApiService.getProductTypeLabel(
-                                  product.type,
-                                  locale,
-                                )}
-                              </p>
-                            </div>
-                            <div className="flex-shrink-0">
-                              <span className="text-sm font-medium text-primary">
-                                {ProductApiService.formatPrice(
-                                  product.discounted_price || product.price,
-                                )}
-                              </span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
-            </div>
-          )}
-
-        {/* Main Product Grid */}
-        <Card>
-          <CardHeader className="pb-4">
-            <CardTitle className="flex items-center gap-2 text-lg xs:text-xl">
-              <Grid className="h-5 w-5 text-primary" />
-              همه محصولات
-              {selectedType !== "all" && (
-                <Badge variant="secondary" className="text-xs">
-                  {productTypes.find((t) => t.value === selectedType)?.label}
-                </Badge>
-              )}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="p-4 xs:p-6">
-              <ProductGrid
-                initialQuery={getInitialQuery()}
-                showSearch={true}
-                showFilters={true}
-                showSorting={true}
-                showViewToggle={true}
-                showPagination={true}
-                locale={locale}
-              />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Categories List */}
-        {state.categories.length > 0 && (
-          <Card>
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Package className="h-5 w-5 text-primary" />
-                مرور بر اساس دسته‌بندی
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-                {state.categories.map((category) => (
-                  <button
-                    key={category.category}
-                    onClick={() => handleCategoryFilter(category.category)}
-                    className="p-4 text-center bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors group"
+                  <div
+                    className="text-xl xs:text-2xl lg:text-3xl font-bold text-white"
+                    itemProp="value"
+                    aria-label={
+                      isRTL ? "بیش از ۱۰۰ کتاب" : "More than 100 books"
+                    }
                   >
-                    <div className="space-y-2">
-                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors">
-                        <Package className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-medium text-gray-900">
-                          {ProductApiService.getProductCategoryLabel(
-                            category.category,
-                            locale,
-                          )}
-                        </h3>
-                        <p className="text-xs text-gray-600">
-                          {category.count.toLocaleString("fa-IR")} محصول
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Statistics */}
-        <div className="grid grid-cols-2 xs:grid-cols-4 gap-4">
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="space-y-2">
-                <div className="text-2xl xs:text-3xl font-bold text-primary">
-                  {state.productList?.pagination.total.toLocaleString(
-                    "fa-IR",
-                  ) || "---"}
+                    {isRTL ? "۱۰۰+" : "100+"}
+                  </div>
+                  <div
+                    className="text-xs xs:text-sm text-blue-200 mt-1"
+                    itemProp="unitText"
+                  >
+                    {isRTL ? "کتاب" : "Books"}
+                  </div>
                 </div>
-                <p className="text-xs xs:text-sm text-gray-600">کل محصولات</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="space-y-2">
-                <div className="text-2xl xs:text-3xl font-bold text-green-600">
-                  {state.categories.length.toLocaleString("fa-IR")}
+                <div
+                  className="text-center"
+                  itemScope
+                  itemType="https://schema.org/Quantity"
+                >
+                  <div
+                    className="text-xl xs:text-2xl lg:text-3xl font-bold text-white"
+                    itemProp="value"
+                    aria-label={
+                      isRTL ? "بیش از ۵۰ اثر هنری" : "More than 50 artworks"
+                    }
+                  >
+                    {isRTL ? "۵۰+" : "50+"}
+                  </div>
+                  <div
+                    className="text-xs xs:text-sm text-blue-200 mt-1"
+                    itemProp="unitText"
+                  >
+                    {isRTL ? "اثر هنری" : "Artworks"}
+                  </div>
                 </div>
-                <p className="text-xs xs:text-sm text-gray-600">دسته‌بندی</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="space-y-2">
-                <div className="text-2xl xs:text-3xl font-bold text-orange-600">
-                  {bestsellerProducts.length.toLocaleString("fa-IR")}
+                <div
+                  className="text-center"
+                  itemScope
+                  itemType="https://schema.org/Quantity"
+                >
+                  <div
+                    className="text-xl xs:text-2xl lg:text-3xl font-bold text-white"
+                    itemProp="value"
+                    aria-label={
+                      isRTL ? "بیش از ۲۰۰ مقاله" : "More than 200 articles"
+                    }
+                  >
+                    {isRTL ? "۲۰۰+" : "200+"}
+                  </div>
+                  <div
+                    className="text-xs xs:text-sm text-blue-200 mt-1"
+                    itemProp="unitText"
+                  >
+                    {isRTL ? "مقاله" : "Articles"}
+                  </div>
                 </div>
-                <p className="text-xs xs:text-sm text-gray-600">پرفروش</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="space-y-2">
-                <div className="text-2xl xs:text-3xl font-bold text-blue-600">
-                  {featuredProducts.length.toLocaleString("fa-IR")}
+                <div
+                  className="text-center"
+                  itemScope
+                  itemType="https://schema.org/Quantity"
+                >
+                  <div
+                    className="text-xl xs:text-2xl lg:text-3xl font-bold text-white"
+                    itemProp="value"
+                    aria-label={
+                      isRTL
+                        ? "بیش از ۳۰ محصول فرهنگی"
+                        : "More than 30 cultural products"
+                    }
+                  >
+                    {isRTL ? "۳۰+" : "30+"}
+                  </div>
+                  <div
+                    className="text-xs xs:text-sm text-blue-200 mt-1"
+                    itemProp="unitText"
+                  >
+                    {isRTL ? "فرهنگی" : "Cultural"}
+                  </div>
                 </div>
-                <p className="text-xs xs:text-sm text-gray-600">ویژه</p>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </div>
+
+          {/* Decorative Wave - optimized for mobile performance */}
+          <div className="relative" aria-hidden="true">
+            <svg
+              className="w-full h-6 xs:h-8 lg:h-12 text-gray-50"
+              preserveAspectRatio="none"
+              viewBox="0 0 1200 120"
+              fill="currentColor"
+              role="img"
+              aria-label={isRTL ? "عنصر تزئینی موج" : "Decorative wave element"}
+            >
+              <path
+                d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                opacity=".25"
+              />
+              <path
+                d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                opacity=".5"
+              />
+              <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" />
+            </svg>
+          </div>
+        </header>
+
+        {/* Main Content with enhanced mobile-first layout */}
+        <main
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 xs:py-8"
+          role="main"
+          itemScope
+          itemType="https://schema.org/ItemList"
+          aria-label={isRTL ? "فهرست محصولات" : "Products list"}
+        >
+          <ProductStore
+            locale={locale}
+            showHeader={false}
+            showStats={true}
+            itemsPerPageOptions={[12, 24, 48]}
+            className="w-full"
+            title={pageTitle}
+            description={pageDescription}
+          />
+        </main>
+
+        {/* Mobile-first performance optimization script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Lazy load non-critical resources for mobile performance
+              if ('IntersectionObserver' in window) {
+                const lazyImages = document.querySelectorAll('img[data-src]');
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                  entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                      const img = entry.target;
+                      img.src = img.dataset.src;
+                      img.classList.remove('lazy');
+                      imageObserver.unobserve(img);
+                    }
+                  });
+                });
+                lazyImages.forEach(img => imageObserver.observe(img));
+              }
+
+              // Mobile-first touch optimization
+              if ('ontouchstart' in window) {
+                document.body.classList.add('touch-enabled');
+              }
+            `,
+          }}
+        />
       </div>
-    </div>
+    </>
   );
 }
