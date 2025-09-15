@@ -1,0 +1,54 @@
+services:
+  # Backend service - configured to use host MongoDB
+  backend:
+    build:
+      context: ./back
+      target: production
+    image: lesan-backend:latest
+    restart: unless-stopped
+    network_mode: "host"
+    env_file:
+      - .env.backend
+    environment:
+      - APP_PORT=1405
+      - ENV=production
+      - MONGO_URI=mongodb://127.0.0.1:27017/nejat
+      - REDIS_URI=redis://127.0.0.1:6379
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./front
+      target: production
+    image: lesan-frontend:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.frontend
+    environment:
+      - APP_PORT=3000
+      - NODE_ENV=production
+      - LESAN_URL=http://backend:1405
+    networks:
+      - irac-network
+
+  # Redis service
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - redis_data:/data
+
+  # MongoDB service disabled - using host MongoDB instead
+  # mongo:
+  #   deploy:
+  #     replicas: 0
+
+volumes:
+  redis_data:
+
+networks:
+  irac-network:
+    driver: bridge
