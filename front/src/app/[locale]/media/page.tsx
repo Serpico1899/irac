@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
-import { AppApi, getLesanBaseUrl } from "@/services/api";
+import { AppApi } from "@/services/api";
+import { env } from "@/config/env.config";
 import { toast } from "react-hot-toast";
 
 interface MediaItem {
@@ -137,7 +138,7 @@ export default function MediaPage() {
   };
 
   const getMediaUrl = (item: MediaItem): string => {
-    const baseUrl = getLesanBaseUrl();
+    const baseUrl = env.MEDIA.URL;
     return `${baseUrl}${item.url}`;
   };
 
