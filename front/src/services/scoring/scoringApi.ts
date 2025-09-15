@@ -20,12 +20,12 @@ import {
  * ScoringApiService - Comprehensive API service for user scoring system
  * Handles points, levels, achievements, rewards, and gamification
  */
+import { env } from "../../config/env.config";
+
 export class ScoringApiService {
-  private static readonly BASE_URL =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-  private static readonly API_PREFIX = "/api/v1/scoring";
-  private static readonly USE_MOCK_DATA =
-    process.env.NODE_ENV === "development" || true; // Enable for development
+  private static readonly BASE_URL = env.API.URL;
+  private static readonly API_PREFIX = "/lesan";
+  private static readonly USE_MOCK_DATA = false; // Always use real backend APIs
 
   /**
    * Get user's current score and stats
@@ -43,16 +43,21 @@ export class ScoringApiService {
     }
 
     try {
-      const response = await fetch(
-        `${this.BASE_URL}${this.API_PREFIX}/users/${userId}/score`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${this.getAuthToken()}`,
-          },
+      const response = await fetch(`${this.BASE_URL}${this.API_PREFIX}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.getAuthToken()}`,
         },
-      );
+        body: JSON.stringify({
+          act: "getUserScore",
+          details: {
+            set: {
+              user_id: userId,
+            },
+          },
+        }),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -84,16 +89,23 @@ export class ScoringApiService {
     }
 
     try {
-      const response = await fetch(
-        `${this.BASE_URL}${this.API_PREFIX}/users/${userId}/stats`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${this.getAuthToken()}`,
-          },
+      const response = await fetch(`${this.BASE_URL}${this.API_PREFIX}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.getAuthToken()}`,
         },
-      );
+        body: JSON.stringify({
+          act: "addPoints",
+          details: {
+            set: {
+              action: reason,
+              points,
+              description: reason,
+            },
+          },
+        }),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -269,16 +281,21 @@ export class ScoringApiService {
     }
 
     try {
-      const response = await fetch(
-        `${this.BASE_URL}${this.API_PREFIX}/users/${userId}/achievements`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${this.getAuthToken()}`,
-          },
+      const response = await fetch(`${this.BASE_URL}${this.API_PREFIX}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.getAuthToken()}`,
         },
-      );
+        body: JSON.stringify({
+          act: "getUserAchievements",
+          details: {
+            set: {
+              user_id: userId,
+            },
+          },
+        }),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -411,15 +428,22 @@ export class ScoringApiService {
    */
   static async getScoreLevels(): Promise<ScoringApiResponse<ScoreLevel[]>> {
     try {
-      const response = await fetch(
-        `${this.BASE_URL}${this.API_PREFIX}/levels`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      const response = await fetch(`${this.BASE_URL}${this.API_PREFIX}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.getAuthToken()}`,
         },
-      );
+        body: JSON.stringify({
+          act: "getLeaderboard",
+          details: {
+            set: {
+              limit: limit || 10,
+              period: period || "all_time",
+            },
+          },
+        }),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
