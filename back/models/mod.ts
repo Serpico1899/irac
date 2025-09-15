@@ -12,3 +12,8 @@ export * from "./wallet.ts";
 export * from "./wallet_transaction.ts";
 export * from "./order.ts";
 export * from "./product.ts";
+export * from "./scoring_transaction.ts";
+export * from "./user_level.ts";
+export * from "./referral.ts";
+export * from "./booking.ts";
+export * from "./space_availability.ts";
