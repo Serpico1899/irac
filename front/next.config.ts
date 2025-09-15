@@ -5,24 +5,19 @@ const withNextIntl = createNextIntlPlugin("./src/lib/i18n.ts");
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "550mb",
-    },
-    esmExternals: true,
-    forceSwcTransforms: true,
-  },
+  compress: true,
+  reactStrictMode: true,
   trailingSlash: false,
   poweredByHeader: false,
+
   eslint: {
     ignoreDuringBuilds: true,
-    dirs: ["src"],
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  staticPageGenerationTimeout: 300,
   images: {
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -31,6 +26,15 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:1405/:path*",
+      },
+    ];
   },
 };
 
