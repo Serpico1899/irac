@@ -7,6 +7,13 @@ import { articleSetup } from "./article/mod.ts";
 import { walletSetup } from "./wallet/mod.ts";
 import { paymentSetup } from "./payment/mod.ts";
 import { productSetup } from "./product/mod.ts";
+import { scoringSetup } from "./scoring/mod.ts";
+import { referralSetup } from "./referral/mod.ts";
+import { bookingSetup } from "./booking/mod.ts";
+import { analyticsSetup } from "./analytics/mod.ts";
+import { downloadSetup } from "./download/mod.ts";
+import { adminSetup } from "./admin/mod.ts";
+import { testSetup } from "./test/mod.ts";
 
 export const functionsSetup = () => {
   fileSetup();
@@ -18,4 +25,13 @@ export const functionsSetup = () => {
   walletSetup();
   paymentSetup();
   productSetup();
+  scoringSetup();
+  referralSetup();
+  bookingSetup();
+  analyticsSetup();
+  downloadSetup();
+  adminSetup();
+  directApiSetup();
+  testSetup();
 };
+import { directApiSetup } from "./alternative/directApi/mod.ts";
