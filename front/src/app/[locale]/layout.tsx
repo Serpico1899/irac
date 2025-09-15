@@ -4,6 +4,7 @@ import { Navbar } from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/footer";
 import Cart from "@/components/organisms/Cart";
 import Script from "next/script";
+import { env } from "@/config/env.config";
 import "../globals.css";
 
 type Props = {
@@ -12,12 +13,82 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale: _locale } = await params;
+  const { locale } = await params;
+
+  const siteTitle =
+    locale === "fa"
+      ? "ایراک | مرکز معماری ایرانی"
+      : "IRAC | Iranian Architecture Center";
+  const siteDescription =
+    locale === "fa"
+      ? "خانه آنلاین مرکز معماری ایرانی - آموزش پیشرفته معماری و فضای کاری مشترک"
+      : "The online home of the Iranian Architecture Center - Advanced architectural education and coworking space";
 
   return {
-    title: "IRAC | Islamic Architecture Center",
-    description: "The online home of the Islamic Architecture Center",
-    icons: { icon: "/favicon.ico" },
+    metadataBase: new URL(env.SEO.METADATA_BASE),
+    title: {
+      default: siteTitle,
+      template: `%s | ${siteTitle}`,
+    },
+    description: siteDescription,
+    keywords: env.SEO.SITE_KEYWORDS,
+    authors: [{ name: "IRAC Team" }],
+    creator: "IRAC",
+    publisher: "IRAC",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+      apple: "/apple-touch-icon.png",
+    },
+    manifest: "/manifest.json",
+    openGraph: {
+      type: "website",
+      siteName: siteTitle,
+      title: siteTitle,
+      description: siteDescription,
+      url: env.APP.BASE_URL,
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: siteTitle,
+        },
+      ],
+      locale: locale === "fa" ? "fa_IR" : "en_US",
+      alternateLocale: locale === "fa" ? "en_US" : "fa_IR",
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: env.SOCIAL.TWITTER,
+      creator: env.SOCIAL.TWITTER,
+      title: siteTitle,
+      description: siteDescription,
+      images: ["/twitter-image.jpg"],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    alternates: {
+      canonical: env.APP.BASE_URL,
+      languages: {
+        fa: `${env.APP.BASE_URL}/fa`,
+        en: `${env.APP.BASE_URL}/en`,
+      },
+    },
   };
 }
 
