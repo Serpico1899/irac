@@ -1,6 +1,12 @@
 {
   "tasks": {
-    "bc-dev": "ENV=development deno run -A --watch --watch-exclude=declarations --no-clear-screen ./mod.ts"
+    "bc-dev": "ENV=development deno run -A --watch --watch-exclude=declarations --no-clear-screen ./mod.ts",
+    "start": "deno run --allow-all --v8-flags=--max-old-space-size=2048 --v8-flags=--optimize-for-size ./mod.ts",
+    "dev": "deno run --allow-all --watch ./mod.ts",
+    "prod": "deno run --allow-all --v8-flags=--max-old-space-size=4096 --v8-flags=--optimize-for-size --v8-flags=--enable-fast-calls-from-js ./mod.ts",
+    "test": "deno test --allow-all",
+    "check": "deno check ./mod.ts",
+    "seed": "deno run --allow-all ./seed.ts"
   },
   "fmt": {
     "files": {
@@ -14,10 +20,26 @@
       "proseWrap": "preserve"
     }
   },
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "experimentalDecorators": true,
+    "strict": false,
+    "target": "ES2022",
+    "lib": ["dom", "ES2022"],
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    },
+    "exclude": ["declarations/", "node_modules/"]
+  },
   "imports": {
     "@deps": "./deps.ts",
     "@lib": "./utils/mod.ts",
-    "@model": "./models/mod.ts",
+    "@model": "./models/mod.ts"
   },
   "nodeModulesDir": "auto"
 }
