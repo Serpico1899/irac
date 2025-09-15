@@ -28,7 +28,7 @@ USER deno
 
 # Set environment variables
 ENV ENV=production
-ENV APP_PORT=1404
+ENV APP_PORT=1405
 
 # Expose the application port
 EXPOSE ${APP_PORT}
@@ -47,7 +47,7 @@ USER deno
 
 # Set environment variables
 ENV ENV=development
-ENV APP_PORT=1404
+ENV APP_PORT=1405
 
 # Expose the application port
 EXPOSE ${APP_PORT}
