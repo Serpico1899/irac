@@ -527,5 +527,6 @@
     "goHome": "Go Home",
     "errorCode": "Error Code",
     "support": "If you encounter any issues, please contact support"
-  }
+  },
+  "admin": "Admin Panel"
 }
