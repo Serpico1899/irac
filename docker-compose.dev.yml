@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   # Backend service (development)
@@ -11,7 +11,7 @@ services:
       - ./back:/app
       - /app/declarations # Exclude declarations directory from mounting
     environment:
-      - APP_PORT=8000
+      - APP_PORT=1405
       - ENV=development
       - MONGO_URI=mongodb://mongo:27017/mydatabase
       - REDIS_URI=redis://redis:6379
@@ -19,7 +19,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`api.localhost`)"
       - "traefik.http.routers.backend.entrypoints=web"
-      - "traefik.http.services.backend.loadbalancer.server.port=8000"
+      - "traefik.http.services.backend.loadbalancer.server.port=1405"
 
   # Frontend service (development)
   frontend:
