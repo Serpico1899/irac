@@ -2,6 +2,8 @@ import { ActFn } from "@deps";
 import { productService } from "../productService.ts";
 import { coreApp } from "../../../mod.ts";
 import { order_models } from "@model";
+import { scoringService } from "../../scoring/scoringService.ts";
+import { referralService } from "../../referral/referralService.ts";
 
 export const purchaseProductFn: ActFn = async (body) => {
   try {
@@ -237,6 +239,51 @@ export const purchaseProductFn: ActFn = async (body) => {
         message: "Failed to create order",
         details: { order_creation_failed: true },
       };
+    }
+
+    // Award points for purchase if user is authenticated
+    if (userId) {
+      try {
+        const purchasePoints = scoringService.calculatePurchasePoints(totalAmount, "IRR");
+
+        if (purchasePoints > 0) {
+          await scoringService.awardPoints({
+            userId: userId.toString(),
+            action: "purchase",
+            points: purchasePoints,
+            description: `Purchase reward for order ${orderNumber}`,
+            metadata: {
+              order_number: orderNumber,
+              total_amount: totalAmount,
+              currency: "IRR",
+              items_count: items.length,
+              has_physical_products: hasPhysicalProducts,
+              has_digital_products: hasDigitalProducts,
+            },
+            referenceId: orderResult.insertedId.toString(),
+            referenceType: "order",
+            orderId: orderResult.insertedId.toString(),
+          });
+        }
+      } catch (error) {
+        console.error("Error awarding purchase points:", error);
+        // Continue with order processing even if scoring fails
+      }
+    }
+
+    // Process referral rewards if user is authenticated
+    if (userId) {
+      try {
+        await referralService.processReferralReward({
+          orderId: orderResult.insertedId.toString(),
+          purchaseAmount: totalAmount,
+          currency: "IRR",
+          buyerId: userId.toString(),
+        });
+      } catch (error) {
+        console.error("Error processing referral reward:", error);
+        // Continue with order processing even if referral processing fails
+      }
     }
 
     // Handle payment processing based on method
