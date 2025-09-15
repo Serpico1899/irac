@@ -1,12 +1,17 @@
 import { lesan, MongoClient, redis } from "@deps";
 import {
   articles,
+  bookings,
   categories,
   courses,
   files,
   order_models,
   product_models,
+  referrals,
+  scoring_transactions,
+  space_availabilities,
   tags,
+  user_levels,
   users,
   wallets,
   wallet_transactions,
@@ -36,6 +41,11 @@ export const wallet = wallets();
 export const wallet_transaction = wallet_transactions();
 export const order = order_models();
 export const product = product_models();
+export const scoring_transaction = scoring_transactions();
+export const user_level = user_levels();
+export const referral = referrals();
+export const booking = bookings();
+export const space_availability = space_availabilities();
 
 export const { setAct, setService, getAtcsWithServices } = coreApp.acts;
 
