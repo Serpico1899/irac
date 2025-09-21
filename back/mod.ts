@@ -3,8 +3,13 @@ import {
   articles,
   bookings,
   categories,
+  coupon_models,
   courses,
+  enrollments,
   files,
+  groups,
+  group_members,
+  invoice_models,
   order_models,
   product_models,
   referrals,
@@ -37,15 +42,20 @@ export const tag = tags();
 export const category = categories();
 export const article = articles();
 export const course = courses();
+export const enrollment = enrollments();
 export const wallet = wallets();
 export const wallet_transaction = wallet_transactions();
 export const order = order_models();
+export const invoice = invoice_models();
+export const coupon = coupon_models();
 export const product = product_models();
 export const scoring_transaction = scoring_transactions();
 export const user_level = user_levels();
 export const referral = referrals();
 export const booking = bookings();
 export const space_availability = space_availabilities();
+export const group = groups();
+export const group_member = group_members();
 
 export const { setAct, setService, getAtcsWithServices } = coreApp.acts;
 
