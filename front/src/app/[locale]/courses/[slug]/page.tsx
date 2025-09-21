@@ -1,16 +1,106 @@
 "use client";
 
+import { Metadata } from "next";
 import { use, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import ContentCard from "@/components/organisms/ContentCard";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
+import CompletionStatus from "@/components/organisms/Course/CompletionStatus";
+import SEOHead from "@/components/SEO/SEOHead";
+import OptimizedImage from "@/components/SEO/OptimizedImage";
 import { getCourse } from "@/app/actions/course/getCourse";
 import { formatPrice } from "@/utils/currency";
 import { useCart } from "@/context/CartContext";
+import { seoService } from "@/lib/seo";
+import { Product } from "@/types";
 
 export const dynamic = "force-dynamic";
+
+// Generate metadata for SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+
+  try {
+    const response = await getCourse(slug);
+
+    if (!response.success || !response.data?.course) {
+      return {
+        title: locale === "fa" ? "دوره یافت نشد" : "Course Not Found",
+        description:
+          locale === "fa"
+            ? "دوره مورد نظر یافت نشد"
+            : "The requested course could not be found",
+        robots: { index: false, follow: false },
+      };
+    }
+
+    const course = response.data.course;
+
+    // Convert course data to Product type for SEO service
+    const productData: Product = {
+      _id: course._id,
+      title: course.name,
+      title_en: course.name_en,
+      slug: course.slug || slug,
+      description: course.description,
+      description_en: course.description_en,
+      type: "other",
+      category: "educational",
+      status: "active",
+      price: course.price,
+      discounted_price:
+        course.original_price !== course.price ? course.price : undefined,
+      is_digital: course.is_online,
+      featured_image: course.featured_image?.details
+        ? {
+            url: course.featured_image.details.url,
+            alt: course.featured_image.details.alt || course.name,
+            width: 1200,
+            height: 630,
+          }
+        : undefined,
+      tags: course.tags?.details?.map((tag: any) => tag.name) || [],
+      author: course.instructor_name,
+      is_featured: course.average_rating >= 4.5,
+      is_bestseller: course.total_students > 100,
+      is_new: false,
+      view_count: 0,
+      purchase_count: course.total_students,
+      rating: {
+        average: course.average_rating,
+        count: course.total_reviews,
+      },
+      meta_title: locale === "fa" ? course.name : course.name_en || course.name,
+      meta_description:
+        locale === "fa"
+          ? course.short_description || course.description
+          : course.short_description_en ||
+            course.description_en ||
+            course.description,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      language: locale,
+    };
+
+    const seoData = seoService.generateCoursePageSEO(productData, locale);
+    return seoData.metadata;
+  } catch (error) {
+    console.error("Error generating course metadata:", error);
+    return {
+      title: locale === "fa" ? "خطا در بارگذاری دوره" : "Error Loading Course",
+      description:
+        locale === "fa"
+          ? "خطا در بارگذاری اطلاعات دوره"
+          : "Error loading course information",
+    };
+  }
+}
 
 interface CourseDetails {
   _id: string;
@@ -86,6 +176,11 @@ interface EnrollmentStatus {
   enrollment_date?: string;
   progress_percentage?: number;
   status?: string;
+  completed_date?: string;
+  certificate_issued?: boolean;
+  certificate_id?: string;
+  certificate_issue_date?: string;
+  final_grade?: number;
 }
 
 interface CoursePageResponse {
@@ -112,6 +207,10 @@ export default function CourseDetailPage({
   const [instructorCourses, setInstructorCourses] = useState<CourseDetails[]>(
     [],
   );
+  const [seoData, setSeoData] = useState<{
+    schemas: any[];
+    breadcrumbs: Array<{ name: string; url: string }>;
+  } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [enrolling, setEnrolling] = useState(false);
@@ -150,6 +249,67 @@ export default function CourseDetailPage({
           setEnrollmentStatus(data.enrollment_status || null);
           setRelatedCourses(data.related_courses || []);
           setInstructorCourses(data.instructor_courses || []);
+
+          // Generate SEO data
+          const productData: Product = {
+            _id: data.course._id,
+            title: data.course.name,
+            title_en: data.course.name_en,
+            slug: data.course.slug || slug,
+            description: data.course.description,
+            description_en: data.course.description_en,
+            type: "other",
+            category: "educational",
+            status: "active",
+            price: data.course.price,
+            discounted_price:
+              data.course.original_price !== data.course.price
+                ? data.course.price
+                : undefined,
+            is_digital: data.course.is_online,
+            featured_image: data.course.featured_image?.details
+              ? {
+                  url: data.course.featured_image.details.url,
+                  alt:
+                    data.course.featured_image.details.alt || data.course.name,
+                  width: 1200,
+                  height: 630,
+                }
+              : undefined,
+            tags: data.course.tags?.details?.map((tag) => tag.name) || [],
+            author: data.course.instructor_name,
+            is_featured: data.course.average_rating >= 4.5,
+            is_bestseller: data.course.total_students > 100,
+            is_new: false,
+            view_count: 0,
+            purchase_count: data.course.total_students,
+            rating: {
+              average: data.course.average_rating,
+              count: data.course.total_reviews,
+            },
+            meta_title:
+              locale === "fa"
+                ? data.course.name
+                : data.course.name_en || data.course.name,
+            meta_description:
+              locale === "fa"
+                ? data.course.short_description || data.course.description
+                : data.course.short_description_en ||
+                  data.course.description_en ||
+                  data.course.description,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            language: locale,
+          };
+
+          const generatedSeoData = seoService.generateCoursePageSEO(
+            productData,
+            locale,
+          );
+          setSeoData({
+            schemas: generatedSeoData.schemas,
+            breadcrumbs: generatedSeoData.breadcrumbs,
+          });
         } else {
           setError(response.message || "خطا در دریافت اطلاعات دوره");
         }
@@ -163,6 +323,13 @@ export default function CourseDetailPage({
 
     fetchCourseDetails();
   }, [slug]);
+
+  // Inject SEO schemas when data is available
+  useEffect(() => {
+    if (seoData && seoData.schemas.length > 0) {
+      seoService.injectPageSchemas(seoData.schemas);
+    }
+  }, [seoData]);
 
   // Handle enrollment
   const handleEnrollment = async () => {
@@ -331,10 +498,97 @@ export default function CourseDetailPage({
   const mainImage = course.featured_image?.details || images[0];
 
   return (
-    <div
-      className="min-h-screen bg-background"
-      dir={locale === "fa" ? "rtl" : "ltr"}
-    >
+    <>
+      {/* SEO Head Component */}
+      {course && seoData && (
+        <SEOHead
+          title={title}
+          description={shortDescription}
+          keywords={course.tags?.details?.map((tag: any) => tag.name) || []}
+          ogImage={mainImage?.url}
+          schemaType="course"
+          breadcrumbs={seoData.breadcrumbs}
+          product={{
+            _id: course._id,
+            title: course.name,
+            title_en: course.name_en,
+            slug: course.slug || slug,
+            description: course.description,
+            description_en: course.description_en,
+            type: "other",
+            category: "educational",
+            status: "active",
+            price: course.price,
+            discounted_price: course.original_price !== course.price ? course.price : undefined,
+            is_digital: course.is_online,
+            featured_image: mainImage ? {
+              url: mainImage.url,
+              alt: mainImage.alt || course.name,
+              width: 1200,
+              height: 630,
+            } : undefined,
+            tags: course.tags?.details?.map((tag: any) => tag.name) || [],
+            author: course.instructor_name,
+            is_featured: course.average_rating >= 4.5,
+            is_bestseller: course.total_students > 100,
+            is_new: false,
+            view_count: 0,
+            purchase_count: course.total_students,
+            rating: {
+              average: course.average_rating,
+              count: course.total_reviews,
+            },
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            language: locale,
+          }}
+          locale={locale}
+        />
+      )}
+
+      <div
+        className="min-h-screen bg-background"
+        dir={locale === "fa" ? "rtl" : "ltr"}
+      >
+      {/* Breadcrumbs */}
+      {seoData?.breadcrumbs && (
+        <nav className="bg-background-primary border-b border-background-darkest/50" aria-label="Breadcrumb">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <ol className="flex items-center space-x-2 text-sm">
+              {seoData.breadcrumbs.map((breadcrumb, index) => (
+                <li key={index} className="flex items-center">
+                  {index > 0 && (
+                    <svg
+                      className="w-4 h-4 text-text-light mx-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
+                  {index === seoData.breadcrumbs.length - 1 ? (
+                    <span className="text-text font-medium" aria-current="page">
+                      {breadcrumb.name}
+                    </span>
+                  ) : (
+                    <Link
+                      href={breadcrumb.url}
+                      className="text-text-secondary hover:text-primary transition-colors"
+                    >
+                      {breadcrumb.name}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </nav>
+      )}
+
       {/* Hero Section */}
       <div className="bg-background-primary border-b border-background-darkest">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -344,12 +598,16 @@ export default function CourseDetailPage({
               <div className="relative">
                 <div className="aspect-video bg-background-secondary rounded-[25px] overflow-hidden">
                   {mainImage ? (
-                    <Image
+                    <OptimizedImage
                       src={mainImage.url}
                       alt={mainImage.alt || title}
+                      alt_en={course.name_en}
                       fill
-                      className="object-cover"
                       priority
+                      quality="high"
+                      objectFit="cover"
+                      className="absolute inset-0"
+                      schema
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-text-light">
@@ -374,12 +632,15 @@ export default function CourseDetailPage({
                             : "border-background-darkest hover:border-primary/50"
                         }`}
                       >
-                        <Image
+                        <OptimizedImage
                           src={image.url}
                           alt={image.alt || `${title} ${index + 1}`}
+                          alt_en={course.name_en ? `${course.name_en} ${index + 1}` : undefined}
                           width={64}
                           height={64}
+                          quality="medium"
                           className="object-cover w-full h-full"
+                          rounded
                         />
                       </button>
                     ))}
@@ -496,43 +757,28 @@ export default function CourseDetailPage({
                 )}
               </div>
 
-              {/* Enrollment Button */}
+              {/* Enrollment/Completion Status */}
               <div className="space-y-4">
                 {enrollmentStatus?.is_enrolled ? (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                    <div className="flex items-center">
-                      <div className="text-green-600 text-xl mr-3">✓</div>
-                      <div>
-                        <p className="text-green-800 font-semibold">
-                          {locale === "fa"
-                            ? "شما در این دوره ثبت‌نام کرده‌اید"
-                            : "You are enrolled in this course"}
-                        </p>
-                        {enrollmentStatus.progress_percentage !== undefined && (
-                          <div className="mt-2">
-                            <div className="flex justify-between text-sm text-green-700 mb-1">
-                              <span>
-                                {locale === "fa"
-                                  ? "پیشرفت دوره"
-                                  : "Course Progress"}
-                              </span>
-                              <span>
-                                {enrollmentStatus.progress_percentage}%
-                              </span>
-                            </div>
-                            <div className="w-full bg-green-200 rounded-full h-2">
-                              <div
-                                className="bg-green-600 h-2 rounded-full transition-all duration-300"
-                                style={{
-                                  width: `${enrollmentStatus.progress_percentage}%`,
-                                }}
-                              ></div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                  <CompletionStatus
+                    enrollmentStatus={enrollmentStatus}
+                    courseDetails={{
+                      _id: course._id,
+                      title: getLocalizedContent(course).title,
+                      title_en: course.title_en,
+                      passing_grade: course.passing_grade,
+                      certificate_template_id: course.certificate_template_id,
+                      duration_hours: course.duration_hours,
+                      total_lessons: course.total_lessons,
+                      completed_lessons: enrollmentStatus.progress_percentage
+                        ? Math.round(
+                            (enrollmentStatus.progress_percentage / 100) *
+                              (course.total_lessons || 0),
+                          )
+                        : 0,
+                    }}
+                    locale={locale}
+                  />
                 ) : (
                   <div className="space-y-3">
                     {course.is_free ? (
@@ -723,13 +969,16 @@ export default function CourseDetailPage({
                 </h3>
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
-                    {course.instructor.avatar ? (
-                      <Image
+                    {course.instructor?.avatar?.url ? (
+                      <OptimizedImage
                         src={course.instructor.avatar.url}
                         alt={`${course.instructor.first_name} ${course.instructor.last_name}`}
                         width={64}
                         height={64}
+                        quality="high"
+                        rounded
                         className="rounded-full object-cover"
+                        fallbackSrc="/images/default-avatar.jpg"
                       />
                     ) : (
                       <div className="w-16 h-16 bg-background-secondary rounded-full flex items-center justify-center">
@@ -833,6 +1082,6 @@ export default function CourseDetailPage({
           </section>
         )}
       </div>
-    </div>
+    </>
   );
 }
