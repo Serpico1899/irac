@@ -20,7 +20,13 @@ export const transaction_type_array = [
   "transfer_out",
   "bonus",
   "penalty",
-  "commission"
+  "commission",
+  "admin_deposit",
+  "admin_withdrawal",
+  "admin_adjustment",
+  "dispute_resolution",
+  "freeze_penalty",
+  "unfreeze_bonus"
 ];
 export const transaction_type_enums = enums(transaction_type_array);
 
