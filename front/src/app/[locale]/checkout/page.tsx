@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/utils/currency";
+import { invoiceApi } from "@/services/invoice/invoiceApi";
 
 // Types
 interface BillingForm {
@@ -232,6 +233,40 @@ export default function CheckoutPage({
       };
 
       console.log("Order created:", order);
+
+      // Generate invoice for the order
+      try {
+        const invoiceData = {
+          customer: {
+            name: `${billingData.first_name} ${billingData.last_name}`,
+            email: billingData.email,
+            phone: billingData.phone,
+            address: billingData.address,
+            city: billingData.city,
+            postal_code: billingData.postal_code,
+          },
+          line_items: cart.items.map((item) => ({
+            item_id: item.id,
+            item_type: item.type || "product",
+            name: item.name,
+            description: item.description || "",
+            unit_price: item.price,
+            quantity: item.quantity,
+            discount_amount: 0,
+          })),
+          payment_terms: isRTL
+            ? "30 روز پس از صدور فاکتور"
+            : "Payment due within 30 days",
+          notes: billingData.special_instructions || "",
+          locale: locale,
+        };
+
+        const invoice = await invoiceApi.createInvoice(invoiceData);
+        console.log("Invoice created:", invoice);
+      } catch (invoiceError) {
+        console.error("Invoice creation failed:", invoiceError);
+        // Don't fail the entire order if invoice creation fails
+      }
 
       // Clear cart after successful order
       clearCart();
