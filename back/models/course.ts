@@ -86,6 +86,12 @@ export const course_pure = {
   // Points System
   completion_points: defaulted(number(), 0), // Points awarded on completion
 
+  // Certificate System
+  certificate_template_id: optional(string()), // Default template for course certificates
+  certificate_enabled: defaulted(boolean(), true), // Whether certificates are enabled
+  total_certificates_issued: defaulted(number(), 0), // Statistics
+  total_certificates_revoked: defaulted(number(), 0), // Statistics
+
   ...createUpdateAt,
 };
 
