@@ -297,60 +297,256 @@ export default function AdminAnalyticsPage() {
       <div className="px-4 py-6 lg:px-8 lg:py-8">
         <div className="max-w-7xl mx-auto">
           {activeTab === "overview" && (
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
               <FinancialDashboard />
+
+              {/* Quick Overview Cards */}
+              <div className="flex flex-wrap gap-6">
+                <div className="flex flex-col flex-1 min-w-60 bg-gradient-to-r from-indigo-400 to-indigo-600 text-white p-6 rounded-lg shadow-lg">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-lg font-bold">کاربران فعال امروز</h3>
+                    <UsersIcon className="w-6 h-6" />
+                  </div>
+                  <p className="text-3xl font-bold mb-2">156</p>
+                  <p className="text-indigo-100 text-sm">+12% از دیروز</p>
+                </div>
+
+                <div className="flex flex-col flex-1 min-w-60 bg-gradient-to-r from-orange-400 to-orange-600 text-white p-6 rounded-lg shadow-lg">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-lg font-bold">نرخ تکمیل دوره</h3>
+                    <AcademicCapIcon className="w-6 h-6" />
+                  </div>
+                  <p className="text-3xl font-bold mb-2">78.5%</p>
+                  <p className="text-orange-100 text-sm">+5.2% از ماه قبل</p>
+                </div>
+
+                <div className="flex flex-col flex-1 min-w-60 bg-gradient-to-r from-teal-400 to-teal-600 text-white p-6 rounded-lg shadow-lg">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-lg font-bold">رزرو فضاهای کاری</h3>
+                    <CalendarIcon className="w-6 h-6" />
+                  </div>
+                  <p className="text-3xl font-bold mb-2">42</p>
+                  <p className="text-teal-100 text-sm">امروز</p>
+                </div>
+              </div>
             </div>
           )}
 
           {activeTab === "revenue" && (
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 <div className="p-4 lg:p-6 border-b border-gray-200">
                   <h2 className="text-lg lg:text-xl font-semibold text-gray-900">
-                    تحلیل درآمد
+                    تحلیل درآمد تفصیلی
                   </h2>
                   <p className="text-sm text-gray-600 mt-1">
-                    نمودارها و آمار درآمد سیستم
+                    نمودارها و آمار کامل درآمد سیستم
                   </p>
                 </div>
-                <div className="p-0">
+                <div className="p-6">
                   <RevenueCharts />
+                </div>
+              </div>
+
+              {/* Revenue Performance Metrics */}
+              <div className="flex flex-wrap gap-6">
+                <div className="flex flex-col flex-1 min-w-80 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">
+                    عملکرد درآمد بر اساس دسته
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                        <span className="font-medium">دوره‌های آنلاین</span>
+                      </div>
+                      <span className="font-bold text-blue-600">
+                        45.2M تومان
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                        <span className="font-medium">کارگاه‌های حضوری</span>
+                      </div>
+                      <span className="font-bold text-green-600">
+                        32.8M تومان
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
+                        <span className="font-medium">محصولات دیجیتال</span>
+                      </div>
+                      <span className="font-bold text-purple-600">
+                        18.7M تومان
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col flex-1 min-w-80 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">
+                    روند درآمد ماهانه
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between p-2 border-b border-gray-100">
+                      <span className="text-sm text-gray-600">فروردین</span>
+                      <span className="font-medium">38.5M</span>
+                    </div>
+                    <div className="flex items-center justify-between p-2 border-b border-gray-100">
+                      <span className="text-sm text-gray-600">اردیبهشت</span>
+                      <span className="font-medium">42.1M</span>
+                    </div>
+                    <div className="flex items-center justify-between p-2 border-b border-gray-100">
+                      <span className="text-sm text-gray-600">خرداد</span>
+                      <span className="font-medium">45.8M</span>
+                    </div>
+                    <div className="flex items-center justify-between p-2">
+                      <span className="text-sm text-gray-600">تیر</span>
+                      <span className="font-medium text-green-600">
+                        48.2M ↗
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           )}
 
           {activeTab === "users" && (
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 <div className="p-4 lg:p-6 border-b border-gray-200">
                   <h2 className="text-lg lg:text-xl font-semibold text-gray-900">
-                    تحلیل کاربران
+                    تحلیل جامع کاربران
                   </h2>
                   <p className="text-sm text-gray-600 mt-1">
-                    رفتار و آمار کاربران سیستم
+                    رفتار، مشارکت و آمار تفصیلی کاربران سیستم
                   </p>
                 </div>
-                <div className="p-0">
+                <div className="p-6">
                   <UserAnalytics />
+                </div>
+              </div>
+
+              {/* User Engagement Metrics */}
+              <div className="flex flex-wrap gap-6">
+                <div className="flex flex-col flex-1 min-w-80 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">
+                    کاربران برتر
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 bg-gold text-white rounded-full flex items-center justify-center font-bold">
+                          1
+                        </span>
+                        <div className="flex flex-col">
+                          <span className="font-medium">محمد احمدی</span>
+                          <span className="text-sm text-gray-500">
+                            12 دوره تکمیل شده
+                          </span>
+                        </div>
+                      </div>
+                      <span className="font-bold text-green-600">
+                        15.2M تومان
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 bg-silver text-white rounded-full flex items-center justify-center font-bold">
+                          2
+                        </span>
+                        <div className="flex flex-col">
+                          <span className="font-medium">فاطمه کریمی</span>
+                          <span className="text-sm text-gray-500">
+                            9 دوره تکمیل شده
+                          </span>
+                        </div>
+                      </div>
+                      <span className="font-bold text-green-600">
+                        8.7M تومان
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col flex-1 min-w-80 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">
+                    آمار مشارکت
+                  </h3>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-600">نرخ بازگشت کاربران</span>
+                      <span className="font-bold text-blue-600">72.3%</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-600">متوسط زمان حضور</span>
+                      <span className="font-bold text-purple-600">
+                        45 دقیقه
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-600">تعداد کل ثبت‌نام‌ها</span>
+                      <span className="font-bold text-green-600">1,247</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           )}
 
           {activeTab === "export" && (
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 <div className="p-4 lg:p-6 border-b border-gray-200">
                   <h2 className="text-lg lg:text-xl font-semibold text-gray-900">
-                    خروجی گزارش‌ها
+                    خروجی و صادرات گزارش‌ها
                   </h2>
                   <p className="text-sm text-gray-600 mt-1">
-                    دانلود و صادرات گزارش‌های تفصیلی
+                    دانلود، ایمیل و برنامه‌ریزی گزارش‌های تفصیلی سیستم
                   </p>
                 </div>
-                <div className="p-0">
+                <div className="p-6">
                   <ExportTools />
+                </div>
+              </div>
+
+              {/* Recent Exports */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">
+                  آخرین گزارش‌های صادر شده
+                </h3>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <ArrowDownTrayIcon className="w-5 h-5 text-green-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">گزارش درآمد ماهانه</span>
+                        <span className="text-sm text-gray-500">
+                          PDF • 2.4 مگابایت • 10 دقیقه پیش
+                        </span>
+                      </div>
+                    </div>
+                    <button className="px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
+                      دانلود
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <ArrowDownTrayIcon className="w-5 h-5 text-green-600" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">آمار کاربران فعال</span>
+                        <span className="text-sm text-gray-500">
+                          Excel • 1.8 مگابایت • 1 ساعت پیش
+                        </span>
+                      </div>
+                    </div>
+                    <button className="px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
+                      دانلود
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -360,27 +556,27 @@ export default function AdminAnalyticsPage() {
 
       {/* Quick Stats Footer - Mobile */}
       <div className="lg:hidden bg-white border-t border-gray-200 p-4">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-sm text-gray-600">
+        <div className="flex justify-between">
+          <div className="flex flex-col items-center text-center">
+            <div className="flex items-center justify-center gap-1 text-sm text-gray-600 mb-1">
               <EyeIcon className="h-4 w-4" />
-              <span>بازدید</span>
+              <span>بازدید امروز</span>
             </div>
-            <p className="text-lg font-semibold text-gray-900">۲,۳۴۵</p>
+            <p className="text-lg font-semibold text-gray-900">۲,۸۹۷</p>
           </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-sm text-gray-600">
+          <div className="flex flex-col items-center text-center">
+            <div className="flex items-center justify-center gap-1 text-sm text-gray-600 mb-1">
               <CurrencyDollarIcon className="h-4 w-4" />
-              <span>درآمد</span>
+              <span>درآمد ماهانه</span>
             </div>
-            <p className="text-lg font-semibold text-gray-900">۱۲.۵M</p>
+            <p className="text-lg font-semibold text-green-600">۴۸.۲M</p>
           </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-sm text-gray-600">
+          <div className="flex flex-col items-center text-center">
+            <div className="flex items-center justify-center gap-1 text-sm text-gray-600 mb-1">
               <UsersIcon className="h-4 w-4" />
-              <span>کاربران</span>
+              <span>کاربران فعال</span>
             </div>
-            <p className="text-lg font-semibold text-gray-900">۸۹۶</p>
+            <p className="text-lg font-semibold text-blue-600">۱,۴۲۳</p>
           </div>
         </div>
       </div>
