@@ -44,6 +44,12 @@ export const enrollment_pure = {
   total_paid: number(), // Amount paid in Iranian Rial
   discount_applied: defaulted(number(), 0),
 
+  // Group Enrollment
+  is_group_enrollment: defaulted(boolean(), false),
+  group_discount_percentage: defaulted(number(), 0),
+  original_price: optional(number()), // Price before group discount
+  group_savings: defaulted(number(), 0), // Amount saved through group discount
+
   // Course Specific
   attendance_count: defaulted(number(), 0),
   assignment_scores: optional(string()), // JSON array of scores
@@ -54,6 +60,15 @@ export const enrollment_pure = {
   certificate_issue_date: optional(
     coerce(date(), string(), (value) => new Date(value))
   ),
+  certificate_id: optional(string()), // Unique certificate number (e.g., IRAC-2024-ARCH-12345)
+  certificate_hash: optional(string()), // Verification hash for security
+  certificate_template_id: optional(string()), // Template used for certificate
+  certificate_revoked: defaulted(boolean(), false),
+  certificate_revoked_date: optional(
+    coerce(date(), string(), (value) => new Date(value))
+  ),
+  certificate_revoked_reason: optional(string()),
+  certificate_revoked_by: optional(string()), // Admin user ID who revoked
 
   // Administrative
   notes: optional(string()),
@@ -103,6 +118,20 @@ export const enrollment_relations = {
     type: "single" as RelationDataType,
     optional: true,
     relatedRelations: {},
+  },
+
+  // Group Relation (for group enrollments)
+  group: {
+    schemaName: "group",
+    type: "single" as RelationDataType,
+    optional: true,
+    relatedRelations: {
+      enrollments: {
+        schemaName: "enrollment",
+        type: "multiple" as RelationDataType,
+        optional: true,
+      },
+    },
   },
 };
 
