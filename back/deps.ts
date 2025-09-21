@@ -3,3 +3,5 @@ export * from "https://deno.land/x/lesan@v0.1.18/mod.ts";
 // export * from '/home/erfan/Desktop/lesan/mod.ts';
 export * as jwt from "https://deno.land/x/djwt@v2.8/mod.ts";
 export * as redis from "https://deno.land/x/redis/mod.ts";
+export * from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
+export { crypto } from "https://deno.land/std@0.208.0/crypto/mod.ts";
