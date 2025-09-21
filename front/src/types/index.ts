@@ -382,6 +382,147 @@ export interface ProductApiResponse<T = any> {
   message?: string;
 }
 
+// Invoice Types
+export interface InvoiceLineItem {
+  id: string;
+  description: string;
+  description_en?: string;
+  quantity: number;
+  unit_price: number;
+  discount_amount?: number;
+  tax_rate?: number;
+  total: number;
+  item_type: "course" | "workshop" | "product" | "service";
+  metadata?: Record<string, any>;
+}
+
+export interface InvoiceCustomer {
+  id: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  national_id?: string;
+  company_name?: string;
+  tax_id?: string;
+  address?: string;
+  city?: string;
+  postal_code?: string;
+  country?: string;
+}
+
+export interface InvoiceTax {
+  name: string;
+  name_en?: string;
+  rate: number; // 0.09 for 9%
+  amount: number;
+  tax_type: "vat" | "service" | "custom";
+}
+
+export interface InvoiceDiscount {
+  coupon_code?: string;
+  coupon_name?: string;
+  discount_type: "percentage" | "fixed_amount";
+  discount_value: number;
+  discount_amount: number;
+  description?: string;
+}
+
+export interface InvoicePayment {
+  method: "zarinpal" | "mellat" | "saman" | "wallet" | "bank_transfer" | "cash";
+  status: "pending" | "paid" | "failed" | "refunded" | "cancelled";
+  transaction_id?: string;
+  reference_number?: string;
+  paid_at?: string;
+  amount_paid?: number;
+}
+
+export interface Invoice {
+  // Basic Info
+  id: string;
+  invoice_number: string;
+  order_id?: string;
+
+  // Dates
+  issue_date: string;
+  due_date?: string;
+  created_at: string;
+  updated_at: string;
+
+  // Status
+  status: "draft" | "sent" | "paid" | "overdue" | "cancelled" | "refunded";
+
+  // Customer
+  customer: InvoiceCustomer;
+
+  // Items
+  line_items: InvoiceLineItem[];
+
+  // Calculations
+  subtotal: number;
+  total_discount: number;
+  taxes: InvoiceTax[];
+  total_tax: number;
+  total_amount: number;
+  currency: string;
+
+  // Applied Discounts
+  discounts: InvoiceDiscount[];
+
+  // Payment
+  payment_info?: InvoicePayment;
+
+  // Additional Info
+  notes?: string;
+  terms?: string;
+  footer_text?: string;
+
+  // Company Info
+  company: {
+    name: string;
+    name_en?: string;
+    logo_url?: string;
+    address?: string;
+    phone?: string;
+    email?: string;
+    website?: string;
+    tax_id?: string;
+  };
+
+  // Localization
+  locale: "fa" | "en";
+
+  // File URLs
+  pdf_url?: string;
+
+  // Metadata
+  metadata?: Record<string, any>;
+}
+
+export interface InvoiceGenerationOptions {
+  template?: "default" | "minimal" | "detailed";
+  include_logo?: boolean;
+  include_terms?: boolean;
+  include_notes?: boolean;
+  language?: "fa" | "en" | "both";
+  format?: "pdf" | "html";
+  email_delivery?: {
+    to: string;
+    subject?: string;
+    body?: string;
+  };
+}
+
+export interface InvoiceStats {
+  total_invoices: number;
+  paid_invoices: number;
+  pending_invoices: number;
+  overdue_invoices: number;
+  total_revenue: number;
+  pending_amount: number;
+  average_invoice_amount: number;
+  payment_methods: Record<string, number>;
+}
+
 // Product Cart Item (extends CartItem for products)
 
 // Product Order types
