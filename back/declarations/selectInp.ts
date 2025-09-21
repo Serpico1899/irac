@@ -13,6 +13,7 @@ bookmarked_articles?: number | articleInp
 taught_courses?: number | courseInp
 enrolled_courses?: number | courseInp
 created_courses?: number | courseInp
+enrollments?: number | enrollmentInp
     }
 
 
@@ -370,6 +371,25 @@ completion_points: number;
 createdAt: Date;
 updatedAt: Date;
 }[];
+enrollments: {
+_id?: string;
+enrollment_date: Date;
+status: ("Active" | "Completed" | "Dropped" | "Suspended" | "Pending_Payment" );
+progress_percentage: number;
+completed_date?: Date;
+points_earned: number;
+points_used_for_enrollment: number;
+total_paid: number;
+discount_applied: number;
+attendance_count: number;
+assignment_scores?: string;
+final_grade?: number;
+certificate_issued: boolean;
+certificate_issue_date?: Date;
+notes?: string;
+createdAt: Date;
+updatedAt: Date;
+}[];
 };
 ;
 
@@ -661,7 +681,7 @@ enrolled_users?: number | userInp
 creator?: number | userInp
 related_courses?: number | courseInp
 prerequisite_courses?: number | courseInp
-      
+      enrollments?: number | enrollmentInp
     }
 
 
@@ -872,6 +892,25 @@ meeting_link?: string;
 featured: boolean;
 sort_order: number;
 completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+}[];
+enrollments: {
+_id?: string;
+enrollment_date: Date;
+status: ("Active" | "Completed" | "Dropped" | "Suspended" | "Pending_Payment" );
+progress_percentage: number;
+completed_date?: Date;
+points_earned: number;
+points_used_for_enrollment: number;
+total_paid: number;
+discount_applied: number;
+attendance_count: number;
+assignment_scores?: string;
+final_grade?: number;
+certificate_issued: boolean;
+certificate_issue_date?: Date;
+notes?: string;
 createdAt: Date;
 updatedAt: Date;
 }[];
@@ -1150,6 +1189,256 @@ updatedAt: Date;
 ;
 
 
+    export type orderInp = {
+      user?: number | userInp
+wallet_transactions?: number | wallet_transactionInp
+      
+    }
+
+
+    export type orderSchema = {
+_id?: string;
+order_number: string;
+order_id: string;
+status: ("pending" | "confirmed" | "processing" | "shipped" | "delivered" | "cancelled" | "refunded" | "failed" );
+payment_status: ("pending" | "paid" | "partially_paid" | "failed" | "refunded" | "cancelled" );
+order_type: ("course" | "workshop" | "product" | "mixed" );
+items: {
+item_id: string;
+item_type: ("course" | "workshop" | "product" );
+name: string;
+name_en?: string;
+price: number;
+discounted_price?: number;
+quantity: number;
+total: number;
+metadata?: string;
+}[];
+subtotal: number;
+tax_amount: number;
+discount_amount: number;
+total_amount: number;
+currency: string;
+customer_email?: string;
+customer_phone?: string;
+customer_name: string;
+billing_address?: string;
+billing_city?: string;
+billing_postal_code?: string;
+billing_country: string;
+shipping_address?: string;
+shipping_city?: string;
+shipping_postal_code?: string;
+shipping_country?: string;
+shipping_cost: number;
+payment_method?: string;
+payment_reference?: string;
+gateway_transaction_id?: string;
+gateway_response?: string;
+shipped_at?: Date;
+delivered_at?: Date;
+admin_notes?: string;
+internal_notes?: string;
+tracking_number?: string;
+tracking_url?: string;
+refund_amount: number;
+refund_reason?: string;
+refunded_at?: Date;
+createdAt: Date;
+updatedAt: Date;
+user: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+};
+wallet_transactions?: {
+_id?: string;
+transaction_id: string;
+amount: number;
+currency: string;
+type: ("deposit" | "withdrawal" | "purchase" | "refund" | "transfer_in" | "transfer_out" | "bonus" | "penalty" | "commission" | "admin_deposit" | "admin_withdrawal" | "admin_adjustment" | "dispute_resolution" | "freeze_penalty" | "unfreeze_bonus" );
+status: ("pending" | "processing" | "completed" | "failed" | "cancelled" | "refunded" );
+payment_method?: ("zarinpal" | "bank_transfer" | "manual" | "wallet_balance" | "credit_card" | "other" );
+description?: string;
+reference_id?: string;
+gateway_response?: string;
+balance_before: number;
+balance_after: number;
+ip_address?: string;
+user_agent?: string;
+admin_notes?: string;
+processed_by?: string;
+processed_at?: string;
+expires_at?: string;
+createdAt: Date;
+updatedAt: Date;
+}[];
+};
+;
+
+
+    export type enrollmentInp = {
+      user?: number | userInp
+course?: number | courseInp
+order?: number | orderInp
+certificate?: number | fileInp
+      
+    }
+
+
+    export type enrollmentSchema = {
+_id?: string;
+enrollment_date: Date;
+status: ("Active" | "Completed" | "Dropped" | "Suspended" | "Pending_Payment" );
+progress_percentage: number;
+completed_date?: Date;
+points_earned: number;
+points_used_for_enrollment: number;
+total_paid: number;
+discount_applied: number;
+attendance_count: number;
+assignment_scores?: string;
+final_grade?: number;
+certificate_issued: boolean;
+certificate_issue_date?: Date;
+notes?: string;
+createdAt: Date;
+updatedAt: Date;
+user: {
+_id?: string;
+first_name: string;
+last_name: string;
+father_name: string;
+mobile: string;
+gender: ("Male" | "Female" );
+birth_date?: Date;
+summary?: string;
+national_number: string;
+address: string;
+level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
+is_verified: boolean;
+createdAt: Date;
+updatedAt: Date;
+};
+course: {
+_id?: string;
+name: string;
+description: string;
+short_description?: string;
+name_en?: string;
+description_en?: string;
+short_description_en?: string;
+level: ("Beginner" | "Intermediate" | "Advanced" );
+type: ("Course" | "Workshop" | "Bootcamp" | "Seminar" );
+status: ("Draft" | "Active" | "Archived" | "Sold_Out" );
+price: number;
+original_price?: number;
+is_free: boolean;
+duration_weeks?: number;
+duration_hours?: number;
+max_students?: number;
+min_students: number;
+start_date?: Date;
+end_date?: Date;
+registration_deadline?: Date;
+curriculum?: string;
+prerequisites?: string;
+learning_outcomes?: string;
+instructor_name?: string;
+instructor_bio?: string;
+instructor_bio_en?: string;
+average_rating: number;
+total_reviews: number;
+total_students: number;
+slug?: string;
+meta_title?: string;
+meta_description?: string;
+is_workshop: boolean;
+workshop_location?: string;
+is_online: boolean;
+meeting_link?: string;
+featured: boolean;
+sort_order: number;
+completion_points: number;
+createdAt: Date;
+updatedAt: Date;
+};
+order?: {
+_id?: string;
+order_number: string;
+order_id: string;
+status: ("pending" | "confirmed" | "processing" | "shipped" | "delivered" | "cancelled" | "refunded" | "failed" );
+payment_status: ("pending" | "paid" | "partially_paid" | "failed" | "refunded" | "cancelled" );
+order_type: ("course" | "workshop" | "product" | "mixed" );
+items: {
+item_id: string;
+item_type: ("course" | "workshop" | "product" );
+name: string;
+name_en?: string;
+price: number;
+discounted_price?: number;
+quantity: number;
+total: number;
+metadata?: string;
+}[];
+subtotal: number;
+tax_amount: number;
+discount_amount: number;
+total_amount: number;
+currency: string;
+customer_email?: string;
+customer_phone?: string;
+customer_name: string;
+billing_address?: string;
+billing_city?: string;
+billing_postal_code?: string;
+billing_country: string;
+shipping_address?: string;
+shipping_city?: string;
+shipping_postal_code?: string;
+shipping_country?: string;
+shipping_cost: number;
+payment_method?: string;
+payment_reference?: string;
+gateway_transaction_id?: string;
+gateway_response?: string;
+shipped_at?: Date;
+delivered_at?: Date;
+admin_notes?: string;
+internal_notes?: string;
+tracking_number?: string;
+tracking_url?: string;
+refund_amount: number;
+refund_reason?: string;
+refunded_at?: Date;
+createdAt: Date;
+updatedAt: Date;
+};
+certificate?: {
+_id?: string;
+name: string;
+type: string;
+size: number;
+path: string;
+url: string;
+createdAt: Date;
+updatedAt: Date;
+};
+};
+;
+
+
     export type walletInp = {
       user?: number | userInp
       
@@ -1198,7 +1487,7 @@ _id?: string;
 transaction_id: string;
 amount: number;
 currency: string;
-type: ("deposit" | "withdrawal" | "purchase" | "refund" | "transfer_in" | "transfer_out" | "bonus" | "penalty" | "commission" );
+type: ("deposit" | "withdrawal" | "purchase" | "refund" | "transfer_in" | "transfer_out" | "bonus" | "penalty" | "commission" | "admin_deposit" | "admin_withdrawal" | "admin_adjustment" | "dispute_resolution" | "freeze_penalty" | "unfreeze_bonus" );
 status: ("pending" | "processing" | "completed" | "failed" | "cancelled" | "refunded" );
 payment_method?: ("zarinpal" | "bank_transfer" | "manual" | "wallet_balance" | "credit_card" | "other" );
 description?: string;
@@ -1291,105 +1580,6 @@ refunded_at?: Date;
 createdAt: Date;
 updatedAt: Date;
 };
-};
-;
-
-
-    export type orderInp = {
-      user?: number | userInp
-wallet_transactions?: number | wallet_transactionInp
-      
-    }
-
-
-    export type orderSchema = {
-_id?: string;
-order_number: string;
-order_id: string;
-status: ("pending" | "confirmed" | "processing" | "shipped" | "delivered" | "cancelled" | "refunded" | "failed" );
-payment_status: ("pending" | "paid" | "partially_paid" | "failed" | "refunded" | "cancelled" );
-order_type: ("course" | "workshop" | "product" | "mixed" );
-items: {
-item_id: string;
-item_type: ("course" | "workshop" | "product" );
-name: string;
-name_en?: string;
-price: number;
-discounted_price?: number;
-quantity: number;
-total: number;
-metadata?: string;
-}[];
-subtotal: number;
-tax_amount: number;
-discount_amount: number;
-total_amount: number;
-currency: string;
-customer_email?: string;
-customer_phone?: string;
-customer_name: string;
-billing_address?: string;
-billing_city?: string;
-billing_postal_code?: string;
-billing_country: string;
-shipping_address?: string;
-shipping_city?: string;
-shipping_postal_code?: string;
-shipping_country?: string;
-shipping_cost: number;
-payment_method?: string;
-payment_reference?: string;
-gateway_transaction_id?: string;
-gateway_response?: string;
-shipped_at?: Date;
-delivered_at?: Date;
-admin_notes?: string;
-internal_notes?: string;
-tracking_number?: string;
-tracking_url?: string;
-refund_amount: number;
-refund_reason?: string;
-refunded_at?: Date;
-createdAt: Date;
-updatedAt: Date;
-user: {
-_id?: string;
-first_name: string;
-last_name: string;
-father_name: string;
-mobile: string;
-gender: ("Male" | "Female" );
-birth_date?: Date;
-summary?: string;
-national_number: string;
-address: string;
-level: ("Ghost" | "Manager" | "Editor" | "Ordinary" );
-is_verified: boolean;
-createdAt: Date;
-updatedAt: Date;
-};
-wallet_transactions?: {
-_id?: string;
-transaction_id: string;
-amount: number;
-currency: string;
-type: ("deposit" | "withdrawal" | "purchase" | "refund" | "transfer_in" | "transfer_out" | "bonus" | "penalty" | "commission" );
-status: ("pending" | "processing" | "completed" | "failed" | "cancelled" | "refunded" );
-payment_method?: ("zarinpal" | "bank_transfer" | "manual" | "wallet_balance" | "credit_card" | "other" );
-description?: string;
-reference_id?: string;
-gateway_response?: string;
-balance_before: number;
-balance_after: number;
-ip_address?: string;
-user_agent?: string;
-admin_notes?: string;
-processed_by?: string;
-processed_at?: string;
-expires_at?: string;
-createdAt: Date;
-updatedAt: Date;
-}[];
 };
 ;
 
@@ -2087,7 +2277,7 @@ _id?: string;
 transaction_id: string;
 amount: number;
 currency: string;
-type: ("deposit" | "withdrawal" | "purchase" | "refund" | "transfer_in" | "transfer_out" | "bonus" | "penalty" | "commission" );
+type: ("deposit" | "withdrawal" | "purchase" | "refund" | "transfer_in" | "transfer_out" | "bonus" | "penalty" | "commission" | "admin_deposit" | "admin_withdrawal" | "admin_adjustment" | "dispute_resolution" | "freeze_penalty" | "unfreeze_bonus" );
 status: ("pending" | "processing" | "completed" | "failed" | "cancelled" | "refunded" );
 payment_method?: ("zarinpal" | "bank_transfer" | "manual" | "wallet_balance" | "credit_card" | "other" );
 description?: string;
