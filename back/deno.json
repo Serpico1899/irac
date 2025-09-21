@@ -39,7 +39,8 @@
   "imports": {
     "@deps": "./deps.ts",
     "@lib": "./utils/mod.ts",
-    "@model": "./models/mod.ts"
+    "@model": "./models/mod.ts",
+    "@app": "./mod.ts"
   },
   "nodeModulesDir": "auto"
 }
