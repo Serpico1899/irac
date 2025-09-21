@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/context/AuthContext";
 import { useWallet } from "@/context/WalletContext";
-import { zarinpalApi } from "@/services/payment/zarinpal/zarinpalApi";
+import { unifiedPaymentApi } from "@/services/payment/unified-payment-api";
 import {
   CheckCircleIcon,
   XCircleIcon,
@@ -20,13 +20,21 @@ import { Metadata } from "next";
 interface PaymentResult {
   success: boolean;
   message: string;
+  gateway_type?: string;
   data?: {
-    authority: string;
+    authority?: string;
+    reference_id?: string;
+    tracking_code?: string;
     amount: number;
-    ref_id?: number;
-    card_pan?: string;
-    new_balance?: number;
-    wallet_transaction_id?: string;
+    card_info?: {
+      masked_pan?: string;
+      hash?: string;
+      bank_name?: string;
+    };
+    wallet_info?: {
+      transaction_id?: string;
+      new_balance?: number;
+    };
   };
   error_code?: string;
 }
@@ -44,16 +52,21 @@ const PaymentCallbackContent: React.FC = () => {
   );
   const [processingStage, setProcessingStage] = useState<string>("parsing");
 
-  // Parse callback parameters
-  const authority = searchParams.get("Authority");
-  const status = searchParams.get("Status");
+  // Parse callback parameters from different gateways
+  const [callbackParams, setCallbackParams] = useState<any>(null);
+  const [gatewayType, setGatewayType] = useState<string>("");
 
   // Get stored payment data
   const [storedPaymentData, setStoredPaymentData] = useState<any>(null);
 
   useEffect(() => {
+    // Parse callback parameters for all gateways
+    const params = unifiedPaymentApi.parseCallbackParams();
+    setCallbackParams(params);
+    setGatewayType(params?.gateway_type || "");
+
     // Get stored payment data
-    const stored = zarinpalApi.getStoredPaymentData();
+    const stored = unifiedPaymentApi.getStoredPaymentData();
     setStoredPaymentData(stored);
   }, []);
 
@@ -74,7 +87,7 @@ const PaymentCallbackContent: React.FC = () => {
         }
 
         // Check callback parameters
-        if (!authority) {
+        if (!callbackParams || !callbackParams.gateway_type) {
           setPaymentResult({
             success: false,
             message: "پارامترهای بازگشت از درگاه پرداخت نامعتبر است",
@@ -84,12 +97,14 @@ const PaymentCallbackContent: React.FC = () => {
           return;
         }
 
-        // Check if payment was cancelled
-        if (status === "NOK") {
+        // Check payment status from callback
+        const paymentStatus = unifiedPaymentApi.getPaymentStatusFromCallback();
+        if (paymentStatus.isCancelled || paymentStatus.isFailed) {
           setPaymentResult({
             success: false,
-            message: "پرداخت توسط شما لغو شد",
-            error_code: "PAYMENT_CANCELLED",
+            message: paymentStatus.message || "پرداخت ناموفق بود",
+            error_code: paymentStatus.errorCode || "PAYMENT_FAILED",
+            gateway_type: gatewayType,
           });
           setIsLoading(false);
           return;
@@ -97,24 +112,29 @@ const PaymentCallbackContent: React.FC = () => {
 
         setProcessingStage("verifying");
 
-        // Get amount from stored data or default
-        const amount = storedPaymentData?.amount || 0;
+        // Get transaction ID from stored data or URL
+        const transactionId =
+          storedPaymentData?.transaction_id ||
+          searchParams.get("transaction_id") ||
+          callbackParams.transaction_id;
 
-        if (!amount || amount < 1000) {
+        if (!transactionId) {
           setPaymentResult({
             success: false,
-            message: "مبلغ پرداخت نامعتبر است",
-            error_code: "INVALID_AMOUNT",
+            message: "شناسه تراکنش یافت نشد",
+            error_code: "MISSING_TRANSACTION_ID",
+            gateway_type: gatewayType,
           });
           setIsLoading(false);
           return;
         }
 
-        // Verify payment
-        const verifyResult = await zarinpalApi.verifyPayment({
-          authority,
-          amount,
-          status: status || undefined,
+        // Verify payment using unified API
+        const verifyResult = await unifiedPaymentApi.verifyPayment({
+          transaction_id: transactionId,
+          authority: callbackParams.authority,
+          reference_id: callbackParams.reference_id,
+          callback_params: callbackParams,
         });
 
         setProcessingStage("completing");
@@ -124,10 +144,13 @@ const PaymentCallbackContent: React.FC = () => {
           await refreshWallet();
 
           // Clear stored payment data
-          zarinpalApi.clearStoredPaymentData();
+          unifiedPaymentApi.clearStoredPaymentData();
         }
 
-        setPaymentResult(verifyResult);
+        setPaymentResult({
+          ...verifyResult,
+          gateway_type: gatewayType,
+        });
         setIsLoading(false);
       } catch (error) {
         console.error("Payment processing error:", error);
@@ -141,7 +164,7 @@ const PaymentCallbackContent: React.FC = () => {
     };
 
     // Only process if we have the necessary parameters
-    if (authority !== null) {
+    if (callbackParams !== null) {
       processPayment();
     } else {
       setIsLoading(false);
@@ -152,8 +175,8 @@ const PaymentCallbackContent: React.FC = () => {
       });
     }
   }, [
-    authority,
-    status,
+    callbackParams,
+    gatewayType,
     isAuthenticated,
     user,
     storedPaymentData,
@@ -237,6 +260,14 @@ const PaymentCallbackContent: React.FC = () => {
                 پرداخت موفقیت‌آمیز بود
               </h2>
 
+              {paymentResult.gateway_type && (
+                <div className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-2">
+                  {unifiedPaymentApi.getGatewayDisplayName(
+                    paymentResult.gateway_type as any,
+                  )}
+                </div>
+              )}
+
               <p className="text-gray-600">{paymentResult.message}</p>
             </div>
 
@@ -245,33 +276,55 @@ const PaymentCallbackContent: React.FC = () => {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">مبلغ پرداخت:</span>
                 <span className="font-medium text-gray-900">
-                  {zarinpalApi.formatAmount(paymentResult.data?.amount || 0)}
+                  {unifiedPaymentApi.formatAmount(
+                    paymentResult.data?.amount || 0,
+                  )}
                 </span>
               </div>
 
-              {paymentResult.data?.ref_id && (
+              {paymentResult.data?.tracking_code && (
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">کد پیگیری:</span>
                   <span className="font-medium text-gray-900 font-mono text-sm">
-                    {paymentResult.data.ref_id}
+                    {paymentResult.data.tracking_code}
                   </span>
                 </div>
               )}
 
-              {paymentResult.data?.card_pan && (
+              {paymentResult.data?.reference_id && (
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">شماره مرجع:</span>
+                  <span className="font-medium text-gray-900 font-mono text-sm">
+                    {paymentResult.data.reference_id}
+                  </span>
+                </div>
+              )}
+
+              {paymentResult.data?.card_info?.masked_pan && (
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">شماره کارت:</span>
                   <span className="font-medium text-gray-900 font-mono text-sm">
-                    {paymentResult.data.card_pan}
+                    {paymentResult.data.card_info.masked_pan}
                   </span>
                 </div>
               )}
 
-              {paymentResult.data?.new_balance !== undefined && (
+              {paymentResult.data?.card_info?.bank_name && (
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">بانک:</span>
+                  <span className="font-medium text-gray-900">
+                    {paymentResult.data.card_info.bank_name}
+                  </span>
+                </div>
+              )}
+
+              {paymentResult.data?.wallet_info?.new_balance !== undefined && (
                 <div className="flex items-center justify-between pt-2 border-t border-gray-200">
                   <span className="text-sm text-gray-600">موجودی جدید:</span>
                   <span className="font-bold text-green-600">
-                    {zarinpalApi.formatAmount(paymentResult.data.new_balance)}
+                    {unifiedPaymentApi.formatAmount(
+                      paymentResult.data.wallet_info.new_balance,
+                    )}
                   </span>
                 </div>
               )}
@@ -320,6 +373,14 @@ const PaymentCallbackContent: React.FC = () => {
                 ? "پرداخت لغو شد"
                 : "پرداخت ناموفق بود"}
             </h2>
+
+            {paymentResult?.gateway_type && (
+              <div className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 mb-2">
+                {unifiedPaymentApi.getGatewayDisplayName(
+                  paymentResult.gateway_type as any,
+                )}
+              </div>
+            )}
 
             <p className="text-gray-600">
               {paymentResult?.message || "خطای نامشخص در پرداخت"}
