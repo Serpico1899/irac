@@ -1,5 +1,5 @@
 import { ActFn } from "@deps";
-import { masterSeeder } from "../../../utils/seedData.ts";
+import { masterSeeder } from "@lib";
 
 export const seedDataFn: ActFn = async (body) => {
   try {

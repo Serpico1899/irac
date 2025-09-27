@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import createCourseFn from "./createCourse.fn.ts";
 import { createCourseValidator } from "./createCourse.val.ts";
 

@@ -2,7 +2,7 @@ import {
   object,
   objectIdValidation,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const getEnrollmentValidator = () => {
   return object({

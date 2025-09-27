@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { verifyPaymentValidator } from "./verifyPayment.val.ts";
 import { verifyPaymentFn } from "./verifyPayment.fn.ts";
 

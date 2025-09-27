@@ -1,5 +1,5 @@
 import { RelationDataType, string } from "@deps";
-import { createUpdateAt } from "../../utils/createUpdateAt.ts";
+import { createUpdateAt } from "@lib";
 
 export const shared_relation_pure = {
   name: string(),

@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { handleDisputeFn } from "./handleDispute.fn.ts";
 import { handleDisputeValidator } from "./handleDispute.val.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

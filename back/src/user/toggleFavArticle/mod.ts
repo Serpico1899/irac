@@ -1,5 +1,5 @@
 import { setTokens, setUser } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { toggleFavArticleFn } from "./toggleFavArticle.fn.ts";
 import { toggleFavArticleValidator } from "./toggleFavArticle.val.ts";
 

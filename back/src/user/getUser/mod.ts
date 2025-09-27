@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { getUserFn } from "./getUser.fn.ts";
 import { getUserValidator } from "./getUser.val.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

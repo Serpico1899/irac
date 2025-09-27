@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 import searchArticlesHandler from "./searchArticles.fn.ts";
 import { searchArticlesValidator } from "./searchArticles.val.ts";
 

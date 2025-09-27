@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { depositFn } from "./deposit.fn.ts";
 import { depositValidator } from "./deposit.val.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

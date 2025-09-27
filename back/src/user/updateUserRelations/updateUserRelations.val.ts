@@ -1,5 +1,5 @@
 import { object, objectIdValidation, optional } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const updateUserRelationsValidator = () => {
   return object({

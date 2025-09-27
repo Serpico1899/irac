@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { seedProductsValidator } from "./seedProducts.val.ts";
 import { seedProductsFn } from "./seedProducts.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

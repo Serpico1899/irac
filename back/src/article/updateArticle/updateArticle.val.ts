@@ -10,7 +10,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 import { article_status_enums, article_type_enums } from "@model";
 
 export const updateArticleValidator = () => {

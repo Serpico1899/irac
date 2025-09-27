@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 
 const searchCoursesHandler = async (context: any) => {
   const {

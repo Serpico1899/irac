@@ -1,5 +1,5 @@
 import { type ActFn } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const revokeCertificateFn: ActFn = async (body) => {
   const { set, get } = body.details;

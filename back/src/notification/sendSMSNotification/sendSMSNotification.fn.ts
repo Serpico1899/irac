@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 import { ObjectId } from "npm:mongodb";
 import { smsService, type SMSMessage } from "../../sms/smsService.ts";
 

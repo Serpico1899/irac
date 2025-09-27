@@ -1,5 +1,5 @@
 import { type ActFn } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { CertificatePDFGenerator, PDFUtils } from "../utils/pdfGenerator.ts";
 
 interface DownloadResponse {

@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId, type TInsertRelations } from "@deps";
-import { article } from "../../../mod.ts";
+import {  article  } from "@app";
 import type { article_relations } from "@model";
 
 export const createArticleFn: ActFn = async (body) => {

@@ -1,5 +1,5 @@
 import { array, boolean, object, optional, string, number } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const validateFileIntegrityValidator = () => {
   return object({

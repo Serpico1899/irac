@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { trackDownloadsValidator } from "./trackDownloads.val.ts";
 import { trackDownloadsFn } from "./trackDownloads.fn.ts";
 

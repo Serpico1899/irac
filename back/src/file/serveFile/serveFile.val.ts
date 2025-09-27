@@ -1,5 +1,5 @@
 import { object, string, boolean, optional } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const serveFileValidator = () => {
   return object({

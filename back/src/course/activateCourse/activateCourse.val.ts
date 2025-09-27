@@ -4,7 +4,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const activateCourseValidator = () => {
   return object({

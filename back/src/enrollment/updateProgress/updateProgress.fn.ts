@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId } from "@deps";
-import { enrollment } from "../../../mod.ts";
+import {  enrollment  } from "@app";
 import { triggerAutomaticCertificateGeneration } from "../../certificate/integrations/automaticGeneration.ts";
 
 export const updateProgressFn: ActFn = async (body) => {

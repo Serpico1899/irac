@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 import { WalletService } from "../wallet/service.ts";
 
 export interface CouponValidationResult {

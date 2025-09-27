@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { changeMobileFn } from "./changeMobile.fn.ts";
 import { changeMobileValidator } from "./changeMobile.val.ts";
 

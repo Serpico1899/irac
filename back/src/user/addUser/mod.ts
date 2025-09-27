@@ -6,7 +6,7 @@ import {
 	setUser,
 	throwError,
 } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { addUserFn } from "./addUser.fn.ts";
 import { addUserValidator } from "./addUser.val.ts";
 import { user_level_emums } from "@model";

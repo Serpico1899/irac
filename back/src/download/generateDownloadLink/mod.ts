@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { generateDownloadLinkValidator } from "./generateDownloadLink.val.ts";
 import { generateDownloadLinkFn } from "./generateDownloadLink.fn.ts";
 

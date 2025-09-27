@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { getReferralStatsValidator } from "./getReferralStats.val.ts";
 import { getReferralStatsFn } from "./getReferralStats.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

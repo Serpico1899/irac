@@ -5,17 +5,41 @@
   },
   "Navbar": {
     "navigation": [
-      { "label": "صفحه اصلی", "href": "/" },
-      { "label": "دوره‌ها", "href": "/courses" },
-      { "label": "کارگاه‌ها", "href": "/workshops" },
-      { "label": "رسانه", "href": "/media" },
-      { "label": "تماس با ما", "href": "/contact" },
-      { "label": "درباره ما", "href": "/about" }
+      {
+        "label": "صفحه اصلی",
+        "href": "/"
+      },
+      {
+        "label": "دوره‌ها",
+        "href": "/courses"
+      },
+      {
+        "label": "کارگاه‌ها",
+        "href": "/workshops"
+      },
+      {
+        "label": "رسانه",
+        "href": "/media"
+      },
+      {
+        "label": "تماس با ما",
+        "href": "/contact"
+      },
+      {
+        "label": "درباره ما",
+        "href": "/about"
+      }
     ],
     "dropdownTitle": "بیشتر",
     "dropdownLinks": [
-      { "label": "درباره ما", "href": "/about" },
-      { "label": "تماس با ما", "href": "/contact" }
+      {
+        "label": "درباره ما",
+        "href": "/about"
+      },
+      {
+        "label": "تماس با ما",
+        "href": "/contact"
+      }
     ],
     "adminPanel": "پنل ادمین",
     "userPanel": "پنل کاربری",
@@ -32,10 +56,22 @@
     "aboutText": "مرکز معماری حوزه هنری انقلاب اسلامی نهادی است تخصصی که در راستای تبیین اندیشه و گفتمان سازی، آموزش و تربیت نیرو، تولید طراحی و ترویج کیفیت های هنر و معماری هویت مند و مسئله محور فعالیت می کند.",
     "quickLinksTitle": "دسترسی سریع",
     "quickLinks": [
-      { "label": "دوره‌ها", "href": "/courses" },
-      { "label": "کارگاه‌ها", "href": "/workshops" },
-      { "label": "رسانه", "href": "/media" },
-      { "label": "درباره ما", "href": "/about" }
+      {
+        "label": "دوره‌ها",
+        "href": "/courses"
+      },
+      {
+        "label": "کارگاه‌ها",
+        "href": "/workshops"
+      },
+      {
+        "label": "رسانه",
+        "href": "/media"
+      },
+      {
+        "label": "درباره ما",
+        "href": "/about"
+      }
     ],
     "contactTitle": "تماس با ما",
     "contactAddress": "خیابان فلسطین، تهران، ایران",
@@ -44,17 +80,41 @@
     "copyright": "© {currentYear} مرکز معماری اسلامی ایراک | تمامی حقوق محفوظ است.",
     "featuresTitle": "امکانات",
     "featuresLinks": [
-      { "label": "دوره‌های آنلاین", "href": "/courses" },
-      { "label": "کارگاه‌ها", "href": "/workshops" },
-      { "label": "کتابخانه دیجیتال", "href": "/library" },
-      { "label": "انجمن", "href": "/community" }
+      {
+        "label": "دوره‌های آنلاین",
+        "href": "/courses"
+      },
+      {
+        "label": "کارگاه‌ها",
+        "href": "/workshops"
+      },
+      {
+        "label": "کتابخانه دیجیتال",
+        "href": "/library"
+      },
+      {
+        "label": "انجمن",
+        "href": "/community"
+      }
     ],
     "resourcesTitle": "منابع",
     "resourcesLinks": [
-      { "label": "مستندات", "href": "/docs" },
-      { "label": "مقالات پژوهشی", "href": "/research" },
-      { "label": "گالری", "href": "/gallery" },
-      { "label": "وبلاگ", "href": "/blog" }
+      {
+        "label": "مستندات",
+        "href": "/docs"
+      },
+      {
+        "label": "مقالات پژوهشی",
+        "href": "/research"
+      },
+      {
+        "label": "گالری",
+        "href": "/gallery"
+      },
+      {
+        "label": "وبلاگ",
+        "href": "/blog"
+      }
     ],
     "contactHours": "ساعات کاری: یکشنبه تا پنج‌شنبه ۹:۰۰ تا ۱۷:۰۰"
   },
@@ -245,19 +305,8 @@
     "module": "ماژول"
   },
   "faq": {
-    "defaultTitle": "سؤالات متداول",
-    "searchPlaceholder": "جستجو در سؤالات...",
-    "allCategories": "همه دسته‌ها",
-    "noResults": "نتیجه‌ای یافت نشد",
-    "noResultsWithFilters": "با فیلترهای انتخاب شده نتیجه‌ای یافت نشد",
-    "noFaqsAvailable": "در حال حاضر سؤالی موجود نیست",
-    "clearFilters": "پاک کردن فیلترها",
-    "expandAll": "باز کردن همه",
-    "collapseAll": "بستن همه",
-    "stillHaveQuestions": "هنوز سؤال دارید؟",
-    "contactSupportText": "تیم پشتیبانی ما آماده کمک به شما است",
-    "contactUs": "تماس با ما",
-    "callUs": "تماس تلفنی"
+    "title": "سؤالات متداول",
+    "subtitle": "پاسخ پرسش‌های رایج شما"
   },
   "cta": {
     "defaultTitle": "همین حالا شروع کنید"
@@ -487,532 +536,19 @@
     "walletBalance": "موجودی کیف پول",
     "insufficientBalance": "موجودی کافی نیست",
     "chargeWallet": "شارژ کیف پول"
-    },
-    "faq": {
-      "title": "سؤالات متداول",
-      "subtitle": "پاسخ پرسش‌های رایج شما"
-    },
-    "finalCta": {
-      "title": "جای خود را امروز رزرو کنید",
-      "subtitle": "فرصت طلایی برای ارتقای مهارت‌هایتان",
-      "description": "با شرکت در این کارگاه، گام مهمی در مسیر یادگیری و توسعه حرفه‌ای خود بردارید."
-    },
-    "reserveSpotNow": "همین حالا رزرو کن",
-    "urgency": {
-      "limitedSpots": "تعداد جاهای محدود باقی مانده!"
-    },
-    "securePayment": "پرداخت امن",
-    "socialProof": {
-      "joinedStudents": "نفر تا کنون ثبت‌نام کرده‌اند"
-    },
-    "reserve": "رزرو"
   },
-  "courseLanding": {
-    "meta": {
-      "title": "دوره | ایراک"
-    },
-    "enrollNow": "ثبت‌نام در دوره",
-    "learnMore": "اطلاعات بیشتر",
-    "overview": {
-      "title": "درباره دوره"
-    },
-    "whatYoullLearn": "آنچه یاد خواهید گرفت",
-    "careerPaths": "مسیرهای شغلی",
-    "toolsRequired": "ابزارهای مورد نیاز",
-    "courseDetails": "جزئیات دوره",
-    "duration": "مدت زمان",
-    "lessons": "درس",
-    "level": "سطح",
-    "language": "زبان",
-    "format": "نحوه ارائه",
-    "schedule": "برنامه‌زمانی",
-    "access": "دسترسی",
-    "weeks": "هفته",
-    "hours": "ساعت",
-    "levels": {
-      "beginner": "مقدماتی",
-      "intermediate": "متوسط",
-      "advanced": "پیشرفته"
-    },
-    "formats": {
-      "online": "آنلاین",
-      "offline": "حضوری",
-      "hybrid": "ترکیبی"
-    },
-    "schedules": {
-      "self_paced": "خودآموز",
-      "instructor_led": "با مدرس",
-      "cohort_based": "گروهی"
-    },
-    "courseIncludes": "شامل دوره",
-    "features": {
-      "certificate": "گواهینامه تکمیل",
-      "resources": "منابع قابل دانلود",
-      "mobileAccess": "دسترسی موبایل",
-      "community": "دسترسی به انجمن"
-    },
-    "prerequisites": "پیش‌نیازها",
-    "guarantee": {
-      "title": "ضمانت کیفیت"
-    },
-    "curriculum": {
-      "title": "برنامه درسی",
-      "subtitle": "ساختار کامل و جزئیات ماژول‌های دوره"
-    },
-    "testimonials": {
-      "title": "نظرات دانشجویان",
-      "subtitle": "تجربه واقعی فارغ‌التحصیلان ما"
-    },
-    "faq": {
-      "title": "سؤالات متداول",
-      "subtitle": "پاسخ پرسش‌های رایج شما"
-    },
-    "finalCta": {
-      "title": "همین حالا در دوره ثبت‌نام کنید",
-      "subtitle": "سرمایه‌گذاری در آینده حرفه‌ای خود",
-      "description": "با شرکت در این دوره، مهارت‌های لازم برای موفقیت در حرفه خود را کسب کنید."
-    },
-    "downloadSyllabus": "دانلود سرفصل",
-    "urgency": {
-      "enrollmentDeadline": "مهلت ثبت‌نام رو به پایان است!"
-    },
-    "countdown": {
-      "days": "روز",
-      "hours": "ساعت",
-      "minutes": "دقیقه",
-      "seconds": "ثانیه"
-    },
-    "securePayment": "پرداخت امن",
-    "socialProof": {
-      "enrolledStudents": "دانشجو تاکنون ثبت‌نام کرده‌اند"
-    },
-    "enroll": "ثبت‌نام"
+  "finalCta": {
+    "title": "جای خود را امروز رزرو کنید",
+    "subtitle": "فرصت طلایی برای ارتقای مهارت‌هایتان",
+    "description": "با شرکت در این کارگاه، گام مهمی در مسیر یادگیری و توسعه حرفه‌ای خود بردارید."
   },
-  "international": {
-    "meta": {
-      "title": "برنامه‌های بین‌المللی | ایراک",
-      "description": "به برنامه‌های آموزشی بین‌المللی ایراک بپیوندید. دوره‌ها و کارگاه‌های معماری اسلامی برای دانشجویان سراسر جهان.",
-      "keywords": "آموزش بین‌المللی، معماری اسلامی، دوره‌های جهانی، کارگاه‌های بین‌المللی، ایراک"
-    },
-    "hero": {
-      "title": "آموزش جهانی معماری اسلامی",
-      "subtitle": "به بزرگترین شبکه آموزشی معماری اسلامی در جهان بپیوندید و با دانشجویان و اساتید سراسر دنیا در ارتباط باشید.",
-      "cta": {
-        "contact": "تماس برای مشاوره",
-        "programs": "مشاهده برنامه‌ها"
-      }
-    },
-    "stats": {
-      "countries": "کشور",
-      "students": "دانشجو بین‌المللی",
-      "partnerships": "شراکت جهانی",
-      "languages": "زبان آموزش"
-    },
-    "globalReach": {
-      "title": "دسترسی جهانی به آموزش",
-      "subtitle": "ما خدمات آموزشی خود را با رعایت تفاوت‌های فرهنگی و زمانی به سراسر جهان ارائه می‌دهیم",
-      "features": {
-        "timezone": {
-          "title": "پشتیبانی چندزمانه",
-          "description": "کلاس‌ها و پشتیبانی در تمام نواحی زمانی جهان"
-        },
-        "currency": {
-          "title": "پرداخت چندارزی",
-          "description": "امکان پرداخت با ارزهای مختلف جهان"
-        },
-        "language": {
-          "title": "آموزش چندزبانه",
-          "description": "دوره‌ها به فارسی، انگلیسی، عربی و سایر زبان‌ها"
-        },
-        "certification": {
-          "title": "گواهی‌نامه بین‌المللی",
-          "description": "مدارک معتبر و قابل قبول در سراسر جهان"
-        },
-        "partnerships": {
-          "title": "شراکت‌های دانشگاهی",
-          "description": "همکاری با برترین دانشگاه‌های جهان"
-        },
-        "crossCultural": {
-          "title": "یادگیری میان‌فرهنگی",
-          "description": "تبادل دانش و تجربه بین فرهنگ‌های مختلف"
-        }
-      }
-    },
-    "programs": {
-      "title": "برنامه‌های بین‌المللی",
-      "subtitle": "دوره‌ها و کارگاه‌های ویژه طراحی شده برای دانشجویان بین‌المللی",
-      "duration": "مدت زمان",
-      "languages": "زبان‌های آموزش",
-      "certification": "گواهی‌نامه",
-      "price": "هزینه",
-      "apply": "درخواست شرکت",
-      "masterclass": {
-        "title": "کارگاه استادی معماری اسلامی",
-        "description": "کارگاه فشرده برای آشنایی عمیق با اصول و فلسفه معماری اسلامی"
-      },
-      "exchange": {
-        "title": "برنامه تبادل دانشجویی",
-        "description": "فرصت مطالعه و پژوهش در مرکز ایراک برای دانشجویان بین‌المللی"
-      },
-      "research": {
-        "title": "بورسیه پژوهشی",
-        "description": "برنامه پژوهشی برای مطالعات عمیق در زمینه معماری اسلامی"
-      }
-    },
-    "partners": {
-      "title": "شرکای بین‌المللی",
-      "subtitle": "ما با برترین موسسات و دانشگاه‌های جهان همکاری می‌کنیم"
-    },
-    "success": {
-      "title": "داستان‌های موفقیت جهانی",
-      "subtitle": "فارغ‌التحصیلان ما در سراسر جهان در حال ایجاد تغییرات مثبت هستند",
-      "graduate": "فارغ‌التحصیل"
-    },
-    "cta": {
-      "title": "آماده پیوستن به جامعه جهانی ما هستید؟",
-      "subtitle": "با ما سفر یادگیری و کشف معماری اسلامی را آغاز کنید",
-      "contact": "تماس برای مشاوره",
-      "programs": "مشاهده برنامه‌ها"
-    }
+  "reserveSpotNow": "همین حالا رزرو کن",
+  "urgency": {
+    "limitedSpots": "تعداد جاهای محدود باقی مانده!"
   },
-  "media": {
-    "title": "رسانه و گالری تصاویر",
-    "subtitle": "مجموعه‌ای از تصاویر، ویدئوها و اسناد مرتبط با معماری اسلامی و فعالیت‌های مرکز",
-    "categories": {
-      "all": "همه رسانه‌ها",
-      "images": "تصاویر",
-      "videos": "ویدئوها",
-      "documents": "اسناد"
-    },
-    "viewModes": {
-      "grid": "نمایش شبکه‌ای",
-      "list": "نمایش فهرستی"
-    },
-    "loading": "در حال بارگذاری...",
-    "error": "خطا در بارگذاری رسانه‌ها",
-    "noMedia": {
-      "title": "رسانه‌ای یافت نشد",
-      "description": "در حال حاضر هیچ رسانه‌ای در این دسته‌بندی موجود نیست"
-    },
-    "itemsFound": "{count} مورد یافت شد",
-    "adminInfo": {
-      "title": "اطلاعات مدیریت",
-      "description": "این صفحه برای مدیریت فایل‌های رسانه‌ای سیستم است"
-    }
+  "securePayment": "پرداخت امن",
+  "socialProof": {
+    "joinedStudents": "نفر تا کنون ثبت‌نام کرده‌اند"
   },
-  "payment": {
-    "processing": "در حال پردازش پرداخت...",
-    "success": "پرداخت موفقیت‌آمیز بود",
-    "failed": "پرداخت ناموفق",
-    "cancelled": "پرداخت لغو شد",
-    "verifying": "در حال تأیید پرداخت...",
-    "amount": "مبلغ",
-    "referenceId": "شماره مرجع",
-    "cardNumber": "شماره کارت",
-    "newBalance": "موجودی جدید",
-    "goToWallet": "رفتن به کیف پول",
-    "goToDashboard": "رفتن به داشبورد",
-    "tryAgain": "تلاش مجدد",
-    "goHome": "رفتن به صفحه اصلی",
-    "errorCode": "کد خطا",
-    "support": "در صورت بروز مشکل، لطفاً با پشتیبانی تماس بگیرید"
-  },
-  "admin": "پنل مدیریت",
-  "Certificate": {
-    "title": "گواهینامه‌ها",
-    "myCertificates": "گواهینامه‌های من",
-    "certificateOf": "گواهینامه",
-    "completion": "تکمیل",
-    "achievement": "دستیابی",
-    "excellence": "تعالی",
-    "participation": "شرکت",
-    "certificateNumber": "شماره گواهینامه",
-    "verificationHash": "کد تأیید",
-    "issueDate": "تاریخ صدور",
-    "completionDate": "تاریخ تکمیل",
-    "expiryDate": "تاریخ انقضا",
-    "finalGrade": "نمره نهایی",
-    "instructor": "مدرس",
-    "courseInstructor": "مدرس دوره",
-    "educationDirector": "مدیر آموزش",
-    "institution": "مؤسسه",
-    "iranianArchitectureCenter": "مرکز معماری ایران",
-    "status": "وضعیت",
-    "active": "فعال",
-    "revoked": "باطل شده",
-    "pending": "در انتظار",
-    "verified": "تأیید شده",
-    "invalid": "نامعتبر",
-    "dashboard": {
-      "title": "داشبورد گواهینامه",
-      "subtitle": "مدیریت گواهینامه‌های خود و پیگیری پیشرفت",
-      "totalCertificates": "مجموع گواهینامه‌ها",
-      "activeCertificates": "گواهینامه‌های فعال",
-      "coursesInProgress": "دوره‌های در حال انجام",
-      "certificatesEarned": "گواهینامه‌های کسب شده",
-      "noCertificates": "گواهینامه‌ای یافت نشد",
-      "noCertificatesDescription": "شما هنوز گواهینامه‌ای کسب نکرده‌اید. برای دریافت گواهینامه، دوره‌های خود را تکمیل کنید.",
-      "startLearning": "شروع یادگیری",
-      "browseCourses": "مرور دوره‌ها"
-    },
-    "list": {
-      "searchPlaceholder": "جستجو در گواهینامه‌ها...",
-      "filterByStatus": "فیلتر بر اساس وضعیت",
-      "filterByCourse": "فیلتر بر اساس دوره",
-      "sortBy": "مرتب‌سازی بر اساس",
-      "sortByDate": "تاریخ صدور",
-      "sortByName": "نام دوره",
-      "sortByGrade": "نمره",
-      "viewCertificate": "مشاهده گواهینامه",
-      "downloadPDF": "دانلود PDF",
-      "downloadPNG": "دانلود PNG",
-      "share": "اشتراک‌گذاری",
-      "verify": "تأیید",
-      "print": "چاپ",
-      "details": "جزئیات",
-      "noResults": "هیچ گواهینامه‌ای با معیارهای جستجوی شما مطابقت ندارد",
-      "loadMore": "بارگذاری بیشتر"
-    },
-    "viewer": {
-      "title": "نمایشگر گواهینامه",
-      "preview": "پیش‌نمایش",
-      "fullView": "نمایش کامل",
-      "printVersion": "نسخه چاپ",
-      "watermarkPreview": "پیش‌نمایش",
-      "certificateOf": "اینجانب به تأیید می‌رسد که",
-      "hasSuccessfullyCompleted": "دوره را با موفقیت به پایان رسانده است",
-      "withGrade": "با نمره نهایی",
-      "issuedOn": "صادر شده در",
-      "completedOn": "تکمیل شده در",
-      "verifyAtUrl": "برای تأیید این گواهینامه، به آدرس زیر مراجعه کنید:",
-      "signature": "امضا",
-      "officialSeal": "مهر رسمی"
-    },
-    "download": {
-      "title": "دانلود گواهینامه",
-      "downloadOptions": "گزینه‌های دانلود",
-      "formatPDF": "سند PDF",
-      "formatPNG": "تصویر با کیفیت بالا",
-      "qualityHigh": "کیفیت بالا",
-      "qualityMedium": "کیفیت متوسط",
-      "qualityLow": "کیفیت پایین",
-      "downloading": "در حال دانلود...",
-      "downloadComplete": "دانلود تکمیل شد",
-      "downloadFailed": "دانلود ناموفق",
-      "tryAgain": "تلاش مجدد",
-      "printCertificate": "چاپ گواهینامه",
-      "shareCertificate": "اشتراک‌گذاری گواهینامه"
-    },
-    "sharing": {
-      "title": "اشتراک‌گذاری گواهینامه",
-      "shareOn": "اشتراک‌گذاری در",
-      "linkedin": "لینکدین",
-      "twitter": "توییتر",
-      "telegram": "تلگرام",
-      "whatsapp": "واتس‌اپ",
-      "facebook": "فیس‌بوک",
-      "copyLink": "کپی لینک",
-      "linkCopied": "لینک در کلیپ‌بورد کپی شد!",
-      "emailShare": "اشتراک‌گذاری از طریق ایمیل",
-      "shareText": "من دوره {courseName} را در مرکز معماری ایران (IRAC) با موفقیت تکمیل کردم!",
-      "verificationLink": "لینک تأیید",
-      "qrCode": "کد QR"
-    },
-    "verification": {
-      "title": "تأیید گواهینامه",
-      "subtitle": "اعتبار هر گواهینامه IRAC را تأیید کنید",
-      "enterCertificateNumber": "شماره گواهینامه را وارد کنید",
-      "certificateNumberPlaceholder": "IRAC-YYYY-COURSE-12345",
-      "verifyButton": "تأیید گواهینامه",
-      "scanQR": "اسکن کد QR",
-      "verifying": "در حال تأیید...",
-      "verified": "گواهینامه تأیید شد",
-      "invalid": "گواهینامه نامعتبر",
-      "notFound": "گواهینامه یافت نشد",
-      "revoked": "گواهینامه باطل شده",
-      "expired": "گواهینامه منقضی شده",
-      "verificationResults": "نتایج تأیید",
-      "studentName": "نام دانشجو",
-      "courseName": "نام دوره",
-      "courseType": "نوع دوره",
-      "institutionName": "مؤسسه",
-      "verificationDate": "تاریخ تأیید",
-      "securityFeatures": "ویژگی‌های امنیتی",
-      "digitalSignature": "امضای دیجیتال",
-      "blockchainRecord": "سابقه بلاک‌چین",
-      "tamperProof": "ضد دستکاری"
-    },
-    "progress": {
-      "title": "پیشرفت دوره",
-      "subtitle": "پیشرفت خود را به سوی کسب گواهینامه پیگیری کنید",
-      "overallProgress": "پیشرفت کلی",
-      "lessonsCompleted": "درس‌های تکمیل شده",
-      "assignmentsCompleted": "تکالیف تکمیل شده",
-      "quizzesCompleted": "آزمون‌های تکمیل شده",
-      "finalExam": "امتحان نهایی",
-      "certificateEligible": "واجد شرایط گواهینامه",
-      "notEligible": "فاقد شرایط",
-      "requirementsToEarn": "شرایط دریافت گواهینامه",
-      "completeAllLessons": "تکمیل همه درس‌ها",
-      "completeAssignments": "تکمیل همه تکالیف",
-      "passQuizzes": "قبولی در همه آزمون‌ها",
-      "passFinalExam": "قبولی در امتحان نهایی با نمره ۷۰ یا بالاتر",
-      "minimumGrade": "حداقل نمره: ۷۰٪",
-      "currentGrade": "نمره فعلی",
-      "generateCertificate": "صدور گواهینامه",
-      "continueStudying": "ادامه تحصیل",
-      "reviewCourse": "مرور دوره"
-    },
-    "templates": {
-      "title": "قالب‌های گواهینامه",
-      "selectTemplate": "انتخاب قالب",
-      "standard": {
-        "name": "استاندارد",
-        "description": "طراحی تمیز و حرفه‌ای برای دوره‌های عادی"
-      },
-      "premium": {
-        "name": "پریمیوم",
-        "description": "طراحی زیبا با نقوش اسلامی برای دوره‌های پیشرفته"
-      },
-      "workshop": {
-        "name": "کارگاه",
-        "description": "طراحی مدرن برای کارگاه‌ها و سمینارها"
-      },
-      "multilingual": {
-        "name": "چندزبانه",
-        "description": "چیدمان فارسی-انگلیسی در کنار هم"
-      },
-      "preview": "پیش‌نمایش قالب",
-      "customize": "سفارشی‌سازی"
-    },
-    "admin": {
-      "title": "مدیریت گواهینامه",
-      "generateCertificate": "صدور گواهینامه",
-      "revokeCertificate": "باطل کردن گواهینامه",
-      "certificateGenerated": "گواهینامه با موفقیت صادر شد",
-      "certificateRevoked": "گواهینامه باطل شد",
-      "generationFailed": "صدور گواهینامه ناموفق بود",
-      "revocationFailed": "باطل کردن گواهینامه ناموفق بود",
-      "selectUser": "انتخاب کاربر",
-      "selectCourse": "انتخاب دوره",
-      "selectTemplate": "انتخاب قالب",
-      "forceGenerate": "صدور اجباری (جایگزینی موجود)",
-      "revocationReason": "دلیل باطل کردن",
-      "revocationReasons": {
-        "academic_misconduct": "سوء رفتار تحصیلی",
-        "incomplete_requirements": "عدم تکمیل شرایط",
-        "technical_error": "خطای فنی",
-        "administrative": "تصمیم اداری",
-        "other": "سایر"
-      },
-      "confirmRevocation": "آیا از باطل کردن این گواهینامه اطمینان دارید؟",
-      "statistics": {
-        "title": "آمار گواهینامه",
-        "totalIssued": "مجموع صادر شده",
-        "totalRevoked": "مجموع باطل شده",
-        "totalActive": "مجموع فعال",
-        "issuedThisMonth": "صادر شده در این ماه",
-        "issuedThisYear": "صادر شده در این سال",
-        "byTemplate": "بر اساس قالب",
-        "byCourse": "بر اساس دوره",
-        "byInstructor": "بر اساس مدرس"
-      }
-    },
-    "notifications": {
-      "certificateEarned": "تبریک! شما گواهینامه جدیدی کسب کرده‌اید",
-      "certificateGenerated": "گواهینامه شما صادر شد",
-      "certificateRevoked": "گواهینامه شما باطل شد",
-      "verificationSuccess": "تأیید گواهینامه موفق بود",
-      "verificationFailed": "تأیید گواهینامه ناموفق بود",
-      "downloadReady": "دانلود گواهینامه شما آماده است",
-      "shareSuccess": "گواهینامه با موفقیت به اشتراک گذاشته شد",
-      "copySuccess": "لینک تأیید در کلیپ‌بورد کپی شد"
-    },
-    "errors": {
-      "loadFailed": "بارگذاری گواهینامه‌ها ناموفق بود",
-      "generateFailed": "صدور گواهینامه ناموفق بود",
-      "downloadFailed": "دانلود گواهینامه ناموفق بود",
-      "verificationFailed": "تأیید گواهینامه ناموفق بود",
-      "invalidFormat": "فرمت شماره گواهینامه نامعتبر است",
-      "networkError": "خطای شبکه رخ داد",
-      "serverError": "خطای سرور رخ داد",
-      "unauthorized": "دسترسی غیرمجاز",
-      "certificateNotFound": "گواهینامه یافت نشد",
-      "alreadyGenerated": "گواهینامه برای این دوره قبلاً صادر شده",
-      "requirementsNotMet": "شرایط تکمیل دوره برآورده نشده",
-      "tryAgain": "لطفاً مجدداً تلاش کنید"
-    },
-    "actions": {
-      "view": "مشاهده",
-      "download": "دانلود",
-      "share": "اشتراک‌گذاری",
-      "print": "چاپ",
-      "verify": "تأیید",
-      "generate": "صدور",
-      "revoke": "باطل کردن",
-      "refresh": "تازه‌سازی",
-      "search": "جستجو",
-      "filter": "فیلتر",
-      "sort": "مرتب‌سازی",
-      "clear": "پاک کردن",
-      "cancel": "لغو",
-      "confirm": "تأیید",
-      "save": "ذخیره",
-      "edit": "ویرایش",
-      "delete": "حذف",
-      "back": "بازگشت",
-      "next": "بعدی",
-      "previous": "قبلی",
-      "close": "بستن"
-     },
-     "notifications": {
-      "title": "اعلان‌ها",
-      "markAllRead": "همه را بخوان",
-      "viewDetails": "مشاهده جزئیات",
-      "noNotifications": "اعلانی وجود ندارد",
-      "all": "همه",
-      "unread": "خوانده نشده",
-      "viewAllNotifications": "مشاهده همه اعلان‌ها",
-      "settings": "تنظیمات"
-     },
-     "notificationSettings": {
-      "title": "تنظیمات اعلان‌ها",
-      "description": "مدیریت تنظیمات اعلان‌های خود",
-      "emailNotifications": "اعلان‌های ایمیل",
-      "emailNotificationsDesc": "دریافت اعلان‌ها از طریق ایمیل",
-      "pushNotifications": "اعلان‌های آنی",
-      "pushNotificationsDesc": "اعلان‌های فوری روی دستگاه",
-      "courseUpdates": "به‌روزرسانی دوره‌ها",
-      "courseUpdatesDesc": "اعلان در صورت به‌روزرسانی دوره‌های ثبت‌نام شده",
-      "bookingReminders": "یادآوری رزرو",
-      "bookingRemindersDesc": "یادآوری قبل از شروع رزرو فضای کاری",
-      "allNotifications": "همه اعلان‌ها",
-      "allNotificationsDesc": "فعال یا غیرفعال کردن تمام اعلان‌ها",
-      "deliveryMethods": "روش‌های تحویل",
-      "inAppNotifications": "اعلان‌های درون‌برنامه‌ای",
-      "inAppNotificationsDesc": "اعلان‌ها در داخل وب‌سایت",
-      "smsNotifications": "اعلان‌های پیامکی",
-      "smsNotificationsDesc": "دریافت پیامک برای اعلان‌های مهم",
-      "emailFrequency": "تناوب ایمیل‌ها",
-      "categories": "دسته‌بندی‌ها",
-      "paymentNotifications": "اعلان‌های پرداخت",
-      "paymentNotificationsDesc": "اطلاع از وضعیت پرداخت‌ها",
-      "certificateNotifications": "اعلان‌های گواهینامه",
-      "certificateNotificationsDesc": "اطلاع از آمادگی گواهینامه‌ها",
-      "securityNotifications": "اعلان‌های امنیتی",
-      "securityNotificationsDesc": "اعلان‌های مربوط به امنیت حساب",
-      "marketingPreferences": "تنظیمات بازاریابی",
-      "marketingEmails": "ایمیل‌های تبلیغاتی",
-      "marketingEmailsDesc": "دریافت ایمیل‌های تبلیغاتی و پیشنهادات ویژه",
-      "newsletter": "خبرنامه",
-      "newsletterDesc": "دریافت خبرنامه ماهانه با آخرین اخبار و مطالب",
-      "quietHours": "ساعات سکوت",
-      "quietHoursStart": "شروع ساعات سکوت",
-      "quietHoursEnd": "پایان ساعات سکوت",
-      "urgentOverride": "رد کردن برای اعلان‌های فوری",
-      "urgentOverrideDesc": "اجازه دریافت اعلان‌های فوری در ساعات سکوت",
-      "saveSettings": "ذخیره تنظیمات",
-      "saveSuccess": "تنظیمات ذخیره شد"
-    }
-  }
+  "reserve": "رزرو"
 }

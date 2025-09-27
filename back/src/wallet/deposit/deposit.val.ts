@@ -1,5 +1,5 @@
 import { object, objectIdValidation, number, optional, string } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const depositValidator = () => {
   return object({

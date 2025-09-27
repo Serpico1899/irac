@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import { coreApp } from "@app";
 import {
   ActFn,
   array,
@@ -8,7 +8,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { coupon_positive_amount } from "../../../models/coupon.ts";
+import { coupon_positive_amount } from "@model";
 import { CouponService } from "../service.ts";
 
 // Input validation schema

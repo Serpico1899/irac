@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { adjustBalanceFn } from "./adjustBalance.fn.ts";
 import { adjustBalanceValidator } from "./adjustBalance.val.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

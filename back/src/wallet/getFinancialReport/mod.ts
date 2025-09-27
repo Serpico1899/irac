@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { getFinancialReportFn } from "./getFinancialReport.fn.ts";
 import { getFinancialReportValidator } from "./getFinancialReport.val.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

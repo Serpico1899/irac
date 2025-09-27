@@ -1,4 +1,4 @@
-import { coreApp } from "../mod.ts";
+import { coreApp } from "@app";
 import {
   array,
   boolean,
@@ -241,23 +241,8 @@ export const invoice_model_relations = {
 };
 
 export const invoice_models = () =>
-  coreApp.odm.newModel("invoice", invoice_model_pure, invoice_model_relations, {
-    createIndex: [
-      {
-        indexSpec: { "invoice_number": 1 },
-        options: { unique: true },
-      },
-      {
-        indexSpec: { "fiscal_year": 1, "sequence_number": 1 },
-        options: { unique: true },
-      },
-      {
-        indexSpec: { "status": 1, "due_date": 1 },
-        options: {},
-      },
-      {
-        indexSpec: { "customer.email": 1, "issue_date": -1 },
-        options: {},
-      },
-    ],
-  });
+  coreApp.odm.newModel(
+    "invoice",
+    invoice_model_pure,
+    invoice_model_relations
+  );

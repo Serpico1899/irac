@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { tempUserFn } from "./tempUser.fn.ts";
 import { tempUserValidator } from "./tempUser.val.ts";
 

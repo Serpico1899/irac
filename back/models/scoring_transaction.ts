@@ -1,4 +1,4 @@
-import { coreApp } from "../mod.ts";
+import { coreApp } from "@app";
 import {
   boolean,
   defaulted,
@@ -82,8 +82,10 @@ export const scoring_transaction_relations = {
 
 export const scoring_transactions = () =>
   coreApp.odm.newModel("scoring_transaction", scoring_transaction_pure, scoring_transaction_relations, {
-    createIndex: {
+    createIndex:
+    {
       indexSpec: { "user": 1, "created_at": -1 },
       options: {},
     },
+
   });

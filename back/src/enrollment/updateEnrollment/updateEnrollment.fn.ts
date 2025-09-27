@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId, type TInsertRelations } from "@deps";
-import { enrollment } from "../../../mod.ts";
+import {  enrollment  } from "@app";
 import type { enrollment_relations } from "@model";
 
 export const updateEnrollmentFn: ActFn = async (body) => {

@@ -1,4 +1,4 @@
-import { coreApp, wallet, wallet_transaction, order } from "../../mod.ts";
+import {  coreApp, wallet, wallet_transaction, order  } from "@app";
 import { createUpdateAt } from "@lib";
 import { v4 } from "https://deno.land/std@0.208.0/uuid/mod.ts";
 

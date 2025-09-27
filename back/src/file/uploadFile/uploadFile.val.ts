@@ -1,5 +1,5 @@
 import { enums, instance, object } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { createUpdateAt } from "@lib";
 
 export const uploadFileValidator = () => {

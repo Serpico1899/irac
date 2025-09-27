@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { freezeWalletFn } from "./freezeWallet.fn.ts";
 import { freezeWalletValidator } from "./freezeWallet.val.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

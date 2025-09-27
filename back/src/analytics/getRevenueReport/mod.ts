@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { getRevenueReportValidator } from "./getRevenueReport.val.ts";
 import { getRevenueReportFn } from "./getRevenueReport.fn.ts";
 

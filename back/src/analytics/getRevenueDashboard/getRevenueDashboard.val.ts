@@ -1,6 +1,6 @@
-import { object, string, optional, union, literal, boolean } from "../../../../../../deps.ts";
+import { object, string, optional, union, literal, boolean } from "@deps";
 
-const getRevenueDashboardValidator = {
+const getRevenueDashboardStruct = {
   set: {
     dateFrom: optional(string()),
     dateTo: optional(string()),
@@ -41,11 +41,11 @@ const getRevenueDashboardValidator = {
   },
 };
 
-export const getRevenueDashboardValidator = object(getRevenueDashboardValidator);
+export const getRevenueDashboardValidator = object(getRevenueDashboardStruct);
 
 export const schema = {
   details: {
-    set: getRevenueDashboardValidator.set,
-    get: getRevenueDashboardValidator.get,
+    set: getRevenueDashboardStruct.set,
+    get: getRevenueDashboardStruct.get,
   },
 };

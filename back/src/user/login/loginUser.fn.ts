@@ -1,6 +1,6 @@
 import { type ActFn, jwt } from "@deps";
 import { jwtTokenKey, throwError } from "@lib";
-import { myRedis, user } from "../../../mod.ts";
+import {  myRedis, user  } from "@app";
 
 export const loginUserFn: ActFn = async (body) => {
   const {

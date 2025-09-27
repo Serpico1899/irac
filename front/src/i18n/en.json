@@ -5,17 +5,41 @@
   },
   "Navbar": {
     "navigation": [
-      { "label": "Home", "href": "/" },
-      { "label": "Courses", "href": "/courses" },
-      { "label": "Workshops", "href": "/workshops" },
-      { "label": "Media", "href": "/media" },
-      { "label": "About Us", "href": "/about" }
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Courses",
+        "href": "/courses"
+      },
+      {
+        "label": "Workshops",
+        "href": "/workshops"
+      },
+      {
+        "label": "Media",
+        "href": "/media"
+      },
+      {
+        "label": "About Us",
+        "href": "/about"
+      }
     ],
     "dropdownTitle": "More",
     "dropdownLinks": [
-      { "label": "FAQ", "href": "/faq" },
-      { "label": "About Us", "href": "/about" },
-      { "label": "Contact Us", "href": "/contact" }
+      {
+        "label": "FAQ",
+        "href": "/faq"
+      },
+      {
+        "label": "About Us",
+        "href": "/about"
+      },
+      {
+        "label": "Contact Us",
+        "href": "/contact"
+      }
     ],
     "adminPanel": "Admin Panel",
     "userPanel": "User Panel",
@@ -32,10 +56,22 @@
     "aboutText": "IRAC is a pioneering institution dedicated to the study, preservation, and advancement of Islamic architecture. We provide courses, workshops, and resources for students and professionals worldwide.",
     "quickLinksTitle": "Quick Links",
     "quickLinks": [
-      { "label": "Courses", "href": "/courses" },
-      { "label": "Workshops", "href": "/workshops" },
-      { "label": "Media", "href": "/media" },
-      { "label": "About Us", "href": "/about" }
+      {
+        "label": "Courses",
+        "href": "/courses"
+      },
+      {
+        "label": "Workshops",
+        "href": "/workshops"
+      },
+      {
+        "label": "Media",
+        "href": "/media"
+      },
+      {
+        "label": "About Us",
+        "href": "/about"
+      }
     ],
     "contactTitle": "Contact Us",
     "contactAddress": "Palestine St., Tehran, Iran",
@@ -44,17 +80,41 @@
     "copyright": "© {currentYear} Islamic Architecture Center IRAC | All rights reserved.",
     "featuresTitle": "Features",
     "featuresLinks": [
-      { "label": "Online Courses", "href": "/courses" },
-      { "label": "Workshops", "href": "/workshops" },
-      { "label": "Digital Library", "href": "/library" },
-      { "label": "Community", "href": "/community" }
+      {
+        "label": "Online Courses",
+        "href": "/courses"
+      },
+      {
+        "label": "Workshops",
+        "href": "/workshops"
+      },
+      {
+        "label": "Digital Library",
+        "href": "/library"
+      },
+      {
+        "label": "Community",
+        "href": "/community"
+      }
     ],
     "resourcesTitle": "Resources",
     "resourcesLinks": [
-      { "label": "Documentation", "href": "/docs" },
-      { "label": "Research Papers", "href": "/research" },
-      { "label": "Gallery", "href": "/gallery" },
-      { "label": "Blog", "href": "/blog" }
+      {
+        "label": "Documentation",
+        "href": "/docs"
+      },
+      {
+        "label": "Research Papers",
+        "href": "/research"
+      },
+      {
+        "label": "Gallery",
+        "href": "/gallery"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      }
     ],
     "contactHours": "Hours: Sun-Thu 9:00 AM - 5:00 PM"
   },
@@ -245,19 +305,8 @@
     "module": "Module"
   },
   "faq": {
-    "defaultTitle": "Frequently Asked Questions",
-    "searchPlaceholder": "Search questions...",
-    "allCategories": "All Categories",
-    "noResults": "No results found",
-    "noResultsWithFilters": "No results found with the selected filters",
-    "noFaqsAvailable": "No questions available at the moment",
-    "clearFilters": "Clear Filters",
-    "expandAll": "Expand All",
-    "collapseAll": "Collapse All",
-    "stillHaveQuestions": "Still have questions?",
-    "contactSupportText": "Our support team is ready to help you",
-    "contactUs": "Contact Us",
-    "callUs": "Call Us"
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to your common questions"
   },
   "cta": {
     "defaultTitle": "Get Started Now"
@@ -563,534 +612,24 @@
     "insufficientBalance": "Insufficient Balance",
     "chargeWallet": "Charge Wallet"
   },
-    "faq": {
-      "title": "Frequently Asked Questions",
-      "subtitle": "Answers to your common questions"
-    },
-    "finalCta": {
-      "title": "Enroll in the Course Now",
-      "subtitle": "Invest in your professional future",
-      "description": "By joining this course, acquire the skills necessary for success in your career."
-    },
-    "downloadSyllabus": "Download Syllabus",
-    "urgency": {
-      "enrollmentDeadline": "Enrollment deadline is approaching!"
-    },
-    "countdown": {
-      "days": "Days",
-      "hours": "Hours",
-      "minutes": "Minutes",
-      "seconds": "Seconds"
-    },
-    "securePayment": "Secure Payment",
-    "socialProof": {
-      "enrolledStudents": "students have enrolled so far"
-    },
-    "enroll": "Enroll"
+  "finalCta": {
+    "title": "Enroll in the Course Now",
+    "subtitle": "Invest in your professional future",
+    "description": "By joining this course, acquire the skills necessary for success in your career."
   },
-  "international": {
-    "meta": {
-      "title": "International Programs | IRAC",
-      "description": "Join IRAC's international educational programs. Islamic architecture courses and workshops for students worldwide.",
-      "keywords": "international education, Islamic architecture, global courses, international workshops, IRAC"
-    },
-    "hero": {
-      "title": "Global Islamic Architecture Education",
-      "subtitle": "Join the world's largest Islamic architecture educational network and connect with students and instructors from around the globe.",
-      "cta": {
-        "contact": "Contact for Consultation",
-        "programs": "View Programs"
-      }
-    },
-    "stats": {
-      "countries": "Countries",
-      "students": "International Students",
-      "partnerships": "Global Partnerships",
-      "languages": "Teaching Languages"
-    },
-    "globalReach": {
-      "title": "Global Access to Education",
-      "subtitle": "We provide educational services worldwide, respecting cultural and time differences",
-      "features": {
-        "timezone": {
-          "title": "Multi-Timezone Support",
-          "description": "Classes and support available across all global time zones"
-        },
-        "currency": {
-          "title": "Multi-Currency Payments",
-          "description": "Payment options in various world currencies"
-        },
-        "language": {
-          "title": "Multilingual Education",
-          "description": "Courses in Persian, English, Arabic and other languages"
-        },
-        "certification": {
-          "title": "International Certification",
-          "description": "Valid and recognized credentials worldwide"
-        },
-        "partnerships": {
-          "title": "University Partnerships",
-          "description": "Collaboration with top universities globally"
-        },
-        "crossCultural": {
-          "title": "Cross-Cultural Learning",
-          "description": "Exchange of knowledge and experience between different cultures"
-        }
-      }
-    },
-    "programs": {
-      "title": "International Programs",
-      "subtitle": "Courses and workshops specially designed for international students",
-      "duration": "Duration",
-      "languages": "Teaching Languages",
-      "certification": "Certification",
-      "price": "Fee",
-      "apply": "Apply to Join",
-      "masterclass": {
-        "title": "Islamic Architecture Masterclass",
-        "description": "Intensive workshop for deep understanding of Islamic architecture principles and philosophy"
-      },
-      "exchange": {
-        "title": "Student Exchange Program",
-        "description": "Study and research opportunity at IRAC center for international students"
-      },
-      "research": {
-        "title": "Research Fellowship",
-        "description": "Research program for in-depth studies in Islamic architecture"
-      }
-    },
-    "partners": {
-      "title": "International Partners",
-      "subtitle": "We collaborate with leading institutions and universities worldwide"
-    },
-    "success": {
-      "title": "Global Success Stories",
-      "subtitle": "Our graduates worldwide are creating positive change",
-      "graduate": "Graduate"
-    },
-    "cta": {
-      "title": "Ready to Join Our Global Community?",
-      "subtitle": "Start your journey of learning and discovering Islamic architecture with us",
-      "contact": "Contact for Consultation",
-      "programs": "View Programs"
-    },
-    "features": {
-      "global": {
-        "title": "Global Accessibility",
-        "description": "Learn from anywhere in the world with our online platform supporting multiple languages and time zones"
-      },
-      "expert": {
-        "title": "Expert Instructors",
-        "description": "Learn from renowned architects and scholars with decades of experience in Islamic architecture"
-      },
-      "certificate": {
-        "title": "International Certification",
-        "description": "Earn globally recognized certificates that enhance your professional credentials"
-      },
-      "community": {
-        "title": "Global Community",
-        "description": "Join a diverse community of students and professionals from around the world"
-      },
-      "flexible": {
-        "title": "Flexible Learning",
-        "description": "Study at your own pace with lifetime access to course materials and recordings"
-      },
-      "support": {
-        "title": "24/7 Support",
-        "description": "Get help whenever you need it with our round-the-clock international support team"
-      }
-    },
-    "contact": {
-      "title": "Get in Touch",
-      "subtitle": "Ready to start your journey in Islamic architecture? Contact our international team",
-      "form": {
-        "name": "Full Name",
-        "email": "Email Address",
-        "country": "Country",
-        "phone": "Phone Number",
-        "program": "Program of Interest",
-        "message": "Message",
-        "timezone": "Preferred Time Zone",
-        "submit": "Send Inquiry",
-        "sending": "Sending...",
-        "success": "Thank you! We'll contact you within 24 hours.",
-        "error": "Something went wrong. Please try again."
-      },
-      "info": {
-        "email": "international@irac.ir",
-        "phone": "+98 21 1234 5678",
-        "hours": "Available 24/7 for international inquiries"
-      }
-    },
-    "courses": {
-      "title": "International Course Offerings",
-      "subtitle": "Discover our comprehensive collection of courses designed for global learners",
-      "new": "New",
-      "featured": "Featured",
-      "preview": "Preview",
-      "enroll": "Enroll Now",
-      "languages": "Languages",
-      "levels": {
-        "beginner": "Beginner",
-        "intermediate": "Intermediate",
-        "advanced": "Advanced"
-      },
-      "categories": {
-        "architecture_history": "Architecture History & Theory",
-        "islamic_patterns": "Islamic Geometric Patterns",
-        "persian_calligraphy": "Persian Calligraphy Basics",
-        "garden_design": "Garden Design Principles",
-        "traditional_crafts": "Traditional Islamic Crafts",
-        "restoration": "Heritage Restoration"
-      },
-      "features": {
-        "english_taught": "English-taught courses",
-        "subtitles": "Multiple language subtitles",
-        "bilingual": "Bilingual instruction",
-        "international_perspective": "International perspective",
-        "cultural_context": "Rich cultural context",
-        "hands_on": "Hands-on learning"
-      }
-    }
+  "downloadSyllabus": "Download Syllabus",
+  "urgency": {
+    "enrollmentDeadline": "Enrollment deadline is approaching!"
   },
-  "media": {
-    "title": "Media & Image Gallery",
-    "subtitle": "A collection of images, videos, and documents related to Islamic architecture and center activities",
-    "categories": {
-      "all": "All Media",
-      "images": "Images",
-      "videos": "Videos",
-      "documents": "Documents"
-    },
-    "viewModes": {
-      "grid": "Grid View",
-      "list": "List View"
-    },
-    "loading": "Loading...",
-    "error": "Error loading media",
-    "noMedia": {
-      "title": "No media found",
-      "description": "No media items are currently available in this category"
-    },
-    "itemsFound": "{count} items found",
-    "adminInfo": {
-      "title": "Admin Information",
-      "description": "To upload new media, please use the admin panel"
-    }
+  "countdown": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
   },
-  "payment": {
-    "processing": "Processing payment...",
-    "success": "Payment successful",
-    "failed": "Payment failed",
-    "cancelled": "Payment cancelled",
-    "verifying": "Verifying payment...",
-    "amount": "Amount",
-    "referenceId": "Reference ID",
-    "cardNumber": "Card Number",
-    "newBalance": "New Balance",
-    "goToWallet": "Go to Wallet",
-    "goToDashboard": "Go to Dashboard",
-    "tryAgain": "Try Again",
-    "goHome": "Go Home",
-    "errorCode": "Error Code",
-    "support": "If you encounter any issues, please contact support"
+  "securePayment": "Secure Payment",
+  "socialProof": {
+    "enrolledStudents": "students have enrolled so far"
   },
-  "admin": "Admin Panel",
-  "Certificate": {
-    "title": "Certificates",
-    "myCertificates": "My Certificates",
-    "certificateOf": "Certificate of",
-    "completion": "Completion",
-    "achievement": "Achievement",
-    "excellence": "Excellence",
-    "participation": "Participation",
-    "certificateNumber": "Certificate Number",
-    "verificationHash": "Verification Hash",
-    "issueDate": "Issue Date",
-    "completionDate": "Completion Date",
-    "expiryDate": "Expiry Date",
-    "finalGrade": "Final Grade",
-    "instructor": "Instructor",
-    "courseInstructor": "Course Instructor",
-    "educationDirector": "Education Director",
-    "institution": "Institution",
-    "iranianArchitectureCenter": "Iranian Architecture Center",
-    "status": "Status",
-    "active": "Active",
-    "revoked": "Revoked",
-    "pending": "Pending",
-    "verified": "Verified",
-    "invalid": "Invalid",
-    "dashboard": {
-      "title": "Certificate Dashboard",
-      "subtitle": "Manage your certificates and track your progress",
-      "totalCertificates": "Total Certificates",
-      "activeCertificates": "Active Certificates",
-      "coursesInProgress": "Courses in Progress",
-      "certificatesEarned": "Certificates Earned",
-      "noCertificates": "No certificates found",
-      "noCertificatesDescription": "You haven't earned any certificates yet. Complete your courses to earn certificates.",
-      "startLearning": "Start Learning",
-      "browseCourses": "Browse Courses"
-    },
-    "list": {
-      "searchPlaceholder": "Search certificates...",
-      "filterByStatus": "Filter by Status",
-      "filterByCourse": "Filter by Course",
-      "sortBy": "Sort By",
-      "sortByDate": "Issue Date",
-      "sortByName": "Course Name",
-      "sortByGrade": "Grade",
-      "viewCertificate": "View Certificate",
-      "downloadPDF": "Download PDF",
-      "downloadPNG": "Download PNG",
-      "share": "Share",
-      "verify": "Verify",
-      "print": "Print",
-      "details": "Details",
-      "noResults": "No certificates match your search criteria",
-      "loadMore": "Load More"
-    },
-    "viewer": {
-      "title": "Certificate Viewer",
-      "preview": "Preview",
-      "fullView": "Full View",
-      "printVersion": "Print Version",
-      "watermarkPreview": "PREVIEW",
-      "certificateOf": "This is to certify that",
-      "hasSuccessfullyCompleted": "has successfully completed the course",
-      "withGrade": "with a final grade of",
-      "issuedOn": "Issued on",
-      "completedOn": "Completed on",
-      "verifyAtUrl": "To verify this certificate, visit:",
-      "signature": "Signature",
-      "officialSeal": "Official Seal"
-    },
-    "download": {
-      "title": "Download Certificate",
-      "downloadOptions": "Download Options",
-      "formatPDF": "PDF Document",
-      "formatPNG": "High Resolution Image",
-      "qualityHigh": "High Quality",
-      "qualityMedium": "Medium Quality",
-      "qualityLow": "Low Quality",
-      "downloading": "Downloading...",
-      "downloadComplete": "Download Complete",
-      "downloadFailed": "Download Failed",
-      "tryAgain": "Try Again",
-      "printCertificate": "Print Certificate",
-      "shareCertificate": "Share Certificate"
-    },
-    "sharing": {
-      "title": "Share Certificate",
-      "shareOn": "Share on",
-      "linkedin": "LinkedIn",
-      "twitter": "Twitter",
-      "telegram": "Telegram",
-      "whatsapp": "WhatsApp",
-      "facebook": "Facebook",
-      "copyLink": "Copy Link",
-      "linkCopied": "Link copied to clipboard!",
-      "emailShare": "Share via Email",
-      "shareText": "I've successfully completed {courseName} at Iranian Architecture Center (IRAC)!",
-      "verificationLink": "Verification Link",
-      "qrCode": "QR Code"
-    },
-    "verification": {
-      "title": "Certificate Verification",
-      "subtitle": "Verify the authenticity of any IRAC certificate",
-      "enterCertificateNumber": "Enter Certificate Number",
-      "certificateNumberPlaceholder": "IRAC-YYYY-COURSE-12345",
-      "verifyButton": "Verify Certificate",
-      "scanQR": "Scan QR Code",
-      "verifying": "Verifying...",
-      "verified": "Certificate Verified",
-      "invalid": "Certificate Invalid",
-      "notFound": "Certificate Not Found",
-      "revoked": "Certificate Revoked",
-      "expired": "Certificate Expired",
-      "verificationResults": "Verification Results",
-      "studentName": "Student Name",
-      "courseName": "Course Name",
-      "courseType": "Course Type",
-      "institutionName": "Institution",
-      "verificationDate": "Verification Date",
-      "securityFeatures": "Security Features",
-      "digitalSignature": "Digital Signature",
-      "blockchainRecord": "Blockchain Record",
-      "tamperProof": "Tamper Proof"
-    },
-    "progress": {
-      "title": "Course Progress",
-      "subtitle": "Track your progress toward earning certificates",
-      "overallProgress": "Overall Progress",
-      "lessonsCompleted": "Lessons Completed",
-      "assignmentsCompleted": "Assignments Completed",
-      "quizzesCompleted": "Quizzes Completed",
-      "finalExam": "Final Exam",
-      "certificateEligible": "Certificate Eligible",
-      "notEligible": "Not Eligible",
-      "requirementsToEarn": "Requirements to Earn Certificate",
-      "completeAllLessons": "Complete all lessons",
-      "completeAssignments": "Complete all assignments",
-      "passQuizzes": "Pass all quizzes",
-      "passFinalExam": "Pass final exam with 70% or higher",
-      "minimumGrade": "Minimum grade: 70%",
-      "currentGrade": "Current grade",
-      "generateCertificate": "Generate Certificate",
-      "continueStudying": "Continue Studying",
-      "reviewCourse": "Review Course"
-    },
-    "templates": {
-      "title": "Certificate Templates",
-      "selectTemplate": "Select Template",
-      "standard": {
-        "name": "Standard",
-        "description": "Clean, professional design for regular courses"
-      },
-      "premium": {
-        "name": "Premium",
-        "description": "Elegant design with Islamic patterns for advanced courses"
-      },
-      "workshop": {
-        "name": "Workshop",
-        "description": "Modern design for workshops and seminars"
-      },
-      "multilingual": {
-        "name": "Multilingual",
-        "description": "Side-by-side Persian-English layout"
-      },
-      "preview": "Preview Template",
-      "customize": "Customize"
-    },
-    "admin": {
-      "title": "Certificate Management",
-      "generateCertificate": "Generate Certificate",
-      "revokeCertificate": "Revoke Certificate",
-      "certificateGenerated": "Certificate Generated Successfully",
-      "certificateRevoked": "Certificate Revoked",
-      "generationFailed": "Certificate Generation Failed",
-      "revocationFailed": "Certificate Revocation Failed",
-      "selectUser": "Select User",
-      "selectCourse": "Select Course",
-      "selectTemplate": "Select Template",
-      "forceGenerate": "Force Generate (Override Existing)",
-      "revocationReason": "Revocation Reason",
-      "revocationReasons": {
-        "academic_misconduct": "Academic Misconduct",
-        "incomplete_requirements": "Incomplete Requirements",
-        "technical_error": "Technical Error",
-        "administrative": "Administrative Decision",
-        "other": "Other"
-      },
-      "confirmRevocation": "Are you sure you want to revoke this certificate?",
-      "statistics": {
-        "title": "Certificate Statistics",
-        "totalIssued": "Total Issued",
-        "totalRevoked": "Total Revoked",
-        "totalActive": "Total Active",
-        "issuedThisMonth": "Issued This Month",
-        "issuedThisYear": "Issued This Year",
-        "byTemplate": "By Template",
-        "byCourse": "By Course",
-        "byInstructor": "By Instructor"
-        "notifications": {
-          "title": "Notifications",
-          "markAllRead": "Mark all as read",
-          "viewDetails": "View details",
-          "noNotifications": "No notifications",
-          "all": "All",
-          "unread": "Unread",
-          "viewAllNotifications": "View all notifications",
-          "settings": "Settings"
-        },
-        "notificationSettings": {
-          "title": "Notification Settings",
-          "description": "Manage your notification settings",
-          "emailNotifications": "Email Notifications",
-          "emailNotificationsDesc": "Receive notifications via email",
-          "pushNotifications": "Push Notifications",
-          "pushNotificationsDesc": "Instant notifications on your device",
-          "courseUpdates": "Course Updates",
-          "courseUpdatesDesc": "Get notified about updates to your enrolled courses",
-          "bookingReminders": "Booking Reminders",
-          "bookingRemindersDesc": "Reminders before your workspace booking starts",
-          "allNotifications": "All Notifications",
-          "allNotificationsDesc": "Enable or disable all notifications",
-          "deliveryMethods": "Delivery Methods",
-          "inAppNotifications": "In-App Notifications",
-          "inAppNotificationsDesc": "Notifications within the website",
-          "smsNotifications": "SMS Notifications",
-          "smsNotificationsDesc": "Receive SMS for important notifications",
-          "emailFrequency": "Email Frequency",
-          "categories": "Categories",
-          "paymentNotifications": "Payment Notifications",
-          "paymentNotificationsDesc": "Get notified about payment status",
-          "certificateNotifications": "Certificate Notifications",
-          "certificateNotificationsDesc": "Get notified when certificates are ready",
-          "securityNotifications": "Security Notifications",
-          "securityNotificationsDesc": "Notifications about account security",
-          "marketingPreferences": "Marketing Preferences",
-          "marketingEmails": "Marketing Emails",
-          "marketingEmailsDesc": "Receive promotional emails and special offers",
-          "newsletter": "Newsletter",
-          "newsletterDesc": "Receive monthly newsletter with latest news and content",
-          "quietHours": "Quiet Hours",
-          "quietHoursStart": "Quiet Hours Start",
-          "quietHoursEnd": "Quiet Hours End",
-          "urgentOverride": "Override for Urgent Notifications",
-          "urgentOverrideDesc": "Allow urgent notifications during quiet hours",
-          "saveSettings": "Save Settings",
-          "saveSuccess": "Settings saved successfully"
-        }
-      }
-    },
-    "notifications": {
-      "certificateEarned": "Congratulations! You've earned a new certificate",
-      "certificateGenerated": "Your certificate has been generated",
-      "certificateRevoked": "Your certificate has been revoked",
-      "verificationSuccess": "Certificate verification successful",
-      "verificationFailed": "Certificate verification failed",
-      "downloadReady": "Your certificate download is ready",
-      "shareSuccess": "Certificate shared successfully",
-      "copySuccess": "Verification link copied to clipboard"
-    },
-    "errors": {
-      "loadFailed": "Failed to load certificates",
-      "generateFailed": "Failed to generate certificate",
-      "downloadFailed": "Failed to download certificate",
-      "verificationFailed": "Certificate verification failed",
-      "invalidFormat": "Invalid certificate number format",
-      "networkError": "Network error occurred",
-      "serverError": "Server error occurred",
-      "unauthorized": "Unauthorized access",
-      "certificateNotFound": "Certificate not found",
-      "alreadyGenerated": "Certificate already generated for this course",
-      "requirementsNotMet": "Course completion requirements not met",
-      "tryAgain": "Please try again"
-    },
-    "actions": {
-      "view": "View",
-      "download": "Download",
-      "share": "Share",
-      "print": "Print",
-      "verify": "Verify",
-      "generate": "Generate",
-      "revoke": "Revoke",
-      "refresh": "Refresh",
-      "search": "Search",
-      "filter": "Filter",
-      "sort": "Sort",
-      "clear": "Clear",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "save": "Save",
-      "edit": "Edit",
-      "delete": "Delete",
-      "back": "Back",
-      "next": "Next",
-      "previous": "Previous",
-      "close": "Close"
-    }
-  }
+  "enroll": "Enroll"
 }

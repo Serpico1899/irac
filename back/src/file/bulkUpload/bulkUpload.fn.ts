@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId, ensureDir } from "@deps";
-import { coreApp, file } from "../../../mod.ts";
+import {  coreApp, file  } from "@app";
 import type { MyContext } from "@lib";
 
 export const bulkUploadFn: ActFn = async (body) => {

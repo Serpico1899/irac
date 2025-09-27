@@ -1,11 +1,11 @@
-import { coreApp } from "../../../mod.ts";
-import {
+import {  coreApp  } from "@app";
+import { 
   user,
   order,
   booking,
   scoring_transaction,
   referral,
-} from "../../../mod.ts";
+ } from "@app";
 
 interface UserStatisticsDetails {
   start_date?: Date;

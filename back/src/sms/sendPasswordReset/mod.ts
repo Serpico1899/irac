@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { sendPasswordResetFn } from "./act.ts";
 import { sendPasswordResetValidator } from "./sendPasswordReset.val.ts";
 

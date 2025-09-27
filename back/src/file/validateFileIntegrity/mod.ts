@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser, grantAccess } from "@lib";
 import { validateFileIntegrityFn } from "./validateFileIntegrity.fn.ts";
 import { validateFileIntegrityValidator } from "./validateFileIntegrity.val.ts";

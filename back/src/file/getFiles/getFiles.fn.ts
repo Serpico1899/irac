@@ -1,5 +1,5 @@
 import type { ActFn } from "@deps";
-import { file } from "../../../mod.ts";
+import {  file  } from "@app";
 
 export const getFilesFn: ActFn = async (body) => {
   const {

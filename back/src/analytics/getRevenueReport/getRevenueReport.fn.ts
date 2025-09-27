@@ -1,11 +1,11 @@
-import { coreApp } from "../../../mod.ts";
-import {
+import {  coreApp  } from "@app";
+import { 
   booking,
   course,
   order,
   product,
   user,
-} from "../../../mod.ts";
+ } from "@app";
 
 interface RevenueReportDetails {
   start_date?: Date;

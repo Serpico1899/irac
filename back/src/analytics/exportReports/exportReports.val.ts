@@ -1,6 +1,6 @@
-import { object, string, optional, union, literal, boolean, array } from "../../../../../../deps.ts";
+import { object, string, optional, union, literal, boolean, array } from "@deps";
 
-const exportReportsValidator = {
+const exportReportsStruct = {
   set: {
     reportType: union([
       literal("revenue_dashboard"),
@@ -80,11 +80,11 @@ const exportReportsValidator = {
   },
 };
 
-export const exportReportsValidator = object(exportReportsValidator);
+export const exportReportsValidator = object(exportReportsStruct);
 
 export const schema = {
   details: {
-    set: exportReportsValidator.set,
-    get: exportReportsValidator.get,
+    set: exportReportsStruct.set,
+    get: exportReportsStruct.get,
   },
 };

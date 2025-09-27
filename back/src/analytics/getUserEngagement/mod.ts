@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { getUserEngagementValidator } from "./getUserEngagement.val.ts";
 import { getUserEngagementFn } from "./getUserEngagement.fn.ts";
 

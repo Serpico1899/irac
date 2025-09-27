@@ -1,38 +1,28 @@
-import {
+import { 
   coreApp,
   user,
   category,
   tag,
   course,
-  product,
   article,
-  order,
-  scoring_transaction,
-  user_level,
-  referral,
   booking,
   wallet,
   wallet_transaction,
-} from "../mod.ts";
+  order,
+  invoice,
+  coupon,
+  file,
+  enrollment,
+ } from "@app";
 
-// Master Data Seeding System for IRAC
-// This file provides comprehensive seed data for all major entities
-
+// Interfaces for seed results
 interface SeedResult<T = any> {
   success: boolean;
   data?: T;
   error?: string;
   message?: string;
-}
-
-interface TransactionData {
-  orders: any[];
-  walletTransactions: any[];
-}
-
-interface ScoringData {
-  scoringTransactions: any[];
-  userLevels: any[];
+  created: number;
+  errors: number;
 }
 
 interface CategoryTagData {
@@ -40,1081 +30,899 @@ interface CategoryTagData {
   tags: any[];
 }
 
-interface SeedingSummary {
-  success_count: number;
-  error_count: number;
-  total_entities: number;
-  duration_ms: number;
-  operations_completed: string[];
-  errors: string[];
-}
-
-interface MasterSeedResults {
-  success: boolean;
-  data?: {
-    summary: SeedingSummary;
-    users?: SeedResult<any[]>;
-    categories?: SeedResult<CategoryTagData>;
-    courses?: SeedResult<any[]>;
-    articles?: SeedResult<any[]>;
-    products?: SeedResult<any>;
-    transactions?: SeedResult<TransactionData>;
-    scoring?: SeedResult<ScoringData>;
-    referrals?: SeedResult<any[]>;
-    bookings?: SeedResult<any[]>;
-  };
-  error?: string;
-}
-
 export class MasterDataSeeder {
+  // Utility functions for generating realistic data
+  private static getRandomPersianName() {
+    const firstNames = [
+      "علی", "محمد", "حسین", "احمد", "مهدی", "رضا", "حسن", "عباس", "جواد", "امیر",
+      "فاطمه", "زهرا", "مریم", "خدیجه", "عایشه", "زینب", "سکینه", "معصومه", "طاهره", "نرگس"
+    ];
+    const lastNames = [
+      "احمدی", "محمدی", "حسینی", "رضایی", "کریمی", "نوری", "صادقی", "طاهری", "موسوی", "هاشمی",
+      "علوی", "فاطمی", "قاسمی", "یوسفی", "ابراهیمی", "اسماعیلی", "جعفری", "باقری", "تقوی", "شریفی"
+    ];
 
-  // User data seeding
-  static async seedUsers(clearExisting = false): Promise<SeedResult<any[]>> {
+    return {
+      first_name: firstNames[Math.floor(Math.random() * firstNames.length)],
+      last_name: lastNames[Math.floor(Math.random() * lastNames.length)]
+    };
+  }
+
+  private static getRandomMobile() {
+    const prefixes = ["0912", "0913", "0914", "0915", "0916", "0917", "0918", "0919"];
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+    const suffix = Math.floor(Math.random() * 10000000).toString().padStart(7, '0');
+    return prefix + suffix;
+  }
+
+  private static getRandomNationalNumber() {
+    return (Math.floor(Math.random() * 9000000000) + 1000000000).toString();
+  }
+
+  private static getRandomAddress() {
+    const cities = ["تهران", "اصفهان", "شیراز", "مشهد", "کرج", "تبریز"];
+    const streets = ["خیابان ولیعصر", "خیابان انقلاب", "خیابان آزادی", "خیابان فردوسی"];
+
+    const city = cities[Math.floor(Math.random() * cities.length)];
+    const street = streets[Math.floor(Math.random() * streets.length)];
+    const number = Math.floor(Math.random() * 500) + 1;
+
+    return `${city}، ${street}، پلاک ${number}`;
+  }
+
+  // Seed Users
+  static async seedUsers(): Promise<SeedResult<any[]>> {
     try {
-      console.log("🫂 Seeding users...");
+      console.log("👥 Seeding users...");
 
-      if (clearExisting) {
-        await user.deleteMany({});
-        console.log("  Cleared existing users");
-      }
-
-      const users = [
-        // Admin users
+      const usersData = [
+        // Admin Users
         {
-          firstname: "علی",
-          lastname: "احمدی",
-          email: "admin@irac.ir",
-          phone: "09121234567",
+          first_name: "علی",
+          last_name: "احمدی",
+          father_name: "محمد",
+          mobile: "09121234567",
+          gender: "Male",
+          national_number: "1234567890",
+          address: "تهران، خیابان ولیعصر، پلاک 123",
           level: "Manager",
           is_verified: true,
-          bio: "مدیر کل مرکز معماری ایرانی",
-          expertise: ["معماری اسلامی", "مدیریت"],
-          profile_image: "/images/profiles/admin1.jpg"
+          summary: "مدیر کل مرکز معماری ایرانی",
+          birth_date: new Date("1980-01-01"),
         },
         {
-          firstname: "Sara",
-          lastname: "Johnson",
-          email: "sarah.admin@irac.ir",
-          phone: "09127654321",
+          first_name: "سارا",
+          last_name: "محمدی",
+          father_name: "حسین",
+          mobile: "09127654321",
+          gender: "Female",
+          national_number: "1234567891",
+          address: "تهران، خیابان انقلاب، پلاک 456",
           level: "Editor",
           is_verified: true,
-          bio: "International Programs Manager",
-          expertise: ["International Education", "Program Management"],
-          profile_image: "/images/profiles/admin2.jpg"
-        },
-
-        // Regular users with diverse backgrounds
-        {
-          firstname: "محمد",
-          lastname: "کریمی",
-          email: "mohammad.karimi@example.com",
-          phone: "09123456789",
-          level: "Ordinary",
-          is_verified: true,
-          bio: "دانشجوی معماری و علاقه‌مند به معماری سنتی ایران",
-          expertise: ["معماری", "طراحی"],
-          profile_image: "/images/profiles/user1.jpg"
+          summary: "مدیر برنامه‌های آموزشی",
+          birth_date: new Date("1985-03-15"),
         },
         {
-          firstname: "فاطمه",
-          lastname: "محمودی",
-          email: "fateme.mahmoudi@example.com",
-          phone: "09134567890",
-          level: "Ordinary",
+          first_name: "محمد",
+          last_name: "کریمی",
+          father_name: "رضا",
+          mobile: "09123456789",
+          gender: "Male",
+          national_number: "1234567892",
+          address: "اصفهان، خیابان چهارباغ، پلاک 789",
+          level: "Editor",
           is_verified: true,
-          bio: "معمار و پژوهشگر در زمینه معماری پایدار",
-          expertise: ["معماری پایدار", "طراحی شهری"],
-          profile_image: "/images/profiles/user2.jpg"
-        },
-        {
-          firstname: "David",
-          lastname: "Chen",
-          email: "david.chen@example.com",
-          phone: "09145678901",
-          level: "Ordinary",
-          is_verified: true,
-          bio: "Architect specializing in cross-cultural design",
-          expertise: ["Cross-cultural Architecture", "Sustainable Design"],
-          profile_image: "/images/profiles/user3.jpg"
-        },
-        {
-          firstname: "آیدا",
-          lastname: "نوری",
-          email: "aida.nouri@example.com",
-          phone: "09156789012",
-          level: "Ordinary",
-          is_verified: true,
-          bio: "دانشجوی دکترای معماری و تاریخ هنر اسلامی",
-          expertise: ["تاریخ معماری", "هنر اسلامی"],
-          profile_image: "/images/profiles/user4.jpg"
-        },
-        {
-          firstname: "James",
-          lastname: "Wilson",
-          email: "james.wilson@example.com",
-          phone: "09167890123",
-          level: "Ordinary",
-          is_verified: true,
-          bio: "International student of Islamic Architecture",
-          expertise: ["Islamic Architecture", "Cultural Studies"],
-          profile_image: "/images/profiles/user5.jpg"
+          summary: "معمار و مدرس دانشگاه",
+          birth_date: new Date("1982-07-22"),
         }
       ];
 
-      const createdUsers: any[] = [];
-      for (const userData of users) {
+      // Add 20+ regular users
+      for (let i = 0; i < 22; i++) {
+        const name = this.getRandomPersianName();
+        const fatherNames = ["احمد", "محمد", "علی", "حسن", "حسین", "رضا"];
+
+        usersData.push({
+          first_name: name.first_name,
+          last_name: name.last_name,
+          father_name: fatherNames[Math.floor(Math.random() * fatherNames.length)],
+          mobile: this.getRandomMobile(),
+          gender: Math.random() > 0.5 ? "Male" : "Female",
+          national_number: (parseInt(this.getRandomNationalNumber()) + i).toString(),
+          address: this.getRandomAddress(),
+          level: "Ordinary",
+          is_verified: Math.random() > 0.3,
+          summary: "علاقه‌مند به معماری و طراحی",
+          birth_date: new Date(1970 + Math.floor(Math.random() * 35), Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1),
+        });
+      }
+
+      const createdUsers = [];
+      let errorCount = 0;
+
+      for (const userData of usersData) {
         try {
-          const newUser = await user.insertOne({
-            doc: {
-              ...userData,
-              created_at: new Date(),
-              updated_at: new Date(),
-            }
-          });
-          createdUsers.push(newUser as any);
+          const createdUser = await user.addOne({ set: userData, get: {} });
+          createdUsers.push(createdUser);
+          console.log(`  ✅ Created user: ${userData.first_name} ${userData.last_name} (${userData.level})`);
         } catch (error) {
-          console.error(`Failed to create user ${userData.email}:`, error);
+          console.error(`  ❌ Failed to create user ${userData.first_name} ${userData.last_name}:`, error.message);
+          errorCount++;
         }
       }
 
-      console.log(`  ✅ Created ${createdUsers.length} users`);
-      return { success: true, data: createdUsers };
+      console.log(`  🎉 Users seeded: ${createdUsers.length} created, ${errorCount} errors`);
+      return {
+        success: true,
+        data: createdUsers,
+        created: createdUsers.length,
+        errors: errorCount,
+        message: `Successfully created ${createdUsers.length} users`
+      };
+
     } catch (error) {
-      console.error("Error seeding users:", error);
-      return { success: false, error: error.message };
+      console.error("❌ Error seeding users:", error);
+      return {
+        success: false,
+        error: error.message,
+        created: 0,
+        errors: 1
+      };
     }
   }
 
-  // Category and Tag seeding
-  static async seedCategoriesAndTags(clearExisting = false): Promise<SeedResult<CategoryTagData>> {
+  // Seed Categories and Tags
+  static async seedCategoriesAndTags(): Promise<SeedResult<CategoryTagData>> {
     try {
       console.log("🏷️ Seeding categories and tags...");
 
-      if (clearExisting) {
-        await category.deleteMany({});
-        await tag.deleteMany({});
-        console.log("  Cleared existing categories and tags");
-      }
-
-      // Categories
-      const categories = [
+      const categoriesData = [
         {
           name: "معماری اسلامی",
-          name_en: "Islamic Architecture",
-          description: "دوره‌های آموزشی و محتوای مربوط به معماری اسلامی",
-          description_en: "Courses and content related to Islamic Architecture",
-          slug: "islamic-architecture",
-          type: "course",
-          is_active: true
+          description: "دوره‌ها و مطالب مرتبط با معماری اسلامی و سنتی ایران"
         },
         {
-          name: "معماری مدرن",
-          name_en: "Modern Architecture",
-          description: "معماری معاصر و مدرن",
-          description_en: "Contemporary and Modern Architecture",
-          slug: "modern-architecture",
-          type: "course",
-          is_active: true
+          name: "معماری معاصر",
+          description: "معماری مدرن و معاصر با رویکرد نوین"
         },
         {
-          name: "کتب معماری",
-          name_en: "Architecture Books",
-          description: "کتب تخصصی در زمینه معماری",
-          description_en: "Specialized architecture books",
-          slug: "architecture-books",
-          type: "product",
-          is_active: true
+          name: "طراحی شهری",
+          description: "برنامه‌ریزی و طراحی فضاهای شهری"
         },
         {
-          name: "آثار هنری",
-          name_en: "Artworks",
-          description: "آثار هنری و دست‌سازه‌های معماری",
-          description_en: "Artworks and architectural handicrafts",
-          slug: "artworks",
-          type: "product",
-          is_active: true
+          name: "معماری پایدار",
+          description: "ساخت و ساز سبز و معماری با رویکرد زیست محیطی"
         },
         {
-          name: "محتوای دیجیتال",
-          name_en: "Digital Content",
-          description: "فایل‌های دیجیتال و منابع آموزشی",
-          description_en: "Digital files and educational resources",
-          slug: "digital-content",
-          type: "product",
-          is_active: true
+          name: "مرمت و احیا",
+          description: "مرمت بناهای تاریخی و احیای میراث معماری"
         },
         {
-          name: "کارگاه‌ها",
-          name_en: "Workshops",
-          description: "کارگاه‌های عملی و تخصصی",
-          description_en: "Practical and specialized workshops",
-          slug: "workshops",
-          type: "workshop",
-          is_active: true
+          name: "معماری داخلی",
+          description: "طراحی فضاهای داخلی و دکوراسیون"
+        },
+        {
+          name: "معماری منظر",
+          description: "طراحی فضاهای سبز و محوطه‌سازی"
+        },
+        {
+          name: "تکنولوژی ساخت",
+          description: "تکنیک‌ها و تکنولوژی‌های نوین در ساخت و ساز"
         }
       ];
 
-      const createdCategories: any[] = [];
-      for (const catData of categories) {
-        try {
-          const newCat = await category.insertOne({
-            doc: {
-              ...catData,
-              created_at: new Date(),
-              updated_at: new Date(),
-            }
-          });
-          createdCategories.push(newCat as any);
-        } catch (error) {
-          console.error(`Failed to create category ${catData.name}:`, error);
-        }
-      }
-
-      // Tags
-      const tags = [
-        { name: "هندسه اسلامی", name_en: "Islamic Geometry", color: "#3B82F6" },
-        { name: "خوشنویسی", name_en: "Calligraphy", color: "#EF4444" },
-        { name: "طراحی پایدار", name_en: "Sustainable Design", color: "#10B981" },
-        { name: "تاریخ معماری", name_en: "Architecture History", color: "#F59E0B" },
-        { name: "شهرسازی", name_en: "Urban Planning", color: "#8B5CF6" },
-        { name: "مرمت", name_en: "Restoration", color: "#F97316" },
-        { name: "فناوری در معماری", name_en: "Technology in Architecture", color: "#06B6D4" },
-        { name: "معماری ایرانی", name_en: "Persian Architecture", color: "#EC4899" },
-        { name: "طراحی داخلی", name_en: "Interior Design", color: "#84CC16" },
-        { name: "BIM", name_en: "Building Information Modeling", color: "#6366F1" }
+      const tagsData = [
+        { name: "گنبد", description: "المان‌های گنبدی در معماری" },
+        { name: "ایوان", description: "ایوان‌ها در معماری سنتی" },
+        { name: "کاشی‌کاری", description: "هنر کاشی‌کاری در معماری" },
+        { name: "پایداری", description: "رویکردهای پایدار در معماری" },
+        { name: "BIM", description: "مدل‌سازی اطلاعات ساختمان" },
+        { name: "AutoCAD", description: "نرم‌افزار طراحی معماری" },
+        { name: "3D Modeling", description: "مدل‌سازی سه‌بعدی" },
+        { name: "فضای سبز", description: "طراحی فضاهای سبز شهری" },
+        { name: "نور طبیعی", description: "استفاده از نور طبیعی در طراحی" },
+        { name: "مصالح بومی", description: "استفاده از مصالح محلی" },
+        { name: "اقلیم گرم", description: "معماری مناسب اقلیم گرم" },
+        { name: "حیاط مرکزی", description: "طراحی با حیاط مرکزی" },
+        { name: "هندسه اسلامی", description: "کاربرد هندسه در معماری اسلامی" },
+        { name: "مینیمالیسم", description: "سبک مینیمالیستی در طراحی" }
       ];
 
-      const createdTags: any[] = [];
-      for (const tagData of tags) {
+      const createdCategories = [];
+      const createdTags = [];
+      let errorCount = 0;
+
+      // Create categories
+      for (const categoryData of categoriesData) {
         try {
-          const newTag = await tag.insertOne({
-            doc: {
-              ...tagData,
-              created_at: new Date(),
-              updated_at: new Date(),
-            }
-          });
-          createdTags.push(newTag as any);
+          const createdCategory = await category.addOne({ set: categoryData, get: {} });
+          createdCategories.push(createdCategory);
+          console.log(`  ✅ Created category: ${categoryData.name}`);
         } catch (error) {
-          console.error(`Failed to create tag ${tagData.name}:`, error);
+          console.error(`  ❌ Failed to create category ${categoryData.name}:`, error.message);
+          errorCount++;
         }
       }
 
-      console.log(`  ✅ Created ${createdCategories.length} categories and ${createdTags.length} tags`);
+      // Create tags
+      for (const tagData of tagsData) {
+        try {
+          const createdTag = await tag.addOne({ set: tagData, get: {} });
+          createdTags.push(createdTag);
+          console.log(`  ✅ Created tag: ${tagData.name}`);
+        } catch (error) {
+          console.error(`  ❌ Failed to create tag ${tagData.name}:`, error.message);
+          errorCount++;
+        }
+      }
+
+      console.log(`  🎉 Categories & Tags seeded: ${createdCategories.length} categories, ${createdTags.length} tags`);
       return {
         success: true,
         data: {
           categories: createdCategories,
           tags: createdTags
-        }
+        },
+        created: createdCategories.length + createdTags.length,
+        errors: errorCount,
+        message: `Successfully created ${createdCategories.length} categories and ${createdTags.length} tags`
       };
+
     } catch (error) {
-      console.error("Error seeding categories and tags:", error);
-      return { success: false, error: error.message };
+      console.error("❌ Error seeding categories and tags:", error);
+      return {
+        success: false,
+        error: error.message,
+        created: 0,
+        errors: 1
+      };
     }
   }
 
-  // Course seeding
-  static async seedCourses(clearExisting = false): Promise<SeedResult<any[]>> {
+  // Seed Courses
+  static async seedCourses(): Promise<SeedResult<any[]>> {
     try {
-      console.log("🎓 Seeding courses...");
+      console.log("📚 Seeding courses...");
 
-      if (clearExisting) {
-        await course.deleteMany({});
-        console.log("  Cleared existing courses");
+      // Get existing users for relationships
+      const existingUsers = await user.getMany({ get: {}, filter: {} });
+      const instructors = existingUsers.filter((u: any) => u.level === "Manager" || u.level === "Editor");
+
+      if (instructors.length === 0) {
+        throw new Error("No instructor-level users found. Please seed users first.");
       }
 
-      const courses = [
+      const coursesData = [
         {
-          title: "مبانی معماری اسلامی",
-          title_en: "Islamic Architecture Fundamentals",
-          slug: "islamic-architecture-fundamentals",
-          description: "دوره جامع آموزش مبانی و اصول معماری اسلامی شامل هندسه، نمادشناسی و عناصر تزیینی",
-          description_en: "Comprehensive course on Islamic architecture fundamentals including geometry, symbolism and decorative elements",
+          name: "مقدمه‌ای بر معماری اسلامی",
+          name_en: "Introduction to Islamic Architecture",
+          description: "دوره جامع آشنایی با اصول و مبانی معماری اسلامی شامل تاریخچه، سبک‌ها، و ویژگی‌های منحصر به فرد",
+          description_en: "Comprehensive course on principles and foundations of Islamic architecture",
+          short_description: "آشنایی با اصول معماری اسلامی",
+          level: "Beginner",
+          type: "Course",
+          status: "Active",
           price: 2500000,
-          discounted_price: 2000000,
-          currency: "IRR",
-          duration_weeks: 8,
-          level: "beginner",
-          language: "fa",
-          format: "online",
-          is_featured: true,
-          is_published: true,
-          instructor_name: "دکتر علی احمدی",
-          instructor_name_en: "Dr. Ali Ahmadi",
-          thumbnail: "/images/courses/islamic-fundamentals.jpg",
-          rating: 4.8,
-          students_count: 234,
-          syllabus: [
-            "مقدمه‌ای بر معماری اسلامی",
-            "اصول هندسه اسلامی",
-            "عناصر تزیینی و نمادها",
-            "مواد و تکنیک‌های ساخت",
-            "مطالعه موردی: مساجد تاریخی"
-          ]
-        },
-        {
-          title: "طراحی معماری مدرن",
-          title_en: "Modern Architectural Design",
-          slug: "modern-architectural-design",
-          description: "آموزش اصول و تکنیک‌های طراحی معماری مدرن با تمرکز بر نوآوری و پایداری",
-          description_en: "Learn modern architectural design principles and techniques with focus on innovation and sustainability",
-          price: 3000000,
-          discounted_price: 2500000,
-          currency: "IRR",
-          duration_weeks: 10,
-          level: "intermediate",
-          language: "fa",
-          format: "hybrid",
-          is_featured: true,
-          is_published: true,
-          instructor_name: "سارا جانسون",
-          instructor_name_en: "Sarah Johnson",
-          thumbnail: "/images/courses/modern-design.jpg",
-          rating: 4.7,
-          students_count: 189,
-          syllabus: [
-            "مبانی طراحی مدرن",
-            "استفاده از تکنولوژی در طراحی",
-            "اصول پایداری",
-            "طراحی فضایی و عملکردی",
-            "پروژه نهایی"
-          ]
-        },
-        {
-          title: "BIM و مدل‌سازی اطلاعات ساختمان",
-          title_en: "BIM and Building Information Modeling",
-          slug: "bim-building-information-modeling",
-          description: "آموزش کاربردی نرم‌افزارهای BIM برای مدل‌سازی و مدیریت پروژه‌های معماری",
-          description_en: "Practical training on BIM software for architectural project modeling and management",
-          price: 3500000,
-          discounted_price: 3000000,
-          currency: "IRR",
+          original_price: 3000000,
+          is_free: false,
           duration_weeks: 12,
-          level: "advanced",
-          language: "fa",
-          format: "online",
-          is_featured: false,
-          is_published: true,
-          instructor_name: "محمد کریمی",
-          instructor_name_en: "Mohammad Karimi",
-          thumbnail: "/images/courses/bim-course.jpg",
-          rating: 4.6,
-          students_count: 156,
-          syllabus: [
-            "مقدمه‌ای بر BIM",
-            "آموزش Revit پایه",
-            "مدل‌سازی سه‌بعدی",
-            "مدیریت پروژه با BIM",
-            "تجزیه و تحلیل و خروجی‌گیری"
-          ]
+          duration_hours: 48,
+          max_students: 30,
+          min_students: 5,
+          start_date: new Date("2024-02-01"),
+          end_date: new Date("2024-04-26"),
+          registration_deadline: new Date("2024-01-25"),
+          curriculum: JSON.stringify({
+            modules: [
+              { title: "تاریخچه معماری اسلامی", duration: 6 },
+              { title: "عناصر معماری اسلامی", duration: 8 },
+              { title: "سبک‌های مختلف", duration: 10 },
+              { title: "مطالعه موردی", duration: 24 }
+            ]
+          }),
+          prerequisites: "آشنایی اولیه با تاریخ هنر",
+          learning_outcomes: "درک عمیق از اصول معماری اسلامی",
+          instructor_name: "دکتر علی احمدی",
+          instructor_bio: "استاد دانشگاه و متخصص معماری اسلامی با ۲۰ سال تجربه",
+          average_rating: 4.7,
+          total_reviews: 15,
+          total_students: 0,
+          slug: "intro-islamic-architecture",
+          is_workshop: false,
+          is_online: true,
+          featured: true,
+          sort_order: 1,
+          completion_points: 100,
+          certificate_enabled: true,
+          total_certificates_issued: 0,
+          total_certificates_revoked: 0
         },
         {
-          title: "تاریخ معماری ایران",
-          title_en: "History of Persian Architecture",
-          slug: "history-persian-architecture",
-          description: "بررسی تحول معماری ایران از دوران باستان تا معاصر",
-          description_en: "Survey of Persian architectural evolution from ancient times to contemporary",
-          price: 2000000,
-          discounted_price: 1500000,
-          currency: "IRR",
+          name: "کارگاه طراحی با AutoCAD",
+          name_en: "AutoCAD Design Workshop",
+          description: "کارگاه عملی آموزش نرم‌افزار AutoCAD برای معماران و طراحان",
+          short_description: "آموزش عملی AutoCAD",
+          level: "Beginner",
+          type: "Workshop",
+          status: "Active",
+          price: 1800000,
+          original_price: 2200000,
+          is_free: false,
           duration_weeks: 6,
-          level: "beginner",
-          language: "fa",
-          format: "online",
-          is_featured: false,
-          is_published: true,
-          instructor_name: "آیدا نوری",
-          instructor_name_en: "Aida Nouri",
-          thumbnail: "/images/courses/persian-history.jpg",
-          rating: 4.9,
-          students_count: 298,
-          syllabus: [
-            "معماری دوران هخامنشی",
-            "معماری دوران اشکانی و ساسانی",
-            "معماری اسلامی اولیه",
-            "معماری دوران صفویه",
-            "معماری معاصر ایران"
-          ]
+          duration_hours: 30,
+          max_students: 20,
+          min_students: 8,
+          start_date: new Date("2024-01-15"),
+          end_date: new Date("2024-02-26"),
+          registration_deadline: new Date("2024-01-10"),
+          curriculum: JSON.stringify({
+            modules: [
+              { title: "آشنایی با محیط AutoCAD", duration: 6 },
+              { title: "ابزارهای طراحی", duration: 8 },
+              { title: "طراحی نقشه معماری", duration: 16 }
+            ]
+          }),
+          prerequisites: "آشنایی اولیه با کامپیوتر",
+          learning_outcomes: "تسلط بر طراحی نقشه‌های معماری با AutoCAD",
+          instructor_name: "مهندس محمد کریمی",
+          instructor_bio: "معمار با 15 سال تجربه در طراحی و آموزش",
+          average_rating: 4.5,
+          total_reviews: 8,
+          total_students: 0,
+          slug: "autocad-design-workshop",
+          is_workshop: true,
+          workshop_location: "سالن کامپیوتر مرکز IRAC",
+          is_online: false,
+          featured: true,
+          sort_order: 2,
+          completion_points: 80,
+          certificate_enabled: true,
+          total_certificates_issued: 0,
+          total_certificates_revoked: 0
         },
         {
-          title: "International Architecture Program",
-          title_en: "International Architecture Program",
-          slug: "international-architecture-program",
-          description: "Comprehensive program for international students covering Persian and Islamic architecture",
-          description_en: "Comprehensive program for international students covering Persian and Islamic architecture",
-          price: 5000000,
-          discounted_price: 4500000,
-          currency: "IRR",
+          name: "معماری پایدار و سبز",
+          name_en: "Sustainable and Green Architecture",
+          description: "دوره تخصصی معماری پایدار با تمرکز بر تکنولوژی‌های سبز",
+          short_description: "اصول معماری پایدار",
+          level: "Intermediate",
+          type: "Course",
+          status: "Active",
+          price: 3200000,
+          original_price: 4000000,
+          is_free: false,
           duration_weeks: 16,
-          level: "intermediate",
-          language: "en",
-          format: "hybrid",
-          is_featured: true,
-          is_published: true,
-          instructor_name: "Sarah Johnson",
-          instructor_name_en: "Sarah Johnson",
-          thumbnail: "/images/courses/international-program.jpg",
-          rating: 4.8,
-          students_count: 87,
-          syllabus: [
-            "Introduction to Persian Architecture",
-            "Islamic Architectural Principles",
-            "Contemporary Iranian Architecture",
-            "Cross-cultural Design Methods",
-            "Final Capstone Project"
-          ]
+          duration_hours: 64,
+          max_students: 25,
+          min_students: 10,
+          start_date: new Date("2024-03-01"),
+          end_date: new Date("2024-06-21"),
+          registration_deadline: new Date("2024-02-20"),
+          curriculum: JSON.stringify({
+            modules: [
+              { title: "مبانی معماری پایدار", duration: 12 },
+              { title: "انرژی‌های تجدیدپذیر", duration: 16 },
+              { title: "مصالح سبز", duration: 12 },
+              { title: "طراحی اقلیمی", duration: 24 }
+            ]
+          }),
+          prerequisites: "دانش پایه معماری",
+          learning_outcomes: "طراحی ساختمان‌های با کارایی انرژی بالا",
+          instructor_name: "دکتر سارا محمدی",
+          instructor_bio: "متخصص معماری پایدار",
+          average_rating: 4.9,
+          total_reviews: 22,
+          total_students: 0,
+          slug: "sustainable-green-architecture",
+          is_workshop: false,
+          is_online: true,
+          featured: true,
+          sort_order: 3,
+          completion_points: 150,
+          certificate_enabled: true,
+          total_certificates_issued: 0,
+          total_certificates_revoked: 0
         }
       ];
 
-      const createdCourses: any[] = [];
-      for (const courseData of courses) {
+      const createdCourses = [];
+      let errorCount = 0;
+
+      for (const courseData of coursesData) {
         try {
-          const newCourse = await course.insertOne({
-            doc: {
-              ...courseData,
-              created_at: new Date(),
-              updated_at: new Date(),
-            }
+          // Assign random instructor
+          const randomInstructor = instructors[Math.floor(Math.random() * instructors.length)];
+          const courseWithInstructor = {
+            ...courseData,
+            instructor: randomInstructor._id
+          };
+
+          const createdCourse = await course.addOne({
+            set: courseWithInstructor,
+            get: {}
           });
-          createdCourses.push(newCourse as any);
+
+          createdCourses.push(createdCourse);
+          console.log(`  ✅ Created course: ${courseData.name}`);
         } catch (error) {
-          console.error(`Failed to create course ${courseData.title}:`, error);
+          console.error(`  ❌ Failed to create course ${courseData.name}:`, error.message);
+          errorCount++;
         }
       }
 
-      console.log(`  ✅ Created ${createdCourses.length} courses`);
-      return { success: true, data: createdCourses };
+      console.log(`  🎉 Courses seeded: ${createdCourses.length} created, ${errorCount} errors`);
+      return {
+        success: true,
+        data: createdCourses,
+        created: createdCourses.length,
+        errors: errorCount,
+        message: `Successfully created ${createdCourses.length} courses`
+      };
+
     } catch (error) {
-      console.error("Error seeding courses:", error);
-      return { success: false, error: error.message };
+      console.error("❌ Error seeding courses:", error);
+      return {
+        success: false,
+        error: error.message,
+        created: 0,
+        errors: 1
+      };
     }
   }
 
-  // Article seeding
-  static async seedArticles(clearExisting = false): Promise<SeedResult<any[]>> {
+  // Seed Articles
+  static async seedArticles(): Promise<SeedResult<any[]>> {
     try {
       console.log("📰 Seeding articles...");
 
-      if (clearExisting) {
-        await article.deleteMany({});
-        console.log("  Cleared existing articles");
-      }
-
-      const articles = [
+      const articlesData = [
         {
-          title: "نقش هندسه در معماری اسلامی",
-          title_en: "The Role of Geometry in Islamic Architecture",
+          name: "نقش هندسه در معماری اسلامی",
+          name_en: "The Role of Geometry in Islamic Architecture",
+          description: "هندسه یکی از مهم‌ترین عناصر معماری اسلامی است که نه تنها جنبه زیبایی‌شناختی دارد بلکه حامل مفاهیم عمیق فلسفی و عرفانی نیز می‌باشد. در این مقاله به بررسی نقش هندسه در معماری اسلامی خواهیم پرداخت...",
           slug: "geometry-islamic-architecture",
-          content: "هندسه یکی از مهم‌ترین عناصر معماری اسلامی است که نه تنها جنبه زیبایی‌شناختی دارد بلکه حامل مفاهیم عمیق فلسفی و عرفانی نیز می‌باشد. در این مقاله به بررسی نقش هندسه در معماری اسلامی خواهیم پرداخت...",
-          content_en: "Geometry is one of the most important elements of Islamic architecture that not only has aesthetic aspects but also carries deep philosophical and mystical concepts...",
-          excerpt: "بررسی نقش و اهمیت هندسه در آثار معماری اسلامی",
-          excerpt_en: "Exploring the role and importance of geometry in Islamic architectural works",
+          summary: "بررسی نقش و اهمیت هندسه در آثار معماری اسلامی",
+          content: "محتوای کامل مقاله درباره هندسه در معماری اسلامی...",
           author_name: "دکتر علی احمدی",
-          author_name_en: "Dr. Ali Ahmadi",
-          featured_image: "/images/articles/geometry-islamic.jpg",
           is_published: true,
           is_featured: true,
-          reading_time: 8,
+          reading_time_minutes: 8,
           views_count: 1250,
-          language: "fa"
+          likes_count: 45,
+          average_rating: 4.8,
+          total_reviews: 12
         },
         {
-          title: "معماری پایدار در اقلیم گرم و خشک",
-          title_en: "Sustainable Architecture in Hot-Dry Climate",
+          name: "معماری پایدار در اقلیم گرم و خشک",
+          name_en: "Sustainable Architecture in Hot-Dry Climate",
+          description: "با توجه به چالش‌های اقلیمی و محیط زیستی، معماری پایدار در مناطق گرم و خشک اهمیت ویژه‌ای یافته است...",
           slug: "sustainable-architecture-hot-dry-climate",
-          content: "با توجه به چالش‌های اقلیمی و محیط زیستی، معماری پایدار در مناطق گرم و خشک اهمیت ویژه‌ای یافته است. در این مقاله راهکارهای سنتی و مدرن را بررسی می‌کنیم...",
-          content_en: "Given the climatic and environmental challenges, sustainable architecture in hot and dry regions has gained special importance...",
-          excerpt: "راهکارهای معماری پایدار برای اقلیم گرم و خشک",
-          excerpt_en: "Sustainable architectural solutions for hot and dry climates",
-          author_name: "فاطمه محمودی",
-          author_name_en: "Fateme Mahmoudi",
-          featured_image: "/images/articles/sustainable-design.jpg",
+          summary: "راهکارهای معماری پایدار برای اقلیم گرم و خشک",
+          content: "محتوای کامل مقاله درباره معماری پایدار...",
+          author_name: "دکتر سارا محمدی",
           is_published: true,
           is_featured: false,
-          reading_time: 12,
+          reading_time_minutes: 12,
           views_count: 890,
-          language: "fa"
+          likes_count: 32,
+          average_rating: 4.6,
+          total_reviews: 8
         },
         {
-          title: "Digital Tools in Modern Architecture",
-          title_en: "Digital Tools in Modern Architecture",
-          slug: "digital-tools-modern-architecture",
-          content: "The integration of digital tools in architectural practice has revolutionized the way architects design, visualize, and construct buildings. From BIM software to AI-assisted design...",
-          content_en: "The integration of digital tools in architectural practice has revolutionized the way architects design, visualize, and construct buildings...",
-          excerpt: "How digital technology is transforming architectural practice",
-          excerpt_en: "How digital technology is transforming architectural practice",
-          author_name: "David Chen",
-          author_name_en: "David Chen",
-          featured_image: "/images/articles/digital-tools.jpg",
-          is_published: true,
-          is_featured: true,
-          reading_time: 10,
-          views_count: 1540,
-          language: "en"
-        },
-        {
-          title: "احیای معماری سنتی ایران",
-          title_en: "Revival of Traditional Persian Architecture",
+          name: "احیای معماری سنتی ایران",
+          name_en: "Revival of Traditional Persian Architecture",
+          description: "در دهه‌های اخیر، احیای معماری سنتی ایران به عنوان راهکاری برای حفظ هویت فرهنگی مطرح شده است...",
           slug: "revival-traditional-persian-architecture",
-          content: "در دهه‌های اخیر، احیای معماری سنتی ایران به عنوان راهکاری برای حفظ هویت فرهنگی و ایجاد معماری متناسب با اقلیم و فرهنگ محلی مطرح شده است...",
-          content_en: "In recent decades, the revival of traditional Persian architecture has emerged as a solution for preserving cultural identity...",
-          excerpt: "بررسی روند احیای معماری سنتی در ایران معاصر",
-          excerpt_en: "Examining the revival of traditional architecture in contemporary Iran",
-          author_name: "آیدا نوری",
-          author_name_en: "Aida Nouri",
-          featured_image: "/images/articles/traditional-revival.jpg",
+          summary: "بررسی روند احیای معماری سنتی در ایران معاصر",
+          content: "محتوای کامل مقاله درباره احیای معماری سنتی...",
+          author_name: "مهندس محمد کریمی",
           is_published: true,
           is_featured: false,
-          reading_time: 15,
+          reading_time_minutes: 15,
           views_count: 2100,
-          language: "fa"
-        },
-        {
-          title: "Cross-Cultural Architecture Education",
-          title_en: "Cross-Cultural Architecture Education",
-          slug: "cross-cultural-architecture-education",
-          content: "Architecture education in a globalized world requires understanding different cultural approaches to space, form, and function. This article explores methodologies for cross-cultural architectural learning...",
-          content_en: "Architecture education in a globalized world requires understanding different cultural approaches to space, form, and function...",
-          excerpt: "Exploring methodologies for international architectural education",
-          excerpt_en: "Exploring methodologies for international architectural education",
-          author_name: "James Wilson",
-          author_name_en: "James Wilson",
-          featured_image: "/images/articles/cross-cultural.jpg",
-          is_published: true,
-          is_featured: false,
-          reading_time: 9,
-          views_count: 670,
-          language: "en"
+          likes_count: 78,
+          average_rating: 4.9,
+          total_reviews: 20
         }
       ];
 
-      const createdArticles: any[] = [];
-      for (const articleData of articles) {
+      const createdArticles = [];
+      let errorCount = 0;
+
+      for (const articleData of articlesData) {
         try {
-          const newArticle = await article.insertOne({
-            doc: {
-              ...articleData,
-              created_at: new Date(),
-              updated_at: new Date(),
-            }
-          });
-          createdArticles.push(newArticle as any);
+          const createdArticle = await article.addOne({ set: articleData, get: {} });
+          createdArticles.push(createdArticle);
+          console.log(`  ✅ Created article: ${articleData.name}`);
         } catch (error) {
-          console.error(`Failed to create article ${articleData.title}:`, error);
+          console.error(`  ❌ Failed to create article ${articleData.name}:`, error.message);
+          errorCount++;
         }
       }
 
-      console.log(`  ✅ Created ${createdArticles.length} articles`);
-      return { success: true, data: createdArticles };
+      console.log(`  🎉 Articles seeded: ${createdArticles.length} created, ${errorCount} errors`);
+      return {
+        success: true,
+        data: createdArticles,
+        created: createdArticles.length,
+        errors: errorCount,
+        message: `Successfully created ${createdArticles.length} articles`
+      };
+
     } catch (error) {
-      console.error("Error seeding articles:", error);
-      return { success: false, error: error.message };
+      console.error("❌ Error seeding articles:", error);
+      return {
+        success: false,
+        error: error.message,
+        created: 0,
+        errors: 1
+      };
     }
   }
 
-  // Sample order and transaction seeding
-  static async seedTransactions(clearExisting: boolean, users: any[], courses: any[], products: any[]): Promise<SeedResult<TransactionData>> {
+  // Seed Wallet Transactions
+  static async seedTransactions(): Promise<SeedResult<any[]>> {
     try {
-      console.log("💰 Seeding orders and transactions...");
+      console.log("💰 Seeding wallet transactions...");
 
-      if (clearExisting) {
-        await order.deleteMany({});
-        await wallet_transaction.deleteMany({});
-        console.log("  Cleared existing orders and wallet transactions");
+      // Get existing users
+      const existingUsers = await user.getMany({ get: {}, filter: {} });
+      const regularUsers = existingUsers.filter((u: any) => u.level === "Ordinary");
+
+      if (regularUsers.length === 0) {
+        console.log("  ⚠️  No regular users found, skipping transactions");
+        return {
+          success: true,
+          data: [],
+          created: 0,
+          errors: 0,
+          message: "No users available for transactions"
+        };
       }
 
-      const orders: any[] = [];
-      const walletTransactions: any[] = [];
+      const createdTransactions = [];
+      let errorCount = 0;
 
-      // Create sample orders for different users
-      for (let i = 0; i < Math.min(users.length - 2, 5); i++) { // Skip admin users
-        const user = users[i + 2];
-        const randomCourse = courses[Math.floor(Math.random() * courses.length)];
-        const randomProduct = products && products.length > 0 ? products[Math.floor(Math.random() * products.length)] : null;
+      // Create wallet transactions for random users
+      for (let i = 0; i < Math.min(10, regularUsers.length); i++) {
+        const randomUser = regularUsers[i];
 
-        // Create course order
-        if (randomCourse) {
-          const courseOrder = await order.insertOne({
-            doc: {
-              user: user._id,
-              type: "course",
+        // Create charge transaction
+        try {
+          const chargeTransaction = await wallet_transaction.addOne({
+            set: {
+              user_id: randomUser._id,
+              type: "deposit",
+              amount: Math.floor(Math.random() * 5000000) + 1000000,
               status: "completed",
-              payment_method: "zarinpal",
-              payment_status: "paid",
-              items: [{
-                course: randomCourse._id,
-                title: randomCourse.title,
-                price: randomCourse.price || 2000000,
-                quantity: 1,
-                total_price: randomCourse.price || 2000000
-              }],
-              subtotal: randomCourse.price || 2000000,
-              total_amount: randomCourse.price || 2000000,
-              currency: "IRR",
-              payment_reference: `PAY_${Date.now()}_${i}`,
-              created_at: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-              updated_at: new Date()
-            }
+              description: "شارژ حساب کاربری",
+              reference_id: `CHG_${Date.now()}_${i}`,
+              gateway: "zarinpal",
+              transaction_fee: 5000,
+              net_amount: Math.floor(Math.random() * 5000000) + 995000,
+              processed_at: new Date(),
+              currency: "IRR"
+            },
+            get: {}
           });
-          orders.push(courseOrder as any);
+          createdTransactions.push(chargeTransaction);
+          console.log(`  ✅ Created charge transaction for user ${randomUser.first_name}`);
+        } catch (error) {
+          console.error(`  ❌ Failed to create transaction:`, error.message);
+          errorCount++;
         }
 
-        // Create product order
-        if (randomProduct) {
-          const productOrder = await order.insertOne({
-            doc: {
-              user: user._id,
-              type: "product",
-              status: "completed",
-              payment_method: "wallet",
-              payment_status: "paid",
-              items: [{
-                product: randomProduct._id,
-                title: randomProduct.title,
-                price: randomProduct.price || 500000,
-                quantity: 1,
-                total_price: randomProduct.price || 500000
-              }],
-              subtotal: randomProduct.price || 500000,
-              total_amount: randomProduct.price || 500000,
-              currency: "IRR",
-              created_at: new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000),
-              updated_at: new Date()
-            }
-          });
-          orders.push(productOrder as any);
-
-          // Create corresponding wallet transaction
-          const walletTx = await wallet_transaction.insertOne({
-            doc: {
-              user: user._id,
-              type: "withdraw",
-              amount: randomProduct.price || 500000,
-              description: `خرید ${randomProduct.title}`,
-              reference_type: "order",
-              reference_id: productOrder._id.toString(),
-              status: "completed",
-              created_at: new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000),
-              updated_at: new Date()
-            }
-          });
-          walletTransactions.push(walletTx as any);
-        }
-      }
-
-      console.log(`  ✅ Created ${orders.length} orders and ${walletTransactions.length} wallet transactions`);
-      return { success: true, data: { orders, walletTransactions } };
-    } catch (error) {
-      console.error("Error seeding transactions:", error);
-      return { success: false, error: (error as Error).message };
-    }
-  }
-
-  // Scoring and achievement seeding
-  static async seedScoringData(clearExisting: boolean, users: any[], orders: any[]): Promise<SeedResult<ScoringData>> {
-    try {
-      console.log("🏆 Seeding scoring data and achievements...");
-
-      if (clearExisting) {
-        await scoring_transaction.deleteMany({});
-        await user_level.deleteMany({});
-        console.log("  Cleared existing scoring transactions and user levels");
-      }
-
-      const scoringTransactions: any[] = [];
-      const userLevels: any[] = [];
-
-      // Create scoring data for regular users (skip admin users)
-      for (let i = 2; i < users.length; i++) {
-        const user = users[i];
-        let totalPoints = 0;
-
-        // Award points for purchases
-        const userOrders = orders.filter(order => order.user.toString() === user._id.toString());
-        for (const order of userOrders) {
-          const points = Math.floor((order.total_amount || 0) / 10000); // 1 point per 10,000 IRR
-          const scoring = await scoring_transaction.insertOne({
-            doc: {
-              user: user._id,
-              points: points,
-              action: "purchase",
-              description: `Points for purchasing ${order.items?.[0]?.title || 'item'}`,
-              reference_type: "order",
-              reference_id: order._id.toString(),
-              status: "completed",
-              created_at: order.created_at,
-              updated_at: new Date()
-            }
-          });
-          scoringTransactions.push(scoring as any);
-          totalPoints += points;
-        }
-
-        // Award bonus points for profile completion
-        const profileBonus = 50;
-        const profileScoring = await scoring_transaction.insertOne({
-          doc: {
-            user: user._id,
-            points: profileBonus,
-            action: "profile_complete",
-            description: "Profile completion bonus",
-            status: "completed",
-            created_at: new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000),
-            updated_at: new Date()
+        // Create withdrawal transaction
+        if (Math.random() > 0.5) {
+          try {
+            const withdrawTransaction = await wallet_transaction.addOne({
+              set: {
+                user_id: randomUser._id,
+                type: "withdrawal",
+                amount: Math.floor(Math.random() * 2000000) + 500000,
+                status: "completed",
+                description: "خرید دوره آموزشی",
+                reference_id: `WTH_${Date.now()}_${i}`,
+                gateway: "wallet",
+                transaction_fee: 0,
+                net_amount: Math.floor(Math.random() * 2000000) + 500000,
+                processed_at: new Date(),
+                currency: "IRR"
+              },
+              get: {}
+            });
+            createdTransactions.push(withdrawTransaction);
+            console.log(`  ✅ Created withdrawal transaction for user ${randomUser.first_name}`);
+          } catch (error) {
+            console.error(`  ❌ Failed to create withdrawal transaction:`, error.message);
+            errorCount++;
           }
-        });
-        scoringTransactions.push(profileScoring as any);
-        totalPoints += profileBonus;
-
-        // Award daily login points (random past logins)
-        const loginDays = Math.floor(Math.random() * 10) + 1;
-        for (let day = 0; day < loginDays; day++) {
-          const loginPoints = 5;
-          const loginScoring = await scoring_transaction.insertOne({
-            doc: {
-              user: user._id,
-              points: loginPoints,
-              action: "daily_login",
-              description: `Daily login bonus`,
-              status: "completed",
-              created_at: new Date(Date.now() - day * 24 * 60 * 60 * 1000),
-              updated_at: new Date()
-            }
-          });
-          scoringTransactions.push(loginScoring as any);
-          totalPoints += loginPoints;
         }
-
-        // Calculate level and achievements
-        const level = Math.floor(totalPoints / 500) + 1;
-        const achievements: string[] = [];
-
-        if (userOrders.length > 0) achievements.push("first_purchase");
-        if (totalPoints >= 100) achievements.push("level_up_5");
-        if (loginDays >= 7) achievements.push("daily_login_streak_7");
-        if (level >= 5) achievements.push("level_up_5");
-
-        // Create user level record
-        const userLevel = await user_level.insertOne({
-          doc: {
-            user: user._id,
-            current_points: totalPoints,
-            total_lifetime_points: totalPoints,
-            level: level,
-            achievements: achievements,
-            achievement_count: achievements.length,
-            points_to_next_level: 500 - (totalPoints % 500),
-            level_progress_percentage: Math.round(((totalPoints % 500) / 500) * 100),
-            last_points_earned_at: new Date(),
-            total_purchases: userOrders.length,
-            total_logins: loginDays,
-            daily_login_streak: loginDays,
-            max_daily_login_streak: loginDays,
-            points_from_purchases: totalPoints - profileBonus - (loginDays * 5),
-            points_from_activities: profileBonus + (loginDays * 5),
-            created_at: new Date(),
-            updated_at: new Date()
-          }
-        });
-        userLevels.push(userLevel as any);
       }
 
-      console.log(`  ✅ Created ${scoringTransactions.length} scoring transactions and ${userLevels.length} user levels`);
-      return { success: true, data: { scoringTransactions, userLevels } };
+      console.log(`  🎉 Transactions seeded: ${createdTransactions.length} created, ${errorCount} errors`);
+      return {
+        success: true,
+        data: createdTransactions,
+        created: createdTransactions.length,
+        errors: errorCount,
+        message: `Successfully created ${createdTransactions.length} transactions`
+      };
+
     } catch (error) {
-      console.error("Error seeding scoring data:", error);
-      return { success: false, error: (error as Error).message };
+      console.error("❌ Error seeding transactions:", error);
+      return {
+        success: false,
+        error: error.message,
+        created: 0,
+        errors: 1
+      };
     }
   }
 
-  // Referral seeding
-  static async seedReferrals(users: any[] = []): Promise<SeedResult<any[]>> {
+  // Seed Scoring Data - placeholder for when model is available
+  static async seedScoringData(): Promise<SeedResult<any[]>> {
     try {
-      console.log("🔗 Seeding referrals...");
+      console.log("🏆 Seeding scoring data...");
+      console.log("  ⚠️  Scoring model not yet implemented, skipping...");
 
-      const referrals: any[] = [];
-
-      // Create some referral relationships
-      for (let i = 2; i < Math.min(users.length - 1, 5); i++) {
-        const referrer = users[i];
-        const referee = users[i + 1];
-
-        if (referrer && referee) {
-          const referralCode = `ARCH-${referrer._id.toString().slice(-6)}-${Math.floor(Math.random() * 9999).toString().padStart(4, '0')}`;
-
-          const newReferral = await referral.insertOne({
-            doc: {
-              referrer: referrer._id,
-              referee: referee._id,
-              referral_code: referralCode,
-              status: "completed",
-              commission_rate: 20,
-              commission_earned: 100000,
-              commission_status: "paid",
-              first_purchase_amount: 500000,
-              total_purchase_amount: 500000,
-              purchase_count: 1,
-              registered_at: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-              first_purchase_at: new Date(Date.now() - Math.random() * 25 * 24 * 60 * 60 * 1000),
-              completed_at: new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000),
-              rewarded_at: new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000),
-              group_size: 1,
-              is_verified: true,
-              fraud_check_status: "passed",
-              click_count: Math.floor(Math.random() * 50) + 5,
-              conversion_rate: 20,
-              created_at: new Date(Date.now() - Math.random() * 35 * 24 * 60 * 60 * 1000),
-              updated_at: new Date()
-            }
-          });
-          referrals.push(newReferral as any);
-        }
-      }
-
-      console.log(`  ✅ Created ${referrals.length} referral records`);
-      return { success: true, data: referrals };
+      return {
+        success: true,
+        data: [],
+        created: 0,
+        errors: 0,
+        message: "Scoring data seeding not implemented yet"
+      };
     } catch (error) {
-      console.error("Error seeding referrals:", error);
-      return { success: false, error: error.message };
+      return {
+        success: false,
+        error: error.message,
+        created: 0,
+        errors: 1
+      };
     }
   }
 
-  // Sample bookings seeding
-  static async seedBookings(users: any[] = []): Promise<SeedResult<any[]>> {
+  // Seed Referrals - placeholder for when model is available
+  static async seedReferrals(): Promise<SeedResult<any[]>> {
+    try {
+      console.log("🤝 Seeding referrals...");
+      console.log("  ⚠️  Referral model not yet implemented, skipping...");
+
+      return {
+        success: true,
+        data: [],
+        created: 0,
+        errors: 0,
+        message: "Referral data seeding not implemented yet"
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        created: 0,
+        errors: 1
+      };
+    }
+  }
+
+  // Seed Bookings
+  static async seedBookings(): Promise<SeedResult<any[]>> {
     try {
       console.log("📅 Seeding bookings...");
 
-      const bookings: any[] = [];
-      const spaceTypes = ["private_office", "shared_desk", "meeting_room", "workshop_space"];
+      // Get existing users
+      const existingUsers = await user.getMany({ get: {}, filter: {} });
+      const regularUsers = existingUsers.filter((u: any) => u.level === "Ordinary");
 
-      for (let i = 2; i < Math.min(users.length, 6); i++) {
-        const user = users[i];
+      if (regularUsers.length === 0) {
+        console.log("  ⚠️  No regular users found, skipping bookings");
+        return {
+          success: true,
+          data: [],
+          created: 0,
+          errors: 0,
+          message: "No users available for bookings"
+        };
+      }
+
+      const spaceTypes = ["private_office", "shared_desk", "meeting_room", "workshop_space"];
+      const timeSlots = ["08:00", "09:00", "10:00", "14:00", "15:00", "16:00"];
+
+      const createdBookings = [];
+      let errorCount = 0;
+
+      // Create sample bookings
+      for (let i = 0; i < Math.min(8, regularUsers.length); i++) {
+        const randomUser = regularUsers[i];
         const spaceType = spaceTypes[Math.floor(Math.random() * spaceTypes.length)];
+        const startTime = timeSlots[Math.floor(Math.random() * timeSlots.length)];
+        const duration = Math.floor(Math.random() * 6) + 2; // 2-8 hours
+
+        // Calculate booking date (1-30 days from now)
         const bookingDate = new Date();
         bookingDate.setDate(bookingDate.getDate() + Math.floor(Math.random() * 30) + 1);
 
         const pricing = {
-          private_office: 500000,
-          shared_desk: 200000,
-          meeting_room: 300000,
-          workshop_space: 400000
+          private_office: 400000,
+          shared_desk: 150000,
+          meeting_room: 250000,
+          workshop_space: 350000
         };
 
-        const newBooking = await booking.insertOne({
-          doc: {
+        const hourlyRate = pricing[spaceType] / 8;
+        const totalPrice = hourlyRate * duration;
+
+        try {
+          const bookingData = {
             booking_number: `BK${Date.now().toString().slice(-6)}${i}`,
-            booking_id: `booking_${user._id}_${Date.now()}`,
+            booking_id: `booking_${randomUser._id}_${Date.now()}_${i}`,
             space_type: spaceType,
-            space_name: `${spaceType.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} #${i}`,
+            space_name: `${spaceType.replace('_', ' ')} #${i + 1}`,
+            space_location: `طبقه ${Math.floor(i / 2) + 1}، اتاق ${i + 1}`,
             booking_date: bookingDate,
-            start_time: "09:00",
-            end_time: "17:00",
-            duration_hours: 8,
-            capacity_requested: Math.floor(Math.random() * 5) + 1,
-            status: ["confirmed", "completed", "pending"][Math.floor(Math.random() * 3)],
+            start_time: startTime,
+            end_time: `${parseInt(startTime.split(':')[0]) + duration}:00`,
+            duration_hours: duration,
+            capacity_requested: Math.floor(Math.random() * 8) + 2,
+            capacity_available: Math.floor(Math.random() * 5) + 10,
+            attendee_count: Math.floor(Math.random() * 5) + 1,
+            status: ["confirmed", "pending", "completed"][Math.floor(Math.random() * 3)],
             payment_status: ["paid", "pending"][Math.floor(Math.random() * 2)],
-            hourly_rate: pricing[spaceType] / 8,
-            total_hours: 8,
-            base_price: pricing[spaceType],
-            total_price: pricing[spaceType],
+            hourly_rate: hourlyRate,
+            total_hours: duration,
+            base_price: totalPrice,
+            additional_services_cost: Math.floor(Math.random() * 100000),
+            discount_amount: 0,
+            total_price: totalPrice + Math.floor(Math.random() * 100000),
             currency: "IRR",
-            customer_name: `${user.firstname} ${user.lastname}`,
-            customer_email: user.email,
-            customer_phone: user.phone,
-            purpose: ["Meeting", "Workshop", "Training", "Presentation"][Math.floor(Math.random() * 4)],
-            user: user._id,
-            created_at: new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000),
-            updated_at: new Date()
-          }
-        });
-        bookings.push(newBooking as any);
+            customer_name: `${randomUser.first_name} ${randomUser.last_name}`,
+            customer_phone: randomUser.mobile,
+            company_name: Math.random() > 0.5 ? "شرکت معماری نوین" : "",
+            purpose: ["جلسه کاری", "کارگاه آموزشی", "ارائه پروژه", "جلسه مشتری"][Math.floor(Math.random() * 4)],
+            special_requirements: Math.random() > 0.7 ? "نیاز به پروژکتور و وایت برد" : "",
+            equipment_needed: Math.random() > 0.6 ? "لپ تاپ، پروژکتور" : "",
+            catering_required: Math.random() > 0.8,
+            is_workshop_booking: spaceType === "workshop_space",
+            payment_method: ["wallet", "zarinpal", "bank_transfer"][Math.floor(Math.random() * 3)],
+            admin_notes: Math.random() > 0.8 ? "مشتری ویژه" : "",
+            is_recurring: false
+          };
+
+          const createdBooking = await booking.addOne({
+            set: { ...bookingData, user: randomUser._id },
+            get: {}
+          });
+
+          createdBookings.push(createdBooking);
+          console.log(`  ✅ Created booking: ${bookingData.space_name} for ${randomUser.first_name}`);
+        } catch (error) {
+          console.error(`  ❌ Failed to create booking:`, error.message);
+          errorCount++;
+        }
       }
 
-      console.log(`  ✅ Created ${bookings.length} bookings`);
-      return { success: true, data: bookings };
+      console.log(`  🎉 Bookings seeded: ${createdBookings.length} created, ${errorCount} errors`);
+      return {
+        success: true,
+        data: createdBookings,
+        created: createdBookings.length,
+        errors: errorCount,
+        message: `Successfully created ${createdBookings.length} bookings`
+      };
+
     } catch (error) {
-      console.error("Error seeding bookings:", error);
-      return { success: false, error: error.message };
+      console.error("❌ Error seeding bookings:", error);
+      return {
+        success: false,
+        error: error.message,
+        created: 0,
+        errors: 1
+      };
     }
   }
 
-  // Master seeding function
-  static async seedAll(options: {
-    clearExisting?: boolean,
-    includeTransactions?: boolean,
-    includeScoring?: boolean,
-    includeReferrals?: boolean,
-    includeBookings?: boolean
-  } = {}): Promise<MasterSeedResults> {
+  // Master Seeding Function
+  static async seedAll(): Promise<SeedResult<any>> {
     try {
-      console.log("🚀 Starting master data seeding...");
+      console.log("🚀 Starting comprehensive database seeding...");
       const startTime = Date.now();
 
-      const {
-        clearExisting = false,
-        includeTransactions = true,
-        includeScoring = true,
-        includeReferrals = true,
-        includeBookings = true
-      } = options;
-
-      const resultData = {
-        users: undefined as SeedResult<any[]> | undefined,
-        categories: undefined as SeedResult<CategoryTagData> | undefined,
-        courses: undefined as SeedResult<any[]> | undefined,
-        articles: undefined as SeedResult<any[]> | undefined,
-        products: undefined as SeedResult<any> | undefined,
-        transactions: undefined as SeedResult<TransactionData> | undefined,
-        scoring: undefined as SeedResult<ScoringData> | undefined,
-        referrals: undefined as SeedResult<any[]> | undefined,
-        bookings: undefined as SeedResult<any[]> | undefined,
-        summary: {
-          success_count: 0,
-          error_count: 0,
-          total_entities: 0,
-          duration_ms: 0,
-          operations_completed: [],
-          errors: []
-        }
+      const results = {
+        users: { created: 0, errors: 0 },
+        categories: { created: 0, errors: 0 },
+        courses: { created: 0, errors: 0 },
+        articles: { created: 0, errors: 0 },
+        transactions: { created: 0, errors: 0 },
+        scoring: { created: 0, errors: 0 },
+        referrals: { created: 0, errors: 0 },
+        bookings: { created: 0, errors: 0 }
       };
 
-      // Step 1: Seed users (foundation for all other data)
       console.log("\n=== PHASE 1: Foundation Data ===");
-      resultData.users = await this.seedUsers(clearExisting);
-      if (resultData.users && resultData.users.success) {
-        resultData.summary.success_count++;
-        resultData.summary.total_entities += resultData.users.data?.length || 0;
-      } else {
-        resultData.summary.error_count++;
-      }
 
-      // Step 2: Seed categories and tags
-      resultData.categories = await this.seedCategoriesAndTags(clearExisting);
-      if (resultData.categories && resultData.categories.success) {
-        resultData.summary.success_count++;
-        resultData.summary.total_entities += (resultData.categories.data?.categories?.length || 0) + (resultData.categories.data?.tags?.length || 0);
-      } else {
-        resultData.summary.error_count++;
-      }
+      // Seed Users
+      const userResult = await this.seedUsers();
+      results.users = { created: userResult.created, errors: userResult.errors };
 
-      // Step 3: Seed content (courses, articles)
+      // Seed Categories and Tags
+      const categoryResult = await this.seedCategoriesAndTags();
+      results.categories = { created: categoryResult.created, errors: categoryResult.errors };
+
       console.log("\n=== PHASE 2: Content Data ===");
-      resultData.courses = await this.seedCourses(clearExisting);
-      if (resultData.courses && resultData.courses.success) {
-        resultData.summary.success_count++;
-        resultData.summary.total_entities += resultData.courses.data?.length || 0;
-      } else {
-        resultData.summary.error_count++;
-      }
 
-      resultData.articles = await this.seedArticles(clearExisting);
-      if (resultData.articles && resultData.articles.success) {
-        resultData.summary.success_count++;
-        resultData.summary.total_entities += resultData.articles.data?.length || 0;
-      } else {
-        resultData.summary.error_count++;
-      }
+      // Seed Courses
+      const courseResult = await this.seedCourses();
+      results.courses = { created: courseResult.created, errors: courseResult.errors };
 
-      // Step 4: Seed products (if exists)
-      console.log("\n=== PHASE 3: E-commerce Data ===");
-      try {
-        const { productSeeder } = await import("../src/product/seedProducts.ts");
-        resultData.products = await productSeeder.seedProducts(clearExisting);
-        if (resultData.products && resultData.products.success) {
-          resultData.summary.success_count++;
-          resultData.summary.total_entities += (resultData.products.data?.success_count || resultData.products.data?.length || 0);
-        } else {
-          resultData.summary.error_count++;
-        }
-      } catch (error) {
-        console.log("  ⚠️  Product seeder not available or failed");
-        resultData.summary.error_count++;
-      }
+      // Seed Articles
+      const articleResult = await this.seedArticles();
+      results.articles = { created: articleResult.created, errors: articleResult.errors };
 
-      // Step 5: Seed transactional data
-      if (includeTransactions && resultData.users && resultData.users.success) {
-        console.log("\n=== PHASE 4: Transactional Data ===");
-        resultData.transactions = await this.seedTransactions(
-          clearExisting,
-          resultData.users?.data || [],
-          resultData.courses?.data || [],
-          resultData.products?.data || []
-        );
-        if (resultData.transactions && resultData.transactions.success) {
-          resultData.summary.success_count++;
-          resultData.summary.total_entities += (resultData.transactions.data?.orders?.length || 0) + (resultData.transactions.data?.walletTransactions?.length || 0);
-        } else {
-          resultData.summary.error_count++;
-        }
+      console.log("\n=== PHASE 3: Transactional Data ===");
 
-        // Step 6: Seed scoring and achievements
-        if (includeScoring) {
-          const transactions = resultData.transactions?.data?.orders || [];
-          resultData.scoring = await this.seedScoringData(
-            clearExisting,
-            resultData.users?.data || [],
-            transactions
-          );
-          if (resultData.scoring && resultData.scoring.success) {
-            resultData.summary.success_count++;
-            resultData.summary.total_entities += (resultData.scoring.data?.scoringTransactions?.length || 0) + (resultData.scoring.data?.userLevels?.length || 0);
-          } else {
-            resultData.summary.error_count++;
-          }
-        }
+      // Seed Transactions
+      const transactionResult = await this.seedTransactions();
+      results.transactions = { created: transactionResult.created, errors: transactionResult.errors };
 
-        // Step 7: Seed referrals
-        if (includeReferrals) {
-          console.log("\n=== PHASE 5: User Engagement Data ===");
-          resultData.referrals = await this.seedReferrals(resultData.users?.data || []);
-          if (resultData.referrals && resultData.referrals.success) {
-            resultData.summary.success_count++;
-            resultData.summary.total_entities += resultData.referrals.data?.length || 0;
-          } else {
-            resultData.summary.error_count++;
-          }
-        }
+      // Seed Scoring Data (placeholder)
+      const scoringResult = await this.seedScoringData();
+      results.scoring = { created: scoringResult.created, errors: scoringResult.errors };
 
-        // Step 8: Seed bookings
-        if (includeBookings) {
-          resultData.bookings = await this.seedBookings(resultData.users?.data || []);
-          if (resultData.bookings && resultData.bookings.success) {
-            resultData.summary.success_count++;
-            resultData.summary.total_entities += resultData.bookings.data?.length || 0;
-          } else {
-            resultData.summary.error_count++;
-          }
-        }
-      }
+      console.log("\n=== PHASE 4: User Engagement Data ===");
 
-      // Calculate final summary
+      // Seed Referrals (placeholder)
+      const referralResult = await this.seedReferrals();
+      results.referrals = { created: referralResult.created, errors: referralResult.errors };
+
+      // Seed Bookings
+      const bookingResult = await this.seedBookings();
+      results.bookings = { created: bookingResult.created, errors: bookingResult.errors };
+
       const endTime = Date.now();
-      resultData.summary.duration_ms = endTime - startTime;
+      const duration = (endTime - startTime) / 1000;
+
+      const totalCreated = Object.values(results).reduce((sum, result) => sum + result.created, 0);
+      const totalErrors = Object.values(results).reduce((sum, result) => sum + result.errors, 0);
 
       console.log("\n🎉 =========================");
       console.log("   SEEDING COMPLETED!");
       console.log("🎉 =========================");
-      console.log(`📊 Total entities created: ${resultData.summary.total_entities}`);
-      console.log(`✅ Successful operations: ${resultData.summary.success_count}`);
-      console.log(`❌ Failed operations: ${resultData.summary.error_count}`);
-      console.log(`⏱️  Total duration: ${Math.round(resultData.summary.duration_ms / 1000)}s`);
+      console.log(`📊 Total entities created: ${totalCreated}`);
+      console.log(`✅ Total successful operations: ${totalCreated}`);
+      console.log(`❌ Total errors: ${totalErrors}`);
+      console.log(`⏱️  Total duration: ${duration.toFixed(2)}s`);
+      console.log("\n📋 BREAKDOWN:");
+      console.log(`👥 Users: ${results.users.created} created, ${results.users.errors} errors`);
+      console.log(`🏷️  Categories & Tags: ${results.categories.created} created, ${results.categories.errors} errors`);
+      console.log(`📚 Courses: ${results.courses.created} created, ${results.courses.errors} errors`);
+      console.log(`📰 Articles: ${results.articles.created} created, ${results.articles.errors} errors`);
+      console.log(`💰 Transactions: ${results.transactions.created} created, ${results.transactions.errors} errors`);
+      console.log(`🏆 Scoring: ${results.scoring.created} created, ${results.scoring.errors} errors`);
+      console.log(`🤝 Referrals: ${results.referrals.created} created, ${results.referrals.errors} errors`);
+      console.log(`📅 Bookings: ${results.bookings.created} created, ${results.bookings.errors} errors`);
       console.log("=========================\n");
 
       return {
-        success: resultData.summary.error_count < resultData.summary.success_count,
-        data: resultData
+        success: totalErrors < totalCreated,
+        data: results,
+        created: totalCreated,
+        errors: totalErrors,
+        message: `Seeding completed: ${totalCreated} entities created with ${totalErrors} errors`
       };
 
     } catch (error) {
-      console.error("Error in master seeding:", error);
+      console.error("❌ Master seeding failed:", error);
       return {
         success: false,
-        error: (error as Error).message
+        error: error.message,
+        created: 0,
+        errors: 1
       };
     }
   }
 }
 
-// Export the seeder
+// Export for use in seed script
 export const masterSeeder = MasterDataSeeder;

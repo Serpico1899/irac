@@ -1,5 +1,5 @@
 import { jwt } from "@deps";
-import { coreApp } from "../mod.ts";
+import {  coreApp  } from "@app";
 import { throwError } from "./throwError.ts";
 
 const secretKey = Deno.env.get("TOKEN_KEY") || "simpleSecretKey";

@@ -21,14 +21,8 @@
     }
   },
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": false,
-    "experimentalDecorators": true,
     "strict": false,
-    "target": "ES2022",
-    "lib": ["dom", "ES2022"],
-    "allowImportingTsExtensions": true,
-    "allowArbitraryExtensions": true
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns", "ES2022"]
   },
   "lint": {
     "rules": {
@@ -40,7 +34,8 @@
     "@deps": "./deps.ts",
     "@lib": "./utils/mod.ts",
     "@model": "./models/mod.ts",
-    "@app": "./mod.ts"
+    "@app": "./mod.ts",
+    "mongodb": "npm:mongodb@^6.3.0"
   },
   "nodeModulesDir": "auto"
 }

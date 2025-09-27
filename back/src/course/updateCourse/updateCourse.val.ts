@@ -9,7 +9,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 import {
   course_level_enums,
   course_status_enums,

@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { sendCertificateEmailNotificationAct } from "./sendCertificateEmailNotification.fn.ts";
 import { sendCertificateEmailNotificationValidator } from "./sendCertificateEmailNotification.val.ts";
 

@@ -1,5 +1,5 @@
 import type { ActFn, Document } from "@deps";
-import { user } from "../../../mod.ts";
+import {  user  } from "@app";
 
 export const countUsersFn: ActFn = async (body) => {
   const {

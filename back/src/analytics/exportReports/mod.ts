@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { exportReportsValidator } from "./exportReports.val.ts";
 import { exportReportsFn } from "./exportReports.fn.ts";
 

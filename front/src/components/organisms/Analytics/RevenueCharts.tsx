@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import {
   ChartBarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
   CurrencyDollarIcon,
   CalendarIcon,
-  RefreshIcon,
+  ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
 interface RevenueChartData {
@@ -153,7 +153,7 @@ const RevenueCharts: React.FC = () => {
     return (
       <div className="flex items-center justify-center p-8">
         <div className="flex items-center gap-3 text-gray-500">
-          <RefreshIcon className="h-6 w-6 animate-spin" />
+          <ArrowPathIcon className="h-6 w-6 animate-spin" />
           <span>در حال بارگذاری نمودار درآمد...</span>
         </div>
       </div>
@@ -235,7 +235,7 @@ const RevenueCharts: React.FC = () => {
             className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
             title="به‌روزرسانی داده‌ها"
           >
-            <RefreshIcon className="h-4 w-4" />
+            <ArrowPathIcon className="h-4 w-4" />
           </button>
         </div>
       </div>
@@ -255,9 +255,9 @@ const RevenueCharts: React.FC = () => {
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1">
             {data.revenueGrowth >= 0 ? (
-              <TrendingUpIcon className="h-5 w-5 text-green-600" />
+              <ArrowTrendingUpIcon className="h-5 w-5 text-green-600" />
             ) : (
-              <TrendingDownIcon className="h-5 w-5 text-red-600" />
+              <ArrowTrendingDownIcon className="h-5 w-5 text-red-600" />
             )}
             <div className="flex flex-col">
               <span className="text-sm text-gray-600">رشد درآمد</span>

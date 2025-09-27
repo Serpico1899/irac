@@ -5,7 +5,7 @@ import {
   objectIdValidation,
   optional,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 const periodEnum = enums(["week", "month", "quarter", "year", "all"]);
 

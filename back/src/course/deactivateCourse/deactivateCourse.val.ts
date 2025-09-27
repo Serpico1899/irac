@@ -6,7 +6,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 const enrollment_action_array = ["notify", "cancel_enrollments", "transfer_enrollments"];
 const enrollment_action_enums = enums(enrollment_action_array);

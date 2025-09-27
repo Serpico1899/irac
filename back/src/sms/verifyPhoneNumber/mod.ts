@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { verifyPhoneNumberFn } from "./act.ts";
 import { verifyPhoneNumberValidator } from "./verifyPhoneNumber.val.ts";
 

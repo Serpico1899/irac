@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 import { ObjectId } from "npm:mongodb";
 import { emailService, type EmailMessage } from "../../email/emailService.ts";
 import type { SendEmailNotificationInput } from "./sendEmailNotification.val.ts";

@@ -1,6 +1,6 @@
 import type { ActFn } from "@deps";
 import { throwError } from "@lib";
-import { myRedis, user, booking } from "../../../mod.ts";
+import {  myRedis, user, booking  } from "@app";
 import { smsService, SMSService } from "../smsService.ts";
 
 // Booking SMS constants

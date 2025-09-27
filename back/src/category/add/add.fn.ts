@@ -1,5 +1,5 @@
 import { type ActFn } from "@deps";
-import { category, coreApp } from "../../../mod.ts";
+import {  category, coreApp  } from "@app";
 import type { MyContext } from "@lib";
 
 export const addFn: ActFn = async (body) => {

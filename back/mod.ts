@@ -1,4 +1,5 @@
 import { lesan, MongoClient, redis } from "@deps";
+
 import {
   articles,
   bookings,
@@ -21,7 +22,9 @@ import {
   wallets,
   wallet_transactions,
 } from "@model";
+
 import { functionsSetup } from "./src/mod.ts";
+import { ensureIndexes } from "./setup/create-indexes.ts"; // ✅ NEW import
 
 const MONGO_URI = Deno.env.get("MONGO_URI") || "mongodb://127.0.0.1:27017/";
 const REDIS_URI = Deno.env.get("REDIS_URI");
@@ -58,8 +61,10 @@ export const group = groups();
 export const group_member = group_members();
 
 export const { setAct, setService, getAtcsWithServices } = coreApp.acts;
-
 export const { selectStruct, getSchemas } = coreApp.schemas;
+
+// ✅ Ensure indexes AFTER DB and models are registered, BEFORE server runs
+await ensureIndexes();
 
 // Initialize server and wait for it to be ready before setting up routes
 await coreApp.runServer({

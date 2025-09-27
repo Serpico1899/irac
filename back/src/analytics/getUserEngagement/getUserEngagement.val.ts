@@ -1,6 +1,6 @@
-import { object, string, optional, union, literal, boolean, number } from "../../../../../../deps.ts";
+import { object, string, optional, union, literal, boolean, number } from "@deps";
 
-const getUserEngagementValidator = {
+const getUserEngagementStruct = {
   set: {
     dateFrom: optional(string()),
     dateTo: optional(string()),
@@ -41,11 +41,11 @@ const getUserEngagementValidator = {
   },
 };
 
-export const getUserEngagementValidator = object(getUserEngagementValidator);
+export const getUserEngagementValidator = object(getUserEngagementStruct);
 
 export const schema = {
   details: {
-    set: getUserEngagementValidator.set,
-    get: getUserEngagementValidator.get,
+    set: getUserEngagementStruct.set,
+    get: getUserEngagementStruct.get,
   },
 };

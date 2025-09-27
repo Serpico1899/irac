@@ -1,64 +1,66 @@
-import { lesan, string, object, array, number, optional, boolean } from "@deps";
-import { coreApp } from "../../../mod.ts";
-import { calculateBulkDiscount } from "../calculateGroupDiscount/mod.ts";
+import { ActFn, ObjectId } from "@deps";
+import { groups, group_members, courses, enrollments, users } from "@model";
 
-const processGroupEnrollmentValidator = {
-  set: {
-    group_id: string(),
-    course_id: string(),
-    member_ids: array(string()), // Array of user IDs to enroll
-    payment_method: optional(string()),
-    use_centralized_billing: optional(boolean()),
-    apply_group_discount: optional(boolean()),
-    notes: optional(string()),
-  },
-  get: object({
-    success: boolean(),
-    message: string(),
-    enrollment_summary: object({
-      total_enrolled: number(),
-      successful_enrollments: number(),
-      failed_enrollments: number(),
-      total_original_price: number(),
-      total_discount_amount: number(),
-      total_final_price: number(),
-      discount_percentage: number(),
-    }),
-    enrollments: array(object({
-      user_id: string(),
-      user_name: string(),
-      status: string(),
-      enrollment_id: optional(string()),
-      error_message: optional(string()),
-    })),
-  }),
-};
+export interface ProcessGroupEnrollmentInput {
+  group_id: string;
+  course_id: string;
+  enrollment_type?: "bulk" | "individual";
+  member_ids?: string[]; // If not provided, will enroll all active members
+  payment_method?: "centralized" | "individual";
+  notes?: string;
+}
 
-export const processGroupEnrollmentFn = lesan.Fn(processGroupEnrollmentValidator, async (body, context, coreApp) => {
-  // Check if user is authenticated
-  if (!context?.user?._id) {
-    throw new Error("User must be authenticated to process group enrollment");
-  }
+export interface ProcessGroupEnrollmentOutput {
+  success: boolean;
+  enrollment_summary: {
+    group_name: string;
+    course_name: string;
+    total_members: number;
+    successful_enrollments: number;
+    failed_enrollments: number;
+    total_discount: number;
+    individual_price: number;
+    group_price: number;
+    savings_per_member: number;
+  };
+  enrollments: Array<{
+    member_id: string;
+    user_name: string;
+    enrollment_status: "success" | "failed" | "already_enrolled";
+    error_message?: string;
+  }>;
+  payment_info?: {
+    payment_method: string;
+    total_amount: number;
+    discount_applied: number;
+    requires_payment: boolean;
+  };
+}
 
-  const groupModel = coreApp.odm.newModel("group", {}, {});
-  const groupMemberModel = coreApp.odm.newModel("group_member", {}, {});
-  const courseModel = coreApp.odm.newModel("course", {}, {});
-  const enrollmentModel = coreApp.odm.newModel("enrollment", {}, {});
-  const userModel = coreApp.odm.newModel("user", {}, {});
+const processGroupEnrollmentHandler: ActFn = async (body) => {
+  const {
+    group_id,
+    course_id,
+    enrollment_type = "bulk",
+    member_ids,
+    payment_method = "centralized",
+    notes
+  }: ProcessGroupEnrollmentInput = body.details;
 
   try {
-    const { group_id, course_id, member_ids, apply_group_discount = true } = body.details.set;
+    // Check if user is authenticated
+    if (!body.user?._id) {
+      throw new Error("User must be authenticated to process group enrollment");
+    }
 
     // Find and validate the group
-    const group = await groupModel.findOne({
-      filters: { _id: group_id },
-      relations: {
+    const group = await groups().findOne({
+      filters: { _id: new ObjectId(group_id) },
+      populate: {
         leader: {
-          users: {
-            _id: 1,
-            first_name: 1,
-            last_name: 1,
-          },
+          first_name: 1,
+          last_name: 1,
+          mobile: 1,
         },
       },
     });
@@ -67,244 +69,230 @@ export const processGroupEnrollmentFn = lesan.Fn(processGroupEnrollmentValidator
       throw new Error("گروه مورد نظر یافت نشد");
     }
 
-    // Check if current user has permission to process group enrollments
-    const currentUserMembership = await groupMemberModel.findOne({
+    // Check if current user has permission to process enrollments
+    const currentUserMembership = await group_members().findOne({
       filters: {
-        group: group_id,
-        user: context.user._id,
+        "group._id": new ObjectId(group_id),
+        "user._id": new ObjectId(body.user._id),
       },
     });
 
-    const isLeader = group.leader._id.toString() === context.user._id.toString();
+    const isLeader = group.leader._id.toString() === body.user._id.toString();
     const canProcessEnrollments = currentUserMembership?.role === "Admin" ||
       currentUserMembership?.can_approve_members ||
       isLeader;
 
     if (!canProcessEnrollments) {
-      throw new Error("شما اجازه ثبت‌نام گروهی در این گروه را ندارید");
+      throw new Error("شما اجازه ثبت‌نام گروهی را ندارید");
     }
 
     // Find and validate the course
-    const course = await courseModel.findOne({
-      filters: { _id: course_id },
+    const course = await courses().findOne({
+      filters: { _id: new ObjectId(course_id) },
     });
 
     if (!course) {
       throw new Error("دوره مورد نظر یافت نشد");
     }
 
-    if (!course.is_active) {
-      throw new Error("این دوره در حال حاضر فعال نیست");
+    if (course.status !== "Active") {
+      throw new Error("این دوره در حال حاضر قابل ثبت‌نام نیست");
     }
 
-    // Validate member IDs and check if they're part of the group
-    const validMembers = [];
-    const invalidMembers = [];
-
-    for (const member_id of member_ids) {
-      // Check if user exists
-      const user = await userModel.findOne({
-        filters: { _id: member_id },
-      });
-
-      if (!user) {
-        invalidMembers.push({
-          user_id: member_id,
-          user_name: "کاربر نامشخص",
-          error: "کاربر یافت نشد",
-        });
-        continue;
-      }
-
-      // Check if user is an active member of the group
-      const membership = await groupMemberModel.findOne({
+    // Get target members for enrollment
+    let targetMembers;
+    if (member_ids && member_ids.length > 0) {
+      // Enroll specific members
+      targetMembers = await group_members().find({
         filters: {
-          group: group_id,
-          user: member_id,
+          "group._id": new ObjectId(group_id),
+          "user._id": { $in: member_ids.map(id => new ObjectId(id)) },
           status: "Active",
         },
-      });
-
-      if (!membership) {
-        invalidMembers.push({
-          user_id: member_id,
-          user_name: `${user.first_name} ${user.last_name}`,
-          error: "کاربر عضو فعال گروه نیست",
-        });
-        continue;
-      }
-
-      // Check if user is already enrolled in the course
-      const existingEnrollment = await enrollmentModel.findOne({
-        filters: {
-          user: member_id,
-          course: course_id,
+        populate: {
+          user: {
+            first_name: 1,
+            last_name: 1,
+            mobile: 1,
+            email: 1,
+          },
         },
       });
-
-      if (existingEnrollment) {
-        invalidMembers.push({
-          user_id: member_id,
-          user_name: `${user.first_name} ${user.last_name}`,
-          error: "قبلاً در این دوره ثبت‌نام شده",
-        });
-        continue;
-      }
-
-      validMembers.push({
-        user_id: member_id,
-        user_name: `${user.first_name} ${user.last_name}`,
-        user: user,
-        membership: membership,
+    } else {
+      // Enroll all active members
+      targetMembers = await group_members().find({
+        filters: {
+          "group._id": new ObjectId(group_id),
+          status: "Active",
+        },
+        populate: {
+          user: {
+            first_name: 1,
+            last_name: 1,
+            mobile: 1,
+            email: 1,
+          },
+        },
       });
     }
 
-    if (validMembers.length === 0) {
-      throw new Error("هیچ عضو معتبری برای ثبت‌نام یافت نشد");
+    if (!targetMembers.length) {
+      throw new Error("عضو فعالی برای ثبت‌نام یافت نشد");
     }
 
-    // Calculate pricing and discounts
-    const coursePrice = course.price || 0;
-    const totalOriginalPrice = coursePrice * validMembers.length;
+    // Calculate group discount
+    const memberCount = targetMembers.length;
+    const originalPrice = course.price || 0;
+    let discountPercentage = 0;
 
-    let discountInfo = {
-      discountPercentage: 0,
-      discountAmount: 0,
-      finalPrice: coursePrice,
-      tier: "None",
-    };
-
-    if (apply_group_discount && group.current_member_count >= group.min_members_for_discount) {
-      discountInfo = calculateBulkDiscount(
-        coursePrice,
-        group.current_member_count,
-        group.min_members_for_discount
-      );
+    // Apply group discount logic
+    if (memberCount >= 21) {
+      discountPercentage = 25;
+    } else if (memberCount >= 11) {
+      discountPercentage = 20;
+    } else if (memberCount >= 6) {
+      discountPercentage = 15;
+    } else if (memberCount >= 3) {
+      discountPercentage = 10;
     }
 
-    const totalDiscountAmount = discountInfo.discountAmount * validMembers.length;
-    const totalFinalPrice = totalOriginalPrice - totalDiscountAmount;
+    const discountAmount = (originalPrice * discountPercentage) / 100;
+    const discountedPrice = originalPrice - discountAmount;
+    const savingsPerMember = discountAmount;
+    const totalDiscount = discountAmount * memberCount;
 
     // Process enrollments
-    const successfulEnrollments = [];
-    const failedEnrollments = [];
+    const enrollmentResults = [];
+    let successfulEnrollments = 0;
+    let failedEnrollments = 0;
 
-    for (const member of validMembers) {
+    for (const member of targetMembers) {
       try {
+        // Check if already enrolled
+        const existingEnrollment = await enrollments().findOne({
+          filters: {
+            "user._id": new ObjectId(member.user._id),
+            "course._id": new ObjectId(course_id),
+          },
+        });
+
+        if (existingEnrollment) {
+          enrollmentResults.push({
+            member_id: member._id.toString(),
+            user_name: `${member.user.first_name} ${member.user.last_name}`,
+            enrollment_status: "already_enrolled" as const,
+            error_message: "قبلاً در این دوره ثبت‌نام شده",
+          });
+          continue;
+        }
+
+        // Create enrollment
         const enrollmentData = {
+          status: "Active",
           enrollment_date: new Date(),
-          status: "Active", // Can be set to "Pending_Payment" if payment processing is separate
           progress_percentage: 0,
-          points_earned: 0,
-          points_used_for_enrollment: 0,
-          total_paid: discountInfo.finalPrice,
-          discount_applied: discountInfo.discountAmount,
           is_group_enrollment: true,
-          group_discount_percentage: discountInfo.discountPercentage,
-          original_price: coursePrice,
-          group_savings: discountInfo.discountAmount,
-          attendance_count: 0,
-          certificate_issued: false,
-          certificate_revoked: false,
-          notes: body.details.set.notes || `ثبت‌نام گروهی - گروه: ${group.name}`,
+          group_discount_percentage: discountPercentage,
+          group_discount_amount: savingsPerMember,
+          original_price: originalPrice,
+          paid_price: discountedPrice,
+          payment_method: payment_method,
+          payment_status: payment_method === "centralized" ? "Pending" : "Unpaid",
+          notes: notes,
           created_at: new Date(),
           updated_at: new Date(),
         };
 
-        const enrollment = await enrollmentModel.insertOne({
+        const newEnrollment = await enrollments().insertOne({
           doc: enrollmentData,
           relations: {
-            user: member.user_id,
+            user: member.user._id.toString(),
             course: course_id,
             group: group_id,
           },
         });
 
-        if (enrollment) {
-          // Update member statistics
-          await groupMemberModel.updateOne({
-            filters: { _id: member.membership._id },
+        if (newEnrollment) {
+          // Update member's enrollment count
+          await group_members().updateOne({
+            filters: { _id: new ObjectId(member._id) },
             update: {
-              $inc: {
-                enrollments_count: 1,
-                total_savings: discountInfo.discountAmount,
-              },
+              $inc: { enrollments_count: 1 },
               $set: { updated_at: new Date() },
             },
           });
 
-          successfulEnrollments.push({
-            user_id: member.user_id,
-            user_name: member.user_name,
-            status: "success",
-            enrollment_id: enrollment._id,
+          enrollmentResults.push({
+            member_id: member._id.toString(),
+            user_name: `${member.user.first_name} ${member.user.last_name}`,
+            enrollment_status: "success" as const,
           });
+
+          successfulEnrollments++;
         }
       } catch (error) {
-        console.error(`Error enrolling user ${member.user_id}:`, error);
-        failedEnrollments.push({
-          user_id: member.user_id,
-          user_name: member.user_name,
-          status: "failed",
+        enrollmentResults.push({
+          member_id: member._id.toString(),
+          user_name: `${member.user.first_name} ${member.user.last_name}`,
+          enrollment_status: "failed" as const,
           error_message: error.message,
         });
+        failedEnrollments++;
       }
     }
 
     // Update group statistics
-    if (successfulEnrollments.length > 0) {
-      await groupModel.updateOne({
-        filters: { _id: group_id },
+    if (successfulEnrollments > 0) {
+      await groups().updateOne({
+        filters: { _id: new ObjectId(group_id) },
         update: {
           $inc: {
-            total_enrollments: successfulEnrollments.length,
-            total_savings: totalDiscountAmount,
+            total_enrollments: successfulEnrollments,
+            total_savings: totalDiscount,
           },
-          $set: { updated_at: new Date() },
+          $set: {
+            current_discount_percentage: discountPercentage,
+            updated_at: new Date(),
+          },
         },
       });
     }
 
-    // Prepare response
-    const allEnrollments = [
-      ...successfulEnrollments,
-      ...failedEnrollments,
-      ...invalidMembers.map(m => ({
-        user_id: m.user_id,
-        user_name: m.user_name,
-        status: "failed",
-        error_message: m.error,
-      })),
-    ];
-
-    const enrollmentSummary = {
-      total_enrolled: member_ids.length,
-      successful_enrollments: successfulEnrollments.length,
-      failed_enrollments: failedEnrollments.length + invalidMembers.length,
-      total_original_price: totalOriginalPrice,
-      total_discount_amount: totalDiscountAmount,
-      total_final_price: totalFinalPrice,
-      discount_percentage: discountInfo.discountPercentage,
+    const result: ProcessGroupEnrollmentOutput = {
+      success: true,
+      enrollment_summary: {
+        group_name: group.name,
+        course_name: course.name || course.name_en,
+        total_members: memberCount,
+        successful_enrollments: successfulEnrollments,
+        failed_enrollments: failedEnrollments,
+        total_discount: totalDiscount,
+        individual_price: originalPrice,
+        group_price: discountedPrice,
+        savings_per_member: savingsPerMember,
+      },
+      enrollments: enrollmentResults,
+      payment_info: {
+        payment_method,
+        total_amount: discountedPrice * successfulEnrollments,
+        discount_applied: totalDiscount,
+        requires_payment: !course.is_free && successfulEnrollments > 0,
+      },
     };
-
-    const message = successfulEnrollments.length > 0
-      ? `${successfulEnrollments.length} عضو با موفقیت در دوره "${course.title}" ثبت‌نام شدند`
-      : "هیچ ثبت‌نام موفقی انجام نشد";
 
     return {
       success: true,
-      body: {
-        success: true,
-        message,
-        enrollment_summary: enrollmentSummary,
-        enrollments: allEnrollments,
-      },
+      data: result
     };
 
   } catch (error) {
     console.error("Error processing group enrollment:", error);
-    throw new Error(`خطا در پردازش ثبت‌نام گروهی: ${error.message}`);
+    return {
+      success: false,
+      message: `خطا در ثبت‌نام گروهی: ${error.message}`,
+      error: error.message
+    };
   }
-});
+};
 
-export default processGroupEnrollmentFn;
+export default processGroupEnrollmentHandler;

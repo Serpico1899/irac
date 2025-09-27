@@ -1,6 +1,6 @@
 import type { MyContext } from "@lib";
 import { grantAccess, setTokens, setUser } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { revokeCertificateFn } from "./revokeCertificate.fn.ts";
 import { revokeCertificateValidator } from "./revokeCertificate.val.ts";
 

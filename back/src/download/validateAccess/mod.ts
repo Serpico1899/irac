@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { validateAccessValidator } from "./validateAccess.val.ts";
 import { validateAccessFn } from "./validateAccess.fn.ts";
 

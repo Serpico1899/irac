@@ -1,5 +1,5 @@
 import { type ActFn } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export interface GetArticleStatsInput {
   period?: "week" | "month" | "quarter" | "year" | "all";

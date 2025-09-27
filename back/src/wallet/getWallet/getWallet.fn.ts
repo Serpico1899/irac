@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId } from "@deps";
-import { wallet } from "../../../mod.ts";
+import {  wallet  } from "@app";
 import { WalletService } from "../service.ts";
 
 export const getWalletFn: ActFn = async (body) => {

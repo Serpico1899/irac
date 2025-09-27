@@ -1,5 +1,5 @@
 import { grantAccess, setTokens, setUser } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { dashboardStatisticFn } from "./dashboardStatistic.fn.ts";
 import { dashboardStatisticValidator } from "./dashboardStatistic.val.ts";
 

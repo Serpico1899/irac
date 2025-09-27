@@ -1,6 +1,6 @@
 import { ActFn } from "@deps";
 import { scoringService } from "../../scoring/scoringService.ts";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const completeCourseFn: ActFn = async (body) => {
   try {

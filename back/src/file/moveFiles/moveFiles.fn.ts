@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId, ensureDir } from "@deps";
-import { coreApp, file, article, course, user } from "../../../mod.ts";
+import {  coreApp, file, article, course, user  } from "@app";
 import type { MyContext } from "@lib";
 
 export const moveFilesFn: ActFn = async (body) => {

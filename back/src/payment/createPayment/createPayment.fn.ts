@@ -1,6 +1,6 @@
 import { ActFn, ObjectId } from "@deps";
 import { createZarinPalService } from "../zarinpal.ts";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export interface CreatePaymentDetails {
   amount: number;

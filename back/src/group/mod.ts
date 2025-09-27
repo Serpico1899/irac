@@ -1,52 +1,15 @@
-import { lesan } from "@deps";
-import createGroupFn from "./createGroup/mod.ts";
-import addGroupMemberFn from "./addGroupMember/mod.ts";
-import calculateGroupDiscountFn from "./calculateGroupDiscount/mod.ts";
-import processGroupEnrollmentFn from "./processGroupEnrollment/mod.ts";
-import getGroupStatsFn from "./getGroupStats/mod.ts";
+export { groupSetup } from "./setup.ts";
 
-// Group Management Functions
-export const createGroup = lesan.Fn(createGroupFn);
-export const addGroupMember = lesan.Fn(addGroupMemberFn);
-export const calculateGroupDiscount = lesan.Fn(calculateGroupDiscountFn);
-export const processGroupEnrollment = lesan.Fn(processGroupEnrollmentFn);
-export const getGroupStats = lesan.Fn(getGroupStatsFn);
+// Re-export handlers for direct use if needed
+export { default as createGroupHandler } from "./createGroup/mod.ts";
+export { default as addGroupMemberHandler } from "./addGroupMember/mod.ts";
+export { default as calculateGroupDiscountHandler } from "./calculateGroupDiscount/mod.ts";
+export { default as processGroupEnrollmentHandler } from "./processGroupEnrollment/mod.ts";
+export { default as getGroupStatsHandler } from "./getGroupStats/mod.ts";
 
-// Export utility functions
-export {
-  getGroupDiscountPercentage,
-  calculateBulkDiscount
-} from "./calculateGroupDiscount/mod.ts";
-
-// Group-related constants
-export const GROUP_DISCOUNT_TIERS = {
-  TIER1: { min: 3, max: 5, percentage: 10, name: "برنزی" },
-  TIER2: { min: 6, max: 10, percentage: 15, name: "نقره‌ای" },
-  TIER3: { min: 11, max: 20, percentage: 20, name: "طلایی" },
-  TIER4: { min: 21, max: Infinity, percentage: 25, name: "پلاتین" },
-};
-
-export const GROUP_TYPES = {
-  REGULAR: "Regular",
-  CORPORATE: "Corporate",
-};
-
-export const GROUP_STATUS = {
-  ACTIVE: "Active",
-  INACTIVE: "Inactive",
-  SUSPENDED: "Suspended",
-  COMPLETED: "Completed",
-};
-
-export const MEMBER_ROLES = {
-  MEMBER: "Member",
-  CO_LEADER: "CoLeader",
-  ADMIN: "Admin",
-};
-
-export const MEMBER_STATUS = {
-  ACTIVE: "Active",
-  PENDING: "Pending",
-  REMOVED: "Removed",
-  SUSPENDED: "Suspended",
-};
+// Re-export types
+export type { CreateGroupInput, CreateGroupOutput } from "./createGroup/mod.ts";
+export type { AddGroupMemberInput, AddGroupMemberOutput } from "./addGroupMember/mod.ts";
+export type { CalculateGroupDiscountInput, CalculateGroupDiscountOutput } from "./calculateGroupDiscount/mod.ts";
+export type { ProcessGroupEnrollmentInput, ProcessGroupEnrollmentOutput } from "./processGroupEnrollment/mod.ts";
+export type { GetGroupStatsInput, GetGroupStatsOutput } from "./getGroupStats/mod.ts";

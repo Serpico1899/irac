@@ -1,12 +1,12 @@
 import type { ActFn } from "@deps";
-import {
+import { 
   article,
   category,
   course,
   file,
   tag,
   user,
-} from "../../../mod.ts";
+ } from "@app";
 
 export const dashboardStatisticFn: ActFn = async () => {
   const articles = await article.countDocument({});

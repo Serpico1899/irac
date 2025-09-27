@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { sendBookingReminderFn } from "./act.ts";
 import { sendBookingReminderValidator } from "./sendBookingReminder.val.ts";
 

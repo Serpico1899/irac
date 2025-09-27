@@ -1,5 +1,5 @@
 import { number, object, optional } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 import { user_level_emums } from "@model";
 
 export const getUsersValidator = () => {

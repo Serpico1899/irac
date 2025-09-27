@@ -4,7 +4,7 @@ import {
   type RelationSortOrderType,
   string,
 } from "@deps";
-import { coreApp } from "../mod.ts";
+import {  coreApp  } from "@app";
 import { createUpdateAt } from "@lib";
 
 export const pure_file = {

@@ -1,5 +1,5 @@
 import { boolean, object, optional, string } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const getFileDetailsValidator = () => {
   return object({

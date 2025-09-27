@@ -1,7 +1,7 @@
 import { grantAccess, setTokens, setUser } from "@lib";
 import { removeFn } from "./remove.fn.ts";
 import { removeValidator } from "./remove.val.ts";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const removeSetup = () =>
 	coreApp.acts.setAct({

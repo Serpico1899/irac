@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 import { product_models } from "@model";
 
 export interface SeedProductData {

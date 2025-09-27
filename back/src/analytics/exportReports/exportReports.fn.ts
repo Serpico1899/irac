@@ -1,8 +1,8 @@
 import {
   ObjectId,
-  ActFn,
-  getMainDb
-} from "../../../../../../../deps.ts";
+  ActFn
+} from "@deps";
+import {  order, invoice, course, booking, user, enrollment  } from "@app";
 
 export const exportReportsFn: ActFn = async (body) => {
   const {
@@ -27,7 +27,7 @@ export const exportReportsFn: ActFn = async (body) => {
     confidential = false
   } = body.details;
 
-  const mainDb = await getMainDb();
+  // Using models instead of direct database access
 
   try {
     // Calculate date range

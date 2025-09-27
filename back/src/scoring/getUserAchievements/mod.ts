@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { getUserAchievementsValidator } from "./getUserAchievements.val.ts";
 import { getUserAchievementsFn } from "./getUserAchievements.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

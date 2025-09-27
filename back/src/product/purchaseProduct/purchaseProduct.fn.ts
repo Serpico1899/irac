@@ -1,6 +1,6 @@
 import { ActFn } from "@deps";
 import { productService } from "../productService.ts";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { order_models } from "@model";
 import { scoringService } from "../../scoring/scoringService.ts";
 import { referralService } from "../../referral/referralService.ts";

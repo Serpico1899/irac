@@ -3,7 +3,7 @@ import {
   setTokens,
   setUser,
 } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { updateProgressFn } from "./updateProgress.fn.ts";
 import { updateProgressValidator } from "./updateProgress.val.ts";
 

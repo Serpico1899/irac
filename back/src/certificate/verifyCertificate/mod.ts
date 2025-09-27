@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { verifyCertificateFn } from "./verifyCertificate.fn.ts";
 import { verifyCertificateValidator } from "./verifyCertificate.val.ts";
 

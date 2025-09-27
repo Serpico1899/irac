@@ -1,5 +1,5 @@
 import { object } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const getMeValidator = () => {
   return object({

@@ -1,5 +1,5 @@
 import { object, string } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 import { is_valid_national_number_struct, mobile_pattern } from "@model";
 
 export const tempUserValidator = () => {

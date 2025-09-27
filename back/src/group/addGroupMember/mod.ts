@@ -1,43 +1,48 @@
-import { lesan, string, object, optional, boolean, enums } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import { ActFn, ObjectId } from "@deps";
+import { groups, group_members, users } from "@model";
 
-const addGroupMemberValidator = {
-  set: {
-    group_id: string(),
-    user_id: optional(string()),
-    user_mobile: optional(string()),
-    user_email: optional(string()),
-    role: optional(enums(["Member", "CoLeader", "Admin"])),
-    can_invite_others: optional(boolean()),
-    can_approve_members: optional(boolean()),
-    auto_approve: optional(boolean()),
-    notes: optional(string()),
-  },
-  get: object({
-    success: boolean(),
-    message: string(),
-    member: optional(object({
-      _id: string(),
-      user: object({}),
-      status: string(),
-      role: string(),
-      join_date: string(),
-    })),
-  }),
-};
+export interface AddGroupMemberInput {
+  group_id: string;
+  user_id?: string;
+  user_mobile?: string;
+  user_email?: string;
+  role?: "Member" | "CoLeader" | "Admin";
+  can_invite_others?: boolean;
+  can_approve_members?: boolean;
+  auto_approve?: boolean;
+  notes?: string;
+}
 
-export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, context, coreApp) => {
-  // Check if user is authenticated
-  if (!context?.user?._id) {
-    throw new Error("User must be authenticated to add group members");
-  }
+export interface AddGroupMemberOutput {
+  success: boolean;
+  message: string;
+  member?: {
+    _id: string;
+    user: any;
+    status: string;
+    role: string;
+    join_date: string;
+  };
+}
 
-  const groupModel = coreApp.odm.newModel("group", {}, {});
-  const groupMemberModel = coreApp.odm.newModel("group_member", {}, {});
-  const userModel = coreApp.odm.newModel("user", {}, {});
+const addGroupMemberHandler: ActFn = async (body) => {
+  const {
+    group_id,
+    user_id,
+    user_mobile,
+    user_email,
+    role = "Member",
+    can_invite_others = false,
+    can_approve_members = false,
+    auto_approve = true,
+    notes
+  }: AddGroupMemberInput = body.details;
 
   try {
-    const { group_id, user_id, user_mobile, user_email } = body.details.set;
+    // Check if user is authenticated
+    if (!body.user?._id) {
+      throw new Error("User must be authenticated to add group members");
+    }
 
     // Validate input - at least one identifier must be provided
     if (!user_id && !user_mobile && !user_email) {
@@ -45,15 +50,13 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
     }
 
     // Find the group
-    const group = await groupModel.findOne({
-      filters: { _id: group_id },
-      relations: {
+    const group = await groups().findOne({
+      filters: { _id: new ObjectId(group_id) },
+      populate: {
         leader: {
-          users: {
-            _id: 1,
-            first_name: 1,
-            last_name: 1,
-          },
+          _id: 1,
+          first_name: 1,
+          last_name: 1,
         },
       },
     });
@@ -63,14 +66,14 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
     }
 
     // Check if current user has permission to add members
-    const currentUserMembership = await groupMemberModel.findOne({
+    const currentUserMembership = await group_members().findOne({
       filters: {
-        group: group_id,
-        user: context.user._id,
+        "group._id": new ObjectId(group_id),
+        "user._id": new ObjectId(body.user._id),
       },
     });
 
-    const isLeader = group.leader._id.toString() === context.user._id.toString();
+    const isLeader = group.leader._id.toString() === body.user._id.toString();
     const canAddMembers = currentUserMembership?.can_approve_members ||
       currentUserMembership?.role === "Admin" ||
       isLeader;
@@ -87,17 +90,16 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
     // Find the target user
     let targetUser;
     if (user_id) {
-      targetUser = await userModel.findOne({
-        filters: { _id: user_id },
+      targetUser = await users().findOne({
+        filters: { _id: new ObjectId(user_id) },
       });
     } else if (user_mobile) {
-      targetUser = await userModel.findOne({
+      targetUser = await users().findOne({
         filters: { mobile: user_mobile },
       });
     } else if (user_email) {
-      // Assuming user model has email field, or search by mobile as proxy
-      targetUser = await userModel.findOne({
-        filters: { mobile: user_email }, // Adjust based on actual schema
+      targetUser = await users().findOne({
+        filters: { email: user_email },
       });
     }
 
@@ -106,10 +108,10 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
     }
 
     // Check if user is already a member
-    const existingMembership = await groupMemberModel.findOne({
+    const existingMembership = await group_members().findOne({
       filters: {
-        group: group_id,
-        user: targetUser._id,
+        "group._id": new ObjectId(group_id),
+        "user._id": new ObjectId(targetUser._id),
       },
     });
 
@@ -122,7 +124,7 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
     }
 
     // Determine if member should be auto-approved
-    const shouldAutoApprove = body.details.set.auto_approve !== false &&
+    const shouldAutoApprove = auto_approve !== false &&
       (group.auto_approve_members || isLeader);
 
     // Create group member
@@ -130,23 +132,23 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
       status: shouldAutoApprove ? "Active" : "Pending",
       join_date: new Date(),
       approved_date: shouldAutoApprove ? new Date() : undefined,
-      role: body.details.set.role || "Member",
-      can_invite_others: body.details.set.can_invite_others || false,
-      can_approve_members: body.details.set.can_approve_members || false,
+      role: role,
+      can_invite_others: can_invite_others,
+      can_approve_members: can_approve_members,
       enrollments_count: 0,
       completed_courses: 0,
       total_savings: 0,
-      notes: body.details.set.notes,
+      notes: notes,
       created_at: new Date(),
       updated_at: new Date(),
     };
 
-    const newMember = await groupMemberModel.insertOne({
+    const newMember = await group_members().insertOne({
       doc: memberData,
       relations: {
         group: group_id,
-        user: targetUser._id,
-        approved_by: shouldAutoApprove ? context.user._id : undefined,
+        user: targetUser._id.toString(),
+        approved_by: shouldAutoApprove ? body.user._id : undefined,
       },
     });
 
@@ -156,8 +158,8 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
 
     // Update group member count if approved
     if (shouldAutoApprove) {
-      await groupModel.updateOne({
-        filters: { _id: group_id },
+      await groups().updateOne({
+        filters: { _id: new ObjectId(group_id) },
         update: {
           $inc: { current_member_count: 1 },
           $set: { updated_at: new Date() },
@@ -166,15 +168,13 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
     }
 
     // Get the complete member data with user info
-    const completeMember = await groupMemberModel.findOne({
-      filters: { _id: newMember._id },
-      relations: {
+    const completeMember = await group_members().findOne({
+      filters: { _id: new ObjectId(newMember._id) },
+      populate: {
         user: {
-          users: {
-            first_name: 1,
-            last_name: 1,
-            mobile: 1,
-          },
+          first_name: 1,
+          last_name: 1,
+          mobile: 1,
         },
       },
     });
@@ -183,25 +183,31 @@ export const addGroupMemberFn = lesan.Fn(addGroupMemberValidator, async (body, c
       `${targetUser.first_name} ${targetUser.last_name} با موفقیت به گروه اضافه شد` :
       `درخواست عضویت ${targetUser.first_name} ${targetUser.last_name} ارسال شد و منتظر تأیید است`;
 
+    const result: AddGroupMemberOutput = {
+      success: true,
+      message: statusMessage,
+      member: completeMember ? {
+        _id: completeMember._id.toString(),
+        user: completeMember.user,
+        status: completeMember.status,
+        role: completeMember.role,
+        join_date: completeMember.join_date.toISOString(),
+      } : undefined,
+    };
+
     return {
       success: true,
-      body: {
-        success: true,
-        message: statusMessage,
-        member: completeMember ? {
-          _id: completeMember._id,
-          user: completeMember.user,
-          status: completeMember.status,
-          role: completeMember.role,
-          join_date: completeMember.join_date.toISOString(),
-        } : undefined,
-      },
+      data: result
     };
 
   } catch (error) {
     console.error("Error adding group member:", error);
-    throw new Error(`خطا در افزودن عضو: ${error.message}`);
+    return {
+      success: false,
+      message: `خطا در افزودن عضو: ${error.message}`,
+      error: error.message
+    };
   }
-});
+};
 
-export default addGroupMemberFn;
+export default addGroupMemberHandler;

@@ -10,7 +10,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 const enrollment_status_array = ["Active", "Pending", "Completed", "Suspended", "Cancelled"];
 const enrollment_status_enums = enums(enrollment_status_array);

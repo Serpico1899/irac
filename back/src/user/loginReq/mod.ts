@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { loginReqUserFn } from "./loginReqUser.fn.ts";
 import { loginUserReqValidator } from "./loginReqUser.val.ts";
 

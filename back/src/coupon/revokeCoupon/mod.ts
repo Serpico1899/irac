@@ -1,6 +1,7 @@
-import { coreApp } from "../../../mod.ts";
+import { coreApp } from "@app";
 import {
   ActFn,
+  number,
   object,
   optional,
   string,

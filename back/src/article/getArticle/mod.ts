@@ -4,7 +4,7 @@ import {
   setTokens,
   setUser,
 } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { getArticleFn } from "./getArticle.fn.ts";
 import { getArticleValidator } from "./getArticle.val.ts";
 

@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { automaticCertificateService, processPendingCertificates } from "../integrations/automaticGeneration.ts";
 import { CertificatePDFGenerator, PDFUtils } from "../utils/pdfGenerator.ts";
 import { crypto } from "@deps";

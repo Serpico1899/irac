@@ -1,7 +1,7 @@
 import type { ActFn } from "@deps";
 import { jwt } from "@deps";
 import { throwError, jwtTokenKey } from "@lib";
-import { myRedis, user } from "../../../mod.ts";
+import {  myRedis, user  } from "@app";
 
 const MAX_VERIFICATION_ATTEMPTS = 3;
 

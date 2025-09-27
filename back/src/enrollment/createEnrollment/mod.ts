@@ -6,7 +6,7 @@ import {
   setUser,
   throwError,
 } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { createEnrollmentFn } from "./createEnrollment.fn.ts";
 import { createEnrollmentValidator } from "./createEnrollment.val.ts";
 

@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { generateReferralCodeValidator } from "./generateReferralCode.val.ts";
 import { generateReferralCodeFn } from "./generateReferralCode.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

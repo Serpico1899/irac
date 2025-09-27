@@ -1,4 +1,4 @@
-import { coreApp } from "../mod.ts";
+import { coreApp } from "@app";
 import {
   boolean,
   coerce,
@@ -184,17 +184,7 @@ export const group_member_relations = {
 
 // Export models
 export const groups = () =>
-  coreApp.odm.newModel("group", group_pure, group_relations, {
-    createIndex: {
-      indexSpec: { "group_code": 1 },
-      options: { unique: true },
-    },
-  });
+  coreApp.odm.newModel("group", group_pure, group_relations);
 
 export const group_members = () =>
-  coreApp.odm.newModel("group_member", group_member_pure, group_member_relations, {
-    createIndex: {
-      indexSpec: { "group": 1, "user": 1 },
-      options: { unique: true },
-    },
-  });
+  coreApp.odm.newModel("group_member", group_member_pure, group_member_relations);

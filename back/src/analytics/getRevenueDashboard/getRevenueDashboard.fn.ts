@@ -1,8 +1,8 @@
 import {
   ObjectId,
-  ActFn,
-  getMainDb
-} from "../../../../../../../deps.ts";
+  ActFn
+} from "@deps";
+import {  order, invoice, course, booking, user  } from "@app";
 
 export const getRevenueDashboardFn: ActFn = async (body) => {
   const {
@@ -14,7 +14,7 @@ export const getRevenueDashboardFn: ActFn = async (body) => {
     currency = "IRR"
   } = body.details;
 
-  const mainDb = await getMainDb();
+  // Using models instead of direct database access
 
   // Calculate date range
   const now = new Date();

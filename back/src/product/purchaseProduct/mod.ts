@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { purchaseProductValidator } from "./purchaseProduct.val.ts";
 import { purchaseProductFn } from "./purchaseProduct.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

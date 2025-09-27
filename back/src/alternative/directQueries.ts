@@ -1,5 +1,5 @@
 // Direct database queries to work around model registration issues
-import { coreApp } from "../../mod.ts";
+import { coreApp } from "@app";
 
 export class DirectQueryService {
   static async getUserScore(userId: string) {
@@ -62,10 +62,89 @@ export class DirectQueryService {
     }
   }
 
+  static async getCourses(limit = 10, skip = 0) {
+    try {
+      const collection = coreApp.odm.db.collection("course");
+      const courses = await collection.find({
+        status: "Active"
+      })
+        .limit(limit)
+        .skip(skip)
+        .toArray();
+
+      const totalCourses = await collection.countDocuments({ status: "Active" });
+
+      return {
+        success: true,
+        data: {
+          courses,
+          total: totalCourses,
+          hasMore: (skip + limit) < totalCourses
+        }
+      };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
+
+  static async getArticles(limit = 10, skip = 0) {
+    try {
+      const collection = coreApp.odm.db.collection("article");
+      const articles = await collection.find({
+        status: "Published"
+      })
+        .sort({ created_at: -1 })
+        .limit(limit)
+        .skip(skip)
+        .toArray();
+
+      const totalArticles = await collection.countDocuments({ status: "Published" });
+
+      return {
+        success: true,
+        data: {
+          articles,
+          total: totalArticles,
+          hasMore: (skip + limit) < totalArticles
+        }
+      };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
+
+  static async getCourse(courseId: string) {
+    try {
+      const collection = coreApp.odm.db.collection("course");
+      const course = await collection.findOne({
+        _id: coreApp.odm.ObjectId(courseId)
+      });
+
+      return { success: true, data: course };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
+
+  static async getArticle(articleId: string) {
+    try {
+      const collection = coreApp.odm.db.collection("article");
+      const article = await collection.findOne({
+        _id: coreApp.odm.ObjectId(articleId)
+      });
+
+      return { success: true, data: article };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
+
   static async getSystemStats() {
     try {
       const collections = {
         users: await coreApp.odm.db.collection("user").countDocuments(),
+        courses: await coreApp.odm.db.collection("course").countDocuments(),
+        articles: await coreApp.odm.db.collection("article").countDocuments(),
         products: await coreApp.odm.db.collection("product").countDocuments(),
         orders: await coreApp.odm.db.collection("order").countDocuments(),
         bookings: await coreApp.odm.db.collection("booking").countDocuments(),

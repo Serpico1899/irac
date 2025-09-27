@@ -1,5 +1,5 @@
 // Comprehensive Seed Data Service for IRAC
-import { coreApp } from "../mod.ts";
+import {  coreApp  } from "@app";
 
 export class ComprehensiveSeedService {
   static async seedUsers() {

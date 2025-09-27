@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 import getRecommendationsHandler from "./getRecommendations.fn.ts";
 import { getRecommendationsValidator } from "./getRecommendations.val.ts";
 

@@ -56,7 +56,7 @@ export type {
   PaymentGatewayEnvironment,
   PaymentGatewayConfig,
   CurrencyCode,
-} from "../../models/payment_gateway.ts";
+} from "@model";
 export {
   paymentGatewayType,
   paymentGatewayStatus,
@@ -69,7 +69,7 @@ export {
   gatewaySupportsFeature,
   validateAmountForGateway,
   calculateGatewayFees,
-} from "../../models/payment_gateway.ts";
+} from "@model";
 
 // Export payment transaction models
 export type {
@@ -79,7 +79,7 @@ export type {
   PaymentMethod,
   PaymentPurpose,
   CurrencyType,
-} from "../../models/payment_transaction.ts";
+} from "@model";
 export {
   paymentTransactionStatus,
   paymentTransactionType,
@@ -95,7 +95,7 @@ export {
   calculateRefundableAmount,
   addTransactionEvent,
   createDefaultTransaction,
-} from "../../models/payment_transaction.ts";
+} from "@model";
 
 // Payment module setup function
 export const paymentSetup = () => {

@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { CertificatePDFGenerator } from "../utils/pdfGenerator.ts";
 import { smsService } from "../../sms/smsService.ts";
 import { emailService } from "../../email/emailService.ts";

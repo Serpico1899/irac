@@ -1,7 +1,7 @@
 import { grantAccess, setTokens, setUser } from "@lib";
 import { countFn } from "./count.fn.ts";
 import { countValidator } from "./count.val.ts";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const countSetup = () =>
 	coreApp.acts.setAct({

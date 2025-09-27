@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser } from "@lib";
 import { uploadFileFn } from "./uploadFile.fn.ts";
 import { uploadFileValidator } from "./uploadFile.val.ts";

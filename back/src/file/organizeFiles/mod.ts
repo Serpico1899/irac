@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser, grantAccess } from "@lib";
 import { organizeFilesFn } from "./organizeFiles.fn.ts";
 import { organizeFilesValidator } from "./organizeFiles.val.ts";

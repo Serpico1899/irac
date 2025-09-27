@@ -1,6 +1,6 @@
 import type { ActFn } from "@deps";
 import { throwError } from "@lib";
-import { myRedis } from "../../../mod.ts";
+import {  myRedis  } from "@app";
 import { smsService, SMSService } from "../smsService.ts";
 
 // Rate limiting constants

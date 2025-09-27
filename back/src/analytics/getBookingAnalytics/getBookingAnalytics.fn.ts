@@ -1,8 +1,8 @@
 import {
   ObjectId,
-  ActFn,
-  getMainDb
-} from "../../../../../../../deps.ts";
+  ActFn
+} from "@deps";
+import {  order, invoice, course, booking, user  } from "@app";
 
 export const getBookingAnalyticsFn: ActFn = async (body) => {
   const {
@@ -17,7 +17,7 @@ export const getBookingAnalyticsFn: ActFn = async (body) => {
     groupBy = "day"
   } = body.details;
 
-  const mainDb = await getMainDb();
+  // Using models instead of direct database access
 
   // Calculate date range
   const now = new Date();

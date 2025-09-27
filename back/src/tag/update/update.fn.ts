@@ -1,5 +1,5 @@
 import { type ActFn, type Infer, object, ObjectId } from "@deps";
-import { tag } from "../../../mod.ts";
+import {  tag  } from "@app";
 import { shared_relation_pure } from "@model";
 
 export const updateFn: ActFn = async (body) => {

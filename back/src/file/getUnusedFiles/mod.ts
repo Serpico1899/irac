@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser, grantAccess } from "@lib";
 import { getUnusedFilesFn } from "./getUnusedFiles.fn.ts";
 import { getUnusedFilesValidator } from "./getUnusedFiles.val.ts";

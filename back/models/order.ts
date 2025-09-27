@@ -1,4 +1,4 @@
-import { coreApp } from "../mod.ts";
+import { coreApp } from "@app";
 import {
   array,
   boolean,
@@ -148,7 +148,8 @@ export const order_model_relations = {
 
 export const order_models = () =>
   coreApp.odm.newModel("order", order_model_pure, order_model_relations, {
-    createIndex: {
+    createIndex:
+    {
       indexSpec: { "order_number": 1 },
       options: { unique: true },
     },

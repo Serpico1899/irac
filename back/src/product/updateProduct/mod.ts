@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { updateProductValidator } from "./updateProduct.val.ts";
 import { updateProductFn } from "./updateProduct.fn.ts";
 

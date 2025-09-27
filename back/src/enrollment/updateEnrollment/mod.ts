@@ -3,7 +3,7 @@ import {
   setTokens,
   setUser,
 } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { updateEnrollmentFn } from "./updateEnrollment.fn.ts";
 import { updateEnrollmentValidator } from "./updateEnrollment.val.ts";
 

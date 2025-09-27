@@ -1,5 +1,5 @@
 import type { ActFn } from "@deps";
-import { tag } from "../../../mod.ts";
+import {  tag  } from "@app";
 
 export const getsFn: ActFn = async (body) => {
 	const {

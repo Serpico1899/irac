@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { getCoursePerformanceValidator } from "./getCoursePerformance.val.ts";
 import { getCoursePerformanceFn } from "./getCoursePerformance.fn.ts";
 

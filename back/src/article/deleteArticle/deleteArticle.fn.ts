@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId } from "@deps";
-import { article, coreApp } from "../../../mod.ts";
+import {  article, coreApp  } from "@app";
 
 export const deleteArticleFn: ActFn = async (body) => {
   const { set: { _id }, get } = body.details;

@@ -143,58 +143,37 @@ async function seedDatabase() {
     await client.connect();
     const db = client.db(DB_NAME);
 
-    info("🌱 Seeding Users (Admin, Managers, Regular Users)...");
-    const userResults = await MasterDataSeeder.seedUsers();
-    success(`Users seeded: ${userResults.created} created, ${userResults.errors} errors`);
+    // Use the comprehensive seeding function
+    info("🌱 Starting comprehensive database seeding...");
+    const seedResults = await MasterDataSeeder.seedAll();
 
-    info("🏷️  Seeding Categories and Tags...");
-    const categoryResults = await MasterDataSeeder.seedCategoriesAndTags();
-    success(`Categories & Tags seeded: ${categoryResults.created} created`);
+    if (seedResults.success) {
+      success("🎉 Database seeding completed successfully!");
+      const duration = (Date.now() - startTime) / 1000;
+      info(`Total duration: ${duration.toFixed(2)} seconds`);
 
-    info("📚 Seeding Courses...");
-    const courseResults = await MasterDataSeeder.seedCourses();
-    success(`Courses seeded: ${courseResults.created} created`);
+      console.log("");
+      console.log(colors.cyan + "📊 SEEDING SUMMARY:" + colors.reset);
+      console.log(`  📊 Total entities: ${seedResults.created} created`);
+      console.log(`  ❌ Total errors: ${seedResults.errors}`);
 
-    info("📰 Seeding Articles...");
-    const articleResults = await MasterDataSeeder.seedArticles();
-    success(`Articles seeded: ${articleResults.created} created`);
-
-    info("💰 Seeding Wallet Transactions...");
-    const transactionResults = await MasterDataSeeder.seedTransactions();
-    success(`Transactions seeded: ${transactionResults.created} created`);
-
-    info("🏆 Seeding Scoring Data...");
-    const scoringResults = await MasterDataSeeder.seedScoringData();
-    success(`Scoring data seeded: ${scoringResults.created} created`);
-
-    info("🤝 Seeding Referral System...");
-    const referralResults = await MasterDataSeeder.seedReferrals();
-    success(`Referrals seeded: ${referralResults.created} created`);
-
-    info("📅 Seeding Booking System...");
-    const bookingResults = await MasterDataSeeder.seedBookings();
-    success(`Bookings seeded: ${bookingResults.created} created`);
-
-    await client.close();
-
-    const duration = (Date.now() - startTime) / 1000;
-
-    console.log("");
-    success("🎉 Database seeding completed successfully!");
-    info(`Total duration: ${duration.toFixed(2)} seconds`);
-
-    // Summary
-    console.log("");
-    console.log(colors.cyan + "📊 SEEDING SUMMARY:" + colors.reset);
-    console.log(`  👥 Users: ${userResults.created} created`);
-    console.log(`  🏷️  Categories & Tags: ${categoryResults.created} created`);
-    console.log(`  📚 Courses: ${courseResults.created} created`);
-    console.log(`  📰 Articles: ${articleResults.created} created`);
-    console.log(`  💰 Transactions: ${transactionResults.created} created`);
-    console.log(`  🏆 Scoring Data: ${scoringResults.created} created`);
-    console.log(`  🤝 Referrals: ${referralResults.created} created`);
-    console.log(`  📅 Bookings: ${bookingResults.created} created`);
-    console.log("");
+      if (seedResults.data) {
+        const results = seedResults.data as any;
+        console.log(`  👥 Users: ${results.users.created} created, ${results.users.errors} errors`);
+        console.log(`  🏷️  Categories & Tags: ${results.categories.created} created, ${results.categories.errors} errors`);
+        console.log(`  📚 Courses: ${results.courses.created} created, ${results.courses.errors} errors`);
+        console.log(`  📰 Articles: ${results.articles.created} created, ${results.articles.errors} errors`);
+        console.log(`  💰 Transactions: ${results.transactions.created} created, ${results.transactions.errors} errors`);
+        console.log(`  🏆 Scoring Data: ${results.scoring.created} created, ${results.scoring.errors} errors`);
+        console.log(`  🤝 Referrals: ${results.referrals.created} created, ${results.referrals.errors} errors`);
+        console.log(`  📅 Bookings: ${results.bookings.created} created, ${results.bookings.errors} errors`);
+      }
+      console.log("");
+    } else {
+      error(`Database seeding failed: ${seedResults.error}`);
+      console.log("");
+      Deno.exit(1);
+    }
 
     // Next steps
     console.log(colors.yellow + "🚀 NEXT STEPS:" + colors.reset);
@@ -233,23 +212,48 @@ async function seedSpecific(component: string) {
   switch (component.toLowerCase()) {
     case 'users':
       const userResults = await MasterDataSeeder.seedUsers();
-      success(`Users seeded: ${userResults.created} created`);
+      if (userResults.success) {
+        success(`Users seeded: ${userResults.created} created, ${userResults.errors} errors`);
+      } else {
+        error(`Users seeding failed: ${userResults.error}`);
+      }
       break;
 
     case 'categories':
     case 'tags':
       const categoryResults = await MasterDataSeeder.seedCategoriesAndTags();
-      success(`Categories & Tags seeded: ${categoryResults.created} created`);
+      if (categoryResults.success) {
+        success(`Categories & Tags seeded: ${categoryResults.created} created, ${categoryResults.errors} errors`);
+      } else {
+        error(`Categories & Tags seeding failed: ${categoryResults.error}`);
+      }
       break;
 
     case 'courses':
       const courseResults = await MasterDataSeeder.seedCourses();
-      success(`Courses seeded: ${courseResults.created} created`);
+      if (courseResults.success) {
+        success(`Courses seeded: ${courseResults.created} created, ${courseResults.errors} errors`);
+      } else {
+        error(`Courses seeding failed: ${courseResults.error}`);
+      }
       break;
 
     case 'articles':
       const articleResults = await MasterDataSeeder.seedArticles();
-      success(`Articles seeded: ${articleResults.created} created`);
+      if (articleResults.success) {
+        success(`Articles seeded: ${articleResults.created} created, ${articleResults.errors} errors`);
+      } else {
+        error(`Articles seeding failed: ${articleResults.error}`);
+      }
+      break;
+
+    case 'bookings':
+      const bookingResults = await MasterDataSeeder.seedBookings();
+      if (bookingResults.success) {
+        success(`Bookings seeded: ${bookingResults.created} created, ${bookingResults.errors} errors`);
+      } else {
+        error(`Bookings seeding failed: ${bookingResults.error}`);
+      }
       break;
 
     case 'all':
@@ -258,7 +262,7 @@ async function seedSpecific(component: string) {
 
     default:
       error(`Unknown component: ${component}`);
-      console.log("Available components: users, categories, tags, courses, articles, all");
+      console.log("Available components: users, categories, tags, courses, articles, bookings, all");
       Deno.exit(1);
   }
 }

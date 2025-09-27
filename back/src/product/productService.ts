@@ -1,10 +1,10 @@
-import { coreApp } from "../../mod.ts";
+import { coreApp } from "@app";
 import {
   product_models,
   product_type_array,
   product_category_array,
   product_status_array,
-} from "../../models/product.ts";
+} from "@model";
 
 export interface ProductQuery {
   page?: number;

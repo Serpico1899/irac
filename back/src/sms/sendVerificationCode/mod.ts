@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { sendVerificationCodeFn } from "./act.ts";
 import { sendVerificationCodeValidator } from "./sendVerificationCode.val.ts";
 

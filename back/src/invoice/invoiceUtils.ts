@@ -3,7 +3,7 @@ import {
   invoice_status_array,
   invoice_type_array,
   tax_type_array
-} from "@models";
+} from "@model";
 
 // Validation utilities
 export const validateInvoiceData = (data: any): { isValid: boolean; errors: string[] } => {

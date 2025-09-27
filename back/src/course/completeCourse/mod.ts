@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { completeCourseValidator } from "./completeCourse.val.ts";
 import { completeCourseFn } from "./completeCourse.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

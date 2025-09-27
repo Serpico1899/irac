@@ -1,5 +1,5 @@
 import { array, boolean, number, object, optional, string, instance } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const bulkUploadValidator = () => {
   return object({

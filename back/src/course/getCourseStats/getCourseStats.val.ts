@@ -10,7 +10,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 const timeframe_array = ["week", "month", "quarter", "year", "all", "custom"];
 const timeframe_enums = enums(timeframe_array);

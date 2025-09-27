@@ -3,7 +3,7 @@ import {
   setTokens,
   setUser,
 } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { getArticleStatsFn } from "./getArticleStats.fn.ts";
 import { getArticleStatsValidator } from "./getArticleStats.val.ts";
 

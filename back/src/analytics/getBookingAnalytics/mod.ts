@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { getBookingAnalyticsValidator } from "./getBookingAnalytics.val.ts";
 import { getBookingAnalyticsFn } from "./getBookingAnalytics.fn.ts";
 

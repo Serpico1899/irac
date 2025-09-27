@@ -1,5 +1,5 @@
 import { enums, object, optional, size, string } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 import { is_valid_national_number_struct } from "@model";
 
 export const loginUserValidator = () => {

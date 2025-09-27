@@ -8,15 +8,17 @@ import type {
   PaymentGatewayStatus,
   validateAmountForGateway,
   calculateGatewayFees
-} from "../../models/payment_gateway.ts";
+} from "@model";
 import type {
   PaymentTransaction,
   PaymentPurpose,
-  PaymentMethod,
+  PaymentMethod
+} from "@model";
+import {
   generateTransactionId,
   createDefaultTransaction,
   updateTransactionStatus
-} from "../../models/payment_transaction.ts";
+} from "@model";
 
 export interface PaymentGatewayManagerConfig {
   zarinpal?: ZarinPalConfig;

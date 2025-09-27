@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser, grantAccess } from "@lib";
 import { bulkDeleteFn } from "./bulkDelete.fn.ts";
 import { bulkDeleteValidator } from "./bulkDelete.val.ts";

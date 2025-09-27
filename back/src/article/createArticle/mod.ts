@@ -6,7 +6,7 @@ import {
   setUser,
   throwError,
 } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { createArticleFn } from "./createArticle.fn.ts";
 import { createArticleValidator } from "./createArticle.val.ts";
 

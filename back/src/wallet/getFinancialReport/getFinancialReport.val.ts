@@ -1,5 +1,5 @@
 import { object, optional, string, defaulted, boolean } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const getFinancialReportValidator = () => {
   return object({

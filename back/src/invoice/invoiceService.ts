@@ -1,9 +1,8 @@
-import { coreApp } from "../../mod.ts";
+import { coreApp } from "@app";
+import { throwError } from "@lib";
 import {
   ActFn,
   ObjectId,
-  throwError,
-  getUser,
   number,
   object,
   string,
@@ -20,7 +19,7 @@ import {
   invoice_type_enums,
   order_models,
   user_models,
-} from "@models";
+} from "@model";
 import { generateInvoiceNumber } from "./invoiceNumbering.ts";
 import { calculateInvoiceTaxes } from "./invoiceTaxCalculator.ts";
 import { sendInvoiceEmail } from "./invoiceEmailService.ts";

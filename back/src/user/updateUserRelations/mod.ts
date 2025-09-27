@@ -1,5 +1,5 @@
 import { grantAccess, setTokens, setUser } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { updateUserRelationsFn } from "./updateUserRelations.fn.ts";
 import { updateUserRelationsValidator } from "./updateUserRelations.val.ts";
 import { checkGhostUser } from "../addUser/mod.ts";

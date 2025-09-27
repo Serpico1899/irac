@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { checkAvailabilityValidator } from "./checkAvailability.val.ts";
 import { checkAvailabilityFn } from "./checkAvailability.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

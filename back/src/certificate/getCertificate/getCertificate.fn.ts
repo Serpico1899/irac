@@ -1,5 +1,5 @@
 import { type ActFn } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import type { MyContext } from "@lib";
 
 export const getCertificateFn: ActFn = async (body) => {

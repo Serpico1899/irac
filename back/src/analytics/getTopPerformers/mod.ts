@@ -1,4 +1,4 @@
-import { setAct } from "../../../mod.ts";
+import {  setAct  } from "@app";
 import { getTopPerformersValidator } from "./getTopPerformers.val.ts";
 import { getTopPerformersFn } from "./getTopPerformers.fn.ts";
 

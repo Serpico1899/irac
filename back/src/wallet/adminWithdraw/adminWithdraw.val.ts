@@ -1,5 +1,5 @@
 import { object, objectIdValidation, number, string, optional } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const adminWithdrawValidator = () => {
   return object({

@@ -1,5 +1,5 @@
 import { object, objectIdValidation } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const getBalanceValidator = () => {
   return object({

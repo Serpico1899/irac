@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import type { MyContext } from "@lib";
 
 export interface GetArticleInput {

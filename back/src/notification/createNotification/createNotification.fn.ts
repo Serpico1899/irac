@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 import { ObjectId } from "npm:mongodb";
 import type { CreateNotificationInput } from "./createNotification.val.ts";
 

@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId } from "@deps";
-import { category } from "../../../mod.ts";
+import {  category  } from "@app";
 
 export const getFn: ActFn = async (body) => {
 	const {

@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser, grantAccess } from "@lib";
 import { deleteFileFn } from "./deleteFile.fn.ts";
 import { deleteFileValidator } from "./deleteFile.val.ts";

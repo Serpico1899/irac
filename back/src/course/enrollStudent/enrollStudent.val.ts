@@ -9,7 +9,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 const payment_status_array = ["Pending", "Paid", "Free", "Partial", "Refunded", "Failed"];
 const payment_status_enums = enums(payment_status_array);

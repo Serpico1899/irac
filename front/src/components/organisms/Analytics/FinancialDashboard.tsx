@@ -4,15 +4,15 @@ import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/context/AuthContext";
 import {
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
   UsersIcon,
   CurrencyDollarIcon,
   AcademicCapIcon,
   CalendarIcon,
   ChartBarIcon,
   ArrowDownTrayIcon,
-  RefreshIcon,
+  ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
 interface FinancialMetrics {
@@ -122,7 +122,7 @@ const FinancialDashboard: React.FC = () => {
     return (
       <div className="flex items-center justify-center p-8">
         <div className="flex items-center gap-3 text-text-secondary">
-          <RefreshIcon className="h-6 w-6 animate-spin" />
+          <ArrowPathIcon className="h-6 w-6 animate-spin" />
           <span>در حال بارگذاری داده‌های مالی...</span>
         </div>
       </div>
@@ -204,7 +204,7 @@ const FinancialDashboard: React.FC = () => {
             className="p-2 border border-border rounded-lg hover:bg-gray-50 transition-colors"
             title="به‌روزرسانی داده‌ها"
           >
-            <RefreshIcon className="h-4 w-4" />
+            <ArrowPathIcon className="h-4 w-4" />
           </button>
         </div>
       </div>
@@ -222,9 +222,9 @@ const FinancialDashboard: React.FC = () => {
           </p>
           <div className="flex items-center gap-1 text-green-100">
             {metrics.revenueGrowth >= 0 ? (
-              <TrendingUpIcon className="w-4 h-4" />
+              <ArrowTrendingUpIcon className="w-4 h-4" />
             ) : (
-              <TrendingDownIcon className="w-4 h-4" />
+              <ArrowTrendingDownIcon className="w-4 h-4" />
             )}
             <span className="text-sm">
               {metrics.revenueGrowth >= 0 ? "+" : ""}
@@ -307,7 +307,7 @@ const FinancialDashboard: React.FC = () => {
       {metrics.topRevenueItems && metrics.topRevenueItems.length > 0 && (
         <div className="bg-background rounded-lg border border-border p-6">
           <h3 className="text-xl font-bold text-text mb-4 flex items-center gap-2">
-            <TrendingUpIcon className="w-6 h-6" />
+            <ArrowTrendingUpIcon className="w-6 h-6" />
             پردرآمدترین موارد
           </h3>
           <div className="flex flex-col gap-3">

@@ -1,5 +1,5 @@
 import { ObjectId } from "@deps";
-import { coreApp, user } from "../mod.ts";
+import {  coreApp, user  } from "@app";
 import type { MyContext } from "@lib";
 import { throwError } from "./throwError.ts";
 

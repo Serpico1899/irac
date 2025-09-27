@@ -8,7 +8,7 @@ import {
   optional,
   string,
 } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 import { enrollment_status_enums } from "@model";
 
 export const updateEnrollmentValidator = () => {

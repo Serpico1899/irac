@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId } from "@deps";
-import { coreApp, file, wallet_transaction } from "../../../mod.ts";
+import {  coreApp, file, wallet_transaction  } from "@app";
 import type { MyContext } from "@lib";
 
 export const serveFileFn: ActFn = async (body) => {

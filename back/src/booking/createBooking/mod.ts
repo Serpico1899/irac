@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { createBookingValidator } from "./createBooking.val.ts";
 import { createBookingFn } from "./createBooking.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

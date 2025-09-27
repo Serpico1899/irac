@@ -1,5 +1,5 @@
 import { object, objectIdValidation, string, optional } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const freezeWalletValidator = () => {
   return object({

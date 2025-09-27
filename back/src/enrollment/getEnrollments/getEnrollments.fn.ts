@@ -1,5 +1,5 @@
 import { type ActFn } from "@deps";
-import { enrollment } from "../../../mod.ts";
+import {  enrollment  } from "@app";
 
 export const getEnrollmentsFn: ActFn = async (body) => {
   const {

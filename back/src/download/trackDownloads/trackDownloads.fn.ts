@@ -1,10 +1,10 @@
-import { coreApp } from "../../../mod.ts";
-import {
+import {  coreApp  } from "@app";
+import { 
   order,
   product,
   user,
   file,
-} from "../../../mod.ts";
+ } from "@app";
 import { jwt } from "@deps";
 
 interface DownloadTrackingDetails {

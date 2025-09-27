@@ -1,5 +1,5 @@
 import { object, objectIdValidation, string, optional, number, boolean, defaulted } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const handleDisputeValidator = () => {
   return object({

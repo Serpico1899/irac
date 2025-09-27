@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import { coreApp } from "@app";
 import {
   ActFn,
   boolean,
@@ -15,7 +15,7 @@ import {
   coupon_applicable_to_enums,
   coupon_status_enums,
   coupon_type_enums,
-} from "../../../models/coupon.ts";
+} from "@model";
 import { CouponService } from "../service.ts";
 
 // Input validation schema

@@ -1,4 +1,4 @@
-import { coreApp } from "../mod.ts";
+import { coreApp } from "@app";
 import {
   array,
   boolean,
@@ -175,8 +175,10 @@ export const space_availability_pure = {
 
 export const space_availabilities = () =>
   coreApp.odm.newModel("space_availability", space_availability_pure, {}, {
-    createIndex: {
+    createIndex:
+    {
       indexSpec: { "date": 1, "space_type": 1 },
       options: { unique: true },
     },
+
   });

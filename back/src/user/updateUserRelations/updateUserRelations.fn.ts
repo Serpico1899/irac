@@ -1,6 +1,6 @@
 import { type ActFn, ObjectId, type TInsertRelations } from "@deps";
 import type { userRelations } from "@lib";
-import { user } from "../../../mod.ts";
+import {  user  } from "@app";
 
 export const updateUserRelationsFn: ActFn = async (body) => {
   const {

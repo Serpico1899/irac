@@ -14,7 +14,7 @@ import { bookingSetup } from "./booking/mod.ts";
 import { analyticsSetup } from "./analytics/mod.ts";
 import { downloadSetup } from "./download/mod.ts";
 import { adminSetup } from "./admin/mod.ts";
-import { testSetup } from "./test/mod.ts";
+// import { testSetup } from "./test/mod.ts"; // Disabled - directory renamed to test.disabled
 import { enrollmentSetup } from "./enrollment/mod.ts";
 import { smsSetup } from "./sms/mod.ts";
 import { emailSetup } from "./email/mod.ts";
@@ -48,6 +48,6 @@ export const functionsSetup = () => {
   certificateSetup();
   invoiceSetup();
   directApiSetup();
-  testSetup();
+  // testSetup(); // Disabled - test module renamed to test.disabled
 };
 import { directApiSetup } from "./alternative/directApi/mod.ts";

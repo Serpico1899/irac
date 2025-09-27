@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import getArticlesHandler from "./getArticles.fn.ts";
 import { getArticlesValidator } from "./getArticles.val.ts";
 

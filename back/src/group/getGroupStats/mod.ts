@@ -1,92 +1,85 @@
-import { lesan, string, object, array, number, optional, boolean } from "@deps";
-import { coreApp } from "../../../mod.ts";
+import { ActFn, ObjectId } from "@deps";
+import { groups, group_members, enrollments } from "@model";
 
-const getGroupStatsValidator = {
-  set: {
-    group_id: string(),
-    include_members: optional(boolean()),
-    include_enrollments: optional(boolean()),
-    limit: optional(number()),
-    offset: optional(number()),
-  },
-  get: object({
-    success: boolean(),
-    group_info: object({
-      _id: string(),
-      name: string(),
-      type: string(),
-      status: string(),
-      group_code: string(),
-      current_member_count: number(),
-      max_members: number(),
-      discount_percentage: number(),
-      total_savings: number(),
-      total_enrollments: number(),
-      completed_courses: number(),
-      certificates_issued: number(),
-      leader: object({}),
-      company_name: optional(string()),
-    }),
-    members: optional(array(object({
-      _id: string(),
-      user: object({}),
-      status: string(),
-      role: string(),
-      join_date: string(),
-      enrollments_count: number(),
-      completed_courses: number(),
-      total_savings: number(),
-    }))),
-    recent_enrollments: optional(array(object({
-      _id: string(),
-      user: object({}),
-      course: object({}),
-      enrollment_date: string(),
-      status: string(),
-      progress_percentage: number(),
-      group_savings: number(),
-    }))),
-    statistics: object({
-      active_members: number(),
-      pending_members: number(),
-      total_group_savings: number(),
-      average_savings_per_member: number(),
-      most_active_member: optional(object({})),
-      completion_rate: number(),
-    }),
-  }),
-};
+export interface GetGroupStatsInput {
+  group_id: string;
+  include_members?: boolean;
+  include_enrollments?: boolean;
+  limit?: number;
+  offset?: number;
+}
 
-export const getGroupStatsFn = lesan.Fn(getGroupStatsValidator, async (body, context, coreApp) => {
-  // Check if user is authenticated
-  if (!context?.user?._id) {
-    throw new Error("User must be authenticated to view group statistics");
-  }
+export interface GetGroupStatsOutput {
+  success: boolean;
+  group_info: {
+    _id: string;
+    name: string;
+    type: string;
+    status: string;
+    group_code: string;
+    current_member_count: number;
+    max_members: number;
+    discount_percentage: number;
+    total_savings: number;
+    total_enrollments: number;
+    completed_courses: number;
+    certificates_issued: number;
+    leader: any;
+    company_name?: string;
+  };
+  members?: Array<{
+    _id: string;
+    user: any;
+    status: string;
+    role: string;
+    join_date: string;
+    enrollments_count: number;
+    completed_courses: number;
+    total_savings: number;
+  }>;
+  recent_enrollments?: Array<{
+    _id: string;
+    user: any;
+    course: any;
+    enrollment_date: string;
+    status: string;
+    progress_percentage: number;
+    group_savings: number;
+  }>;
+  statistics: {
+    active_members: number;
+    pending_members: number;
+    total_group_savings: number;
+    average_savings_per_member: number;
+    most_active_member?: any;
+    completion_rate: number;
+  };
+}
 
-  const groupModel = coreApp.odm.newModel("group", {}, {});
-  const groupMemberModel = coreApp.odm.newModel("group_member", {}, {});
-  const enrollmentModel = coreApp.odm.newModel("enrollment", {}, {});
+const getGroupStatsHandler: ActFn = async (body) => {
+  const {
+    group_id,
+    include_members = false,
+    include_enrollments = false,
+    limit = 20,
+    offset = 0
+  }: GetGroupStatsInput = body.details;
 
   try {
-    const {
-      group_id,
-      include_members = true,
-      include_enrollments = true,
-      limit = 50,
-      offset = 0
-    } = body.details.set;
+    // Check if user is authenticated
+    if (!body.user?._id) {
+      throw new Error("User must be authenticated to view group statistics");
+    }
 
-    // Find and validate the group
-    const group = await groupModel.findOne({
-      filters: { _id: group_id },
-      relations: {
+    // Find the group with leader information
+    const group = await groups().findOne({
+      filters: { _id: new ObjectId(group_id) },
+      populate: {
         leader: {
-          users: {
-            _id: 1,
-            first_name: 1,
-            last_name: 1,
-            mobile: 1,
-          },
+          first_name: 1,
+          last_name: 1,
+          mobile: 1,
+          email: 1,
         },
       },
     });
@@ -95,66 +88,121 @@ export const getGroupStatsFn = lesan.Fn(getGroupStatsValidator, async (body, con
       throw new Error("گروه مورد نظر یافت نشد");
     }
 
-    // Check if current user has permission to view group statistics
-    const currentUserMembership = await groupMemberModel.findOne({
+    // Check if user has permission to view group stats
+    const userMembership = await group_members().findOne({
       filters: {
-        group: group_id,
-        user: context.user._id,
+        "group._id": new ObjectId(group_id),
+        "user._id": new ObjectId(body.user._id),
       },
     });
 
-    const isLeader = group.leader._id.toString() === context.user._id.toString();
-    const isMember = !!currentUserMembership;
-    const canViewStats = currentUserMembership?.role === "Admin" ||
-      currentUserMembership?.role === "CoLeader" ||
-      isLeader;
+    const isLeader = group.leader._id.toString() === body.user._id.toString();
+    const hasPermission = isLeader ||
+      userMembership?.role === "Admin" ||
+      userMembership?.role === "CoLeader";
 
-    if (!canViewStats && !isMember) {
+    if (!hasPermission) {
       throw new Error("شما اجازه مشاهده آمار این گروه را ندارید");
     }
 
-    // Prepare group basic info
+    // Get group members statistics
+    const memberStats = await group_members().aggregation().pipeline([
+      { $match: { "group._id": new ObjectId(group_id) } },
+      {
+        $group: {
+          _id: "$status",
+          count: { $sum: 1 },
+          total_savings: { $sum: "$total_savings" },
+          completed_courses: { $sum: "$completed_courses" },
+        }
+      }
+    ]);
+
+    let activeMembers = 0;
+    let pendingMembers = 0;
+    let totalGroupSavings = 0;
+    let totalCompletedCourses = 0;
+
+    memberStats.forEach(stat => {
+      if (stat._id === "Active") {
+        activeMembers = stat.count;
+        totalGroupSavings += stat.total_savings;
+        totalCompletedCourses += stat.completed_courses;
+      } else if (stat._id === "Pending") {
+        pendingMembers = stat.count;
+      }
+    });
+
+    // Find most active member
+    const mostActiveResult = await group_members().findOne({
+      filters: {
+        "group._id": new ObjectId(group_id),
+        status: "Active",
+      },
+      sort: { enrollments_count: -1 },
+      populate: {
+        user: {
+          first_name: 1,
+          last_name: 1,
+          mobile: 1,
+        },
+      },
+    });
+
+    // Calculate completion rate
+    const totalEnrollments = await enrollments().countDocuments({
+      filters: {
+        "group._id": new ObjectId(group_id),
+      },
+    });
+
+    const completedEnrollments = await enrollments().countDocuments({
+      filters: {
+        "group._id": new ObjectId(group_id),
+        status: "Completed",
+      },
+    });
+
+    const completionRate = totalEnrollments > 0 ?
+      (completedEnrollments / totalEnrollments) * 100 : 0;
+
+    // Prepare basic group info
     const groupInfo = {
-      _id: group._id,
+      _id: group._id.toString(),
       name: group.name,
       type: group.type,
-      status: group.status,
+      status: group.status || "Active",
       group_code: group.group_code,
       current_member_count: group.current_member_count,
       max_members: group.max_members,
-      discount_percentage: group.current_discount_percentage,
-      total_savings: group.total_savings,
-      total_enrollments: group.total_enrollments,
-      completed_courses: group.completed_courses,
-      certificates_issued: group.certificates_issued,
+      discount_percentage: group.current_discount_percentage || 0,
+      total_savings: group.total_savings || 0,
+      total_enrollments: totalEnrollments,
+      completed_courses: totalCompletedCourses,
+      certificates_issued: group.certificates_issued || 0,
       leader: group.leader,
       company_name: group.company_name,
     };
 
-    let members = undefined;
-    let recentEnrollments = undefined;
-
-    // Get group members if requested
-    if (include_members && canViewStats) {
-      const membersList = await groupMemberModel.findMany({
-        filters: { group: group_id },
-        relations: {
-          user: {
-            users: {
-              _id: 1,
-              first_name: 1,
-              last_name: 1,
-              mobile: 1,
-            },
-          },
-        },
-        sorts: { join_date: -1 },
+    let members;
+    if (include_members) {
+      members = await group_members().find({
+        filters: { "group._id": new ObjectId(group_id) },
         limit,
         offset,
+        sort: { join_date: -1 },
+        populate: {
+          user: {
+            first_name: 1,
+            last_name: 1,
+            mobile: 1,
+            email: 1,
+          },
+        },
       });
 
-      members = membersList.map(member => ({
-        _id: member._id,
+      members = members.map(member => ({
+        _id: member._id.toString(),
         user: member.user,
         status: member.status,
         role: member.role,
@@ -165,116 +213,72 @@ export const getGroupStatsFn = lesan.Fn(getGroupStatsValidator, async (body, con
       }));
     }
 
-    // Get recent enrollments if requested
-    if (include_enrollments && canViewStats) {
-      const enrollmentsList = await enrollmentModel.findMany({
-        filters: {
-          group: group_id,
-          is_group_enrollment: true,
-        },
-        relations: {
+    let recentEnrollments;
+    if (include_enrollments) {
+      const enrollmentResults = await enrollments().find({
+        filters: { "group._id": new ObjectId(group_id) },
+        limit,
+        sort: { created_at: -1 },
+        populate: {
           user: {
-            users: {
-              _id: 1,
-              first_name: 1,
-              last_name: 1,
-            },
+            first_name: 1,
+            last_name: 1,
+            mobile: 1,
           },
           course: {
-            courses: {
-              _id: 1,
-              title: 1,
-              price: 1,
-            },
+            name: 1,
+            name_en: 1,
+            featured_image: 1,
+            price: 1,
           },
         },
-        sorts: { enrollment_date: -1 },
-        limit: 10,
       });
 
-      recentEnrollments = enrollmentsList.map(enrollment => ({
-        _id: enrollment._id,
+      recentEnrollments = enrollmentResults.map(enrollment => ({
+        _id: enrollment._id.toString(),
         user: enrollment.user,
         course: enrollment.course,
-        enrollment_date: enrollment.enrollment_date.toISOString(),
+        enrollment_date: enrollment.created_at.toISOString(),
         status: enrollment.status,
-        progress_percentage: enrollment.progress_percentage,
-        group_savings: enrollment.group_savings,
+        progress_percentage: enrollment.progress_percentage || 0,
+        group_savings: enrollment.group_discount_amount || 0,
       }));
     }
-
-    // Calculate detailed statistics
-    const allMembers = await groupMemberModel.findMany({
-      filters: { group: group_id },
-    });
-
-    const activeMembers = allMembers.filter(m => m.status === "Active").length;
-    const pendingMembers = allMembers.filter(m => m.status === "Pending").length;
-
-    const totalGroupSavings = group.total_savings;
-    const averageSavingsPerMember = activeMembers > 0
-      ? Math.round(totalGroupSavings / activeMembers)
-      : 0;
-
-    // Find most active member (by enrollments)
-    let mostActiveMember = undefined;
-    if (canViewStats && allMembers.length > 0) {
-      const sortedMembers = allMembers.sort((a, b) => b.enrollments_count - a.enrollments_count);
-      if (sortedMembers[0].enrollments_count > 0) {
-        const topMember = await groupMemberModel.findOne({
-          filters: { _id: sortedMembers[0]._id },
-          relations: {
-            user: {
-              users: {
-                _id: 1,
-                first_name: 1,
-                last_name: 1,
-              },
-            },
-          },
-        });
-
-        if (topMember) {
-          mostActiveMember = {
-            user: topMember.user,
-            enrollments_count: topMember.enrollments_count,
-            completed_courses: topMember.completed_courses,
-          };
-        }
-      }
-    }
-
-    // Calculate completion rate
-    const totalEnrollments = group.total_enrollments;
-    const completedCourses = group.completed_courses;
-    const completionRate = totalEnrollments > 0
-      ? Math.round((completedCourses / totalEnrollments) * 100)
-      : 0;
 
     const statistics = {
       active_members: activeMembers,
       pending_members: pendingMembers,
       total_group_savings: totalGroupSavings,
-      average_savings_per_member: averageSavingsPerMember,
-      most_active_member: mostActiveMember,
-      completion_rate: completionRate,
+      average_savings_per_member: activeMembers > 0 ? totalGroupSavings / activeMembers : 0,
+      most_active_member: mostActiveResult ? {
+        user: mostActiveResult.user,
+        enrollments_count: mostActiveResult.enrollments_count,
+        completed_courses: mostActiveResult.completed_courses,
+      } : undefined,
+      completion_rate: Math.round(completionRate * 100) / 100,
+    };
+
+    const result: GetGroupStatsOutput = {
+      success: true,
+      group_info: groupInfo,
+      members,
+      recent_enrollments: recentEnrollments,
+      statistics,
     };
 
     return {
       success: true,
-      body: {
-        success: true,
-        group_info: groupInfo,
-        members,
-        recent_enrollments: recentEnrollments,
-        statistics,
-      },
+      data: result
     };
 
   } catch (error) {
-    console.error("Error getting group statistics:", error);
-    throw new Error(`خطا در دریافت آمار گروه: ${error.message}`);
+    console.error("Error fetching group statistics:", error);
+    return {
+      success: false,
+      message: `خطا در دریافت آمار گروه: ${error.message}`,
+      error: error.message
+    };
   }
-});
+};
 
-export default getGroupStatsFn;
+export default getGroupStatsHandler;

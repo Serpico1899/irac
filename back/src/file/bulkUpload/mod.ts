@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser, grantAccess } from "@lib";
 import { bulkUploadFn } from "./bulkUpload.fn.ts";
 import { bulkUploadValidator } from "./bulkUpload.val.ts";

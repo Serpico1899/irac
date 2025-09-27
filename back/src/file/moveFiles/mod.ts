@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser, grantAccess } from "@lib";
 import { moveFilesFn } from "./moveFiles.fn.ts";
 import { moveFilesValidator } from "./moveFiles.val.ts";

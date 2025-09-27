@@ -1,5 +1,5 @@
 import { grantAccess, setTokens, setUser } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { updateUserFn } from "./updateUser.fn.ts";
 import { updateUserValidator } from "./updateUser.val.ts";
 

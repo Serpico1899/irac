@@ -1,6 +1,6 @@
 import type { ActFn } from "@deps";
 import { throwError } from "@lib";
-import { myRedis, user } from "../../../mod.ts";
+import {  myRedis, user  } from "@app";
 import { smsService, SMSService } from "../smsService.ts";
 
 // 2FA Security constants

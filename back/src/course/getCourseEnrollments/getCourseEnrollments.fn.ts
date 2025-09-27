@@ -1,6 +1,6 @@
 import { type ActFn, ObjectId } from "@deps";
 import { type MyContext } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 const getCourseEnrollmentsFn: ActFn = async (body) => {
   const { set, get } = body.details;

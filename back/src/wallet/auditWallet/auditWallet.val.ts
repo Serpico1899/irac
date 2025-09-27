@@ -1,5 +1,5 @@
 import { object, objectIdValidation, string, optional, boolean, defaulted } from "@deps";
-import { selectStruct } from "../../../mod.ts";
+import {  selectStruct  } from "@app";
 
 export const auditWalletValidator = () => {
   return object({

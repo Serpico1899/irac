@@ -6,12 +6,8 @@ import {
   type UnifiedVerificationRequest,
   type PaymentGatewayManagerConfig
 } from "../gateway-manager.ts";
-import { user } from "../../../models/user.ts";
-import { order } from "../../../models/order.ts";
-import { invoice } from "../../../models/invoice.ts";
-import { wallet } from "../../../models/wallet.ts";
-import { paymentTransaction } from "../../../models/payment_transaction.ts";
-import { paymentGateway, DEFAULT_GATEWAYS } from "../../../models/payment_gateway.ts";
+import { user, order, invoice, wallet } from "@app";
+import { DEFAULT_GATEWAYS } from "@model";
 import { getServerSession } from "../../auth/mod.ts";
 
 // Initialize Payment Gateway Manager
@@ -171,6 +167,7 @@ export const createUnifiedPayment: ActFn = async (body) => {
 
     if (result.success) {
       // Store transaction in database (you might want to implement this)
+      // TODO: Implement paymentTransaction model export in mod.ts
       // await paymentTransaction.insertOne(transactionData);
 
       return {

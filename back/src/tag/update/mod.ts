@@ -1,7 +1,7 @@
 import { grantAccess, setTokens, setUser } from "@lib";
 import { updateFn } from "./update.fn.ts";
 import { updateValidator } from "./update.val.ts";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 
 export const updateSetup = () =>
 	coreApp.acts.setAct({

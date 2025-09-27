@@ -1,5 +1,5 @@
 import { type ActFn, ObjectId } from "@deps";
-import { coreApp, user } from "../../../mod.ts";
+import {  coreApp, user  } from "@app";
 import { type MyContext, throwError } from "@lib";
 
 export const getMeFn: ActFn = async (body) => {

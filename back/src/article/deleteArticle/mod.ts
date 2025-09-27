@@ -5,7 +5,7 @@ import {
   setUser,
   throwError,
 } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { deleteArticleFn } from "./deleteArticle.fn.ts";
 import { deleteArticleValidator } from "./deleteArticle.val.ts";
 

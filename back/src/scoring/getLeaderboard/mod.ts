@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { getLeaderboardValidator } from "./getLeaderboard.val.ts";
 import { getLeaderboardFn } from "./getLeaderboard.fn.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

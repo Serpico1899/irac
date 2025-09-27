@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { setTokens, setUser, grantAccess } from "@lib";
 import { updateFileMetadataFn } from "./updateFileMetadata.fn.ts";
 import { updateFileMetadataValidator } from "./updateFileMetadata.val.ts";

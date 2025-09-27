@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { getWalletFn } from "./getWallet.fn.ts";
 import { getWalletValidator } from "./getWallet.val.ts";
 import { grantAccess, setTokens, setUser } from "@lib";

@@ -2,7 +2,7 @@ import type { Infer } from "@deps";
 import type { user_level_emums } from "@model";
 import { throwError } from "./throwError.ts";
 import type { MyContext } from "@lib";
-import { coreApp } from "../mod.ts";
+import {  coreApp  } from "@app";
 
 type UserLevels = Infer<typeof user_level_emums>;
 export const grantAccess = (

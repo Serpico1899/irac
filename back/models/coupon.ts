@@ -1,4 +1,4 @@
-import { coreApp } from "../mod.ts";
+import { coreApp } from "@app";
 import {
   array,
   boolean,
@@ -203,23 +203,8 @@ export const coupon_model_relations = {
 };
 
 export const coupon_models = () =>
-  coreApp.odm.newModel("coupon", coupon_model_pure, coupon_model_relations, {
-    createIndex: [
-      {
-        indexSpec: { "code": 1 },
-        options: { unique: true },
-      },
-      {
-        indexSpec: { "status": 1, "valid_from": 1, "valid_until": 1 },
-        options: {},
-      },
-      {
-        indexSpec: { "type": 1, "applicable_to": 1 },
-        options: {},
-      },
-      {
-        indexSpec: { "created_at": -1 },
-        options: {},
-      },
-    ],
-  });
+  coreApp.odm.newModel(
+    "coupon",
+    coupon_model_pure,
+    coupon_model_relations
+  );

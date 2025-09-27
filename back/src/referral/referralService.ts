@@ -1,4 +1,4 @@
-import { coreApp } from "../../mod.ts";
+import {  coreApp  } from "@app";
 import { ActFn } from "@deps";
 
 export class ReferralService {

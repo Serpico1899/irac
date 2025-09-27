@@ -1,5 +1,5 @@
 import { grantAccess, setTokens, setUser } from "@lib";
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import { removeUserFn } from "./removeUser.fn.ts";
 import { removeUserValidator } from "./removeUser.val.ts";
 

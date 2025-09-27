@@ -1,4 +1,4 @@
-import { act } from "https://deno.land/x/lesan@v0.1.8/mod.ts";
+import {  setAct  } from "@app";
 import {
   getAvailableGateways,
   createUnifiedPayment,
@@ -24,63 +24,63 @@ import {
 
 export const unifiedPaymentSetup = () => {
   // Get available payment gateways
-  act({
+  setAct({
     schema: "main",
     fn: getAvailableGateways,
     validator: getAvailableGatewaysValidator,
   });
 
   // Create unified payment request
-  act({
+  setAct({
     schema: "main",
     fn: createUnifiedPayment,
     validator: createUnifiedPaymentValidator,
   });
 
   // Verify unified payment
-  act({
+  setAct({
     schema: "main",
     fn: verifyUnifiedPayment,
     validator: verifyUnifiedPaymentValidator,
   });
 
   // Cancel payment
-  act({
+  setAct({
     schema: "main",
     fn: cancelPayment,
     validator: cancelPaymentValidator,
   });
 
   // Refund payment (admin only)
-  act({
+  setAct({
     schema: "main",
     fn: refundPayment,
     validator: refundPaymentValidator,
   });
 
   // Get payment statistics (admin only)
-  act({
+  setAct({
     schema: "main",
     fn: getPaymentStatistics,
     validator: getPaymentStatisticsValidator,
   });
 
   // Get gateway health status (admin only)
-  act({
+  setAct({
     schema: "main",
     fn: getGatewayHealthStatus,
     validator: getGatewayHealthStatusValidator,
   });
 
   // Get transaction details
-  act({
+  setAct({
     schema: "main",
     fn: getTransactionDetails,
     validator: getTransactionDetailsValidator,
   });
 
   // Cleanup expired transactions (admin only)
-  act({
+  setAct({
     schema: "main",
     fn: cleanupExpiredTransactions,
     validator: cleanupExpiredTransactionsValidator,

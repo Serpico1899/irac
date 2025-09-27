@@ -1,4 +1,4 @@
-import { coreApp } from "../../../mod.ts";
+import {  coreApp  } from "@app";
 import activateCourseFn from "./activateCourse.fn.ts";
 import { activateCourseValidator } from "./activateCourse.val.ts";
 import type { MyContext } from "@lib";

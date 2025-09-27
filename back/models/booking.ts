@@ -1,4 +1,4 @@
-import { coreApp } from "../mod.ts";
+import { coreApp } from "@app";
 import {
   boolean,
   coerce,
@@ -204,8 +204,9 @@ export const booking_relations = {
 
 export const bookings = () =>
   coreApp.odm.newModel("booking", booking_pure, booking_relations, {
-    createIndex: {
+    createIndex:
+    {
       indexSpec: { "booking_number": 1 },
       options: { unique: true },
-    },
+    }
   });

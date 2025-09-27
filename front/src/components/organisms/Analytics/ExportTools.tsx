@@ -12,7 +12,7 @@ import {
   CogIcon,
   CheckCircleIcon,
   XCircleIcon,
-  RefreshIcon,
+  ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
 interface ExportRequest {
@@ -563,7 +563,7 @@ const ExportTools: React.FC = () => {
             }`}
           >
             {isExporting ? (
-              <RefreshIcon className="w-5 h-5 animate-spin" />
+              <ArrowPathIcon className="w-5 h-5 animate-spin" />
             ) : (
               <ArrowDownTrayIcon className="w-5 h-5" />
             )}
@@ -630,7 +630,7 @@ const ExportTools: React.FC = () => {
             className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
             title="به‌روزرسانی لیست"
           >
-            <RefreshIcon className="w-5 h-5" />
+            <ArrowPathIcon className="w-5 h-5" />
           </button>
         </div>
 

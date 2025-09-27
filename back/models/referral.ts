@@ -1,4 +1,4 @@
-import { coreApp } from "../mod.ts";
+import { coreApp } from "@app";
 import {
   boolean,
   coerce,
@@ -145,8 +145,10 @@ export const referral_relations = {
 
 export const referrals = () =>
   coreApp.odm.newModel("referral", referral_pure, referral_relations, {
-    createIndex: {
+    createIndex:
+    {
       indexSpec: { "referral_code": 1 },
       options: { unique: true },
     },
+
   });
